@@ -4,4 +4,6 @@ Using the very-cool-dark-mode color scheme, DocsAfterDark aims to relieve eye-st
 
 Available on [Firefox Add-Ons](https://addons.mozilla.org/en-US/firefox/addon/docsafterdark/) and (Pending) Chrome Web Store.
 
+---
+
 ![promotional image](docsafterdark.png)
