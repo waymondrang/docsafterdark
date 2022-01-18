@@ -12,5 +12,9 @@ echo "creating firefox release"
 
 zip -j "./releases/dad_${1}_firefox.zip" ./src/firefox/*
 
+git add .
+git commit -m "release ${1}"
+git push
+
 echo "process finished"
 read -n 1
