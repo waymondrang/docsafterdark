@@ -1,5 +1,7 @@
+const start_time = new Date();
 const fs = require("fs");
 const { exec, spawn } = require("child_process");
+const { start } = require("repl");
 
 var src_files = fs.readdirSync("./src/chrome");
 
@@ -30,10 +32,12 @@ fs.writeFileSync("./src/firefox/manifest.json", JSON.stringify(firefox_manifest,
 
 console.log("updated firefox manifest using chrome manifest");
 
-console.log("creating zip files");
+if (process.argv.includes("--package")) {
+    console.log("creating zip files");
+    var package_shell = exec(`package.sh \"v${chrome_manifest["version"]}\"`);
+    package_shell.on("exit", function () {
+        console.log(`release ${chrome_manifest["version"]} created for chrome and firefox`);
+    })
+}
 
-var package_shell = exec(`package.sh \"v${chrome_manifest["version"]}\"`);
-
-package_shell.on("exit", function () {
-    console.log(`release ${chrome_manifest["version"]} created for chrome and firefox`);
-})
+console.log("process finished in " + ((new Date() - start_time) / 1000) + " seconds");
