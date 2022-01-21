@@ -52,7 +52,13 @@ body,
 .docs-material.docs-presence-plus-widget-overflow-menu .docs-presence-plus-collab-widget-name,
 .goog-menuitem-highlight .goog-menuitem-content,
 .goog-menuitem-hover .goog-menuitem-content,
-.apps-menuitem .goog-menuitem-label {
+.docs-gm .docs-revisions-chromecover-content-color-default,
+.docs-material-gm-labeled-checkbox .docs-material-gm-labeled-checkbox-label,
+.docs-gm .docs-revisions-tile-collaborator-name,
+.docs-gm .docs-revisions-tile-descriptor,
+.docs-gm .docs-revisions-tile-text-box~.docs-revisions-tile-descriptor,
+.docs-gm .docs-revisions-sidebar-revisions-empty-title,
+.docs-revisions-tile-text-box:disabled {
     color: var(--secondary-text-color) !important;
 }
 
@@ -61,7 +67,10 @@ body,
 .docs-gm .docs-colormenuitems .docs-colormenuitems-scheme-header,
 .docs-gm .docs-colormenuitems .docs-colormenuitems-custom-header,
 .docs-gm .docos-anchoredreplyview-header .docos-anchoredreplyview-timestamp,
-.docs-material .docs-presence-plus-widget-overflow-button {
+.docs-material .docs-presence-plus-widget-overflow-button,
+#docs-toolbar-iterator-label,
+.docs-gm .docs-revisions-sidebar-name-filter-switch-container label,
+.docs-gm .docs-revisions-sidebar-date-group {
     color: var(--tertiary-text-color);
 }
 
@@ -75,13 +84,21 @@ body,
 .goog-option-selected .goog-menuitem-content,
 .docs-gm .docos-anchoredreplyview-header .docos-anchoredreplyview-author,
 .docs-gm .docos-input-typing>.docos-input-textarea,
-.docs-omnibox-input.jfk-textinput {
+.docs-omnibox-input.jfk-textinput,
+.docs-gm .docs-revisions-sidebar-header {
     color: var(--secondary-text-color);
 }
 
 .docs-gm .goog-menuitem-disabled,
-.docs-gm .goog-menuitem-disabled .goog-menuitem-content {
+.docs-gm .goog-menuitem-disabled .goog-menuitem-content,
+.docs-material-button-disabled.docs-material-button-flat-primary,
+.docs-material-button-disabled.docs-material-button-flat-default,
+.docs-material-button-disabled.docs-material-button-raised-default {
     color: var(--disabled-text) !important;
+}
+
+.apps-menuitem .goog-menuitem-label {
+    color: inherit !important;
 }
 
 /* selection color */
@@ -108,7 +125,14 @@ body,
 .docs-bubble,
 .docs-gm .docos-anchoreddocoview,
 .document-details-bubble-container,
-.docs-omnibox-autocomplete .ac-renderer {
+.docs-omnibox-autocomplete .ac-renderer,
+.docs-material #docs-equationtoolbar,
+.docs-material .docs-printpreview-toolbar,
+.docs-gm .docs-revisions-chromecover-content-color-default,
+.docs-gm .docs-revisions-chromecover-content-color-default,
+.docs-gm .docs-revisions-sidebar-header,
+.docs-gm .docs-revisions-sidebar-date-group,
+.docs-revisions-sidebar {
     background-color: var(--secondary-background-color) !important;
 }
 
@@ -134,7 +158,9 @@ body,
 #titlebar-mode-indicator-container>.docs-material-menu-button-flat-primary-hover,
 .titlebar-request-access-button.docs-material-button.docs-material-button-hover,
 #docs-meet-in-editors-entrypointbutton.goog-flat-menu-button-hover,
-#docs-meet-in-editors-entrypointbutton.goog-flat-menu-button-focused {
+#docs-meet-in-editors-entrypointbutton.goog-flat-menu-button-focused,
+.docs-revisions-tile-selected,
+.docs-revisions-tile-hover:not(.docs-revisions-tile-selected) {
     /* although not hover elements, some elements may use the
     hover-background-color to differentiate themselves from the
     secondary-background-color */
@@ -281,12 +307,18 @@ body,
 .docs-gm .goog-menuseparator,
 .docs-gm .docos-showrepliesbutton,
 .docs-gm .docos-anchoreddocoview-input-pane,
-.kix-document-top-shadow.read-mode-titlebar-border {
+.kix-document-top-shadow.read-mode-titlebar-border,
+.docs-gm .docs-revisions-sidebar-name-filter-switch-container,
+.docs-revisions-sidebar-actions {
     border-top: 1px solid var(--primary-border-color) !important;
 }
 
 .docs-gm .docs-horizontal-ruler,
-.docs-gm #docs-toolbar-wrapper {
+.docs-gm #docs-toolbar-wrapper,
+.docs-material #docs-equationtoolbar,
+.docs-gm .docs-revisions-sidebar-header,
+.docs-revisions-sidebar-date-group,
+.docs-revisions-tile-content-wrapper {
     border-bottom: 1px solid var(--primary-border-color) !important;
 }
 
@@ -311,6 +343,12 @@ body,
 .docs-gm .docs-material .docs-toolbar-split-create-button+.docs-toolbar-button-split-right {
     border-left-color: var(--secondary-border-color) !important;
 }
+
+.kix-equation-toolbar-palette-item {
+    border: none;
+}
+
+/* border radius */
 
 .kix-page,
 .docs-title-input,
@@ -343,6 +381,10 @@ body,
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
+.goog-palette-cell-hover .kix-equation-toolbar-palette-item {
+    box-shadow: none;
+}
+
 .docs-title-input {
     background-color: transparent !important;
     color: transparent;
@@ -373,6 +415,10 @@ body,
     border-color: var(--primary-border-color) transparent !important;
 }
 
+.goog-palette-cell-hover .kix-equation-toolbar-palette-item {
+    border-color: var(--primary-border-color) !important;
+}
+
 .goog-toolbar-combo-button-input:focus,
 .outline-refresh #navigation-widget-bottom-fade {
     background: transparent;
@@ -393,13 +439,20 @@ body,
 
 /* filters */
 
-.docs-gm .docs-material .docs-icon-img {
+.docs-gm .docs-material .docs-icon-img,
+.docs-revisions-icon-img:before {
     filter: brightness(1.5);
 }
 
 /* loading circle on link preview */
 .docs-material .docs-icon-loading-circle-grey200 {
     filter: brightness(0.5) !important;
+}
+
+.kix-equation-toolbar-icon,
+.kix-equation-toolbar-palette-icon {
+    filter: invert(100%);
+    -webkit-filter: invert(100%);
 }
 
 /* #docs-meet-in-editors-entrypointbutton.goog-flat-menu-button .docs-icon-present-to-all-24,
