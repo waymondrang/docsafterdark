@@ -1,7 +1,7 @@
 {
     "name": "DocsAfterDark",
-    "version": "0.1.2",
-    "description": "A toggleable dark mode theme for Google Docs that uses the VCDM color scheme.",
+    "version": "0.1.4",
+    "description": "A modern, dark theme for Google Docs",
     "author": "Raymond Wang",
     "manifest_version": 3,
     "content_scripts": [
@@ -17,7 +17,9 @@
     "web_accessible_resources": [
         {
             "resources": [
-                "docs.css"
+                "docs.css",
+                "/assets/checkmark.secondary.png",
+                "/assets/revisions_sprite1.secondary.svg"
             ],
             "matches": [
                 "*://docs.google.com/*"

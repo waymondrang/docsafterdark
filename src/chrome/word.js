@@ -38,7 +38,7 @@ if (!docs_homepage) {
     }
 
     var default_style = document.createElement("style")
-    default_style.innerHTML = `
+    default_style.textContent = `
 #dark-mode-switch {
     position: fixed;
     left: 24px;
@@ -53,8 +53,11 @@ if (!docs_homepage) {
 }
 `
 
-    document.body.insertBefore(toggle_button, document.body.lastChild)
-    document.body.insertBefore(default_style, document.body.lastChild)
+    document.body.insertBefore(toggle_button, document.body.lastChild);
+    document.body.insertBefore(default_style, document.body.lastChild);
+
+    document.documentElement.style.setProperty("--checkmark", "url(" + chrome.runtime.getURL('assets/checkmark.secondary.png') + ")");
+    document.documentElement.style.setProperty("--revisions-sprite1", "url(" + chrome.runtime.getURL('assets/revisions_sprite1.secondary.svg') + ")");
 
     insert_style();
 }
