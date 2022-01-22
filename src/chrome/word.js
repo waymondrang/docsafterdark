@@ -17,7 +17,6 @@ if (!docs_homepage) {
         css.id = "docs-dark-mode";
         css.rel = "stylesheet";
         document.body.insertBefore(css, document.body.lastChild);
-
     }
 
     var toggle_button = document.createElement("button");

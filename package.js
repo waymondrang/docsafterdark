@@ -44,6 +44,10 @@ fs.writeFileSync("./src/firefox/manifest.json", JSON.stringify(firefox_manifest,
 
 console.log("updated firefox manifest using chrome manifest");
 
+function end_message() {
+    console.log("\x1b[36m%s\x1b[0m", "process finished in " + ((new Date() - start_time) / 1000) + " seconds");
+}
+
 if (process.argv.includes("--package")) {
     console.log("creating zip files");
     var package_shell = exec(`package.sh \"v${chrome_manifest["version"]}\"`);
@@ -54,13 +58,14 @@ if (process.argv.includes("--package")) {
             var package_shell = exec(`git.sh \"v${chrome_manifest["version"]}\"`);
             package_shell.on("exit", function () {
                 console.log(`committed and pushed ${chrome_manifest["version"]} to github`);
+                end_message();
             })
         } else {
             console.log("skipping push to github");
+            end_message();
         }
     })
 } else {
     console.log("skipping zip files");
+    end_message();
 }
-
-console.log("\x1b[36m%s\x1b[0m", "process finished in " + ((new Date() - start_time) / 1000) + " seconds");
