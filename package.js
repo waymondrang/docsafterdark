@@ -49,19 +49,18 @@ if (process.argv.includes("--package")) {
     var package_shell = exec(`package.sh \"v${chrome_manifest["version"]}\"`);
     package_shell.on("exit", function () {
         console.log(`release ${chrome_manifest["version"]} created for chrome and firefox`);
+        if (process.argv.includes("--git")) {
+            console.log("committing and pushing changes");
+            var package_shell = exec(`git.sh \"v${chrome_manifest["version"]}\"`);
+            package_shell.on("exit", function () {
+                console.log(`committed and pushed ${chrome_manifest["version"]} to github`);
+            })
+        } else {
+            console.log("skipping push to github");
+        }
     })
 } else {
     console.log("skipping zip files");
-}
-
-if (process.argv.includes("--git")) {
-    console.log("committing and pushing changes");
-    var package_shell = exec(`git.sh \"v${chrome_manifest["version"]}\"`);
-    package_shell.on("exit", function () {
-        console.log(`committed and pushed ${chrome_manifest["version"]} to github`);
-    })
-} else {
-    console.log("skipping push to github");
 }
 
 console.log("\x1b[36m%s\x1b[0m", "process finished in " + ((new Date() - start_time) / 1000) + " seconds");
