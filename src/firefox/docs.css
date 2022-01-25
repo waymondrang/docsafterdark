@@ -2,6 +2,8 @@
     --primary-background-color: #1b1b1b;
     --secondary-background-color: #262626;
     --hover-background-color: #404040;
+    --input-background-color: #595959;
+    --enabled-background-color: #808080;
     --selection-background-color: #999999;
 
     --primary-border-color: #4d4d4d;
@@ -16,19 +18,40 @@
     --menu-background: #1b1b1bf0;
 }
 
+/* text colors */
+
 body,
 #document-details-bubble-header,
 .docs-gm .docs-revisions-chromecover-content-color-default,
-.docs-gm .docs-revisions-sidebar-header {
+.docs-gm .docs-revisions-sidebar-header,
+.apps-shortcutshelpcontentimpl-dialog-title,
+.apps-navigationwidget,
+.apps-actiondatawidget-content-header,
+.apps-shortcutshelpcontentimpl-search-label,
+.docs-gm .modal-dialog-title-text,
+.docs-gm .docs-offline-optinpromo-title-text {
     color: var(--primary-text-color);
 }
 
-.outline-refresh .location-indicator-highlight.navigation-item,
-.outline-refresh .location-indicator-highlight.navigation-item .navigation-item-level-0,
-.docs-bubble-link,
-.docs-bubble a {
-    color: var(--accent-text) !important;
+.docs-title-input:focus,
+input,
+.docs-gm .modal-dialog .jfk-textinput {
+    color: var(--primary-text-color);
 }
+
+.apps-shortcutshelpcontentimpl-reset-search-button-icon,
+.docs-palette-close-icon,
+.docs-palette-grippy-icon {
+    fill: var(--primary-text-color) !important;
+}
+
+.docs-mic-button,
+.docs-mic-svg-icon-path,
+.docs-mic-palette-help>svg {
+    fill: var(--secondary-text-color);
+}
+
+/* secondary text color */
 
 .docs-gm .docs-ruler-face-number,
 .docs-gm .docs-menubar .goog-control,
@@ -60,7 +83,23 @@ body,
 .docs-gm .docs-revisions-tile-text-box~.docs-revisions-tile-descriptor,
 .docs-gm .docs-revisions-sidebar-revisions-empty-title,
 .docs-revisions-tile-text-box:disabled,
-.docs-gm .docs-revisions-sidebar-name-filter-switch-container label {
+.docs-gm .docs-revisions-sidebar-name-filter-switch-container label,
+.apps-actiondatawidget-shortcut-desc,
+.apps-shortcutshelppopup,
+.docs-voice-mic-bubble,
+.docs-voice-activity-bubble,
+.goog-flat-menu-button,
+.docs-mic-palette .goog-flat-menu-button-caption,
+.docs-gm .modal-dialog,
+.docs-gm .modal-dialog.google-url-picker,
+.docs-gm .modal-dialog-content,
+.docs-gm #docs-offline-optinpromo-description,
+.docs-gm #docs-offline-optinpromo-learn-more-container,
+.docs-gm .modal-dialog .goog-flat-menu-button-caption,
+.docs-gm .kix-tablesidebar-control .goog-flat-menu-button-caption,
+.docs-gm .sketchy-shape-effects-shadow-tile .goog-flat-menu-button-caption,
+.docs-findinput-count,
+.script-promo-menu-item-title {
     color: var(--secondary-text-color) !important;
 }
 
@@ -71,13 +110,10 @@ body,
 .docs-gm .docos-anchoredreplyview-header .docos-anchoredreplyview-timestamp,
 .docs-material .docs-presence-plus-widget-overflow-button,
 #docs-toolbar-iterator-label,
-.docs-gm .docs-revisions-sidebar-date-group {
+.docs-gm .docs-revisions-sidebar-date-group,
+.apps-actiondatawidget-shortcut-key,
+.script-promo-menu-item-description {
     color: var(--tertiary-text-color);
-}
-
-.docs-title-input:focus {
-    color: var(--primary-text-color);
-    background-color: var(--hover-background-color) !important;
 }
 
 .goog-menuitem-highlight .goog-menuitem-content,
@@ -99,6 +135,10 @@ body,
     color: var(--disabled-text) !important;
 }
 
+.docs-preferencesdialog-tabbed-menu-tabbar .docs-tabbar-tablabel {
+    color: var(--disabled-text);
+}
+
 .apps-menuitem .goog-menuitem-label {
     color: inherit !important;
 }
@@ -113,7 +153,15 @@ body,
 
 .docs-gm #docs-editor,
 .docs-gm #docs-editor-container,
-.kix-appview-editor {
+.kix-appview-editor,
+.apps-shortcutshelpcontentimpl-container,
+.apps-shortcutshelppopup,
+.docs-gm .modal-dialog,
+.docs-gm .modal-dialog.google-url-picker,
+.docs-gm .docs-offline-optinpromo.jfk-bubble,
+.docs-gm .docs-sync-indicator-popup.jfk-bubble,
+.modal-dialog-title,
+.modal-dialog-content {
     background: var(--primary-background-color) !important;
 }
 
@@ -133,7 +181,10 @@ body,
 .docs-gm .docs-revisions-chromecover-content-color-default,
 .docs-gm .docs-revisions-sidebar-header,
 .docs-gm .docs-revisions-sidebar-date-group,
-.docs-revisions-sidebar {
+.docs-revisions-sidebar,
+.apps-shortcutshelpcontentimpl-ac-renderer,
+.docs-palette-body,
+.docs-palette-title-bar {
     background-color: var(--secondary-background-color) !important;
 }
 
@@ -161,11 +212,15 @@ body,
 #docs-meet-in-editors-entrypointbutton.goog-flat-menu-button-hover,
 #docs-meet-in-editors-entrypointbutton.goog-flat-menu-button-focused,
 .docs-revisions-tile-selected,
-.docs-revisions-tile-hover:not(.docs-revisions-tile-selected) {
+.docs-revisions-tile-hover:not(.docs-revisions-tile-selected),
+.docs-omnibox-parent .docs-labelinputmenuitem.goog-menuitem.goog-menuitem-highlight,
+.docs-mic-palette-body-hover,
+.docs-mic-palette .goog-flat-menu-button-hover,
+.docs-mic-palette .goog-flat-menu-button-focused {
     /* although not hover elements, some elements may use the
     hover-background-color to differentiate themselves from the
     secondary-background-color */
-    background: var(--hover-background-color);
+    background: var(--hover-background-color) !important;
 }
 
 .docs-ruler-background-inner,
@@ -213,9 +268,23 @@ body,
 .docs-material .docs-presence-plus-collab-widget-color-block,
 .docs-material.docs-presence-plus-widget-overflow-menu .docs-presence-plus-collab-widget-color-block,
 .docs-material .docs-presence-plus-widget-overflow-button,
-.docs-omnibox-input.jfk-textinput,
-.docs-omnibox-autocomplete .ac-active {
+.docs-omnibox-autocomplete .ac-active,
+.apps-navigationwidget-item-hover,
+.apps-shortcutshelpcontentimpl-ac-renderer .ac-active,
+.docs-title-input:focus {
     background-color: var(--hover-background-color) !important;
+}
+
+.docs-omnibox-input.jfk-textinput,
+.apps-shortcutshelpcontentimpl-search-focused,
+.docs-mic-palette .goog-flat-menu-button {
+    background-color: var(--input-background-color) !important;
+}
+
+.docs-mic-palette .goog-flat-menu-button,
+.docs-findinput-container,
+.docs-gm .modal-dialog .jfk-textinput {
+    background: var(--input-background-color);
 }
 
 .docs-explore-widget {
@@ -261,15 +330,49 @@ body,
 .kix-titlebar-approvals-button.docs-material-button.docs-material-button-focused.docs-material-button-no-focus-border,
 .document-details-bubble-container,
 .docs-gm .docs-save-indicator-popup.jfk-bubble,
-.docs-gm .goog-menu {
+.docs-gm .goog-menu,
+.apps-shortcutshelppopup,
+.docs-palette-body,
+.docs-gm .modal-dialog,
+.docs-gm .modal-dialog.google-url-picker,
+.docs-gm .docs-offline-optinpromo.jfk-bubble,
+.docs-gm .docs-sync-indicator-popup.jfk-bubble,
+.docs-gm .modal-dialog .goog-flat-menu-button,
+.docs-gm .kix-tablesidebar-control .goog-flat-menu-button,
+.docs-gm .sketchy-shape-effects-shadow-tile .goog-flat-menu-button,
+.ita-cp-search,
+.ita-cp-charpicker .goog-char-picker-grid,
+.ita-cp-hwt,
+.docs-gm .modal-dialog button,
+.docs-gm .modal-dialog .jfk-button-standard {
     border: 1px solid var(--primary-border-color) !important;
 }
 
-.docs-gm .docos-input-textarea {
+.docs-title-input:hover,
+.goog-toolbar[role="toolbar"] .docs-font-size-inc-dec-action-button.goog-toolbar-button,
+.docs-material .goog-toolbar-combo-button-hover .goog-toolbar-combo-button-input,
+#fontSizeSelect.docs-font-size-inc-dec-combobox,
+.goog-menuitem.docs-submenuitem,
+.docs-material .docs-presence-plus-collab-widget-color-block,
+.docs-material.docs-presence-plus-widget-overflow-menu .docs-presence-plus-collab-widget-color-block,
+.docs-gm .docs-material .docs-chat.jfk-button,
+.docs-gm .docs-material .docs-chat.jfk-button.jfk-button-clear-outline,
+.docs-gm .docs-material .docs-chat.jfk-button.jfk-button-active.jfk-button-focused,
+.goog-flat-menu-button,
+.docs-palette-title-bar,
+.ita-cp-hwt-hint {
+    border-color: var(--primary-border-color) !important;
+}
+
+.docs-gm .docos-input-textarea,
+.docs-gm .docs-findinput-container,
+.docs-gm .docs-gotoinput-container,
+.docs-gm .modal-dialog .jfk-textinput {
     border: 1px solid var(--primary-border-color);
 }
 
-.docs-vertical-ruler {
+.docs-vertical-ruler,
+.goog-char-picker-grid .goog-flat-button {
     border-right: 1px solid var(--primary-border-color) !important;
 }
 
@@ -319,22 +422,9 @@ body,
 .docs-material #docs-equationtoolbar,
 .docs-gm .docs-revisions-sidebar-header,
 .docs-revisions-sidebar-date-group,
-.docs-revisions-tile-content-wrapper {
+.docs-revisions-tile-content-wrapper,
+.goog-char-picker-grid .goog-flat-button {
     border-bottom: 1px solid var(--primary-border-color) !important;
-}
-
-.docs-title-input:hover,
-.goog-toolbar[role="toolbar"] .docs-font-size-inc-dec-action-button.goog-toolbar-button,
-.docs-material .goog-toolbar-combo-button-hover .goog-toolbar-combo-button-input,
-#fontSizeSelect.docs-font-size-inc-dec-combobox,
-.goog-menuitem.docs-submenuitem,
-.docs-material .docs-presence-plus-collab-widget-color-block,
-.docs-material.docs-presence-plus-widget-overflow-menu .docs-presence-plus-collab-widget-color-block,
-.docs-gm .docs-material .docs-chat.jfk-button,
-.docs-gm .docs-material .docs-chat.jfk-button.jfk-button-clear-outline,
-.docs-gm .docs-material .docs-chat.jfk-button.jfk-button-active.jfk-button-focused,
-.goog-flat-menu-button {
-    border-color: var(--primary-border-color) !important;
 }
 
 .docs-gm .docs-material .docs-toolbar-button-split-right.goog-toolbar-button-hover,
@@ -352,6 +442,10 @@ body,
 
 /* border radius */
 
+.apps-shortcutshelppopup {
+    border-radius: 12px;
+}
+
 .kix-page,
 .docs-title-input,
 .docs-gm .goog-menu,
@@ -363,7 +457,19 @@ body,
 .docs-gm #docs-titlebar-share-client-button .jfk-button,
 .docs-omnibox-autocomplete .ac-renderer,
 .docs-revisions-chromecover-titlebar-button-action,
-.docs-revisions-chromecover-titlebar-second-button-action {
+.docs-revisions-chromecover-titlebar-second-button-action,
+.apps-shortcutshelpcontentimpl-ac-renderer,
+.jfk-bubble,
+.ita-cp-search,
+.ita-cp-hwt,
+.docs-gm .modal-dialog .goog-flat-menu-button,
+.docs-gm .kix-tablesidebar-control .goog-flat-menu-button,
+.docs-gm .sketchy-shape-effects-shadow-tile .goog-flat-menu-button,
+.docs-gm .modal-dialog button,
+.docs-gm .modal-dialog .jfk-button-standard,
+.docs-gm .modal-dialog .goog-buttonset-action,
+.docs-gm .modal-dialog .jfk-button-action,
+.docs-gm .docs-material-bubble .jfk-button-action {
     border-radius: 6px !important;
 }
 
@@ -381,11 +487,21 @@ body,
 
 /* material design box shadow */
 .document-details-bubble-container,
-.docs-gm .goog-menu {
+.docs-gm .goog-menu,
+.apps-shortcutshelppopup,
+.apps-shortcutshelpcontentimpl-ac-renderer,
+.docs-palette,
+.docs-voice-mic-bubble:focus,
+.docs-voice-activity-bubble:focus,
+.docs-gm .modal-dialog,
+.docs-gm .modal-dialog.google-url-picker,
+.docs-gm .docs-offline-optinpromo.jfk-bubble,
+.docs-gm .docs-sync-indicator-popup.jfk-bubble {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
-.goog-palette-cell-hover .kix-equation-toolbar-palette-item {
+.goog-palette-cell-hover .kix-equation-toolbar-palette-item,
+.docs-mic-palette-body-hover {
     box-shadow: none;
 }
 
@@ -404,27 +520,29 @@ body,
     background-color: transparent;
 }
 
-.goog-menu {
-    background: var(--menu-background);
-    backdrop-filter: blur(16px);
-}
-
 .jfk-tooltip-arrowleft .jfk-tooltip-arrowimplbefore,
 .jfk-tooltip-arrowright .jfk-tooltip-arrowimplbefore {
     border-color: transparent var(--primary-border-color) !important;
 }
 
 .jfk-tooltip-arrowdown .jfk-tooltip-arrowimplbefore,
-.jfk-tooltip-arrowup .jfk-tooltip-arrowimplbefore {
+.jfk-tooltip-arrowup .jfk-tooltip-arrowimplbefore,
+.jfk-bubble-arrowdown .jfk-bubble-arrowimplbefore,
+.jfk-bubble-arrowup .jfk-bubble-arrowimplbefore,
+.jfk-bubble-arrowdown .jfk-bubble-arrowimplafter,
+.jfk-bubble-arrowup .jfk-bubble-arrowimplafter {
     border-color: var(--primary-border-color) transparent !important;
 }
 
-.goog-palette-cell-hover .kix-equation-toolbar-palette-item {
+.goog-palette-cell-hover .kix-equation-toolbar-palette-item,
+.jfk-bubble {
     border-color: var(--primary-border-color) !important;
 }
 
 .goog-toolbar-combo-button-input:focus,
-.outline-refresh #navigation-widget-bottom-fade {
+.outline-refresh #navigation-widget-bottom-fade,
+.ita-cp-input,
+.ita-cp-hwt {
     background: transparent;
 }
 
@@ -433,7 +551,10 @@ body,
     border-radius: 0 6px 6px 0;
 }
 
-.picker-iframe.picker-min.goog-menu {
+/* overflow */
+
+.picker-iframe.picker-min.goog-menu,
+.apps-shortcutshelpcontentimpl-ac-renderer {
     overflow: hidden;
 }
 
@@ -442,6 +563,20 @@ body,
 }
 
 /* filters */
+
+/* slightly transparent fallback */
+.goog-menu {
+    background: var(--primary-background-color);
+}
+
+/* if backdrop support: very transparent and blurred */
+@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+    .goog-menu {
+        background: var(--menu-background);
+        -webkit-backdrop-filter: blur(16px);
+        backdrop-filter: blur(16px);
+    }
+}
 
 .docs-gm .docs-material .docs-icon-img,
 .docs-revisions-icon-img:before {
@@ -478,4 +613,72 @@ body,
 
 .docs-revisions-icon-img:before {
     content: var(--revisions-sprite1)
+}
+
+/* placeholders */
+
+input::-webkit-input-placeholder {
+    /* WebKit, Blink, Edge */
+    color: #cccccc;
+}
+
+input:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: var(--secondary-text-color);
+    opacity: 1;
+}
+
+input::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: var(--secondary-text-color);
+    opacity: 1;
+}
+
+input:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: var(--secondary-text-color);
+}
+
+input::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: var(--secondary-text-color);
+}
+
+input::placeholder {
+    /* Most modern browsers support this now. */
+    color: #cccccc;
+}
+
+/* accent */
+
+.outline-refresh .location-indicator-highlight.navigation-item,
+.outline-refresh .location-indicator-highlight.navigation-item .navigation-item-level-0,
+.docs-bubble-link,
+.docs-bubble a,
+.apps-navigationwidget-item-selected,
+a:link {
+    color: var(--accent-text) !important;
+}
+
+.docs-gm .modal-dialog button,
+.docs-gm .modal-dialog .jfk-button-standard,
+.docs-preferencesdialog-tabbed-menu-tabbar .docs-tabbar-tab-selected .docs-tabbar-tablabel:hover,
+.docs-preferencesdialog-tabbed-menu-tabbar .docs-tabbar-tab-selected .docs-tabbar-tablabel {
+    color: var(--accent-text);
+}
+
+.docs-gm .modal-dialog .jfk-textinput:focus,
+.docs-gm .docs-findinput-container-focus,
+.docs-gm .docs-gotoinput-container:focus {
+    border: 2px solid var(--accent-text);
+}
+
+/* opacity */
+
+.docs-gm .modal-dialog button[disabled],
+.docs-gm .modal-dialog .jfk-button-standard.jfk-button-disabled,
+.docs-gm .modal-dialog .goog-buttonset-action[disabled],
+.docs-gm .modal-dialog .jfk-button-action.jfk-button-disabled,
+.docs-gm .docs-material-bubble .jfk-button-action.jfk-button-disabled {
+    opacity: 0.2;
 }
