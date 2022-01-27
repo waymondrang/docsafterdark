@@ -57,6 +57,11 @@ if (!docs_homepage) {
 
     document.documentElement.style.setProperty("--checkmark", "url(" + chrome.runtime.getURL('assets/checkmark.secondary.png') + ")");
     document.documentElement.style.setProperty("--revisions-sprite1", "url(" + chrome.runtime.getURL('assets/revisions_sprite1.secondary.svg') + ")");
+    document.documentElement.style.setProperty("--close_18px", "url(" + chrome.runtime.getURL('assets/close_18px.svg') + ")");
+    document.documentElement.style.setProperty("--lens", "url(" + chrome.runtime.getURL('assets/lens.svg') + ")");
+    document.documentElement.style.setProperty("--jfk_sprite186", "url(" + chrome.runtime.getURL('assets/jfk_sprite186.edited.png') + ")");
+    document.documentElement.style.setProperty("--dimension_highlighted", "url(" + chrome.runtime.getURL('assets/dimension-highlighted.edited.png') + ")");
+    document.documentElement.style.setProperty("--dimension_unhighlighted", "url(" + chrome.runtime.getURL('assets/dimension-unhighlighted.edited.png') + ")");
 
     insert_style();
 }

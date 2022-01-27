@@ -13,7 +13,7 @@ if (!docs_homepage) {
     function insert_style() {
         //inject docs css
         const css = document.createElement('link');
-        css.setAttribute("href", chrome.runtime.getURL('docs.css'));
+        css.setAttribute("href", browser.runtime.getURL('docs.css'));
         css.id = "docs-dark-mode";
         css.rel = "stylesheet";
         document.body.insertBefore(css, document.body.lastChild);
@@ -27,12 +27,12 @@ if (!docs_homepage) {
             document.querySelector("#docs-dark-mode").remove()
             document.querySelector("#dark-mode-switch").innerHTML = "🌚"
             dark_mode_state = false
-            //chrome.storage.local.set({ "gc-darkmode": false })
+            //browser.storage.local.set({ "gc-darkmode": false })
         } else {
             insert_style()
             document.querySelector("#dark-mode-switch").innerHTML = "🌞"
             dark_mode_state = true
-            //chrome.storage.local.set({ "gc-darkmode": true })
+            //browser.storage.local.set({ "gc-darkmode": true })
         }
     }
 
@@ -55,8 +55,13 @@ if (!docs_homepage) {
     document.body.insertBefore(toggle_button, document.body.lastChild);
     document.body.insertBefore(default_style, document.body.lastChild);
 
-    document.documentElement.style.setProperty("--checkmark", "url(" + chrome.runtime.getURL('assets/checkmark.secondary.png') + ")");
-    document.documentElement.style.setProperty("--revisions-sprite1", "url(" + chrome.runtime.getURL('assets/revisions_sprite1.secondary.svg') + ")");
+    document.documentElement.style.setProperty("--checkmark", "url(" + browser.runtime.getURL('assets/checkmark.secondary.png') + ")");
+    document.documentElement.style.setProperty("--revisions-sprite1", "url(" + browser.runtime.getURL('assets/revisions_sprite1.secondary.svg') + ")");
+    document.documentElement.style.setProperty("--close_18px", "url(" + browser.runtime.getURL('assets/close_18px.svg') + ")");
+    document.documentElement.style.setProperty("--lens", "url(" + browser.runtime.getURL('assets/lens.svg') + ")");
+    document.documentElement.style.setProperty("--jfk_sprite186", "url(" + browser.runtime.getURL('assets/jfk_sprite186.edited.png') + ")");
+    document.documentElement.style.setProperty("--dimension_highlighted", "url(" + browser.runtime.getURL('assets/dimension-highlighted.edited.png') + ")");
+    document.documentElement.style.setProperty("--dimension_unhighlighted", "url(" + browser.runtime.getURL('assets/dimension-unhighlighted.edited.png') + ")");
 
     insert_style();
 }
