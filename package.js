@@ -7,7 +7,7 @@ const chrome_manifest = JSON.parse(fs.readFileSync("./src/chrome/manifest.json")
 
 var firefox_manifest = JSON.parse(fs.readFileSync("./src/firefox/manifest.json").toString());
 
-if (process.argv.includes("--copy")) {
+if (process.argv.includes("--copy") || process.argv.includes("--all")) {
 
     const src_files = fs.readdirSync("./src/chrome");
 
@@ -62,12 +62,12 @@ function end_message() {
     console.log("\x1b[36m%s\x1b[0m", "process finished in " + ((new Date() - start_time) / 1000) + " seconds");
 }
 
-if (process.argv.includes("--package")) {
+if (process.argv.includes("--package") || process.argv.includes("--all")) {
     console.log("creating zip files");
     var package_shell = exec(`package.sh \"v${chrome_manifest["version"]}\"`);
     package_shell.on("exit", function () {
         console.log(`release ${chrome_manifest["version"]} created for chrome and firefox`);
-        if (process.argv.includes("--git")) {
+        if (process.argv.includes("--git") || process.argv.includes("--all")) {
             console.log("committing and pushing changes");
             var package_shell = exec(`git.sh \"v${chrome_manifest["version"]}\"`);
             package_shell.on("exit", function () {
