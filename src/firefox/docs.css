@@ -54,7 +54,9 @@ label,
 .docs-gm .docs-details-dialog .modal-dialog-title-text,
 .docs-gm .docs-details-field,
 .docs-material-button-hairline-primary.docs-material-button,
-.kix-pageorientationdialog-title {
+.kix-pageorientationdialog-title,
+.docs-gm .docs-revisions-sidebar-revisions-empty-title,
+.docs-gm .kix-header-footer-bubble-description {
     color: var(--primary-text-color);
 }
 
@@ -74,7 +76,8 @@ input,
 
 .docs-mic-button,
 .docs-mic-svg-icon-path,
-.docs-mic-palette-help>svg {
+.docs-mic-palette-help>svg,
+.docs-explore-icon.docs-explore-widget-icon.docs-explore-widget-icon-inactive.goog-inline-block>svg>path {
     fill: var(--secondary-text-color);
 }
 
@@ -107,7 +110,6 @@ input,
 .docs-gm .docs-revisions-tile-collaborator-name,
 .docs-gm .docs-revisions-tile-descriptor,
 .docs-gm .docs-revisions-tile-text-box~.docs-revisions-tile-descriptor,
-.docs-gm .docs-revisions-sidebar-revisions-empty-title,
 .docs-revisions-tile-text-box:disabled,
 .docs-gm .docs-revisions-sidebar-name-filter-switch-container label,
 .apps-actiondatawidget-shortcut-desc,
@@ -151,7 +153,9 @@ input,
 .docs-link-smartlinksuggestion-search,
 .docs-link-smartlinksuggestion-title,
 .docs-gm .docs-link-smartinsertlinkbubble-text-label,
-.docs-insert-link-bubble-internal-links-text {
+.docs-insert-link-bubble-internal-links-text,
+.docs-autocorrect-bubble .docs-autocorrect-bubble-undo,
+.docs-gm .kix-header-footer-bubble-checkbox-label {
     color: var(--secondary-text-color);
 }
 
@@ -173,7 +177,9 @@ input,
 .docs-link-smartlinksuggestion-search,
 .docs-material-gm-labeled-checkbox .docs-material-gm-labeled-checkbox-description,
 .docs-titlebar-badge,
-.docs-indentationdialoggm-units {
+.docs-indentationdialoggm-units,
+.docs-gm .docs-revisions-sidebar-revisions-empty-details,
+.docs-material.docs-presence-plus-widget-overflow-menu .docs-presence-plus-collab-widget-idle-text {
     color: var(--tertiary-text-color);
 }
 
@@ -209,6 +215,7 @@ input,
 
 /* primary background color */
 
+body,
 .docs-gm #docs-editor,
 .docs-gm #docs-editor-container,
 .kix-appview-editor,
@@ -324,7 +331,6 @@ input,
 .app-switcher-button-selected.agca-gab-blue.app-switcher-button-focused .app-switcher-button-icon-background-inner,
 .docs-gm .docs-titlebar-badge:active,
 .docs-gm .docs-titlebar-badge.docs-titlebar-badge-selected,
-.app-switcher-button-icon-container,
 .companion-collapser-button.app-switcher-button-checked .app-switcher-button-icon-background,
 .companion-theme-light .companion-collapser-button.app-switcher-button-checked .app-switcher-button-icon-background,
 .docs-material .docs-presence-plus-collab-widget-color-block,
@@ -344,7 +350,9 @@ input,
 .docs-insert-link-bubble-internal-links-button:hover,
 .docs-insert-link-bubble-internal-links-button:focus,
 .docs-link-back-to-search-icon-button:hover,
-.docs-link-back-to-search-icon-button:focus {
+.docs-link-back-to-search-icon-button:focus,
+.docs-gm .kix-header-footer-bubble .kix-header-footer-bubble-menu-button.goog-flat-menu-button.goog-flat-menu-button-hover,
+.docs-gm .kix-header-footer-bubble .kix-header-footer-bubble-menu-button.goog-flat-menu-button.goog-flat-menu-button-open {
     background-color: var(--hover-background-color) !important;
 }
 
@@ -465,7 +473,10 @@ input,
 .docs-palette-title-bar,
 .ita-cp-hwt-hint,
 .docs-insert-link-bubble-internal-links-button,
-.docs-revisions-tile-text-box:hover:enabled {
+.docs-revisions-tile-text-box:hover:enabled,
+.docs-gm .kix-spell-bubble,
+.docs-gm .docs-autocorrect-bubble,
+.docs-gm .kix-header-footer-bubble.docs-bubble {
     border-color: var(--primary-border-color) !important;
 }
 
@@ -504,7 +515,7 @@ input,
 .docs-material .docs-presence-plus-widget-overflow-button.goog-flat-menu-button-active .goog-flat-menu-button-dropdown,
 .docs-material .docs-presence-plus-widget-overflow-button.goog-flat-menu-button-focused .goog-flat-menu-button-dropdown,
 .docs-material .docs-presence-plus-widget-overflow-button.goog-flat-menu-button-hover .goog-flat-menu-button-dropdown {
-    border-color: var(--secondary-background-color) transparent;
+    border-color: var(--primary-border-color) transparent;
 }
 
 .docs-omnibox-input.jfk-textinput:focus[aria-expanded="true"] {
@@ -590,8 +601,12 @@ input,
 .docs-gm .docs-material-bubble .jfk-button-action,
 .docs-gm .docs-ui-toast,
 .docs-checkupdialog-content-container,
-.jfk-button {
+.docs-explore-widget {
     border-radius: 6px !important;
+}
+
+.jfk-button {
+    border-radius: 6px;
 }
 
 .goog-palette-cell .docs-preview-palette-item,
@@ -631,7 +646,10 @@ input,
 .docs-gm .modal-dialog .jfk-button-standard.jfk-button-focus.jfk-button-active,
 .docs-revisions-chromecover-titlebar-button-action.goog-flat-button-active,
 .docs-revisions-chromecover-titlebar-second-button-action.goog-flat-button-active,
-.docs-material-button-fill-primary.docs-material-button-hover {
+.docs-material-button-fill-primary.docs-material-button-hover,
+.docs-explore-widget,
+.companion-collapser-button.app-switcher-button-checked .app-switcher-button-icon-background,
+.docs-gm .docs-autocorrect-bubble {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
@@ -658,7 +676,8 @@ input,
 .docs-gm .sketchy-shape-effects-shadow-tile .goog-flat-menu-button:active,
 .docs-gm .docs-preferencesdialog-list-body,
 .modal-dialog-title,
-.modal-dialog-content {
+.modal-dialog-content,
+.app-switcher-button-icon-container {
     background-color: transparent;
 }
 
@@ -687,7 +706,8 @@ input,
 .ita-cp-hwt,
 .full-screen-share-client-dialog .modal-dialog-content,
 .jfk-radiobutton-disabled:active .jfk-radiobutton-radio,
-.jfk-radiobutton-disabled:hover .jfk-radiobutton-radio {
+.jfk-radiobutton-disabled:hover .jfk-radiobutton-radio,
+.outline-refresh:not([class*="docs-hc"]) #navigation-widget-top-shadow::after {
     background: transparent;
 }
 
@@ -718,7 +738,8 @@ input,
 .docs-gm .modal-dialog,
 .docs-gm .modal-dialog.google-url-picker,
 .docs-gm .docs-offline-optinpromo.jfk-bubble,
-.docs-gm .docs-sync-indicator-popup.jfk-bubble {
+.docs-gm .docs-sync-indicator-popup.jfk-bubble,
+.docs-gm .kix-header-footer-bubble-menu.goog-menu {
     background: var(--primary-background-color);
 }
 
@@ -731,7 +752,8 @@ input,
     .docs-gm .modal-dialog,
     .docs-gm .modal-dialog.google-url-picker,
     .docs-gm .docs-offline-optinpromo.jfk-bubble,
-    .docs-gm .docs-sync-indicator-popup.jfk-bubble {
+    .docs-gm .docs-sync-indicator-popup.jfk-bubble,
+    .docs-gm .kix-header-footer-bubble-menu.goog-menu {
         background: var(--menu-background);
         -webkit-backdrop-filter: blur(16px);
         backdrop-filter: blur(16px);
@@ -848,8 +870,13 @@ a:link,
 .docs-material .docs-save-indicator-popup-title,
 .docs-gm .docs-revisions-tile-selected .docs-revisions-tile-text-box,
 .docs-gm .docs-revisions-tile-selected .docs-revisions-tile-descriptor,
-.docs-gm .docs-revisions-tile-selected .docs-revisions-tile-text-box~.docs-revisions-tile-descriptor {
+.docs-gm .docs-revisions-tile-selected .docs-revisions-tile-text-box~.docs-revisions-tile-descriptor,
+.docs-gm .kix-header-footer-bubble .kix-header-footer-bubble-menu-button.goog-flat-menu-button {
     color: var(--accent-text) !important;
+}
+
+.docs-explore-widget-active .docs-explore-widget-icon>svg>path {
+    fill: var(--accent-text);
 }
 
 .docs-gm .modal-dialog .jfk-button-standard,
@@ -956,4 +983,12 @@ a:link,
 
 .docs-gm .docs-revisions-sidebar-name-filter-switch-container {
     height: 39px;
+}
+
+/* .docs-explore-widget {
+    margin-bottom: 17px !important;
+} */
+
+.kix-page-paginated :last-child {
+    z-index: -999 !important;
 }
