@@ -180,7 +180,8 @@ input,
 .docs-titlebar-badge,
 .docs-indentationdialoggm-units,
 .docs-gm .docs-revisions-sidebar-revisions-empty-details,
-.docs-material.docs-presence-plus-widget-overflow-menu .docs-presence-plus-collab-widget-idle-text {
+.docs-material.docs-presence-plus-widget-overflow-menu .docs-presence-plus-collab-widget-idle-text,
+.kix-columnoptionsdialog-units {
     color: var(--tertiary-text-color);
 }
 
@@ -1014,6 +1015,10 @@ a:link,
 
 .docs-gm .docs-revisions-sidebar-name-filter-switch-container {
     height: 39px;
+}
+
+.docs-indentationdialoggm-units {
+    opacity: 1;
 }
 
 /* .docs-explore-widget {
