@@ -15,7 +15,9 @@ if (process.argv.includes("--copy") || process.argv.includes("--all")) {
         console.log("\x1b[33m%s\x1b[0m", "chrome manifest version not updated!");
     }
 
-    var excluded_files = ["manifest.json", ".git", "firefox", "word.js"];
+    // ! Confirm these files before building
+    var excluded_files = ["manifest.json", ".git", "firefox", "word.js", "popup.js"];
+    var exclusive_files = ["word.js", "popup.js"];
 
     for (file of src_files) {
         if (excluded_files.includes(file)) {
@@ -24,11 +26,11 @@ if (process.argv.includes("--copy") || process.argv.includes("--all")) {
         fs.copySync("./src/chrome/" + file, "./src/firefox/" + file);
     }
 
-    const chrome_word_js = fs.readFileSync("./src/chrome/word.js", { encoding: "utf-8" }).toString();
-
-    var firefox_word_js = chrome_word_js.replace(/chrome/gm, "browser");
-
-    fs.writeFileSync("./src/firefox/word.js", firefox_word_js);
+    for (file of exclusive_files) {
+        var chrome_js = fs.readFileSync("./src/chrome/" + file, { encoding: "utf-8" }).toString();
+        var firefox_js = chrome_js.replace(/chrome/gm, "browser");
+        fs.writeFileSync("./src/firefox/" + file, firefox_js);
+    }
 
     console.log("finished copying " + src_files.length + " files from chrome into firefox directory");
 
@@ -45,6 +47,14 @@ if (process.argv.includes("--copy") || process.argv.includes("--all")) {
                 new_resources.push(resource);
             }
             firefox_manifest[field] = new_resources;
+            continue;
+        }
+        if (field == "action") {
+            var actions = chrome_manifest[field];
+            firefox_manifest["browser_action"] = {};
+            for (action in actions) {
+                firefox_manifest["browser_action"][action] = chrome_manifest[field][action];
+            }
             continue;
         }
         firefox_manifest[field] = chrome_manifest[field];

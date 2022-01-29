@@ -63,6 +63,56 @@ if (!docs_homepage) {
     document.documentElement.style.setProperty("--dimension_highlighted", "url(" + chrome.runtime.getURL('assets/dimension-highlighted.edited.png') + ")");
     document.documentElement.style.setProperty("--dimension_unhighlighted", "url(" + chrome.runtime.getURL('assets/dimension-unhighlighted.edited.png') + ")");
 
+    var backgrounds = {
+        "default": "#ffffff",
+        "shade": "#999999",
+        "dark": "#1b1b1b",
+        "black": "#000000"
+    }
+
+    console.log("GETTING FROM STORAGE");
+    chrome.storage.local.get(["doc_bg", "custom_bg"], function (data) {
+        console.log(data);
+        if (data.doc_bg) {
+            var option = data.doc_bg;
+            var custom = data.custom_bg ? data.custom_bg : "";
+            if (option == "custom") {
+                document.documentElement.style.setProperty("--document_background", custom);
+            } else {
+                for (bg in backgrounds) {
+                    if (option == bg) {
+                        document.documentElement.style.setProperty("--document_background", backgrounds[bg]);
+                        break;
+                    }
+                }
+            }
+        }
+    });
+
+    chrome.storage.onChanged.addListener(function (changes, area) {
+        console.log(changes);
+        if (Object.keys(changes).includes("doc_bg")) {
+            var option = changes.doc_bg.newValue;
+            if (option != "custom") {
+                for (bg in backgrounds) {
+                    if (option == bg) {
+                        document.documentElement.style.setProperty("--document_background", backgrounds[bg]);
+                        break;
+                    }
+                }
+            } else {
+                chrome.storage.local.get(["custom_bg"], function (data) {
+                    var custom = data.custom_bg ? data.custom_bg : "";
+                    document.documentElement.style.setProperty("--document_background", custom);
+                })
+            }
+        }
+        if (Object.keys(changes).includes("custom_bg")) {
+            var custom = changes.custom_bg.newValue;
+            document.documentElement.style.setProperty("--document_background", custom);
+        }
+    })
+
     insert_style();
 }
 

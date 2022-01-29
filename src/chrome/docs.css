@@ -352,7 +352,9 @@ body,
 .docs-link-back-to-search-icon-button:hover,
 .docs-link-back-to-search-icon-button:focus,
 .docs-gm .kix-header-footer-bubble .kix-header-footer-bubble-menu-button.goog-flat-menu-button.goog-flat-menu-button-hover,
-.docs-gm .kix-header-footer-bubble .kix-header-footer-bubble-menu-button.goog-flat-menu-button.goog-flat-menu-button-open {
+.docs-gm .kix-header-footer-bubble .kix-header-footer-bubble-menu-button.goog-flat-menu-button.goog-flat-menu-button-open,
+.docs-gm .docs-autocorrect-bubble-undo:hover,
+.docs-gm .docs-autocorrect-bubble-more-options:hover {
     background-color: var(--hover-background-color) !important;
 }
 
@@ -991,4 +993,8 @@ a:link,
 
 .kix-page-paginated :last-child {
     z-index: -999 !important;
+}
+
+.kix-canvas-tile-content {
+    background: var(--document_background);
 }
