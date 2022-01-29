@@ -997,4 +997,5 @@ a:link,
 
 .kix-canvas-tile-content {
     background: var(--document_background);
+    background-size: contain;
 }

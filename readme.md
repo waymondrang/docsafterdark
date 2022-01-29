@@ -9,3 +9,5 @@ Available on [Firefox Add-Ons](https://addons.mozilla.org/en-US/firefox/addon/do
 ![promotional image](docsafterdark.png)
 
 ![menus preview](menus.png)
+
+![background customization](backgrounds.png)
