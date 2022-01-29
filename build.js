@@ -64,6 +64,10 @@ if (process.argv.includes("--copy") || process.argv.includes("--all")) {
 
     console.log("updated firefox manifest using chrome manifest");
 
+    if (process.argv.includes("--git") || process.argv.includes("--all")) {
+        console.log("pushing synced directories to github");
+        var package_shell = exec(`git.sh \"v${chrome_manifest["version"]} platform directory sync\"`);
+    }
 } else {
     console.log("skipped copying");
 }
@@ -79,7 +83,7 @@ if (process.argv.includes("--package") || process.argv.includes("--all")) {
         console.log(`release ${chrome_manifest["version"]} created for chrome and firefox`);
         if (process.argv.includes("--git") || process.argv.includes("--all")) {
             console.log("committing and pushing changes");
-            var package_shell = exec(`git.sh \"v${chrome_manifest["version"]}\"`);
+            var package_shell = exec(`git.sh \"version v${chrome_manifest["version"]}\"`);
             package_shell.on("exit", function () {
                 console.log(`committed and pushed ${chrome_manifest["version"]} to github`);
                 end_message();
