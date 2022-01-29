@@ -7,13 +7,21 @@ const chrome_manifest = JSON.parse(fs.readFileSync("./src/chrome/manifest.json")
 
 var firefox_manifest = JSON.parse(fs.readFileSync("./src/firefox/manifest.json").toString());
 
+const version_exists = fs.existsSync(`./releases/dad_v${chrome_manifest["version"]}_chrome.zip`);
+
+if ((process.argv.includes("--all") || process.argv.includes("--package")) && version_exists && !process.argv.includes("--ignore")) {
+    console.log("\x1b[33m%s\x1b[0m", "packaged version already exists!");
+    process.exit(9);
+}
+
+if ((process.argv.includes("--all") || process.argv.includes("--package")) && chrome_manifest["version"] === firefox_manifest["version"] && !process.argv.includes("--ignore")) {
+    console.log("\x1b[33m%s\x1b[0m", "chrome manifest version not updated!");
+    process.exit(9);
+}
+
 if (process.argv.includes("--copy") || process.argv.includes("--all")) {
 
     const src_files = fs.readdirSync("./src/chrome");
-
-    if (chrome_manifest["version"] === firefox_manifest["version"]) {
-        console.log("\x1b[33m%s\x1b[0m", "chrome manifest version not updated!");
-    }
 
     // ! Confirm these files before building
     var excluded_files = ["manifest.json", ".git", "firefox", "word.js", "popup.js"];
