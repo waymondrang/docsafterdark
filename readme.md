@@ -1,8 +1,6 @@
 # DocsAfterDark
 
-![Chrome Web Store](https://img.shields.io/chrome-web-store/v/pihphjfnfjmdbhakhjifipfdgbpenobg?color=%23262626%20) ![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/pihphjfnfjmdbhakhjifipfdgbpenobg?color=%23262626%20&label=chrome%20users)
-
-![Mozilla Add-on](https://img.shields.io/amo/v/docsafterdark?color=%23262626%20) ![Mozilla Add-on](https://img.shields.io/amo/users/docsafterdark?color=%23262626%20&label=firefox%20users)
+![Chrome Web Store](https://img.shields.io/chrome-web-store/v/pihphjfnfjmdbhakhjifipfdgbpenobg?color=%23262626%20) ![Mozilla Add-on](https://img.shields.io/amo/v/docsafterdark?color=%23262626%20)
 
 DocsAfterDark aims to relieve eye-strain from the Google Docs experience with a focus on functionality and artful design.
 
@@ -19,3 +17,7 @@ Available on [Firefox Add-Ons](https://addons.mozilla.org/en-US/firefox/addon/do
 ![background customization](backgrounds.png)
 
 ![menus preview](menus.png)
+
+---
+
+![Mozilla Add-on](https://img.shields.io/amo/users/docsafterdark?color=%23262626%20&label=firefox%20users) ![Mozilla Add-on](https://img.shields.io/amo/rating/docsafterdark?color=%23262626%20&label=firefox%20rating) ![Mozilla Add-on](https://img.shields.io/amo/dw/docsafterdark?color=%23262626%20&label=firefox%20downloads) ![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/pihphjfnfjmdbhakhjifipfdgbpenobg?color=%23262626%20&label=chrome%20users) ![Chrome Web Store Users](https://img.shields.io/chrome-web-store/rating/pihphjfnfjmdbhakhjifipfdgbpenobg?color=%23262626%20&label=chrome%20rating) ![Chrome Web Store Users](https://img.shields.io/chrome-web-store/rating-count/pihphjfnfjmdbhakhjifipfdgbpenobg?color=%23262626%20&label=chrome%20rating%20count)
