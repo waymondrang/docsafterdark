@@ -1,7 +1,8 @@
 # DocsAfterDark
 
-![Chrome Web Store](https://img.shields.io/chrome-web-store/v/pihphjfnfjmdbhakhjifipfdgbpenobg?color=%23262626%20) ![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/pihphjfnfjmdbhakhjifipfdgbpenobg?color=%23262626%20&label=users)
-![Mozilla Add-on](https://img.shields.io/amo/v/docsafterdark?color=%23262626%20) ![Mozilla Add-on](https://img.shields.io/amo/users/docsafterdark?color=%23262626%20&label=users)
+![Chrome Web Store](https://img.shields.io/chrome-web-store/v/pihphjfnfjmdbhakhjifipfdgbpenobg?color=%23262626%20) ![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/pihphjfnfjmdbhakhjifipfdgbpenobg?color=%23262626%20&label=chrome%20users)
+
+![Mozilla Add-on](https://img.shields.io/amo/v/docsafterdark?color=%23262626%20) ![Mozilla Add-on](https://img.shields.io/amo/users/docsafterdark?color=%23262626%20&label=firefox%20users)
 
 DocsAfterDark aims to relieve eye-strain from the Google Docs experience with a focus on functionality and artful design.
 
