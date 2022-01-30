@@ -251,7 +251,8 @@ body,
 .docs-preferencesdialog-tabbed-menu-tabbar .docs-tabbar-tab-hover,
 .docs-gm .docos-calltoactionview-container,
 .docs-slidingdialog,
-.docs-gm .docs-link-smartinsertlinkbubble-text-label {
+.docs-gm .docs-link-smartinsertlinkbubble-text-label,
+#banners #title-banner {
     background-color: var(--secondary-background-color) !important;
 }
 
@@ -556,7 +557,8 @@ body,
 .docs-revisions-tile-content-wrapper,
 .goog-char-picker-grid .goog-flat-button,
 .docos-calltoactionview-checkbox-container,
-.docs-slidingdialog {
+.docs-slidingdialog,
+#banners #title-banner {
     border-bottom: 1px solid var(--primary-border-color) !important;
 }
 
