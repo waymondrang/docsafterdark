@@ -1,6 +1,10 @@
 # DocsAfterDark
 
-DocsAfterDark aims to relieve eye-strain from the Google Docs experience through an artfully crafted color palette. The theme can be toggled on/off using the button on the bottom left of the page.
+DocsAfterDark aims to relieve eye-strain from the Google Docs experience with a focus on functionality and artful design.
+
+Customize the document background to a darker shade or any color by clicking on its icon in the toolbar. Any valid background CSS value can be used in the custom field, including images and gradients.
+
+To toggle the theme on/off, click on the button on the bottom left of the page.
 
 Available on [Firefox Add-Ons](https://addons.mozilla.org/en-US/firefox/addon/docsafterdark/) and [Chrome Web Store](https://chrome.google.com/webstore/detail/docsafterdark/pihphjfnfjmdbhakhjifipfdgbpenobg).
 
