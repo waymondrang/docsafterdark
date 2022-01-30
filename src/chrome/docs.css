@@ -1035,3 +1035,8 @@ a:link,
     background: var(--document_background);
     background-size: contain;
 }
+
+#contents>div {
+    background-color: transparent;
+    background: var(--document_background);
+}

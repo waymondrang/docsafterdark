@@ -1,5 +1,8 @@
 # DocsAfterDark
 
+![Chrome Web Store](https://img.shields.io/chrome-web-store/v/pihphjfnfjmdbhakhjifipfdgbpenobg?color=%23262626%20) ![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/pihphjfnfjmdbhakhjifipfdgbpenobg?color=%23262626%20&label=users)
+![Mozilla Add-on](https://img.shields.io/amo/v/docsafterdark?color=%23262626%20) ![Mozilla Add-on](https://img.shields.io/amo/users/docsafterdark?color=%23262626%20&label=users)
+
 DocsAfterDark aims to relieve eye-strain from the Google Docs experience with a focus on functionality and artful design.
 
 Customize the document background to a darker shade or any color by clicking on its icon in the toolbar. Any valid background CSS value can be used in the custom field, including images and gradients.
