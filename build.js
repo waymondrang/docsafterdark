@@ -1,7 +1,6 @@
 const start_time = new Date();
 const fs = require('fs-extra');
-const { exec, spawn } = require("child_process");
-const { start } = require("repl");
+const { exec } = require("child_process");
 
 const chrome_manifest = JSON.parse(fs.readFileSync("./src/chrome/manifest.json").toString());
 
