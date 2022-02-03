@@ -70,8 +70,10 @@ if (!docs_homepage) {
         "black": "#000000"
     }
 
+    var inverted;
+
     console.log("GETTING FROM STORAGE");
-    browser.storage.local.get(["doc_bg", "custom_bg"], function (data) {
+    browser.storage.local.get(["doc_bg", "custom_bg", "invert"], function (data) {
         console.log(data);
         if (data.doc_bg) {
             var option = data.doc_bg;
@@ -87,10 +89,14 @@ if (!docs_homepage) {
                 }
             }
         }
+        if (data.invert) {
+            inverted = data.invert;
+            document.documentElement.style.setProperty("--document_invert", "invert(1)");
+        }
     });
 
     browser.storage.onChanged.addListener(function (changes, area) {
-        console.log(changes);
+        console.log(changes, inverted);
         if (Object.keys(changes).includes("doc_bg")) {
             var option = changes.doc_bg.newValue;
             if (option != "custom") {
@@ -111,6 +117,11 @@ if (!docs_homepage) {
             var custom = changes.custom_bg.newValue;
             document.documentElement.style.setProperty("--document_background", custom);
         }
+        if (Object.keys(changes).includes("invert")) {
+            console.log("INVERT CHANGED", inverted, changes)
+            inverted = changes.invert.newValue;
+        }
+        document.documentElement.style.setProperty("--document_invert", inverted ? "invert(1)" : "none");
     })
 
     insert_style();

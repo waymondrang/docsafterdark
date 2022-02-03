@@ -30,18 +30,14 @@ body {
 }
 
 body {
-    color: var(--primary-text-color)
+    color: var(--primary-text-color);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
 }
 
 #main {
     max-width: min-content;
     padding: 0 12px;
-}
-
-p {
-
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
 }
 
 .menu_bar {
@@ -71,6 +67,22 @@ input {
     color: var(--primary-text-color);
     width: 100%;
     box-sizing: border-box;
+}
+
+input[type=checkbox] {
+    width: fit-content;
+    margin: 0;
+    margin-right: 4px;
+}
+
+#invert_container {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+}
+
+label {
+    font-family: inherit;
 }
 
 button:hover {

@@ -2,6 +2,7 @@ var selected;
 const custom_input = document.querySelector("#custom_input");
 const custom_save = document.querySelector("#save_custom");
 const description = document.querySelector("#description");
+const invert = document.querySelector("#invert");
 
 var descriptions = {
     "default": "The default, white background.",
@@ -26,10 +27,11 @@ document.querySelectorAll(".menu_bar button").forEach(function (e) {
                 description.textContent = descriptions[d];
             }
         }
-        browser.storage.local.set({ "doc_bg": id });
+        browser.storage.local.set({ "doc_bg": id, "invert": false });
         selected.classList.remove("selected");
         this.classList.add("selected");
         selected = this;
+        invert.checked = false;
     })
 })
 
@@ -39,10 +41,15 @@ custom_save.addEventListener("click", function (e) {
     }
 })
 
+invert.addEventListener("click", function (e) {
+    browser.storage.local.set({ "invert": this.checked });
+})
+
 try {
-    browser.storage.local.get(["doc_bg", "custom_bg"], function (data) {
+    browser.storage.local.get(["doc_bg", "custom_bg", "invert"], function (data) {
         var option = data.doc_bg;
         var custom = data.custom_bg;
+        var inverted = data.invert;
         if (!option) {
             var option = "default";
             browser.storage.local.set({ "doc_bg": "default" });
@@ -55,6 +62,9 @@ try {
             custom_input.classList.remove("hidden");
             custom_input.value = custom ? custom : "";
             custom_save.classList.remove("hidden");
+        }
+        if (inverted) {
+            invert.checked = true;
         }
     })
 } catch (e) {

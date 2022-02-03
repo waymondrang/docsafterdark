@@ -69,7 +69,8 @@ input,
 .docs-title-input:focus,
 .docs-gm .modal-dialog .jfk-textinput,
 .docs-gm.docs-material-gm-dialog .jfk-textinput,
-.docs-gm .docs-material-bubble .jfk-textinput {
+.docs-gm .docs-material-bubble .jfk-textinput,
+#gb a.gb_1.gb_1 {
     color: var(--primary-text-color) !important;
 }
 
@@ -204,7 +205,8 @@ input,
 .docs-gm .modal-dialog button[disabled],
 .docs-gm .modal-dialog .jfk-button-standard.jfk-button-disabled,
 .docs-title .docs-title-untitled,
-.docs-title-input-label.docs-title-untitled {
+.docs-title-input-label.docs-title-untitled,
+.docs-gm #docs-titlebar-share-client-button .jfk-button-disabled {
     color: var(--disabled-text) !important;
 }
 
@@ -1064,13 +1066,20 @@ a:link,
     margin-bottom: 17px !important;
 } */
 
-.kix-page-paginated :last-child {
-    z-index: -999 !important;
-}
+.kix-appview-editor .kix-page-paginated:last-child {}
 
 .kix-canvas-tile-content {
-    background: var(--document_background);
+    background: transparent;
     background-size: contain;
+}
+
+.kix-appview-editor canvas {
+    filter: var(--document_invert);
+    background: var(--document_background) !important;
+}
+
+.kix-appview-clipped-ui-elements-container {
+    filter: var(--document_invert);
 }
 
 #contents>div {
