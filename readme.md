@@ -17,6 +17,8 @@ Available on [Firefox Add-Ons](https://addons.mozilla.org/en-US/firefox/addon/do
 
 ![background customization](backgrounds.png)
 
+![backgrounds inverted](backgrounds_inverted.png)
+
 ![menus preview](menus.png)
 
 ![customization menu](customization_menu.png)
