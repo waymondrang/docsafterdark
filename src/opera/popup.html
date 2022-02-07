@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="popup.css">
+    <title>DocsAfterDark Settings</title>
+</head>
+
+<body>
+    <div id="main">
+        <p>Document Background Customization</p>
+        <div class="menu_bar">
+            <button id="default">
+                <div>
+                    Default
+                </div>
+            </button>
+            <button id="shade">
+                <div>
+                    Shade
+                </div>
+            </button>
+            <button id="dark">
+                <div>
+                    Dark
+                </div>
+            </button>
+            <button id="black">
+                <div>
+                    Black
+                </div>
+            </button>
+            <button id="custom">
+                <div>
+                    Custom
+                </div>
+            </button>
+        </div>
+        <input id="custom_input" class="hidden" placeholder="Custom Color/CSS">
+        <button id="save_custom" class="hidden">Save</button>
+        <div id="invert_container">
+            <input type="checkbox" id="invert" name="invert"><label for="invert">Invert</label>
+        </div>
+        <p id="description"></p>
+    </div>
+    <script src="popup.js"></script>
+</body>
+
+</html>

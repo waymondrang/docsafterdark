@@ -25,3 +25,13 @@ zip -r "dad_${1}_firefox.zip" ./*
 cd -
 
 mv "./src/firefox/dad_${1}_firefox.zip" ./releases
+
+echo "creating opera release"
+
+cd src/opera/
+
+zip -r "dad_${1}_opera.zip" ./*
+
+cd -
+
+mv "./src/opera/dad_${1}_opera.zip" ./releases

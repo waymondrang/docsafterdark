@@ -1,0 +1,40 @@
+{
+  "name": "DocsAfterDark",
+  "version": "0.3.15",
+  "description": "Modern, dark mode for Google Docs",
+  "author": "Raymond Wang",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": [
+        "*://docs.google.com/document/*"
+      ],
+      "js": [
+        "word.js"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    "docs.css",
+    "/assets/checkmark.secondary.png",
+    "/assets/revisions_sprite1.secondary.svg",
+    "/assets/close_18px.svg",
+    "/assets/lens.svg",
+    "/assets/jfk_sprite186.png",
+    "/assets/jfk_sprite186.edited.png",
+    "assets/dimension-unhighlighted.edited.png",
+    "assets/dimension-highlighted.edited.png"
+  ],
+  "icons": {
+    "16": "dad16.png",
+    "48": "dad48.png",
+    "128": "dad128.png"
+  },
+  "permissions": [
+    "storage"
+  ],
+  "browser_action": {
+    "default_title": "DocsAfterDark Options",
+    "default_popup": "popup.html"
+  }
+}

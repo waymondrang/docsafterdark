@@ -2,18 +2,24 @@ const start_time = new Date();
 const fs = require('fs-extra');
 const { exec } = require("child_process");
 
+const force_mode = process.argv.includes("--ignore") || process.argv.includes("--force");
+
 const chrome_manifest = JSON.parse(fs.readFileSync("./src/chrome/manifest.json").toString());
+
+var opera_manifest = JSON.parse(fs.readFileSync("./src/opera/manifest.json").toString());
 
 var firefox_manifest = JSON.parse(fs.readFileSync("./src/firefox/manifest.json").toString());
 
 const version_exists = fs.existsSync(`./releases/dad_v${chrome_manifest["version"]}_chrome.zip`);
 
-if ((process.argv.includes("--all") || process.argv.includes("--package")) && version_exists && !process.argv.includes("--ignore")) {
+// TODO: Run checks against each version, and if needed, perform directory sync for behind directory
+
+if ((process.argv.includes("--all") || process.argv.includes("--package")) && version_exists && !force_mode) {
     console.log("\x1b[33m%s\x1b[0m", "packaged version already exists!");
     process.exit(9);
 }
 
-if ((process.argv.includes("--all") || process.argv.includes("--package")) && chrome_manifest["version"] === firefox_manifest["version"] && !process.argv.includes("--ignore")) {
+if ((process.argv.includes("--all") || process.argv.includes("--package")) && chrome_manifest["version"] === firefox_manifest["version"] && !force_mode) {
     console.log("\x1b[33m%s\x1b[0m", "chrome manifest version not updated!");
     process.exit(9);
 }
@@ -23,14 +29,17 @@ if (process.argv.includes("--copy") || process.argv.includes("--all")) {
     const src_files = fs.readdirSync("./src/chrome");
 
     // ! Confirm these files before building
-    var excluded_files = ["manifest.json", ".git", "firefox", "word.js", "popup.js"];
+    var firefox_excluded_files = ["manifest.json", "firefox", "word.js", "popup.js"];
+    var opera_excluded_files = ["manifest.json"];
     var exclusive_files = ["word.js", "popup.js"];
 
     for (file of src_files) {
-        if (excluded_files.includes(file)) {
-            continue;
+        if (!opera_excluded_files.includes(file)) {
+            fs.copySync("./src/chrome/" + file, "./src/opera/" + file);
         }
-        fs.copySync("./src/chrome/" + file, "./src/firefox/" + file);
+        if (!firefox_excluded_files.includes(file)) {
+            fs.copySync("./src/chrome/" + file, "./src/firefox/" + file);
+        }
     }
 
     for (file of exclusive_files) {
@@ -39,7 +48,7 @@ if (process.argv.includes("--copy") || process.argv.includes("--all")) {
         fs.writeFileSync("./src/firefox/" + file, firefox_js);
     }
 
-    console.log("finished copying " + src_files.length + " files from chrome into firefox directory");
+    console.log("finished copying " + src_files.length + " files from chrome into firefox & opera directories");
 
     var excluded_fields = ["manifest_version"];
 
@@ -68,8 +77,9 @@ if (process.argv.includes("--copy") || process.argv.includes("--all")) {
     }
 
     fs.writeFileSync("./src/firefox/manifest.json", JSON.stringify(firefox_manifest, null, 2));
+    fs.writeFileSync("./src/opera/manifest.json", JSON.stringify(firefox_manifest, null, 2));
 
-    console.log("updated firefox manifest using chrome manifest");
+    console.log("updated firefox & opera manifests using chrome manifest");
 
     if (process.argv.includes("--git") || process.argv.includes("--all")) {
         console.log("pushing synced directories to github");
@@ -87,7 +97,7 @@ if (process.argv.includes("--package") || process.argv.includes("--all")) {
     console.log("creating zip files");
     var package_shell = exec(`package.sh \"v${chrome_manifest["version"]}\"`);
     package_shell.on("exit", function () {
-        console.log(`release ${chrome_manifest["version"]} created for chrome and firefox`);
+        console.log(`release ${chrome_manifest["version"]} created for chrome, firefox, and opera`);
         if (process.argv.includes("--git") || process.argv.includes("--all")) {
             console.log("committing and pushing changes");
             var package_shell = exec(`git.sh \"version v${chrome_manifest["version"]}\"`);
