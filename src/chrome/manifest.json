@@ -1,7 +1,7 @@
 {
     "name": "DocsAfterDark",
-    "version": "0.3.1",
-    "description": "A modern, dark theme for Google Docs",
+    "version": "0.3.15",
+    "description": "Modern, dark mode for Google Docs",
     "author": "Raymond Wang",
     "manifest_version": 3,
     "content_scripts": [
