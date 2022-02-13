@@ -2,7 +2,6 @@
 
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/pihphjfnfjmdbhakhjifipfdgbpenobg?color=%23262626%20)](https://chrome.google.com/webstore/detail/docsafterdark/pihphjfnfjmdbhakhjifipfdgbpenobg) [![Mozilla Add-on](https://img.shields.io/amo/v/docsafterdark?color=%23262626%20)](https://addons.mozilla.org/en-US/firefox/addon/docsafterdark/)
 
-
 DocsAfterDark aims to relieve eye-strain from the Google Docs experience with a focus on functionality and artful design.
 
 Customize the document background to a darker shade or any color by clicking on the extension icon in the browser toolbar. Any valid background CSS value can be used in the custom field, including images and gradients.
@@ -27,4 +26,12 @@ Available on [Firefox Add-Ons](https://addons.mozilla.org/en-US/firefox/addon/do
 
 ---
 
-![Mozilla Add-on](https://img.shields.io/amo/users/docsafterdark?color=%23262626%20&label=firefox%20users) ![Mozilla Add-on](https://img.shields.io/amo/rating/docsafterdark?color=%23262626%20&label=firefox%20rating) ![Mozilla Add-on](https://img.shields.io/amo/dw/docsafterdark?color=%23262626%20&label=firefox%20downloads) ![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/pihphjfnfjmdbhakhjifipfdgbpenobg?color=%23262626%20&label=chrome%20users) ![Chrome Web Store Users](https://img.shields.io/chrome-web-store/rating/pihphjfnfjmdbhakhjifipfdgbpenobg?color=%23262626%20&label=chrome%20rating) ![Chrome Web Store Users](https://img.shields.io/chrome-web-store/rating-count/pihphjfnfjmdbhakhjifipfdgbpenobg?color=%23262626%20&label=chrome%20rating%20count)
+## Extension Stats
+
+### Firefox
+
+![Mozilla Add-on](https://img.shields.io/amo/users/docsafterdark?color=%23262626%20&label=firefox%20users) ![Mozilla Add-on](https://img.shields.io/amo/rating/docsafterdark?color=%23262626%20&label=firefox%20rating) ![Mozilla Add-on](https://img.shields.io/amo/dw/docsafterdark?color=%23262626%20&label=firefox%20downloads) 
+
+### Chrome
+
+![Chrome Web Store Users](https://img.shields.io/chrome-web-store/users/pihphjfnfjmdbhakhjifipfdgbpenobg?color=%23262626%20&label=chrome%20users) ![Chrome Web Store Users](https://img.shields.io/chrome-web-store/rating/pihphjfnfjmdbhakhjifipfdgbpenobg?color=%23262626%20&label=chrome%20rating) ![Chrome Web Store Users](https://img.shields.io/chrome-web-store/rating-count/pihphjfnfjmdbhakhjifipfdgbpenobg?color=%23262626%20&label=chrome%20rating%20count)
