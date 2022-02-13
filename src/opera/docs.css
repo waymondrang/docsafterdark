@@ -489,7 +489,8 @@ body,
 .docs-gm .colormenuitems-ob-order .goog-menuitem.colormenuitems-no-color,
 .docs-material-hsv-color-picker-input,
 .docs-docos-activitybox-round-corners,
-.docs-gm .docos-filter-settings .docs-material-menu-button-flat-default {
+.docs-gm .docos-filter-settings .docs-material-menu-button-flat-default,
+.docs-gm-promo.jfk-bubble.docs-promo-bubble {
     border: 1px solid var(--primary-border-color) !important;
 }
 
@@ -710,13 +711,15 @@ body,
 .docs-material-button-fill-primary.docs-material-button-hover,
 .docs-explore-widget,
 .companion-collapser-button.app-switcher-button-checked .app-switcher-button-icon-background,
-.docs-gm .docs-autocorrect-bubble {
+.docs-gm .docs-autocorrect-bubble,
+.docs-gm-promo.jfk-bubble.docs-promo-bubble {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 .goog-palette-cell-hover .kix-equation-toolbar-palette-item,
 .docs-mic-palette-body-hover,
-.docs-gm .docs-link-smartinsertlinkbubble-text-label {
+.docs-gm .docs-link-smartinsertlinkbubble-text-label,
+.docs-gm .docs-revisions-sidebar {
     box-shadow: none;
 }
 

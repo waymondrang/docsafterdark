@@ -83,7 +83,7 @@ if (process.argv.includes("--copy") || process.argv.includes("--all")) {
 
     if (process.argv.includes("--git") || process.argv.includes("--all")) {
         console.log("pushing synced directories to github");
-        var package_shell = exec(`git.sh \"v${chrome_manifest["version"]} platform directory sync\"`);
+        var package_shell = exec(`git.sh \"platform directory sync\"`);
     }
 } else {
     console.log("skipped copying");
