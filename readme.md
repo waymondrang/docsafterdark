@@ -11,7 +11,7 @@ With the invert option, document content (excluding images) will appear inverted
 
 To toggle dark mode on/off, click on the button at the bottom left of the page.
 
-Available on [Firefox Add-Ons](https://addons.mozilla.org/en-US/firefox/addon/docsafterdark/) and [Chrome Web Store](https://chrome.google.com/webstore/detail/docsafterdark/pihphjfnfjmdbhakhjifipfdgbpenobg).
+Available on [Firefox Add-Ons](https://addons.mozilla.org/en-US/firefox/addon/docsafterdark/) and [Chrome Web Store](https://chrome.google.com/webstore/detail/docsafterdark/pihphjfnfjmdbhakhjifipfdgbpenobg). Opera and Microsoft Edge releases are currently awaiting approval.
 
 ---
 
