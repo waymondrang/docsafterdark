@@ -1,0 +1,30 @@
+{
+    "project_name_short": "dad",
+    "enforce_version_control": true,
+    "clean_manifest": true,
+    "debug": false,
+    "release_directory": "./releases",
+    "source": {
+        "directory": "./src/chrome",
+        "platform": "chrome"
+    },
+    "targets": [
+        {
+            "directory": "./src/firefox",
+            "platform": "firefox",
+            "manifest_version": 2,
+            "patch": [
+                "word.js",
+                "popup.js"
+            ]
+        },
+        {
+            "directory": "./src/opera",
+            "platform": "opera",
+            "manifest_version": 2
+        }
+    ],
+    "git_messages": {
+        "directory_sync": "automated directory sync"
+    }
+}

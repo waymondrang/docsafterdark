@@ -1,37 +1,17 @@
 #!/bin/bash
 
 if [ $# -eq 0 ]; then
-    echo "no version provided"
+    echo "missing arguments"
     read -n 1
     exit 1
 fi
 
-echo "creating chrome release"
+echo "creating ${3} release"
 
-cd src/chrome/
+cd ${4}
 
-zip -r "dad_${1}_chrome.zip" ./*
-
-cd -
-
-mv "./src/chrome/dad_${1}_chrome.zip" ./releases
-
-echo "creating firefox release"
-
-cd src/firefox/
-
-zip -r "dad_${1}_firefox.zip" ./*
+zip -r "${2}_${1}_${3}.zip" ./*
 
 cd -
 
-mv "./src/firefox/dad_${1}_firefox.zip" ./releases
-
-echo "creating opera release"
-
-cd src/opera/
-
-zip -r "dad_${1}_opera.zip" ./*
-
-cd -
-
-mv "./src/opera/dad_${1}_opera.zip" ./releases
+mv "${4}/${2}_${1}_${3}.zip" ${5}
