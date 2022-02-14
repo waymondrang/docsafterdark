@@ -25,6 +25,7 @@
         }
     ],
     "git_messages": {
-        "directory_sync": "automated directory sync"
+        "directory_sync": "automated directory sync",
+        "packages": "automated package build"
     }
 }

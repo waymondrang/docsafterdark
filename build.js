@@ -191,6 +191,10 @@ if (will_package) {
         execSync(`package.sh \"v${source_manifest.version}\" \"${config.project_name_short}\" \"${package.platform}\" \"${package.directory}\" \"${config.release_directory}\"`);
         log(`packaged ${source_manifest.version} for ` + package.platform);
     }
+    if (will_git) {
+        log("pushing completed packages to github");
+        execSync(`git.sh \"${config.git_messages.packages}\"`);
+    }
 } else {
     log("skipping zipping files");
 }

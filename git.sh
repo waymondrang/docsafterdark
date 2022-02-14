@@ -7,6 +7,6 @@ if [ $# -eq 0 ]; then
 fi
 
 git status
-git add .
+git add *
 git commit -m " ${1} "
 git push origin main
