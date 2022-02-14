@@ -1,4 +1,4 @@
-var selected;
+var bg_selected, on_selected;
 const custom_input = document.querySelector("#custom_input");
 const custom_save = document.querySelector("#save_custom");
 const description = document.querySelector("#description");
@@ -12,9 +12,23 @@ var descriptions = {
     "custom": "Any valid CSS declaration for the background property may be used here."
 }
 
-document.querySelectorAll(".menu_bar button").forEach(function (e) {
+document.querySelectorAll("#on_off button").forEach(function (e) {
     e.addEventListener("click", function (e) {
         var id = this.id;
+        on_selected.classList.remove("selected");
+        this.classList.add("selected");
+        on_selected = this;
+        chrome.storage.local.set({ "on": id == "on" });
+    })
+})
+
+document.querySelectorAll("#document_bg button").forEach(function (e) {
+    e.addEventListener("click", function (e) {
+        var id = this.id;
+        bg_selected.classList.remove("selected");
+        this.classList.add("selected");
+        bg_selected = this;
+        invert.checked = false;
         if (id != "custom") {
             custom_input.classList.add("hidden");
             custom_save.classList.add("hidden");
@@ -28,10 +42,6 @@ document.querySelectorAll(".menu_bar button").forEach(function (e) {
             }
         }
         chrome.storage.local.set({ "doc_bg": id, "invert": false });
-        selected.classList.remove("selected");
-        this.classList.add("selected");
-        selected = this;
-        invert.checked = false;
     })
 })
 
@@ -46,17 +56,22 @@ invert.addEventListener("click", function (e) {
 })
 
 try {
-    chrome.storage.local.get(["doc_bg", "custom_bg", "invert"], function (data) {
+    chrome.storage.local.get(["doc_bg", "custom_bg", "invert", "on"], function (data) {
         var option = data.doc_bg;
         var custom = data.custom_bg;
         var inverted = data.invert;
+        var on = data.on;
+        if (on == null) {
+            chrome.storage.local.set({ "on": true });
+            on = true;
+        }
         if (!option) {
             var option = "default";
             chrome.storage.local.set({ "doc_bg": "default" });
         }
         var selected_option = document.querySelector(`#${option}`);
         selected_option.classList.add("selected");
-        selected = selected_option;
+        bg_selected = selected_option;
         description.textContent = descriptions[option];
         if (option == "custom") {
             custom_input.classList.remove("hidden");
@@ -66,6 +81,10 @@ try {
         if (inverted) {
             invert.checked = true;
         }
+        var on_off;
+        on_off = on ? document.querySelector("#on") : document.querySelector("#off");
+        on_selected = on_off;
+        on_off.classList.add("selected");
     })
 } catch (e) {
     description.textContent = "Something went wrong..."

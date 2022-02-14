@@ -33,11 +33,17 @@ body {
     color: var(--primary-text-color);
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
+    width: 300px;
 }
 
 #main {
-    max-width: min-content;
+    margin: 0 auto;
     padding: 0 12px;
+}
+
+.menu_bar_label {
+    color: #999999;
+    margin-bottom: 8px;
 }
 
 .menu_bar {
@@ -48,13 +54,17 @@ body {
     border-radius: 4px;
 }
 
+#on_off {
+    margin-bottom: 18px;
+}
+
 button {
     background-color: transparent;
     color: var(--primary-text-color);
     border: none;
     padding: 4px 8px;
     cursor: pointer;
-    transition: background-color 0.1s ease-out;
+    /* transition: background-color 0.1s ease-out; */
     /* border-radius: 4px; */
 }
 

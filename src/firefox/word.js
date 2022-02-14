@@ -1,41 +1,57 @@
 const head = document.head || document.getElementsByTagName("head")[0] || document.documentElement;
 
-console.log("DOCS DARK MODE INJECTED")
-
 var theme = `#90caf9`;
 var warning = `#90caf9`;
 var link_color = `#90caf9`;
-var dark_mode_state = true;
+var dark_mode_state;
 
 var docs_homepage = document.querySelector(".docs-homescreen-gb-container");
 
-if (!docs_homepage) {
-    function insert_style() {
-        //inject docs css
-        const css = document.createElement('link');
-        css.setAttribute("href", browser.runtime.getURL('docs.css'));
-        css.id = "docs-dark-mode";
-        css.rel = "stylesheet";
-        document.body.insertBefore(css, document.body.lastChild);
+function dad() {
+    if (document.querySelector("#docs-dark-mode")) {
+        return;
     }
+    dark_mode_state = true;
+    const css = document.createElement('link');
+    css.setAttribute("href", browser.runtime.getURL('docs.css'));
+    css.id = "docs-dark-mode";
+    css.rel = "stylesheet";
+    document.body.insertBefore(css, document.body.lastChild);
+    insert_button();
+}
 
+function remove_dad() {
+    dark_mode_state = false;
+    if (document.querySelector("#docs-dark-mode"))
+        document.querySelector("#docs-dark-mode").remove();
+    if (document.querySelector("#dark-mode-switch"))
+        document.querySelector("#dark-mode-switch").remove();
+}
+
+function insert_button() {
+    if (document.querySelector("#dark-mode-switch")) {
+        return;
+    }
     var toggle_button = document.createElement("button");
     toggle_button.id = "dark-mode-switch";
     toggle_button.innerHTML = "🌞"
     toggle_button.onclick = function () {
-        if (dark_mode_state) {
-            document.querySelector("#docs-dark-mode").remove()
-            document.querySelector("#dark-mode-switch").innerHTML = "🌚"
-            dark_mode_state = false
+        if (document.querySelector("#docs-dark-mode")) {
+            document.querySelector("#docs-dark-mode").remove();
+            this.innerHTML = "🌚";
+            dark_mode_state = false;
             //browser.storage.local.set({ "gc-darkmode": false })
         } else {
-            insert_style()
-            document.querySelector("#dark-mode-switch").innerHTML = "🌞"
+            dad();
+            this.innerHTML = "🌞";
             dark_mode_state = true
             //browser.storage.local.set({ "gc-darkmode": true })
         }
     }
+    document.body.insertBefore(toggle_button, document.body.lastChild);
+}
 
+function set_up() {
     var default_style = document.createElement("style")
     default_style.textContent = `
 #dark-mode-switch {
@@ -51,8 +67,6 @@ if (!docs_homepage) {
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);   
 }
 `
-
-    document.body.insertBefore(toggle_button, document.body.lastChild);
     document.body.insertBefore(default_style, document.body.lastChild);
 
     document.documentElement.style.setProperty("--checkmark", "url(" + browser.runtime.getURL('assets/checkmark.secondary.png') + ")");
@@ -122,8 +136,23 @@ if (!docs_homepage) {
             inverted = changes.invert.newValue;
         }
         document.documentElement.style.setProperty("--document_invert", inverted ? "invert(1)" : "none");
+        if (changes.on.newValue) {
+            dad();
+        } else {
+            remove_dad();
+        }
     })
-
-    insert_style();
 }
 
+set_up();
+
+browser.storage.local.get(["on"], function (data) {
+    if (data.on == null) {
+        dad();
+        browser.storage.local.set({ "on": true });
+        dark_mode_state = true;
+    } else if (data.on && !docs_homepage) {
+        dad();
+        dark_mode_state = true;
+    }
+});
