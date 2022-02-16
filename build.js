@@ -33,6 +33,10 @@ const fs = require('fs-extra');
 const { exec, execSync } = require("child_process");
 const config = require("./build_config.json");
 
+process.on("exit", function (code) {
+    log("\x1b[36m" + "process exited in " + ((new Date() - start_time) / 1000) + " seconds with code " + code + "\x1b[0m");
+})
+
 var source_manifest = JSON.parse(fs.readFileSync(config.source.directory + "/" + "manifest.json").toString());
 
 const force_mode = process.argv.includes("--ignore") || process.argv.includes("--force");
@@ -178,10 +182,6 @@ if (will_copy) {
 } else {
     log("skipped copying files");
 }
-
-process.on("exit", function (code) {
-    log("\x1b[36m" + "process finished in " + ((new Date() - start_time) / 1000) + " seconds with exit code " + code + "\x1b[0m");
-})
 
 if (will_package) {
     log(`packaging ${source_manifest.version} for ` + targets.map(e => e.platform).join(", ") + " & " + config.source.platform);
