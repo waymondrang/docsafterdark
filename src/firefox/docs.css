@@ -163,7 +163,8 @@ input,
 .docs-insert-link-bubble-internal-links-text,
 .docs-autocorrect-bubble .docs-autocorrect-bubble-undo,
 .docs-gm .kix-header-footer-bubble-checkbox-label,
-.docs-gm .docos-filter-settings .docs-material-menu-button-flat-default {
+.docs-gm .docos-filter-settings .docs-material-menu-button-flat-default,
+.docs-gm .docs-indentationdialoggm-menu.goog-menu .goog-menuitem-content {
     color: var(--secondary-text-color);
 }
 

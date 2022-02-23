@@ -18,7 +18,7 @@ document.querySelectorAll("#on_off button").forEach(function (e) {
         on_selected.classList.remove("selected");
         this.classList.add("selected");
         on_selected = this;
-        browser.storage.local.set({ "on": id == "on" });
+        chrome.storage.local.set({ "on": id == "on" });
     })
 })
 
@@ -41,33 +41,33 @@ document.querySelectorAll("#document_bg button").forEach(function (e) {
                 description.textContent = descriptions[d];
             }
         }
-        browser.storage.local.set({ "doc_bg": id, "invert": false });
+        chrome.storage.local.set({ "doc_bg": id, "invert": false });
     })
 })
 
 custom_save.addEventListener("click", function (e) {
     if (custom_input.value) {
-        browser.storage.local.set({ "custom_bg": custom_input.value });
+        chrome.storage.local.set({ "custom_bg": custom_input.value });
     }
 })
 
 invert.addEventListener("click", function (e) {
-    browser.storage.local.set({ "invert": this.checked });
+    chrome.storage.local.set({ "invert": this.checked });
 })
 
 try {
-    browser.storage.local.get(["doc_bg", "custom_bg", "invert", "on"], function (data) {
+    chrome.storage.local.get(["doc_bg", "custom_bg", "invert", "on"], function (data) {
         var option = data.doc_bg;
         var custom = data.custom_bg;
         var inverted = data.invert;
         var on = data.on;
         if (on == null) {
-            browser.storage.local.set({ "on": true });
+            chrome.storage.local.set({ "on": true });
             on = true;
         }
         if (!option) {
             var option = "default";
-            browser.storage.local.set({ "doc_bg": "default" });
+            chrome.storage.local.set({ "doc_bg": "default" });
         }
         var selected_option = document.querySelector(`#${option}`);
         selected_option.classList.add("selected");
