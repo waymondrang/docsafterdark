@@ -1,0 +1,3 @@
+[submodule "build_scripts"]
+	path = build_scripts
+	url = https://github.com/waymondrang/extension-builder
