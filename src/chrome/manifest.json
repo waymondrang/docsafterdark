@@ -1,6 +1,6 @@
 {
     "name": "DocsAfterDark",
-    "version": "0.3.30",
+    "version": "0.3.40",
     "description": "Modern, dark mode for Google Docs",
     "author": "Raymond Wang",
     "manifest_version": 3,
@@ -29,7 +29,9 @@
                 "/assets/jfk_sprite186.png",
                 "/assets/jfk_sprite186.edited.png",
                 "assets/dimension-unhighlighted.edited.png",
-                "assets/dimension-highlighted.edited.png"
+                "assets/dimension-highlighted.edited.png",
+                "assets/access_denied_transparent.png",
+                "assets/access_denied_600_transparent.png"
             ],
             "matches": [
                 "*://docs.google.com/*"

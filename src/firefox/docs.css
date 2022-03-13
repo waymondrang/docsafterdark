@@ -61,7 +61,9 @@ label,
 .docs-gm .docos-filter-settings .docs-material-menu-button-flat-default-active,
 .docs-gm .docos-filter-settings .docs-material-menu-button-flat-default-focused,
 .docs-gm .docos-filter-settings .docs-material-menu-button-flat-default-hover,
-.docos {
+.docos,
+.header,
+#textarea {
     color: var(--primary-text-color);
 }
 
@@ -70,7 +72,9 @@ input,
 .docs-gm .modal-dialog .jfk-textinput,
 .docs-gm.docs-material-gm-dialog .jfk-textinput,
 .docs-gm .docs-material-bubble .jfk-textinput,
-#gb a.gb_1.gb_1 {
+#gb a.gb_1.gb_1,
+#accounts-button,
+#accounts-button :last-child {
     color: var(--primary-text-color) !important;
 }
 
@@ -164,7 +168,8 @@ input,
 .docs-autocorrect-bubble .docs-autocorrect-bubble-undo,
 .docs-gm .kix-header-footer-bubble-checkbox-label,
 .docs-gm .docos-filter-settings .docs-material-menu-button-flat-default,
-.docs-gm .docs-indentationdialoggm-menu.goog-menu .goog-menuitem-content {
+.docs-gm .docs-indentationdialoggm-menu.goog-menu .goog-menuitem-content,
+.body {
     color: var(--secondary-text-color);
 }
 
@@ -390,6 +395,7 @@ body,
 .docs-mic-palette .goog-flat-menu-button,
 .docs-gm .docs-save-indicator-popup-header,
 .docs-material-hsv-color-picker-input,
+#textarea,
 .docs-gm .docos-streampane-container .streampane-dragger:hover
 
 /* header in changes saved to drive popup */
@@ -525,7 +531,8 @@ body,
 .docs-gm .docos-input-textarea,
 .docs-gm .docs-findinput-container,
 .docs-gm .docs-gotoinput-container,
-.docs-gm .modal-dialog .jfk-textinput {
+.docs-gm .modal-dialog .jfk-textinput,
+#accounts-button {
     border: 1px solid var(--primary-border-color);
 }
 
@@ -594,7 +601,8 @@ body,
 .docos-calltoactionview-checkbox-container,
 .docs-slidingdialog,
 #banners #title-banner,
-.docs-gm .docos-streampane-header {
+.docs-gm .docos-streampane-header,
+.docs-revisions-authorwidget-hat {
     border-bottom: 1px solid var(--primary-border-color) !important;
 }
 
@@ -873,6 +881,13 @@ body,
 .goog-option-selected {
     background-image: var(--checkmark);
 }
+
+#request-access-icon {
+    background-image: var(--access_denied);
+    background-image: image-set(var(--access_denied) 1x, var(--access_denied_600) 2x);
+    background-image: -webkit-image-set(var(--access_denied) 1x, var(--access_denied_600) 2x);
+}
+
 
 .docs-revisions-icon-img:before {
     content: var(--revisions-sprite1)

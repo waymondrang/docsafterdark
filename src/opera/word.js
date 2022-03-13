@@ -76,6 +76,8 @@ function set_up() {
     document.documentElement.style.setProperty("--jfk_sprite186", "url(" + chrome.runtime.getURL('assets/jfk_sprite186.edited.png') + ")");
     document.documentElement.style.setProperty("--dimension_highlighted", "url(" + chrome.runtime.getURL('assets/dimension-highlighted.edited.png') + ")");
     document.documentElement.style.setProperty("--dimension_unhighlighted", "url(" + chrome.runtime.getURL('assets/dimension-unhighlighted.edited.png') + ")");
+    document.documentElement.style.setProperty("--access_denied", "url(" + chrome.runtime.getURL('assets/access_denied_transparent.png') + ")");
+    document.documentElement.style.setProperty("--access_denied_600", "url(" + chrome.runtime.getURL('assets/access_denied_600_transparent.png') + ")");
 
     var backgrounds = {
         "default": "#ffffff",
