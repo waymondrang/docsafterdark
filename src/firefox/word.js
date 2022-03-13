@@ -13,7 +13,7 @@ function dad() {
     }
     dark_mode_state = true;
     const css = document.createElement('link');
-    css.setAttribute("href", chrome.runtime.getURL('docs.css'));
+    css.setAttribute("href", browser.runtime.getURL('docs.css'));
     css.id = "docs-dark-mode";
     css.rel = "stylesheet";
     document.body.insertBefore(css, document.body.lastChild);
@@ -40,12 +40,12 @@ function insert_button() {
             document.querySelector("#docs-dark-mode").remove();
             this.innerHTML = "🌚";
             dark_mode_state = false;
-            //chrome.storage.local.set({ "gc-darkmode": false })
+            //browser.storage.local.set({ "gc-darkmode": false })
         } else {
             dad();
             this.innerHTML = "🌞";
             dark_mode_state = true
-            //chrome.storage.local.set({ "gc-darkmode": true })
+            //browser.storage.local.set({ "gc-darkmode": true })
         }
     }
     document.body.insertBefore(toggle_button, document.body.lastChild);
@@ -69,15 +69,15 @@ function set_up() {
 `
     document.body.insertBefore(default_style, document.body.lastChild);
 
-    document.documentElement.style.setProperty("--checkmark", "url(" + chrome.runtime.getURL('assets/checkmark.secondary.png') + ")");
-    document.documentElement.style.setProperty("--revisions-sprite1", "url(" + chrome.runtime.getURL('assets/revisions_sprite1.secondary.svg') + ")");
-    document.documentElement.style.setProperty("--close_18px", "url(" + chrome.runtime.getURL('assets/close_18px.svg') + ")");
-    document.documentElement.style.setProperty("--lens", "url(" + chrome.runtime.getURL('assets/lens.svg') + ")");
-    document.documentElement.style.setProperty("--jfk_sprite186", "url(" + chrome.runtime.getURL('assets/jfk_sprite186.edited.png') + ")");
-    document.documentElement.style.setProperty("--dimension_highlighted", "url(" + chrome.runtime.getURL('assets/dimension-highlighted.edited.png') + ")");
-    document.documentElement.style.setProperty("--dimension_unhighlighted", "url(" + chrome.runtime.getURL('assets/dimension-unhighlighted.edited.png') + ")");
-    document.documentElement.style.setProperty("--access_denied", "url(" + chrome.runtime.getURL('assets/access_denied_transparent.png') + ")");
-    document.documentElement.style.setProperty("--access_denied_600", "url(" + chrome.runtime.getURL('assets/access_denied_600_transparent.png') + ")");
+    document.documentElement.style.setProperty("--checkmark", "url(" + browser.runtime.getURL('assets/checkmark.secondary.png') + ")");
+    document.documentElement.style.setProperty("--revisions-sprite1", "url(" + browser.runtime.getURL('assets/revisions_sprite1.secondary.svg') + ")");
+    document.documentElement.style.setProperty("--close_18px", "url(" + browser.runtime.getURL('assets/close_18px.svg') + ")");
+    document.documentElement.style.setProperty("--lens", "url(" + browser.runtime.getURL('assets/lens.svg') + ")");
+    document.documentElement.style.setProperty("--jfk_sprite186", "url(" + browser.runtime.getURL('assets/jfk_sprite186.edited.png') + ")");
+    document.documentElement.style.setProperty("--dimension_highlighted", "url(" + browser.runtime.getURL('assets/dimension-highlighted.edited.png') + ")");
+    document.documentElement.style.setProperty("--dimension_unhighlighted", "url(" + browser.runtime.getURL('assets/dimension-unhighlighted.edited.png') + ")");
+    document.documentElement.style.setProperty("--access_denied", "url(" + browser.runtime.getURL('assets/access_denied_transparent.png') + ")");
+    document.documentElement.style.setProperty("--access_denied_600", "url(" + browser.runtime.getURL('assets/access_denied_600_transparent.png') + ")");
 
     var backgrounds = {
         "default": "#ffffff",
@@ -89,7 +89,7 @@ function set_up() {
     var inverted;
 
     console.log("GETTING FROM STORAGE");
-    chrome.storage.local.get(["doc_bg", "custom_bg", "invert"], function (data) {
+    browser.storage.local.get(["doc_bg", "custom_bg", "invert"], function (data) {
         console.log(data);
         if (data.doc_bg) {
             var option = data.doc_bg;
@@ -111,7 +111,7 @@ function set_up() {
         }
     });
 
-    chrome.storage.onChanged.addListener(function (changes, area) {
+    browser.storage.onChanged.addListener(function (changes, area) {
         console.log(changes, inverted);
         if (Object.keys(changes).includes("doc_bg")) {
             var option = changes.doc_bg.newValue;
@@ -123,7 +123,7 @@ function set_up() {
                     }
                 }
             } else {
-                chrome.storage.local.get(["custom_bg"], function (data) {
+                browser.storage.local.get(["custom_bg"], function (data) {
                     var custom = data.custom_bg ? data.custom_bg : "";
                     document.documentElement.style.setProperty("--document_background", custom);
                 })
@@ -148,10 +148,10 @@ function set_up() {
 
 set_up();
 
-chrome.storage.local.get(["on"], function (data) {
+browser.storage.local.get(["on"], function (data) {
     if (data.on == null) {
         dad();
-        chrome.storage.local.set({ "on": true });
+        browser.storage.local.set({ "on": true });
         dark_mode_state = true;
     } else if (data.on && !docs_homepage) {
         dad();
