@@ -753,7 +753,8 @@ img.kix-smart-summary-onboarding-promo-content-illustration {
 .goog-palette-cell-hover .kix-equation-toolbar-palette-item,
 .docs-mic-palette-body-hover,
 .docs-gm .docs-link-smartinsertlinkbubble-text-label,
-.docs-gm .docs-revisions-sidebar, .left-sidebar-container.pageless-format {
+.docs-gm .docs-revisions-sidebar,
+.left-sidebar-container.pageless-format {
     box-shadow: none;
 }
 
@@ -996,7 +997,8 @@ a:link,
 .docs-gm .docs-revisions-tile-selected .docs-revisions-tile-descriptor,
 .docs-gm .docs-revisions-tile-selected .docs-revisions-tile-text-box~.docs-revisions-tile-descriptor,
 .docs-gm .kix-header-footer-bubble .kix-header-footer-bubble-menu-button.goog-flat-menu-button,
-.docs-horizontal-button-group .docs-material-button.docs-material-button-selected.docs-material-button-focused .docs-material-button-content {
+.docs-horizontal-button-group .docs-material-button.docs-material-button-selected.docs-material-button-focused .docs-material-button-content,
+.docs-material-button-flat-primary {
     color: var(--accent-text) !important;
 }
 
