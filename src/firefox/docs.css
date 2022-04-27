@@ -74,7 +74,8 @@ textarea,
 .hA3Ymb,
 .meet-video-promo-bubble-title,
 .docos-emoji-counter-button-tooltip,
-.docs-gm .docos-anchoredreplyview .docos-anchoredreplyview-body {
+.docs-gm .docos-anchoredreplyview .docos-anchoredreplyview-body,
+:not(.docos-emoji-counter-button-user-involved).docs-material-button-flat-primary .docos-emoji-counter-button-container {
     color: var(--primary-text-color);
 }
 
@@ -1088,7 +1089,8 @@ a:link,
 .docs-preferencesdialog-tabbed-menu-tabbar .docs-tabbar-tab-selected .docs-tabbar-tablabel:hover,
 .docs-preferencesdialog-tabbed-menu-tabbar .docs-tabbar-tab-selected .docs-tabbar-tablabel,
 .docs-horizontal-button-group .docs-material-button.docs-material-button-selected .docs-material-button-content,
-.kix-smart-summary-view-header-container.kix-smart-summary-edit-mode .navigation-widget-header {
+.kix-smart-summary-view-header-container.kix-smart-summary-edit-mode .navigation-widget-header,
+.docos-emoji-counter-button-user-involved.docs-material-button-flat-primary .docos-emoji-counter-button-container {
     color: var(--accent-text);
 }
 
@@ -1104,7 +1106,8 @@ a:link,
 }
 
 .docs-material-gm-labeled-checkbox-checkbox.docs-material-gm-labeled-checkbox-checked,
-.docs-material-gm-labeled-checkbox-checkbox.docs-material-gm-labeled-checkbox-undetermined {
+.docs-material-gm-labeled-checkbox-checkbox.docs-material-gm-labeled-checkbox-undetermined,
+.docs-material-menu-button-raised-default-focused {
     border: 2px solid var(--accent-text);
 }
 
