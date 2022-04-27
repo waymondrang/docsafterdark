@@ -68,6 +68,11 @@ button {
     /* border-radius: 4px; */
 }
 
+button:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+}
+
 input {
     background-color: var(--input-background-color);
     border: 1px solid var(--primary-border-color);

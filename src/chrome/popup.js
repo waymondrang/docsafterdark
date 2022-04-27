@@ -5,7 +5,7 @@ const description = document.querySelector("#description");
 const invert = document.querySelector("#invert");
 
 var descriptions = {
-    "default": "The default, white background.",
+    "default": "The background color feature is currently disabled. The page color change feature has been integrated into Google Docs, which can be accessed by navigating to the File dropdown, Page setup, and Page color.",
     "shade": "A light shade of gray. Black text is still readable.",
     "dark": "A dark gray. Black text will become hard to read and color changes may be be required",
     "black": "A completely black background.",
@@ -22,34 +22,34 @@ document.querySelectorAll("#on_off button").forEach(function (e) {
     })
 })
 
-document.querySelectorAll("#document_bg button").forEach(function (e) {
-    e.addEventListener("click", function (e) {
-        var id = this.id;
-        bg_selected.classList.remove("selected");
-        this.classList.add("selected");
-        bg_selected = this;
-        invert.checked = false;
-        if (id != "custom") {
-            custom_input.classList.add("hidden");
-            custom_save.classList.add("hidden");
-        } else {
-            custom_input.classList.remove("hidden");
-            custom_save.classList.remove("hidden");
-        }
-        for (d in descriptions) {
-            if (id == d) {
-                description.textContent = descriptions[d];
-            }
-        }
-        chrome.storage.local.set({ "doc_bg": id, "invert": false });
-    })
-})
+// document.querySelectorAll("#document_bg button").forEach(function (e) {
+//     e.addEventListener("click", function (e) {
+//         var id = this.id;
+//         bg_selected.classList.remove("selected");
+//         this.classList.add("selected");
+//         bg_selected = this;
+//         invert.checked = false;
+//         if (id != "custom") {
+//             custom_input.classList.add("hidden");
+//             custom_save.classList.add("hidden");
+//         } else {
+//             custom_input.classList.remove("hidden");
+//             custom_save.classList.remove("hidden");
+//         }
+//         for (d in descriptions) {
+//             if (id == d) {
+//                 description.textContent = descriptions[d];
+//             }
+//         }
+//         chrome.storage.local.set({ "doc_bg": id, "invert": false });
+//     })
+// })
 
-custom_save.addEventListener("click", function (e) {
-    if (custom_input.value) {
-        chrome.storage.local.set({ "custom_bg": custom_input.value });
-    }
-})
+// custom_save.addEventListener("click", function (e) {
+//     if (custom_input.value) {
+//         chrome.storage.local.set({ "custom_bg": custom_input.value });
+//     }
+// })
 
 invert.addEventListener("click", function (e) {
     chrome.storage.local.set({ "invert": this.checked });
