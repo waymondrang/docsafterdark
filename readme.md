@@ -4,7 +4,7 @@
 
 DocsAfterDark aims to relieve eye-strain from the Google Docs experience with a focus on functionality and artful design.
 
-Customize the document background to a darker shade or any color in the extension's option menu, which can be accessed by clicking on the extension icon in the browser toolbar. Any valid background CSS value can be used in the custom field, including images and gradients.
+Customize the document background to a darker shade or any color in the extension's option menu, which can be accessed by clicking on the extension icon in the browser toolbar. Any valid background CSS value can be used in the custom field, including images and gradients (This feature may be misbehaving on Chrome).
 
 With the invert option, document content (excluding images) will appear inverted. This option is recommended for users who want a darker document background without needing to change the font color.
 
