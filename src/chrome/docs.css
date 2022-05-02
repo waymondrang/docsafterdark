@@ -801,7 +801,8 @@ img.kix-smart-summary-onboarding-promo-content-illustration {
 .docos-emoji-reaction-doco-view .docs-material-button-raised-default,
 .docos-emoji-reaction-doco-view .docs-material-menu-button-raised-default,
 .docos-docoview-active .docos-emoji-reaction-doco-view-emojis :not(.docs-material-button-focused).docs-material-button-flat-primary,
-.apps-search-popup-menu {
+.apps-search-popup-menu,
+.docs-gm .docos-anchoreddocoview:hover {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
