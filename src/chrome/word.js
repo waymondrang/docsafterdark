@@ -34,16 +34,16 @@ function insert_button() {
     }
     var toggle_button = document.createElement("button");
     toggle_button.id = "dark-mode-switch";
-    toggle_button.innerHTML = "🌞"
+    toggle_button.textContent = "🌞"
     toggle_button.onclick = function () {
         if (document.querySelector("#docs-dark-mode")) {
             document.querySelector("#docs-dark-mode").remove();
-            this.innerHTML = "🌚";
+            this.textContent = "🌚";
             dark_mode_state = false;
             //chrome.storage.local.set({ "gc-darkmode": false })
         } else {
             dad();
-            this.innerHTML = "🌞";
+            this.textContent = "🌞";
             dark_mode_state = true
             //chrome.storage.local.set({ "gc-darkmode": true })
         }
