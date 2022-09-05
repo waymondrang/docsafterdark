@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "DocsAfterDark",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Modern, dark mode for Google Docs",
   "author": "Raymond Wang",
   "content_scripts": [
@@ -29,7 +29,8 @@
     "assets/dimension-unhighlighted.edited.png",
     "assets/dimension-highlighted.edited.png",
     "assets/access_denied_transparent.png",
-    "assets/access_denied_600_transparent.png"
+    "assets/access_denied_600_transparent.png",
+    "assets/gm_add_black_24dp.png"
   ],
   "icons": {
     "16": "dad16.png",

@@ -1201,7 +1201,7 @@ z {
 
 [style='background-image: url(https://fonts.gstatic.com/s/i/googlematerialicons/add/v21/black-24dp/1x/gm_add_black_24dp.png)']
 {
-  background-image: var(--gm_add_black_24dp);
+  background-image: var(--gm_add_black_24dp) !important;
 }
 
 .goog-dimension-picker div.goog-dimension-picker-highlighted {
@@ -1450,6 +1450,10 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused {
 
 .goog-inline-block.docs-material-gm-select.docs-revisions-filter-selector.jfk-select {
   height: 39px;
+}
+
+.docs-gm .docs-tiled-sidebar-header {
+  height: 52px;
 }
 
 .docs-indentationdialoggm-units {
