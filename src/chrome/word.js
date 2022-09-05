@@ -78,6 +78,7 @@ function set_up() {
     document.documentElement.style.setProperty("--dimension_unhighlighted", "url(" + chrome.runtime.getURL('assets/dimension-unhighlighted.edited.png') + ")");
     document.documentElement.style.setProperty("--access_denied", "url(" + chrome.runtime.getURL('assets/access_denied_transparent.png') + ")");
     document.documentElement.style.setProperty("--access_denied_600", "url(" + chrome.runtime.getURL('assets/access_denied_600_transparent.png') + ")");
+    document.documentElement.style.setProperty("--gm_add_black_24dp", "url(" + chrome.runtime.getURL('assets/gm_add_black_24dp.png') + ")");
 
     var backgrounds = {
         "default": "#ffffff",
@@ -158,3 +159,73 @@ chrome.storage.local.get(["on"], function (data) {
         dark_mode_state = true;
     }
 });
+
+// DEV SOLUTION
+
+/**
+ * 
+ * @param {HTMLElement} element 
+ */
+function apply_dark_mode(element) {
+    console.log(element);
+
+    let style = window.getComputedStyle ? getComputedStyle(element, null) : element.currentStyle;
+
+    // Backgrounds
+
+    if (style.backgroundColor == "rgb(255, 255, 255)") {
+        element.style.backgroundColor = "#262626";
+    }
+
+    if (style.backgroundColor == "rgb(248, 249, 250)") {
+        element.style.backgroundColor = "#262626";
+    }
+
+    // Borders
+
+    if (style.borderBottomColor == "rgb(218, 220, 224)") {
+        element.style.borderBottomColor = "#4d4d4d";
+    }
+
+    if (style.borderTopColor == "rgb(218, 220, 224)") {
+        element.style.borderTopColor = "#4d4d4d";
+    }
+
+    if (style.borderLeftColor == "rgb(218, 220, 224)") {
+        element.style.borderLeftColor = "#4d4d4d";
+    }
+
+    if (style.borderRightColor == "rgb(218, 220, 224)") {
+        element.style.borderRightColor = "#4d4d4d";
+    }
+
+    // Color
+
+    if (style.color == "rgb(32, 33, 36)") {
+        element.style.color = "#f2f2f2";
+    }
+
+    if (!element.children.length)
+        return;
+
+    for (var i = 0; i < element.children.length; i++) {
+        apply_dark_mode(element.children[i]);
+    }
+
+    return;
+}
+
+// var mutationObserver = new MutationObserver(function (mutationList, observer) {
+//     var target = document.querySelector(".docs-gm .docs-tiled-sidebar");
+
+//     if (target && target.style.display != "none") {
+//         // SIDEBAR APPEARED
+//         apply_dark_mode(target);
+//         mutationObserver.disconnect();
+//     }
+// })
+
+// mutationObserver.observe(document.body, {
+//     childList: true,
+//     subtree: true
+// });

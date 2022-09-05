@@ -31,7 +31,8 @@
                 "assets/dimension-unhighlighted.edited.png",
                 "assets/dimension-highlighted.edited.png",
                 "assets/access_denied_transparent.png",
-                "assets/access_denied_600_transparent.png"
+                "assets/access_denied_600_transparent.png",
+                "assets/gm_add_black_24dp.png"
             ],
             "matches": [
                 "*://docs.google.com/*"
