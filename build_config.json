@@ -23,7 +23,7 @@
         {
             "directory": "src/opera",
             "platform": "opera",
-            "manifest_version": 2,
+            "manifest_version": 3,
             "patch": [
                 "popup.js",
                 "word.js"
