@@ -909,6 +909,11 @@ img.kix-smart-summary-onboarding-promo-content-illustration,
   border-radius: 4px;
 }
 
+.kix-page-paginated .kix-stacked-tile-page-shadow,
+canvas.kix-canvas-tile-content {
+  border-radius: 0em !important;
+}
+
 /* box shadows */
 
 .docs-gm .docs-material .docs-chat.jfk-button,
@@ -1480,13 +1485,18 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused {
   background: var(--document_background) !important;
 }
 
-.kix-appview-clipped-ui-elements-container {
+.kix-cursor {
   filter: var(--document_invert);
 }
 
 #contents > div {
   background-color: transparent;
   background: var(--document_background);
+}
+
+.kix-page-paginated .kix-stacked-tile-page-shadow {
+  color: var(--secondary-border-color);
+  box-shadow: var(--document_border);
 }
 
 .docs-gm .modal-dialog button:hover,

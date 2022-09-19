@@ -91,10 +91,29 @@ input[type="checkbox"] {
   margin-right: 4px;
 }
 
+input[type="checkbox"]:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+input[type="checkbox"]:disabled + label {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
 #invert_container {
-  margin-top: 12px;
+  margin: -6px;
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
+}
+
+#invert_container .input {
+  margin: 6px;
+}
+
+#document_border_container {
+  margin-bottom: 18px;
 }
 
 label {
