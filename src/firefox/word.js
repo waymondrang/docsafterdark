@@ -1,4 +1,5 @@
 const head = document.head || document.getElementsByTagName("head")[0] || document.documentElement;
+const version = browser.runtime.getManifest().version;
 
 var theme = `#90caf9`;
 var warning = `#90caf9`;
@@ -94,9 +95,10 @@ function set_up() {
     var grayscale;
     var show_border;
     var raise_button;
+    var updates;
 
     console.log("GETTING FROM STORAGE");
-    browser.storage.local.get(["doc_bg", "custom_bg", "invert", "raise_button", "show_border"], function (data) {
+    browser.storage.local.get(["doc_bg", "custom_bg", "invert", "raise_button", "show_border", "updates"], function (data) {
         console.log(data);
         if (Object.keys(data).includes("doc_bg")) {
             let option = data.doc_bg;
@@ -144,6 +146,45 @@ function set_up() {
         // Insert Button
         default_style.textContent = get_default_style(raise_button);
         document.body.insertBefore(default_style, document.body.lastChild);
+
+        var update_notification = document.createElement("div");
+        update_notification.id = "update-notification";
+        update_notification.style = "top: 0; left: 0; right: 0; background-color: #212121; color: #cecece; padding: 0.5em; text-align: center; z-index: 2500000000;";
+        update_notification.textContent = "DocsAfterDark has been updated to version " + browser.runtime.getManifest().version + ". Read update notes on ";
+        var update_link = document.createElement("a");
+        update_link.href = "https://github.com/waymondrang/docsafterdark/releases";
+        update_link.target = "_blank";
+        update_link.textContent = "GitHub";
+        update_link.style = "color: #cecece; text-decoration: underline;";
+        update_notification.appendChild(update_link);
+        update_notification.appendChild(document.createTextNode("."));
+        var close_button = document.createElement("button");
+        close_button.textContent = "Close";
+        close_button.style = "background-color: #4d4d4d; border-radius: 2px; color: #64b5f6; border: none; cursor: pointer; margin-left: 1em;";
+        close_button.onclick = function () {
+            update_notification.style.display = "none";
+            if (updates) {
+                if (!updates.includes(version)) {
+                    updates.push(version);
+                    browser.storage.local.set({ "updates": updates });
+                }
+            } else {
+                browser.storage.local.set({ "updates": [version] });
+            }
+        }
+        update_notification.appendChild(close_button);
+
+        // User must be on page for 10 seconds or manually close notification
+        if (Object.keys(data).includes("updates")) {
+            updates = data.updates;
+            if (!updates.includes(version)) {
+                // Extension updated
+                document.body.prepend(update_notification);
+            }
+        } else {
+            // Extension updated
+            document.body.prepend(update_notification);
+        }
     });
 
     browser.storage.onChanged.addListener(function (changes, area) {
