@@ -48,12 +48,25 @@
         </div>
         <input id="custom_input" class="hidden" placeholder="Custom Color/CSS">
         <button id="save_custom" class="hidden">Save</button>
-        <div id="invert_container">
-            <input type="checkbox" id="invert" name="invert"><label for="invert">Invert</label>
-        </div>
         <p id="description"></p>
-        <p class="menu_bar_label">Toggle Button Settings</p>
-        <input type="checkbox" id="raise_button" name="raise_button"><label for="raise_button">Raise Button</label>
+        <div id="document_border_container">
+            <p class="menu_bar_label">Document Border</p>
+            <input type="checkbox" id="show_border" name="show_border"><label for="show_border">Show Border</label>
+        </div>
+        <p class="menu_bar_label">Invert Options</p>
+        <div id="invert_container">
+            <div class="input">
+                <input type="checkbox" id="invert" name="invert"><label for="invert">Invert</label>
+            </div>
+            <div class="input">
+                <input type="checkbox" id="grayscale" name="grayscale"><label for="grayscale">Grayscale</label>
+            </div>
+        </div>
+
+        <div id="toggle_button_container">
+            <p class="menu_bar_label">Toggle Button Options</p>
+            <input type="checkbox" id="raise_button" name="raise_button"><label for="raise_button">Raise Button</label>
+        </div>
     </div>
     <script src="popup.js"></script>
 </body>

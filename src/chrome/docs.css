@@ -1503,3 +1503,8 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused {
 .docs-gm .modal-dialog .jfk-button-standard.jfk-button-hover {
   font-weight: 400;
 }
+
+/* Fix for Firefox */
+.kix-canvas-tile-content svg {
+  display: none;
+}

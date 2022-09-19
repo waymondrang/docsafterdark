@@ -86,18 +86,21 @@ function set_up() {
     var backgrounds = {
         "default": "#ffffff",
         "shade": "#999999",
-        "dark": "#1b1b1b",
+        "dark": "transparent",
         "black": "#000000"
     }
 
     var inverted;
+    var grayscale;
+    var show_border;
+    var raise_button;
 
     console.log("GETTING FROM STORAGE");
-    browser.storage.local.get(["doc_bg", "custom_bg", "invert", "raise_button"], function (data) {
+    browser.storage.local.get(["doc_bg", "custom_bg", "invert", "raise_button", "show_border"], function (data) {
         console.log(data);
-        if (data.doc_bg) {
-            var option = data.doc_bg;
-            var custom = data.custom_bg ? data.custom_bg : "";
+        if (Object.keys(data).includes("doc_bg")) {
+            let option = data.doc_bg;
+            let custom = data.custom_bg;
             if (option == "custom") {
                 document.documentElement.style.setProperty("--document_background", custom);
             } else {
@@ -108,14 +111,38 @@ function set_up() {
                     }
                 }
             }
+        } else {
+            // Use "dark" background as default
+            document.documentElement.style.setProperty("--document_background", backgrounds["dark"]);
         }
-        if (data.invert) {
-            inverted = data.invert;
-            document.documentElement.style.setProperty("--document_invert", "invert(1)");
+
+        if (Object.keys(data).includes("invert")) {
+            inverted = data.invert.invert;
+            grayscale = data.invert.grayscale;
+        } else {
+            // Enable inverted and grayscale by default
+            inverted = true;
+            grayscale = true;
         }
+
+        if (Object.keys(data).includes("show_border")) {
+            show_border = data.show_border;
+        } else {
+            // Show border by default
+            show_border = true;
+        }
+
+        if (Object.keys(data).includes("raise_button")) {
+            raise_button = data.raise_button;
+        } else {
+            // Don't raise button by default
+            raise_button = false;
+        }
+
+        document.documentElement.style.setProperty("--document_invert", inverted ? `${grayscale ? `contrast(79%) grayscale(100%) ` : ""}invert(1)` : "none");
+        document.documentElement.style.setProperty("--document_border", show_border ? "0 0 0 1px" : "none");
         // Insert Button
-        default_style.textContent = get_default_style(data.raise_button);
-        console.log(default_style.textContent);
+        default_style.textContent = get_default_style(raise_button);
         document.body.insertBefore(default_style, document.body.lastChild);
     });
 
@@ -132,7 +159,7 @@ function set_up() {
                 }
             } else {
                 browser.storage.local.get(["custom_bg"], function (data) {
-                    var custom = data.custom_bg ? data.custom_bg : "";
+                    var custom = data.custom_bg;
                     document.documentElement.style.setProperty("--document_background", custom);
                 })
             }
@@ -143,7 +170,11 @@ function set_up() {
         }
         if (Object.keys(changes).includes("invert")) {
             console.log("INVERT CHANGED", inverted, changes)
-            inverted = changes.invert.newValue;
+            let invert_changes = changes.invert.newValue;
+            inverted = invert_changes.invert;
+            grayscale = invert_changes.grayscale;
+            // Invert toggle property
+            document.documentElement.style.setProperty("--document_invert", inverted ? `${grayscale ? `contrast(79%) grayscale(100%) ` : ""}invert(1)` : "none");
         }
         if (Object.keys(changes).includes("on")) {
             if (changes.on.newValue) {
@@ -156,8 +187,9 @@ function set_up() {
             console.log("RAISE BUTTON CHANGED", changes);
             default_style.textContent = get_default_style(changes.raise_button.newValue);
         }
-        // Invert toggle property
-        document.documentElement.style.setProperty("--document_invert", inverted ? "invert(1)" : "none");
+        if (Object.keys(changes).includes("show_border")) {
+            document.documentElement.style.setProperty("--document_border", changes.show_border.newValue ? "0 0 0 1px" : "none");
+        }
     })
 }
 
