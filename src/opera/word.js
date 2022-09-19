@@ -4,6 +4,7 @@ var theme = `#90caf9`;
 var warning = `#90caf9`;
 var link_color = `#90caf9`;
 var dark_mode_state;
+var raise_button = false;
 
 var docs_homepage = document.querySelector(".docs-homescreen-gb-container");
 
@@ -51,23 +52,25 @@ function insert_button() {
     document.body.insertBefore(toggle_button, document.body.lastChild);
 }
 
+function get_default_style(condition) {
+    return `
+    #dark-mode-switch {
+        position: fixed;
+        left: 24px;
+        bottom: ${condition ? "74px" : "24px"};
+        border: .0625rem solid #3737371a;
+        border-radius: 500px;
+        background-color: #2121211a;
+        color: #cecece;
+        padding: 2px 8px;
+        z-index: 2500000000;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);   
+    }
+    `
+}
+
 function set_up() {
     var default_style = document.createElement("style")
-    default_style.textContent = `
-#dark-mode-switch {
-    position: fixed;
-    left: 24px;
-    bottom: 24px;
-    border: .0625rem solid #3737371a;
-    border-radius: 500px;
-    background-color: #2121211a;
-    color: #cecece;
-    padding: 2px 8px;
-    z-index: 2500000000;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);   
-}
-`
-    document.body.insertBefore(default_style, document.body.lastChild);
 
     document.documentElement.style.setProperty("--checkmark", "url(" + chrome.runtime.getURL('assets/checkmark.secondary.png') + ")");
     document.documentElement.style.setProperty("--revisions-sprite1", "url(" + chrome.runtime.getURL('assets/revisions_sprite1.secondary.svg') + ")");
@@ -90,7 +93,7 @@ function set_up() {
     var inverted;
 
     console.log("GETTING FROM STORAGE");
-    chrome.storage.local.get(["doc_bg", "custom_bg", "invert"], function (data) {
+    chrome.storage.local.get(["doc_bg", "custom_bg", "invert", "raise_button"], function (data) {
         console.log(data);
         if (data.doc_bg) {
             var option = data.doc_bg;
@@ -110,6 +113,10 @@ function set_up() {
             inverted = data.invert;
             document.documentElement.style.setProperty("--document_invert", "invert(1)");
         }
+        // Insert Button
+        default_style.textContent = get_default_style(data.raise_button);
+        console.log(default_style.textContent);
+        document.body.insertBefore(default_style, document.body.lastChild);
     });
 
     chrome.storage.onChanged.addListener(function (changes, area) {
@@ -138,12 +145,19 @@ function set_up() {
             console.log("INVERT CHANGED", inverted, changes)
             inverted = changes.invert.newValue;
         }
-        document.documentElement.style.setProperty("--document_invert", inverted ? "invert(1)" : "none");
-        if (changes.on.newValue) {
-            dad();
-        } else {
-            remove_dad();
+        if (Object.keys(changes).includes("on")) {
+            if (changes.on.newValue) {
+                dad();
+            } else {
+                remove_dad();
+            }
         }
+        if (Object.keys(changes).includes("raise_button")) {
+            console.log("RAISE BUTTON CHANGED", changes);
+            default_style.textContent = get_default_style(changes.raise_button.newValue);
+        }
+        // Invert toggle property
+        document.documentElement.style.setProperty("--document_invert", inverted ? "invert(1)" : "none");
     })
 }
 
@@ -160,7 +174,7 @@ chrome.storage.local.get(["on"], function (data) {
     }
 });
 
-// DEV SOLUTION
+// DEV SOLUTION (not in use)
 
 /**
  * 

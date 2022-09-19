@@ -2,6 +2,7 @@ var bg_selected, on_selected;
 const custom_input = document.querySelector("#custom_input");
 const custom_save = document.querySelector("#save_custom");
 const description = document.querySelector("#description");
+const raise_button = document.querySelector("#raise_button");
 const invert = document.querySelector("#invert");
 
 var descriptions = {
@@ -55,18 +56,26 @@ invert.addEventListener("click", function (e) {
     browser.storage.local.set({ "invert": this.checked });
 })
 
+raise_button.addEventListener("click", function (e) {
+    browser.storage.local.set({ "raise_button": this.checked });
+})
+
 try {
-    browser.storage.local.get(["doc_bg", "custom_bg", "invert", "on"], function (data) {
-        var option = data.doc_bg;
-        var custom = data.custom_bg;
-        var inverted = data.invert;
-        var on = data.on;
+    browser.storage.local.get(["doc_bg", "custom_bg", "invert", "on", "raise_button"], function (data) {
+        let option = data.doc_bg;
+        let custom = data.custom_bg;
+        let inverted = data.invert;
+        let button_raised = data.raise_button;
+        let on = data.on;
+
+        console.log(raise_button);
+
         if (on == null) {
             browser.storage.local.set({ "on": true });
             on = true;
         }
         if (!option) {
-            var option = "default";
+            let option = "default";
             browser.storage.local.set({ "doc_bg": "default" });
         }
         var selected_option = document.querySelector(`#${option}`);
@@ -81,8 +90,11 @@ try {
         if (inverted) {
             invert.checked = true;
         }
-        var on_off;
-        on_off = on ? document.querySelector("#on") : document.querySelector("#off");
+        if (button_raised) {
+            raise_button.checked = true;
+        }
+
+        let on_off = on ? document.querySelector("#on") : document.querySelector("#off");
         on_selected = on_off;
         on_off.classList.add("selected");
     })

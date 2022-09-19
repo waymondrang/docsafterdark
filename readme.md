@@ -8,7 +8,9 @@ Customize the document background to a darker shade or any color in the extensio
 
 With the invert option, document content (excluding images) will appear inverted. This option is recommended for users who want a darker document background without needing to change the font color.
 
-To temporarily toggle dark mode on/off, click on the button at the bottom left of the page. The global toggle in the options menu can be used to disable/enable the extension.
+To temporarily toggle dark mode on/off, click on the button at the bottom left of the page. This toggle may block other elements, such as the persistent word count widget. When this occurs, use the raise button settings in the options menu.
+
+The global toggle in the options menu can be used to disable/enable the extension.
 
 Available on [Firefox Add-Ons](https://addons.mozilla.org/en-US/firefox/addon/docsafterdark/), [Chrome Web Store](https://chrome.google.com/webstore/detail/docsafterdark/pihphjfnfjmdbhakhjifipfdgbpenobg), [Edge Add-Ons](https://microsoftedge.microsoft.com/addons/detail/docsafterdark/bbpgjhhjjphjmabmohnkkpmelbfpgfna), and [Opera](https://addons.opera.com/en/extensions/details/docsafterdark/).
 

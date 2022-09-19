@@ -346,7 +346,8 @@ body,
 .docs-gm .goog-zippy-expanded.docs-sidebar-tile-header,
 .docs-gm .docs-tiled-sidebar-header,
 .docs-gm .docs-tiled-sidebar,
-.docs-gm .docs-sidebar-tile-controls {
+.docs-gm .docs-sidebar-tile-controls,
+.kix-documentmetrics-widget {
   background-color: var(--secondary-background-color) !important;
 }
 
@@ -972,7 +973,8 @@ img.kix-smart-summary-onboarding-promo-content-illustration,
 .docs-gm .docos-anchoreddocoview:hover,
 .docs-gm .docos-anchoreddocoview.docos-docoview-active,
 .docs-gm .docos-anchoreddocoview.docos-docoview-active:hover,
-.kix-dropdown-item-selection-bubble {
+.kix-dropdown-item-selection-bubble,
+.kix-documentmetrics-widget {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
