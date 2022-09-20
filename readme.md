@@ -8,7 +8,7 @@ Easily enable or disable dark mode for any document without modifying the origin
 
 Customize the document background to a darker shade, or use any valid background CSS value in the custom field, including images, gradients, and transparent backgrounds.\*
 
-With the invert and grayscale options, document content (excluding images\*) will be rendered in a comfortable dark mode. By disabling the document border option, documents will blend into the background to create a seamless workspace.
+With the invert and grayscale options, document content (excluding images\*) will be rendered in a comfortable dark mode. By disabling the document border option, documents can blend with the background to create a seamless workspace.
 
 To temporarily toggle dark mode on/off, click on the button in the bottom left corner of the page. Sometimes this button may block other elements, such as the word count widget. When this occurs, enable the Raise Button toggle in the option menu.
 
