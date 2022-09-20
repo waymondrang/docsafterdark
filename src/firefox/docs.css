@@ -1505,6 +1505,6 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused {
 }
 
 /* Fix for Firefox */
-.kix-canvas-tile-content svg {
-  display: none;
+.kix-canvas-tile-content svg rect {
+  fill: transparent !important;
 }

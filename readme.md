@@ -2,13 +2,11 @@
 
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/pihphjfnfjmdbhakhjifipfdgbpenobg?color=%23262626%20)](https://chrome.google.com/webstore/detail/docsafterdark/pihphjfnfjmdbhakhjifipfdgbpenobg) [![Mozilla Add-on](https://img.shields.io/amo/v/docsafterdark?color=%23262626%20)](https://addons.mozilla.org/en-US/firefox/addon/docsafterdark/)
 
-DocsAfterDark aims to relieve eye-strain from the Google Docs experience with a focus on functionality and artful design.
+DocsAfterDark relieves eye-strain from the Google Docs experience with a focus on functionality and artful design.
 
-Customize the document background to a darker shade or any color in the extension's option menu, which can be accessed by clicking on the extension icon in the browser toolbar. Any valid background CSS value can be used in the custom field, including images and gradients (This feature may be unstable on Chrome).
+Enable dark mode for documents without modifying the original project using the extension's option menu, which can be accessed by clicking on the extension icon in the browser toolbar.
 
-With the invert option, document content (excluding images) will appear inverted. This option is recommended for users who want a darker document background without needing to change the font color.
-
-To temporarily toggle dark mode on/off, click on the button at the bottom left of the page. This toggle may block other elements, such as the persistent word count widget. When this occurs, use the raise button settings in the options menu.
+To temporarily toggle dark mode on/off, click on the button at the bottom left corner of the page. Sometimes, this button may block other elements, such as the word count widget. When this occurs, use the raise button setting in the option menu.
 
 The global toggle in the options menu can be used to disable/enable the extension.
 
