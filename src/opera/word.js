@@ -146,18 +146,21 @@ function set_up() {
         // Insert Button
         default_style.textContent = get_default_style(raise_button);
         document.body.insertBefore(default_style, document.body.lastChild);
+        let update_notification;
 
-        var update_notification = document.createElement("div");
-        update_notification.id = "update-notification";
-        update_notification.style = "top: 0; left: 0; right: 0; background-color: #212121; color: #cecece; padding: 0.5em; text-align: center; z-index: 2500000000;";
-        update_notification.textContent = "DocsAfterDark has been updated to version " + chrome.runtime.getManifest().version + ". Read update notes on ";
+        update_notification = document.createElement("div");
+        update_notification.id = "bb-update-notification";
+        update_notification.style = "position: fixed; top: 0.5em; left: 0; right: 0; color: #cecece; padding: 0.5em; text-align: center; z-index: 2500000000;";
+        var update_text = document.createElement("span");
+        update_text.textContent = "DocsAfterDark has been updated to version " + chrome.runtime.getManifest().version + ". Read update notes on ";
+        update_text.style = "background-color: #212121; padding: 0.5em 0.75em; border-radius: 0.5em; box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);";
         var update_link = document.createElement("a");
         update_link.href = "https://github.com/waymondrang/docsafterdark/releases";
         update_link.target = "_blank";
         update_link.textContent = "GitHub";
         update_link.style = "color: #cecece; text-decoration: underline;";
-        update_notification.appendChild(update_link);
-        update_notification.appendChild(document.createTextNode("."));
+        update_text.appendChild(update_link);
+        update_text.appendChild(document.createTextNode("."));
         var close_button = document.createElement("button");
         close_button.textContent = "Close";
         close_button.style = "background-color: #4d4d4d; border-radius: 2px; color: #64b5f6; border: none; cursor: pointer; margin-left: 1em;";
@@ -172,7 +175,9 @@ function set_up() {
                 chrome.storage.local.set({ "updates": [version] });
             }
         }
-        update_notification.appendChild(close_button);
+        update_text.appendChild(close_button);
+        update_notification.appendChild(update_text);
+
 
         // User must be on page for 10 seconds or manually close notification
         if (Object.keys(data).includes("updates")) {
