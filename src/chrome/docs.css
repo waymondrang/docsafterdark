@@ -92,7 +92,8 @@ textarea,
 .docs-gm .docs-tiled-sidebar-header,
 .docs-gm .docs-sidebar-tile-header,
 .docs-sidebar-tile,
-.docs-material-gm-select-caption {
+.docs-material-gm-select-caption,
+.docs-sidebar-tile-section-disabled .docs-sidebar-tile-section-title {
   color: var(--primary-text-color);
 }
 
@@ -225,7 +226,11 @@ svg.kix-configure-dropdown-button-add-icon {
 .JsJznb,
 .VY1pEb,
 .docs-material-gm-dialog-content,
-.docs-number-input-unit {
+.docs-number-input-unit,
+.docs-number-input-label,
+.docs-labeled-button-label,
+.docs-sidebar-tile-input-label,
+.docs-sidebar-tile-label {
   color: var(--secondary-text-color);
 }
 
@@ -360,7 +365,8 @@ body,
 .docs-gm .docos-showrepliesbutton,
 .docs-gm .docos-anchoreddocoview-input-pane,
 #docs-meet-in-editors-entrypointbutton,
-.docs-gm .docs-ui-toast {
+.docs-gm .docs-ui-toast,
+.docs-material-button-hairline-default.docs-material-button {
   background: var(--secondary-background-color);
 }
 
@@ -659,7 +665,8 @@ body,
 .kix-dropdown-entity-configuration-dialog-title-naming-component-input,
 .docs-dropdown-item-custom-color-menu-cancel-button,
 .docs-dropdown-item-custom-color-menu-okay-button,
-.docs-bubble {
+.docs-bubble,
+.docs-material-button-hairline-default.docs-material-button {
   border: 1px solid var(--primary-border-color) !important;
 }
 
@@ -894,8 +901,7 @@ img.kix-smart-summary-onboarding-promo-content-illustration,
 .visual-treatment-pageless-promo .docos-calltoactionview-header-image,
 .docs-material-button-text-default.docs-material-button,
 .kix-dropdown-entity-configuration-dialog-title-naming-component-header,
-.kix-dropdown-item-selection-bubble,
-.docs-number-input-container input {
+.kix-dropdown-item-selection-bubble {
   border-radius: 6px !important;
 }
 
@@ -1139,6 +1145,11 @@ z {
   filter: brightness(1.5);
 }
 
+/* invert with brightness */
+.docs-icon-img-container.docs-icon-img.docs-icon-rotate-cw {
+  filter: invert(1) brightness(1.5);
+}
+
 /* loading circle on link preview */
 .docs-material .docs-icon-loading-circle-grey200 {
   filter: brightness(0.5) !important;
@@ -1319,7 +1330,10 @@ a:link,
 .docs-gm .docs-material-bubble .jfk-textinput:focus,
 .docs-gm .modal-dialog .jfk-textinput:focus,
 .docs-gm .docs-material-gm-dialog .jfk-textinput:focus,
-.docs-gm .docs-material-bubble .jfk-textinput:focus {
+.docs-gm .docs-material-bubble .jfk-textinput:focus,
+.docs-sidebar-palette
+  .docs-sidebar-palette-button-container.goog-control-selected
+  .docs-sidebar-palette-button {
   border: 2px solid var(--accent-text) !important;
 }
 
