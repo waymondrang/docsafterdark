@@ -30,7 +30,7 @@ Available on [Firefox Add-Ons](https://addons.mozilla.org/en-US/firefox/addon/do
 
 ![menus preview](img/menus.png)
 
-![customization menu](img/customization_menu.png)
+![options menu](img/options_menu.png)
 
 ---
 
