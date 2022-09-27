@@ -20,15 +20,17 @@ Available on [Firefox Add-Ons](https://addons.mozilla.org/en-US/firefox/addon/do
 
 ---
 
-![promotional image](docsafterdark.png)
+![promotional image](img/docsafterdark.png)
 
-![background customization](backgrounds.png)
+![comparison](img/comparison.png)
 
-![backgrounds inverted](backgrounds_inverted.png)
+![background customization](img/backgrounds.png)
 
-![menus preview](menus.png)
+![backgrounds inverted](img/backgrounds_inverted.png)
 
-![customization menu](customization_menu.png)
+![menus preview](img/menus.png)
+
+![customization menu](img/customization_menu.png)
 
 ---
 
