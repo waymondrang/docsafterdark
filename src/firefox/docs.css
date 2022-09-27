@@ -1476,7 +1476,7 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused {
 } */
 
 .kix-canvas-tile-content {
-  background: transparent;
+  background: transparent !important;
   background-size: contain;
 }
 
