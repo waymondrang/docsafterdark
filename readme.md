@@ -14,7 +14,7 @@ To temporarily toggle dark mode on/off, click on the button in the bottom left c
 
 The global toggle in the option menu can be used to disable/enable the extension.
 
-\*Only on Firefox
+\*May be unstable on Chrome, Edge, and Opera
 
 Available on [Firefox Add-Ons](https://addons.mozilla.org/en-US/firefox/addon/docsafterdark/), [Chrome Web Store](https://chrome.google.com/webstore/detail/docsafterdark/pihphjfnfjmdbhakhjifipfdgbpenobg), [Edge Add-Ons](https://microsoftedge.microsoft.com/addons/detail/docsafterdark/bbpgjhhjjphjmabmohnkkpmelbfpgfna), and [Opera](https://addons.opera.com/en/extensions/details/docsafterdark/).
 
