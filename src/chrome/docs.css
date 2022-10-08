@@ -262,7 +262,8 @@ svg.kix-configure-dropdown-button-add-icon {
 .docs-horizontal-button-group
   .docs-material-button:not([class*="docs-material-button-selected"]),
 .BOpCwe,
-.docs-emoji-picker-category-title {
+.docs-emoji-picker-category-title,
+.docs-offline-optinpromo-notice {
   color: var(--tertiary-text-color);
 }
 
