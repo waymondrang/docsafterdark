@@ -92,7 +92,8 @@ textarea,
 .docs-gm .docs-tiled-sidebar-header,
 .docs-gm .docs-sidebar-tile-header,
 .docs-sidebar-tile,
-.docs-material-gm-select-caption {
+.docs-material-gm-select-caption,
+.docs-sidebar-tile-section-disabled .docs-sidebar-tile-section-title {
   color: var(--primary-text-color);
 }
 
@@ -225,7 +226,12 @@ svg.kix-configure-dropdown-button-add-icon {
 .JsJznb,
 .VY1pEb,
 .docs-material-gm-dialog-content,
-.docs-number-input-unit {
+.docs-number-input-unit,
+.docs-number-input-label,
+.docs-labeled-button-label,
+.docs-sidebar-tile-input-label,
+.docs-sidebar-tile-label,
+.kix-embedded-entity-options .docs-material-gm-select-caption {
   color: var(--secondary-text-color);
 }
 
@@ -360,7 +366,8 @@ body,
 .docs-gm .docos-showrepliesbutton,
 .docs-gm .docos-anchoreddocoview-input-pane,
 #docs-meet-in-editors-entrypointbutton,
-.docs-gm .docs-ui-toast {
+.docs-gm .docs-ui-toast,
+.docs-material-button-hairline-default.docs-material-button {
   background: var(--secondary-background-color);
 }
 
@@ -407,7 +414,8 @@ body,
 .docs-sidebar-tile-header-cursor:focus:not(.docs-sidebar-tile-header-no-focus),
 .docs-gm .goog-zippy-expanded.docs-sidebar-tile-header:focus,
 .docs-sidebar-gm-titlebar-icon-button:hover,
-.docs-border-selection-palette .goog-palette-cell-hover {
+.docs-border-selection-palette .goog-palette-cell-hover,
+.docs-number-input-container input:disabled {
   /* although not hover elements, some elements may use the
     hover-background-color to differentiate themselves from the
     secondary-background-color */
@@ -560,7 +568,8 @@ body,
 .docs-gm.docs-material-gm-dialog .jfk-textinput,
 .docs-gm .docs-material-bubble .jfk-textinput,
 .docs-smart-link-searchinput-search-container,
-.docs-material-menu-button-flat-default {
+.docs-material-menu-button-flat-default,
+.docs-material-slider-track-off {
   background: var(--input-background-color);
 }
 
@@ -659,7 +668,8 @@ body,
 .kix-dropdown-entity-configuration-dialog-title-naming-component-input,
 .docs-dropdown-item-custom-color-menu-cancel-button,
 .docs-dropdown-item-custom-color-menu-okay-button,
-.docs-bubble {
+.docs-bubble,
+.docs-material-button-hairline-default.docs-material-button {
   border: 1px solid var(--primary-border-color) !important;
 }
 
@@ -791,13 +801,11 @@ body,
 .docs-emoji-picker-categories,
 .docs-emoji-picker-quick-pick-container,
 .apps-shortcutshelpcontentimpl-tearoff-link-container,
-.docs-gm .docs-tiled-sidebar-header {
-  border-top: 1px solid var(--primary-border-color);
-}
-
+.docs-gm .docs-tiled-sidebar-header,
 .docs-gm .docos-anchoredreplyview,
 .docs-gm .docos-showrepliesbutton,
-.docs-gm .docos-anchoreddocoview-input-pane {
+.docs-gm .docos-anchoreddocoview-input-pane,
+.docs-gm .docs-sidebar-tile.docs-sidebar-tile-expanded {
   border-top: 1px solid var(--primary-border-color);
 }
 
@@ -818,6 +826,10 @@ body,
 .apps-actiondatawidget-content-element,
 .docs-gm .docs-tiled-sidebar-header {
   border-bottom: 1px solid var(--primary-border-color) !important;
+}
+
+.docs-number-input-container input {
+  border-bottom: 1px solid var(--primary-border-color);
 }
 
 .docs-gm .kix-documentmetricsdialog-row {
@@ -894,8 +906,7 @@ img.kix-smart-summary-onboarding-promo-content-illustration,
 .visual-treatment-pageless-promo .docos-calltoactionview-header-image,
 .docs-material-button-text-default.docs-material-button,
 .kix-dropdown-entity-configuration-dialog-title-naming-component-header,
-.kix-dropdown-item-selection-bubble,
-.docs-number-input-container input {
+.kix-dropdown-item-selection-bubble {
   border-radius: 6px !important;
 }
 
@@ -1026,12 +1037,14 @@ canvas.kix-canvas-tile-content {
   background-color: transparent;
 }
 
-.docs-gm .docos-emoji-reaction-doco-view.docos-anchoreddocoview {
+.docs-gm .docos-emoji-reaction-doco-view.docos-anchoreddocoview,
+.kix-tablesidebar-control .docs-number-input,
+.docs-tiled-sidebar.docs-material.docs-format-options-sidebar
+  .docs-number-input {
   background-color: transparent !important;
 }
 
-.left-sidebar-container.pageless-format,
-z {
+.left-sidebar-container.pageless-format {
   background: transparent;
 }
 
@@ -1137,6 +1150,17 @@ z {
 .docs-gm .docs-material .docs-icon-img,
 .docs-revisions-icon-img:before {
   filter: brightness(1.5);
+}
+
+/* invert with brightness */
+.docs-icon-img-container.docs-icon-img.docs-icon-rotate-cw {
+  filter: invert(1) brightness(1.5);
+}
+
+/* only invert */
+.docs-number-input-up-button,
+.docs-number-input-down-button {
+  filter: invert(1);
 }
 
 /* loading circle on link preview */
@@ -1287,8 +1311,10 @@ a:link,
 }
 
 .docs-explore-widget-active .docs-explore-widget-icon > svg > path,
-.kix-dropdown-entity-configuration-dialog-add-button-icon-container svg {
-  fill: var(--accent-text);
+.kix-dropdown-entity-configuration-dialog-add-button-icon-container svg,
+.docs-gm-sidebar-icon path[fill="#1a73e8"],
+.docs-gm-sidebar-icon path[fill="#1A73E8"] {
+  fill: var(--accent-text) !important;
 }
 
 .docs-gm .modal-dialog .jfk-button-standard,
@@ -1319,7 +1345,10 @@ a:link,
 .docs-gm .docs-material-bubble .jfk-textinput:focus,
 .docs-gm .modal-dialog .jfk-textinput:focus,
 .docs-gm .docs-material-gm-dialog .jfk-textinput:focus,
-.docs-gm .docs-material-bubble .jfk-textinput:focus {
+.docs-gm .docs-material-bubble .jfk-textinput:focus,
+.docs-sidebar-palette
+  .docs-sidebar-palette-button-container.goog-control-selected
+  .docs-sidebar-palette-button {
   border: 2px solid var(--accent-text) !important;
 }
 
@@ -1343,7 +1372,16 @@ span.docs-material-gm-checkbox-undetermined,
 div.docs-material-gm-checkbox-focused,
 span.docs-material-gm-checkbox-focused,
 div.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
-span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused {
+span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
+.docs-sidebar-tile
+  .jfk-radiobutton-checked:not(.jfk-radiobutton-disabled):not(.jfk-radiobutton-focused)
+  .jfk-radiobutton-radio,
+.docs-sidebar-tile
+  .jfk-radiobutton-checked:not(.jfk-radiobutton-disabled):not(.jfk-radiobutton-focused):hover
+  .jfk-radiobutton-radio,
+.docs-sidebar-tile
+  .jfk-radiobutton-checked.jfk-radiobutton-focused
+  .jfk-radiobutton-radio {
   border: 2px solid var(--accent-text);
 }
 
@@ -1352,13 +1390,18 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused {
   .jfk-radiobutton-radio::after,
 .kix-pagenumberdialog-radio-button-group-controls
   .jfk-radiobutton-checked
+  .jfk-radiobutton-radio::after,
+.docs-sidebar-tile .jfk-radiobutton-checked .jfk-radiobutton-radio::after,
+.docs-sidebar-tile
+  .jfk-radiobutton-checked.jfk-radiobutton-focused
   .jfk-radiobutton-radio::after {
   border: 4px solid var(--accent-text);
 }
 
 .docs-revisions-tile-text-box:focus:enabled,
 .kix-smart-summary-text-container.kix-smart-summary-edit-summary-text-input,
-.docs-number-input-container input:focus {
+.docs-number-input-container input:focus,
+.docs-material-slider-thumb-grabber {
   border-color: var(--accent-text) !important;
 }
 
@@ -1379,7 +1422,13 @@ span.docs-material-gm-checkbox-undetermined,
   .jfk-radiobutton-checked
   .jfk-radiobutton-radio::after,
 div.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
-span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused {
+span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
+.docs-material-slider-thumb-grabber,
+.docs-material-slider-track-on,
+.docs-sidebar-tile .jfk-radiobutton-checked .jfk-radiobutton-radio::after,
+.docs-sidebar-tile
+  .jfk-radiobutton-checked.jfk-radiobutton-focused
+  .jfk-radiobutton-radio::after {
   background-color: var(--accent-text);
 }
 
@@ -1476,7 +1525,7 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused {
 } */
 
 .kix-canvas-tile-content {
-  background: transparent !important;
+  background: transparent;
   background-size: contain;
 }
 
