@@ -253,7 +253,8 @@ svg.kix-configure-dropdown-button-add-icon {
 .docs-gm .docos-anchoredreplyview-origin,
 .docs-gm.docos-xeditor .docos-streamdocoview-authorname-timestamp .docos-streamdocoview-timestamp,
 .docos-streamreplyview-origin,
-.docos-streamreplyview-timestamp {
+.docos-streamreplyview-timestamp,
+.docs-offline-optinpromo-notice {
   color: var(--tertiary-text-color);
 }
 
