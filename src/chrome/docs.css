@@ -480,7 +480,11 @@ body,
 .docos-xeditor .docos-streamdocoview:hover .docos-streamdocoview-header-container,
 .kix-smart-summary-view .jfk-button:focus,
 .kix-smart-summary-view .jfk-button:hover,
-.docs-gm .kix-spell-bubble-suggestion-text:focus {
+.docs-gm .kix-spell-bubble-suggestion-text:focus,
+.smart-canvas-date-details-icon-button:hover,
+.smart-canvas-date-details-icon-button:focus,
+.smart-canvas-date-details-bubble-pattern-picker-button:hover,
+.smart-canvas-date-details-bubble-pattern-picker-button:focus {
   background-color: var(--hover-background-color) !important;
 }
 
@@ -738,7 +742,8 @@ body,
 .docs-gm .docos-anchoredreplyview,
 .docs-gm .docos-showrepliesbutton,
 .docs-gm .docos-anchoreddocoview-input-pane,
-.docs-gm .docs-sidebar-tile.docs-sidebar-tile-expanded {
+.docs-gm .docs-sidebar-tile.docs-sidebar-tile-expanded,
+.smart-canvas-date-details-bubble-action-bar {
   border-top: 1px solid var(--primary-border-color);
 }
 
