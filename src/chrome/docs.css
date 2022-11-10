@@ -87,7 +87,9 @@ textarea,
 .docs-gm .docs-sidebar-tile-header,
 .docs-sidebar-tile,
 .docs-material-gm-select-caption,
-.docs-sidebar-tile-section-disabled .docs-sidebar-tile-section-title {
+.docs-sidebar-tile-section-disabled .docs-sidebar-tile-section-title,
+#docs-embeddedcontentpastedialog-title,
+.docs-embeddedcontentpastedialog-label {
   color: var(--primary-text-color);
 }
 
@@ -180,7 +182,8 @@ svg.kix-dropdown-item-selection-button-icon {
 .docs-modality-header-message-component-title,
 .docs-dropdown-item-preview-control-title,
 .kix-headerfooterdialog-units,
-.docs-gm.docos-xeditor .docos-streamdocoview-authorname-timestamp .docos-streamdocoview-author {
+.docs-gm.docos-xeditor .docos-streamdocoview-authorname-timestamp .docos-streamdocoview-author,
+.docs-embeddedcontentpastedialog-message {
   color: var(--secondary-text-color) !important;
 }
 
