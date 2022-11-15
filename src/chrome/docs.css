@@ -96,7 +96,9 @@ textarea,
 .kix-spellcheck-with-explanation-bubble .kix-spellcheck-with-explanation-bubble-title-text,
 .docos-streamreplyview-body,
 .docos-ssd-radio-button-group .jfk-radiobutton-label label,
-.docos-stream-emoji-content .docos-stream-emoji-reply-author .docos-author {
+.docos-stream-emoji-content .docos-stream-emoji-reply-author .docos-author,
+#docs-embeddedcontentpastedialog-title,
+.docs-embeddedcontentpastedialog-label {
   color: var(--primary-text-color);
 }
 
@@ -191,7 +193,8 @@ svg.kix-dropdown-item-selection-button-icon {
 .kix-headerfooterdialog-units,
 .kix-spellcheck-with-explanation-bubble .kix-spellcheck-with-explanation-bubble-explanation-text,
 .docos-ssd-content p,
-.docos-ssd-radio-button-group .jfk-radiobutton-label span {
+.docos-ssd-radio-button-group .jfk-radiobutton-label span,
+.docs-embeddedcontentpastedialog-message {
   color: var(--secondary-text-color) !important;
 }
 
