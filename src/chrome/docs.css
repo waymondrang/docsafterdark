@@ -378,7 +378,13 @@ body,
 .docs-gm .docos-anchoreddocoview-input-pane,
 #docs-meet-in-editors-entrypointbutton,
 .docs-gm .docs-ui-toast,
-.docs-material-button-hairline-default.docs-material-button {
+.docs-material-button-hairline-default.docs-material-button,
+.docs-gm .docos-anchoreddocoview .docos-show-more,
+.docs-gm .docos-anchoreddocoview .docos-show-less,
+.docs-gm .docos-anchoreddocoview.docos-docoview-active .docos-show-more,
+.docs-gm .docos-anchoreddocoview.docos-docoview-active .docos-show-less,
+.docs-gm .docos-replyview-first .docos-show-more,
+.docs-gm .docos-anchoreddocoview.docos-docoview-tesla-conflict:hover .docos-show-more {
   background: var(--secondary-background-color);
 }
 
@@ -1260,7 +1266,9 @@ a:link,
 .docs-material-button-text-default.docs-material-button,
 .docs-dropdown-item-custom-color-menu-cancel-button,
 .kix-dropdown-entity-configuration-dialog-add-button-text,
-.docs-gm .docos-filter-settings .docs-material-menu-button-flat-default.filter-applied {
+.docs-gm .docos-filter-settings .docs-material-menu-button-flat-default.filter-applied,
+.docos-show-more,
+.docos-show-less {
   color: var(--accent-text) !important;
 }
 
