@@ -11,6 +11,9 @@
       ],
       "js": [
         "word.js"
+      ],
+      "css": [
+        "default.css"
       ]
     }
   ],

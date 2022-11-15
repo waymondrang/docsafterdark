@@ -96,7 +96,7 @@ input[type="checkbox"]:disabled {
   cursor: not-allowed;
 }
 
-input[type="checkbox"]:disabled + label {
+input[type="checkbox"]:disabled+label {
   opacity: 0.25;
   cursor: not-allowed;
 }
@@ -140,4 +140,35 @@ button.selected {
 
 #save_custom:hover {
   background-color: var(--button-background-color-focus);
+}
+
+footer {
+  margin-top: 0.5em;
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#version {
+  color: var(--tertiary-text-color);
+  margin: 0;
+}
+
+#donate {
+  text-align: right;
+  color: var(--accent-text);
+  /* button-like */
+  background-color: var(--hover-background-color);
+  box-sizing: border-box;
+  border: none;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+#donate:hover {
+  background-color: var(--button-background-color-focus);
+  color: var(--primary-text-color);
 }
