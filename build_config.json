@@ -27,8 +27,7 @@
             "patch": [
                 "popup.js",
                 "word.js"
-            ],
-            "temp": true
+            ]
         }
     ],
     "git_messages": {
