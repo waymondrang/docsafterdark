@@ -100,7 +100,10 @@ textarea,
 #docs-embeddedcontentpastedialog-title,
 .docs-embeddedcontentpastedialog-label,
 .docs-gm .docos-assigneeview.docos-assignee-other,
-.docs-gm .docos-anchoredreplyview-header .docos-anchoredreplyview-author {
+.docs-gm .docos-anchoredreplyview-header .docos-anchoredreplyview-author,
+.docs-gm .docs-dictionary-titlebar,
+.docs-gm .docs-explore-dictionaryentry-title,
+.docs-gm .docs-explore-dictionaryentries {
   color: var(--primary-text-color);
 }
 
@@ -274,7 +277,11 @@ svg.kix-configure-dropdown-button-add-icon {
 .docs-gm .docos-streamreplyview .docos-action-text,
 .docos-streamdocoview-timestamp,
 .docos-streamdocoview-comments-off,
-.docs-gm .docos-anchoredreplyview .docos-action-text {
+.docs-gm .docos-anchoredreplyview .docos-action-text,
+.docs-gm .docs-explore-emptylist-body,
+.docs-explore-dictionaryentry-sensefamily-morphunits,
+.docs-explore-dictionaryentry-sense-synonym-prefix,
+.docs-explore-dictionaryentry-sense-antonym-prefix {
   color: var(--tertiary-text-color);
 }
 
@@ -366,7 +373,9 @@ body,
 .docs-gm .docs-sidebar-tile-controls,
 .kix-documentmetrics-widget,
 .docs-docos-activitybox,
-.docs-gm .docos-streampane-header {
+.docs-gm .docos-streampane-header,
+.docs-gm .docs-dictionary-titlebar,
+.docs-dictionary-sidebar {
   background-color: var(--secondary-background-color) !important;
 }
 
@@ -438,7 +447,9 @@ body,
 .docos-search-button .docs-material-button-active.docs-material-button-flat-default,
 .docos-subscription-settings-button .docs-material-button-hover.docs-material-button-flat-default,
 .docos-subscription-settings-button .docs-material-button-focused.docs-material-button-flat-default,
-.docos-subscription-settings-button .docs-material-button-active.docs-material-button-flat-default {
+.docos-subscription-settings-button .docs-material-button-active.docs-material-button-flat-default,
+.docs-explore-searchbar-labelinput:focus,
+.docs-sidebar-gm-titlebar-icon-button:focus {
   /* although not hover elements, some elements may use the
     hover-background-color to differentiate themselves from the
     secondary-background-color */
@@ -555,7 +566,8 @@ body,
 .docos-xeditor .docos-docoview-resolved.docos-docoview-active.docos-streamdocoview .docos-streamdocoview-header-container,
 .docs-gm.docos-xeditor .docos-input-typing>.docos-input-textarea,
 .docs-gm .docs-docos-activity-sidebar .docos-input-typing>.docos-input-textarea,
-.docos-streamdocoview-input-pane .docos-input-textarea {
+.docos-streamdocoview-input-pane .docos-input-textarea,
+.docs-explore-searchbar-labelinput {
   background-color: var(--input-background-color) !important;
 }
 
@@ -741,7 +753,8 @@ body,
 .companion-app-switcher-container,
 .docs-gm .goog-toolbar-separator.goog-inline-block,
 .docs-slidingdialog,
-.docs-gm .docs-revisions-sidebar {
+.docs-gm .docs-revisions-sidebar,
+.docs-gm .docs-dictionary-sidebar {
   border-left: 1px solid var(--primary-border-color) !important;
 }
 
@@ -788,7 +801,8 @@ body,
 .docs-gm .docos-showrepliesbutton,
 .docs-gm .docos-anchoreddocoview-input-pane,
 .docs-gm .docs-sidebar-tile.docs-sidebar-tile-expanded,
-.smart-canvas-date-details-bubble-action-bar {
+.smart-canvas-date-details-bubble-action-bar,
+.docs-gm .docs-dictionary-titlebar {
   border-top: 1px solid var(--primary-border-color);
 }
 
@@ -812,7 +826,10 @@ body,
   border-bottom: 1px solid var(--primary-border-color) !important;
 }
 
-.docs-number-input-container input {
+.docs-number-input-container input,
+.docs-gm .docs-dictionary-titlebar,
+.docs-explore-searchbar-labelinput,
+.docs-explore-searchbar-labelinput:focus {
   border-bottom: 1px solid var(--primary-border-color);
 }
 
@@ -893,7 +910,11 @@ img.kix-smart-summary-onboarding-promo-content-illustration,
 
 .kix-page-paginated .kix-stacked-tile-page-shadow,
 canvas.kix-canvas-tile-content {
-  border-radius: 0em !important;
+  border-radius: 0px !important;
+}
+
+.jfk-textinput {
+  border-radius: 0px;
 }
 
 /* box shadows */
@@ -973,7 +994,8 @@ canvas.kix-canvas-tile-content {
 .docs-gm .docs-revisions-sidebar,
 .left-sidebar-container.pageless-format,
 .docs-gm .docos-emoji-reaction-doco-view.docos-anchoreddocoview:hover,
-.docs-gm .docs-sidebar-tile.docs-sidebar-tile-expanded {
+.docs-gm .docs-sidebar-tile.docs-sidebar-tile-expanded,
+.docs-explore-searchbar-labelinput {
   box-shadow: none;
 }
 
@@ -1272,7 +1294,9 @@ a:link,
 .kix-dropdown-entity-configuration-dialog-add-button-text,
 .docs-gm .docos-filter-settings .docs-material-menu-button-flat-default.filter-applied,
 .docos-show-more,
-.docos-show-less {
+.docos-show-less,
+.docs-explore-dictionaryentry-sense-synonym-clickable,
+.docs-explore-dictionaryentry-sense-antonym-clickable {
   color: var(--accent-text) !important;
 }
 
@@ -1443,7 +1467,8 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
   height: 39px;
 }
 
-.docs-gm .docs-tiled-sidebar-header {
+.docs-gm .docs-tiled-sidebar-header,
+.docs-gm .docs-dictionary-titlebar {
   height: 52px;
 }
 
@@ -1486,6 +1511,10 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
 .docs-gm .modal-dialog button:hover,
 .docs-gm .modal-dialog .jfk-button-standard.jfk-button-hover {
   font-weight: 400;
+}
+
+.docs-gm .docs-explore-dictionaryentry-phonetics {
+  font-weight: normal;
 }
 
 /* Fix for Firefox */
