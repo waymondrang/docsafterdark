@@ -98,7 +98,9 @@ textarea,
 .docos-ssd-radio-button-group .jfk-radiobutton-label label,
 .docos-stream-emoji-content .docos-stream-emoji-reply-author .docos-author,
 #docs-embeddedcontentpastedialog-title,
-.docs-embeddedcontentpastedialog-label {
+.docs-embeddedcontentpastedialog-label,
+.docs-gm .docos-assigneeview.docos-assignee-other,
+.docs-gm .docos-anchoredreplyview-header .docos-anchoredreplyview-author {
   color: var(--primary-text-color);
 }
 
@@ -181,7 +183,6 @@ svg.kix-dropdown-item-selection-button-icon {
 .navigation-widget-header,
 .i5S8cc,
 .meet-video-promo-bubble-description,
-.docs-gm .docos-anchoredreplyview-header .docos-anchoredreplyview-author,
 .docs-gm .docos-anchoredreplyview .docos-anchoredreplyview-body>*>*,
 .docos-streamdocoview-body>*>*,
 .docs-gm .docos-anchoreddocoview .docos-input-at-reply-message,
@@ -272,7 +273,8 @@ svg.kix-configure-dropdown-button-add-icon {
 .docs-gm .docos-streamrootreplyview .docos-action-text,
 .docs-gm .docos-streamreplyview .docos-action-text,
 .docos-streamdocoview-timestamp,
-.docos-streamdocoview-comments-off {
+.docos-streamdocoview-comments-off,
+.docs-gm .docos-anchoredreplyview .docos-action-text {
   color: var(--tertiary-text-color);
 }
 
@@ -516,7 +518,8 @@ body,
 .smart-canvas-date-details-icon-button:hover,
 .smart-canvas-date-details-icon-button:focus,
 .smart-canvas-date-details-bubble-pattern-picker-button:hover,
-.smart-canvas-date-details-bubble-pattern-picker-button:focus {
+.smart-canvas-date-details-bubble-pattern-picker-button:focus,
+.docs-gm .docos-assigneeview.docos-assignee-other {
   background-color: var(--hover-background-color) !important;
 }
 
@@ -804,7 +807,8 @@ body,
 .docs-emoji-picker-categories,
 .apps-shortcutshelpcontentimpl-header,
 .apps-actiondatawidget-content-element,
-.docs-gm .docs-tiled-sidebar-header {
+.docs-gm .docs-tiled-sidebar-header,
+.docs-gm .docos-assigneeview {
   border-bottom: 1px solid var(--primary-border-color) !important;
 }
 
