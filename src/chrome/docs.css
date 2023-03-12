@@ -107,7 +107,14 @@ textarea,
 .docs-gm .docos-anchoredreplyview-header .docos-anchoredreplyview-author,
 .docs-gm .docs-dictionary-titlebar,
 .docs-gm .docs-explore-dictionaryentry-title,
-.docs-gm .docs-explore-dictionaryentries {
+.docs-gm .docs-explore-dictionaryentries,
+/* generated css classes, volatile */
+.hA3Ymb,
+.vhoiae .hA3Ymb,
+.X9XeLb .hA3Ymb,
+.cWKK1c .hA3Ymb,
+.aJfoSc .hA3Ymb,
+.TOb6Ze .hA3Ymb {
   color: var(--primary-text-color);
 }
 
@@ -120,7 +127,8 @@ input,
 #accounts-button,
 #accounts-button :last-child,
 body.docs-gm:not(.docs-grille-gm3) .docos-anchoredreplyview .docos-anchoredreplyview-body *,
-.docos-streamdocoview-body * {
+.docos-streamdocoview-body *,
+.TBnIgc:not(.VfPpkd-fmcmS-yrriRe-OWXEXe-OWB6Me) .VfPpkd-fmcmS-wGMbrd {
   color: var(--primary-text-color) !important;
 }
 
@@ -380,8 +388,13 @@ body.docs-gm:not(.docs-grille-gm3) .docos-anchoreddocoview,
 .docs-docos-activitybox,
 .docs-gm .docos-streampane-header,
 .docs-gm .docs-dictionary-titlebar,
-.docs-dictionary-sidebar {
+.docs-dictionary-sidebar,
+#innerContainer div[style*="background"] {
   background-color: var(--secondary-background-color) !important;
+}
+
+.yYWAMb {
+  background: var(--primary-background-color);
 }
 
 #docs-chrome,
@@ -550,6 +563,10 @@ body.docs-gm:not(.docs-grille-gm3) .docos-showrepliesbutton,
   background-color: var(--hover-background-color) !important;
 }
 
+.fWf7qe:not(.RDPZE):hover .Yalane {
+  background-color: var(--hover-background-color);
+}
+
 /* hover background border */
 
 .docs-gm.docos-xeditor .docos-streamdocoview:hover {
@@ -699,7 +716,8 @@ body.docs-gm:not(.docs-grille-gm3) .docos-anchoreddocoview:hover,
 .docs-bubble,
 .docs-material-button-hairline-default.docs-material-button,
 body.docs-gm:not(.docs-grille-gm3) .docs-gm.docos-xeditor .streamdocoview-no-header.docos-streamdocoview,
-.docos-ssd-content hr {
+.docos-ssd-content hr,
+#innerContainer div[style*="background"] {
   border: 1px solid var(--primary-border-color) !important;
 }
 
@@ -1218,7 +1236,8 @@ body.docs-gm:not(.docs-grille-gm3) .docos-anchoreddocoview:hover,
 }
 
 #request-access-icon,
-.QLUvIe.ihNnYc:before {
+.QLUvIe.ihNnYc:before,
+.QLUvIe.lFiY0b:before {
   background-image: var(--access_denied);
   background-image: image-set(var(--access_denied) 1x,
       var(--access_denied_600) 2x);
