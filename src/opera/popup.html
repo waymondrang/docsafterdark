@@ -1,77 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="popup.css" />
+        <link rel="stylesheet" href="special.css" />
+        <title>DocsAfterDark Settings</title>
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="popup.css">
-    <link rel="stylesheet" href="special.css">
-    <title>DocsAfterDark Settings</title>
-</head>
-
-<body>
-    <div id="main">
-        <p>DocsAfterDark Options</p>
-        <p class="menu_bar_label">Global Toggle</p>
-        <div id="on_off" class="menu_bar">
-            <button id="on">On</button>
-            <button id="off">Off</button>
-        </div>
-        <p class="menu_bar_label">Invert Options</p>
-        <div id="invert_container">
-            <div class="input">
-                <input type="checkbox" id="invert" name="invert"><label for="invert">Invert</label>
+    <body>
+        <div id="main">
+            <p>DocsAfterDark Options</p>
+            <p class="menu_bar_label">Global Toggle</p>
+            <div id="on_off" class="menu_bar">
+                <button id="on">On</button>
+                <button id="off">Off</button>
             </div>
-            <div class="input">
-                <input type="checkbox" id="grayscale" name="grayscale"><label for="grayscale">Grayscale</label>
+            <p class="menu_bar_label">Invert Options</p>
+            <div id="invert_container">
+                <div class="input">
+                    <input type="checkbox" id="invert" name="invert" /><label
+                        for="invert"
+                        >Invert</label
+                    >
+                </div>
+                <div class="input">
+                    <input
+                        type="checkbox"
+                        id="grayscale"
+                        name="grayscale" /><label for="grayscale"
+                        >Grayscale</label
+                    >
+                </div>
             </div>
+            <p class="menu_bar_label">
+                Document Background<span class="__firefox-exclude"
+                    >&nbsp;(May Be Unstable)</span
+                >
+            </p>
+            <div id="document_bg" class="menu_bar">
+                <button id="default">
+                    <div>Default</div>
+                </button>
+                <button id="shade">
+                    <div>Shade</div>
+                </button>
+                <button id="dark">
+                    <div>Dark</div>
+                </button>
+                <button id="black">
+                    <div>Black</div>
+                </button>
+                <button id="custom">
+                    <div>Custom</div>
+                </button>
+            </div>
+            <input
+                id="custom_input"
+                class="hidden"
+                placeholder="Custom Color/CSS" />
+            <button id="save_custom" class="hidden">Save</button>
+            <p id="description"></p>
+            <div id="document_border_container">
+                <p class="menu_bar_label">Document Border</p>
+                <input
+                    type="checkbox"
+                    id="show_border"
+                    name="show_border" /><label for="show_border"
+                    >Show Border</label
+                >
+            </div>
+            <div id="toggle_button_container">
+                <p class="menu_bar_label">Toggle Button Options</p>
+                <input
+                    type="checkbox"
+                    id="raise_button"
+                    name="raise_button" /><label for="raise_button"
+                    >Raise Button</label
+                >
+            </div>
+            <footer>
+                <p id="version"></p>
+                <a id="donate">Donate</a>
+            </footer>
         </div>
-        <p class="menu_bar_label">Document Background<span class="__firefox-exclude">&nbsp;(May Be Unstable)</span></p>
-        <div id="document_bg" class="menu_bar">
-            <button id="default">
-                <div>
-                    Default
-                </div>
-            </button>
-            <button id="shade">
-                <div>
-                    Shade
-                </div>
-            </button>
-            <button id="dark">
-                <div>
-                    Dark
-                </div>
-            </button>
-            <button id="black">
-                <div>
-                    Black
-                </div>
-            </button>
-            <button id="custom">
-                <div>
-                    Custom
-                </div>
-            </button>
-        </div>
-        <input id="custom_input" class="hidden" placeholder="Custom Color/CSS">
-        <button id="save_custom" class="hidden">Save</button>
-        <p id="description"></p>
-        <div id="document_border_container">
-            <p class="menu_bar_label">Document Border</p>
-            <input type="checkbox" id="show_border" name="show_border"><label for="show_border">Show Border</label>
-        </div>
-        <div id="toggle_button_container">
-            <p class="menu_bar_label">Toggle Button Options</p>
-            <input type="checkbox" id="raise_button" name="raise_button"><label for="raise_button">Raise Button</label>
-        </div>
-        <footer>
-            <p id="version"></p>
-            <a id="donate">Donate</a>
-        </footer>
-    </div>
-    <script src="popup.js"></script>
-</body>
-
+        <script src="popup.js"></script>
+    </body>
 </html>
