@@ -5,7 +5,6 @@
   --hover-background-color: #333333;
   --input-background-color: #404040;
 
-  /* buttons */
   --button-background-color: #4d4d4d;
   --button-background-color-hover: #2196f3;
   --button-background-color-focus: #2196f3;
@@ -17,15 +16,20 @@
 
   --primary-border-color: #4d4d4d;
   --secondary-border-color: #404040;
+  --lighter-border-color: #808080;
 
   --primary-text-color: #f2f2f2;
   --secondary-text-color: #cccccc;
   --tertiary-text-color: #999999;
   --disabled-text: #666666;
   --accent-text: #64b5f6;
+  --accent-text-hover: #64b5f608;
 
   --comment-active: #1e88e5;
   --comment-hover: #2196f3;
+
+  --gm3-comment-background: #202427;
+  --gm3-comment-hover: #252D34;
 }
 
 /* text colors */
@@ -103,7 +107,14 @@ textarea,
 .docs-gm .docos-anchoredreplyview-header .docos-anchoredreplyview-author,
 .docs-gm .docs-dictionary-titlebar,
 .docs-gm .docs-explore-dictionaryentry-title,
-.docs-gm .docs-explore-dictionaryentries {
+.docs-gm .docs-explore-dictionaryentries,
+/* generated css classes, volatile */
+.hA3Ymb,
+.vhoiae .hA3Ymb,
+.X9XeLb .hA3Ymb,
+.cWKK1c .hA3Ymb,
+.aJfoSc .hA3Ymb,
+.TOb6Ze .hA3Ymb {
   color: var(--primary-text-color);
 }
 
@@ -115,8 +126,9 @@ input,
 #gb a.gb_1.gb_1,
 #accounts-button,
 #accounts-button :last-child,
-.docs-gm .docos-anchoredreplyview .docos-anchoredreplyview-body *,
-.docos-streamdocoview-body * {
+body.docs-gm:not(.docs-grille-gm3) .docos-anchoredreplyview .docos-anchoredreplyview-body *,
+.docos-streamdocoview-body *,
+.TBnIgc:not(.VfPpkd-fmcmS-yrriRe-OWXEXe-OWB6Me) .VfPpkd-fmcmS-wGMbrd {
   color: var(--primary-text-color) !important;
 }
 
@@ -198,7 +210,8 @@ svg.kix-dropdown-item-selection-button-icon {
 .kix-spellcheck-with-explanation-bubble .kix-spellcheck-with-explanation-bubble-explanation-text,
 .docos-ssd-content p,
 .docos-ssd-radio-button-group .jfk-radiobutton-label span,
-.docs-embeddedcontentpastedialog-message {
+.docs-embeddedcontentpastedialog-message,
+.docs-indentationdialoggm-indentation-special-type.docs-indentationdialoggm-control.jfk-select .goog-flat-menu-button-caption {
   color: var(--secondary-text-color) !important;
 }
 
@@ -326,7 +339,7 @@ svg.kix-configure-dropdown-button-add-icon {
 body,
 .docs-gm #docs-editor,
 .docs-gm #docs-editor-container,
-.kix-appview-editor,
+.docs-gm:not(.docs-grille-gm3) .kix-appview-editor,
 .apps-shortcutshelpcontentimpl-container,
 .apps-shortcutshelppopup {
   background: var(--primary-background-color) !important;
@@ -334,10 +347,10 @@ body,
 
 /* secondary background color */
 
-.docs-gm #kix-vertical-ruler,
+body.docs-gm:not(.docs-grille-gm3) #kix-vertical-ruler,
 .docs-ruler-contributed-dragger-container,
 .docs-ruler-contributed-dragger-container,
-.companion-app-switcher-container,
+body.docs-gm:not(.docs-grille-gm3) .companion-app-switcher-container,
 .docs-gm .docs-horizontal-ruler,
 .docs-material #docs-header .docs-titlebar-buttons,
 .jfk-bubble,
@@ -346,7 +359,7 @@ body,
 .docs-omnibox-autocomplete .ac-renderer,
 .docs-material #docs-equationtoolbar,
 .docs-material .docs-printpreview-toolbar,
-.docs-gm .docs-revisions-chromecover-content-color-default,
+body.docs-gm:not(.docs-grille-gm3) .docs-revisions-chromecover-content-color-default,
 .docs-gm .docs-revisions-sidebar-header,
 .docs-gm .docs-revisions-sidebar-date-group,
 .docs-revisions-sidebar,
@@ -364,7 +377,7 @@ body,
 .docos-emoji-counter-button-tooltip,
 .docs-material-menu-button-raised-default,
 .docs-material-button-raised-default,
-.docs-gm .docos-anchoreddocoview,
+body.docs-gm:not(.docs-grille-gm3) .docos-anchoreddocoview,
 .apps-search-popup-menu,
 .goog-char-picker-hovercard,
 .docs-gm .goog-zippy-expanded.docs-sidebar-tile-header,
@@ -375,8 +388,13 @@ body,
 .docs-docos-activitybox,
 .docs-gm .docos-streampane-header,
 .docs-gm .docs-dictionary-titlebar,
-.docs-dictionary-sidebar {
+.docs-dictionary-sidebar,
+#innerContainer div[style*="background"] {
   background-color: var(--secondary-background-color) !important;
+}
+
+.yYWAMb {
+  background: var(--primary-background-color);
 }
 
 #docs-chrome,
@@ -385,7 +403,7 @@ body,
 .docs-material.docs-toolbar-more-toolbar,
 .docos-anchoreddocoview .docos-replyview-first.docos-anchoredreplyview,
 .docs-gm .docos-anchoredreplyview,
-.docs-gm .docos-showrepliesbutton,
+body.docs-gm:not(.docs-grille-gm3) .docos-showrepliesbutton,
 .docs-gm .docos-anchoreddocoview-input-pane,
 #docs-meet-in-editors-entrypointbutton,
 .docs-gm .docs-ui-toast,
@@ -449,7 +467,15 @@ body,
 .docos-subscription-settings-button .docs-material-button-focused.docs-material-button-flat-default,
 .docos-subscription-settings-button .docs-material-button-active.docs-material-button-flat-default,
 .docs-explore-searchbar-labelinput:focus,
-.docs-sidebar-gm-titlebar-icon-button:focus {
+.docs-sidebar-gm-titlebar-icon-button:focus,
+.docs-grille-gm3 .docs-navigation-tab-button-hover .docs-navigation-tab-button-outer-box,
+.docs-grille-gm3 .navigation-widget-hat-close.goog-flat-button-hover .navigation-widget-hat-close-button-outer-box,
+.docs-grille .docs-material #docs-docos-commentsbutton.jfk-button.jfk-button-active,
+.docs-grille .docs-material #docs-docos-commentsbutton.jfk-button.jfk-button-checked,
+.docs-grille .docs-material #docs-docos-commentsbutton.jfk-button.jfk-button-focused,
+.docs-grille .docs-material #docs-docos-commentsbutton:focus,
+.docs-grille .docs-material .docs-appbar-circle-button.jfk-button-active,
+.docs-grille .docs-material .docs-appbar-circle-button.jfk-button-checked {
   /* although not hover elements, some elements may use the
     hover-background-color to differentiate themselves from the
     secondary-background-color */
@@ -480,7 +506,7 @@ body,
 .docs-gm .docs-material .docs-toolbar-split-create-button.goog-toolbar-menu-button-active,
 .docs-gm .docs-material .docs-toolbar-split-create-button.goog-toolbar-menu-button-open,
 .docs-gm .docs-material.trix-palette .goog-palette-cell-selected,
-#docs-toolbar-mode-switcher.edit-mode,
+.docs-gm:not(.docs-grille-gm3) #docs-toolbar-mode-switcher.edit-mode,
 .docs-omnibox-material-style .docs-omnibox-input.jfk-textinput,
 .app-switcher-button-hover .app-switcher-button-icon-background,
 .app-switcher-button-open .app-switcher-button-icon-background,
@@ -530,8 +556,15 @@ body,
 .smart-canvas-date-details-icon-button:focus,
 .smart-canvas-date-details-bubble-pattern-picker-button:hover,
 .smart-canvas-date-details-bubble-pattern-picker-button:focus,
-.docs-gm .docos-assigneeview.docos-assignee-other {
+.docs-gm .docos-assigneeview.docos-assignee-other,
+#docs-revisions-appbarbutton.jfk-button-disabled:hover,
+#docs-revisions-appbarbutton.jfk-button-hover,
+.docs-grille .docs-material #docs-docos-commentsbutton.jfk-button.jfk-button-hover {
   background-color: var(--hover-background-color) !important;
+}
+
+.fWf7qe:not(.RDPZE):hover .Yalane {
+  background-color: var(--hover-background-color);
 }
 
 /* hover background border */
@@ -568,7 +601,8 @@ body,
 .docs-gm .docs-docos-activity-sidebar .docos-input-typing>.docos-input-textarea,
 .docos-streamdocoview-input-pane .docos-input-textarea,
 .docs-explore-searchbar-labelinput {
-  background-color: var(--input-background-color) !important;
+  background-color: var(--input-background-color);
+  /* omitted !important */
 }
 
 /* header in changes saved to drive popup */
@@ -675,14 +709,15 @@ body,
 .docs-emoji-picker,
 .docs-emoji-picker-search-bar-container,
 .docs-emoji-picker-variants-popup,
-.docs-gm .docos-anchoreddocoview:hover,
+body.docs-gm:not(.docs-grille-gm3) .docos-anchoreddocoview:hover,
 .kix-dropdown-entity-configuration-dialog-title-naming-component-input,
 .docs-dropdown-item-custom-color-menu-cancel-button,
 .docs-dropdown-item-custom-color-menu-okay-button,
 .docs-bubble,
 .docs-material-button-hairline-default.docs-material-button,
-.docs-gm.docos-xeditor .streamdocoview-no-header.docos-streamdocoview,
-.docos-ssd-content hr {
+body.docs-gm:not(.docs-grille-gm3) .docs-gm.docos-xeditor .streamdocoview-no-header.docos-streamdocoview,
+.docos-ssd-content hr,
+#innerContainer div[style*="background"] {
   border: 1px solid var(--primary-border-color) !important;
 }
 
@@ -750,7 +785,7 @@ body,
   border-right: 1px solid var(--primary-border-color) !important;
 }
 
-.companion-app-switcher-container,
+body.docs-gm:not(.docs-grille-gm3) .companion-app-switcher-container,
 .docs-gm .goog-toolbar-separator.goog-inline-block,
 .docs-slidingdialog,
 .docs-gm .docs-revisions-sidebar,
@@ -788,7 +823,6 @@ body,
 .docs-gm #docs-toolbar-wrapper,
 .apps-hoverable-menu-separator-container .apps-hoverable-menu-separator-bottom,
 .docs-gm .goog-menuseparator,
-.docs-gm .docos-showrepliesbutton,
 .docs-gm .docos-anchoreddocoview-input-pane,
 .kix-document-top-shadow.read-mode-titlebar-border,
 .docs-gm .docs-revisions-sidebar-name-filter-switch-container,
@@ -796,13 +830,14 @@ body,
 .docs-emoji-picker-categories,
 .docs-emoji-picker-quick-pick-container,
 .apps-shortcutshelpcontentimpl-tearoff-link-container,
-.docs-gm .docs-tiled-sidebar-header,
+body.docs-gm:not(.docs-grille-gm3) .docs-tiled-sidebar-header,
 .docs-gm .docos-anchoredreplyview,
-.docs-gm .docos-showrepliesbutton,
+body.docs-gm:not(.docs-grille-gm3) .docos-showrepliesbutton,
 .docs-gm .docos-anchoreddocoview-input-pane,
-.docs-gm .docs-sidebar-tile.docs-sidebar-tile-expanded,
+body.docs-gm:not(.docs-grille-gm3) .docs-sidebar-tile.docs-sidebar-tile-expanded,
 .smart-canvas-date-details-bubble-action-bar,
-.docs-gm .docs-dictionary-titlebar {
+.docs-gm .docs-dictionary-titlebar,
+.kix-spellcheck-with-explanation-bubble .kix-spellcheck-with-explanation-bubble-action {
   border-top: 1px solid var(--primary-border-color);
 }
 
@@ -868,7 +903,7 @@ body,
 .docs-parent-collections-container:focus,
 #titlebar-mode-indicator-container>div,
 .docs-gm .docs-save-indicator-popup.jfk-bubble,
-.docs-gm #docs-titlebar-share-client-button .jfk-button,
+.docs-gm:not(.docs-grille-gm3) #docs-titlebar-share-client-button .jfk-button,
 .docs-omnibox-autocomplete .ac-renderer,
 .docs-revisions-chromecover-titlebar-button-action,
 .docs-revisions-chromecover-titlebar-second-button-action,
@@ -972,7 +1007,7 @@ canvas.kix-canvas-tile-content {
 .docos-emoji-reaction-doco-view .docs-material-menu-button-raised-default,
 .docos-docoview-active .docos-emoji-reaction-doco-view-emojis :not(.docs-material-button-focused).docs-material-button-flat-primary,
 .apps-search-popup-menu,
-.docs-gm .docos-anchoreddocoview:hover,
+body.docs-gm:not(.docs-grille-gm3) .docos-anchoreddocoview:hover,
 .docs-gm .docos-anchoreddocoview.docos-docoview-active,
 .docs-gm .docos-anchoreddocoview.docos-docoview-active:hover,
 .kix-dropdown-item-selection-bubble,
@@ -984,7 +1019,8 @@ canvas.kix-canvas-tile-content {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
-.docs-gm.docos-xeditor .docos-streamdocoview:hover {
+.docs-gm.docos-xeditor .docos-streamdocoview:hover,
+.docs-gm .docs-toolbar-more-bubble {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.125), 0 10px 10px rgba(0, 0, 0, 0.11);
 }
 
@@ -994,7 +1030,7 @@ canvas.kix-canvas-tile-content {
 .docs-gm .docs-revisions-sidebar,
 .left-sidebar-container.pageless-format,
 .docs-gm .docos-emoji-reaction-doco-view.docos-anchoreddocoview:hover,
-.docs-gm .docs-sidebar-tile.docs-sidebar-tile-expanded,
+/* .docs-gm .docs-sidebar-tile.docs-sidebar-tile-expanded, */
 .docs-explore-searchbar-labelinput {
   box-shadow: none;
 }
@@ -1200,7 +1236,8 @@ canvas.kix-canvas-tile-content {
 }
 
 #request-access-icon,
-.QLUvIe.ihNnYc:before {
+.QLUvIe.ihNnYc:before,
+.QLUvIe.lFiY0b:before {
   background-image: var(--access_denied);
   background-image: image-set(var(--access_denied) 1x,
       var(--access_denied_600) 2x);
@@ -1296,7 +1333,8 @@ a:link,
 .docos-show-more,
 .docos-show-less,
 .docs-explore-dictionaryentry-sense-synonym-clickable,
-.docs-explore-dictionaryentry-sense-antonym-clickable {
+.docs-explore-dictionaryentry-sense-antonym-clickable,
+.kix-spellcheck-with-explanation-bubble .kix-spellcheck-with-explanation-bubble-action {
   color: var(--accent-text) !important;
 }
 
@@ -1399,7 +1437,7 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
 .docs-gm .modal-dialog .goog-buttonset-action,
 .docs-gm .modal-dialog .jfk-button-action,
 .docs-gm .docs-material-bubble .jfk-button-action,
-.docs-gm #docs-titlebar-share-client-button .jfk-button,
+.docs-gm:not(.docs-grille-gm3) #docs-titlebar-share-client-button .jfk-button,
 .docs-revisions-chromecover-titlebar-button-action,
 .docs-revisions-chromecover-titlebar-second-button-action,
 .docs-dropdown-item-custom-color-menu-cancel-button {
@@ -1467,8 +1505,8 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
   height: 39px;
 }
 
-.docs-gm .docs-tiled-sidebar-header,
-.docs-gm .docs-dictionary-titlebar {
+body.docs-gm:not(.docs-grille-gm3) .docs-tiled-sidebar-header,
+body.docs-gm:not(.docs-grille-gm3) .docs-dictionary-titlebar {
   height: 52px;
 }
 
@@ -1476,7 +1514,7 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
   opacity: 1;
 }
 
-.docs-number-input-container input {
+body.docs-gm:not(.docs-grille-gm3) .docs-number-input-container input {
   padding-left: 10%;
 }
 
@@ -1491,6 +1529,9 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
 
 .kix-appview-editor canvas {
   filter: var(--document_invert);
+}
+
+.docs-gm:not(.docs-grille-gm3) .kix-appview-editor canvas {
   background: var(--document_background) !important;
 }
 
@@ -1508,8 +1549,8 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
   box-shadow: var(--document_border);
 }
 
-.docs-gm .modal-dialog button:hover,
-.docs-gm .modal-dialog .jfk-button-standard.jfk-button-hover {
+.docs-gm:not(.docs-grille-gm3) .modal-dialog button:hover,
+.docs-gm:not(.docs-grille-gm3) .modal-dialog .jfk-button-standard.jfk-button-hover {
   font-weight: 400;
 }
 
@@ -1565,4 +1606,353 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
 /* restore border unset */
 .docs-gm .docos-emoji-reaction-doco-view.docos-anchoreddocoview {
   border: unset !important;
+}
+
+/* material design 3 specific css */
+
+.docs-grille-gm3.docs-gm .docs-material #docs-toolbar-wrapper,
+.docs-grille-gm3 .docos-anchoreddocoview,
+.docs-grille-gm3 .docos-anchoreddocoview-input-pane {
+  border: none !important;
+}
+
+.docs-grille-gm3 .docos-input .docos-input-textarea,
+.docs-grille-gm3 .docos-input .docos-input-textarea:focus,
+.docs-grille-gm3 .docos-streamdocoview-input-pane .docos-input-textarea,
+.docs-grille-gm3 .docos-streamdocoview-input-pane.docos-input .docos-input-textarea:focus {
+  color: var(--primary-text-color);
+}
+
+.docs-grille-gm3 .docos-anchoreddocoview .docos-anchoredreplyview,
+.docs-grille-gm3 .docos-anchoreddocoview-input-pane {
+  border-color: var(--primary-border-color);
+}
+
+.docs-grille-gm3.docs-gm #docs-header:not(.docs-hub-appbar) .docs-titlebar-buttons,
+.docs-grille-gm3 #docs-chrome:not(.docs-hub-chrome),
+.docs-grille-gm3 #kix-horizontal-ruler,
+.docs-grille-gm3 #kix-vertical-ruler.ac-active.docs-grille-gm3 .docs-horizontal-ruler,
+.docs-grille-gm3 .docs-ruler-background-inner,
+.docs-grille-gm3 .docs-vertical-ruler,
+.docs-grille-gm3 .docs-revisions-chromecover-content-color-default.ac-active.docs-gm .docs-linkbubble-bubble,
+.docs-grille-gm3 .docs-multi-linkbubble-bubble,
+.docs-grille-gm3 .docs-link-smartinsertlinkbubble-text-label,
+.docs-grille-gm3 .docs-slidingdialog {
+  background: var(--primary-background-color) !important;
+}
+
+.docs-grille-gm3.docs-gm .docs-material #docs-toolbar-wrapper {
+  background: var(--secondary-background-color) !important;
+}
+
+.docs-grille-gm3.docs-gm #docs-toolbar-mode-switcher,
+.docs-grille-gm3 #docs-align-palette,
+.docs-grille-gm3.docs-body-pageless #docs-align-palette,
+.docs-grille-gm3.docs-body-pageless #docs-align-palette .goog-toolbar-button,
+.docs-grille-gm3.docs-body-pageless .docs-main-toolbars .goog-toolbar-button,
+.docs-grille-gm3.docs-body-pageless .docs-main-toolbars .goog-toolbar-combo-button,
+.docs-grille-gm3.docs-body-pageless .docs-main-toolbars .goog-toolbar-menu-button,
+.docs-grille-gm3.docs-body-pageless .docs-toolbar-more-toolbar,
+.docs-grille-gm3.docs-body-pageless.docs-gm #docs-toolbar-wrapper,
+.docs-grille-gm3.docs-gm.docs-body-pageless #docs-toolbar-mode-switcher {
+  background: var(--secondary-background-color);
+}
+
+.docs-grille-gm3 .docos-stream-emoji-header-container,
+.docs-grille-gm3 .docos-xeditor .docos-streamdocoview-header-container,
+.docs-grille #titlebar-mode-indicator-container>.docs-material-menu-button-flat-primary-focused,
+.docs-grille .titlebar-request-access-button.docs-material-button.docs-material-button-focused {
+  background: var(--hover-background-color);
+}
+
+.docs-grille .docs-titlebar-badge .docs-save-indicator-icon:hover,
+.docs-grille .docs-titlebar-badge:hover,
+.docs-grille #docs-star.docs-titlebar-badge:active,
+.docs-grille .docs-titlebar-badge:active,
+.docs-grille .docs-titlebar-badge:focus,
+.docs-grille .goog-control-active .docs-titlebar-badge .docs-save-indicator-icon,
+.docs-grille .goog-control-focused .docs-titlebar-badge .docs-save-indicator-icon {
+  background-color: var(--hover-background-color);
+}
+
+.docs-grille-gm3.docs-body-pageless .docos-anchoreddocoview,
+.docs-grille-gm3.docs-body-pageless .docos-anchoreddocoview .docos-anchoredreplyview,
+.docs-grille-gm3.docs-body-pageless .docos-anchoreddocoview-input-pane,
+.docs-grille-gm3 .docos-anchoreddocoview .docos-anchoredreplyview,
+.docs-grille-gm3 .docos-anchoreddocoview-input-pane,
+.docs-grille-gm3 .docos-anchoreddocoview,
+.docs-grille-gm3 .docos-anchoreddocoview .docos-anchoredreplyview,
+.docs-grille-gm3 .docos-anchoreddocoview-input-pane,
+.docs-grille-gm3 .docos-anchoreddocoview .docos-show-less,
+.docs-grille-gm3 .docos-anchoreddocoview .docos-show-more,
+.docs-grille-gm3 .docos-replyview-first .docos-show-more,
+.docs-grille-gm3 .docos-showrepliesbutton-collapsed-internal-container,
+.docs-grille-gm3.docs-body-pageless .docos-anchoreddocoview .docos-show-less,
+.docs-grille-gm3.docs-body-pageless .docos-anchoreddocoview .docos-show-more,
+.docs-grille-gm3.docs-body-pageless .docos-replyview-first .docos-show-more,
+.docs-grille-gm3.docs-body-pageless .docos-showrepliesbutton-collapsed-internal-container {
+  background: var(--gm3-comment-background);
+}
+
+.docs-grille-gm3 .docos-anchoreddocoview:hover,
+.docs-grille-gm3 .docos-anchoreddocoview:hover .docos-anchoreddocoview-input-pane,
+.docs-grille-gm3 .docos-anchoreddocoview:hover .docos-anchoredreplyview,
+.docs-grille-gm3 .docos-anchoreddocoview.docos-docoview-tesla-conflict:hover .docos-show-more,
+.docs-grille-gm3 .docos-anchoreddocoview:hover .docos-replyview-first .docos-show-more,
+.docs-grille-gm3 .docos-anchoreddocoview:hover .docos-show-less,
+.docs-grille-gm3 .docos-anchoreddocoview:hover .docos-show-more,
+.docs-grille-gm3 .docos-anchoreddocoview.docos-docoview-active .docos-showrepliesbutton-collapsed-internal-container,
+.docs-grille-gm3 .docos-anchoreddocoview:hover .docos-showrepliesbutton-collapsed-internal-container,
+.docs-grille-gm3.docs-body-pageless .docos-anchoreddocoview:hover,
+.docs-grille-gm3.docs-body-pageless .docos-anchoreddocoview:hover .docos-anchoreddocoview-input-pane,
+.docs-grille-gm3.docs-body-pageless .docos-anchoreddocoview:hover .docos-anchoredreplyview,
+.docs-grille-gm3.docs-body-pageless .docos-anchoreddocoview.docos-docoview-tesla-conflict:hover .docos-show-more,
+.docs-grille-gm3.docs-body-pageless .docos-anchoreddocoview:hover .docos-replyview-first .docos-show-more,
+.docs-grille-gm3.docs-body-pageless .docos-anchoreddocoview:hover .docos-show-less,
+.docs-grille-gm3.docs-body-pageless .docos-anchoreddocoview:hover .docos-show-more,
+.docs-grille-gm3.docs-body-pageless .docos-anchoreddocoview.docos-docoview-active .docos-showrepliesbutton-collapsed-internal-container,
+.docs-grille-gm3.docs-body-pageless .docos-anchoreddocoview:hover .docos-showrepliesbutton-collapsed-internal-container {
+  background: var(--gm3-comment-hover);
+}
+
+.docs-grille-gm3 #kix-vertical-ruler:before,
+.docs-grille-gm3.docs-gm .docos-anchoreddocoview.docos-docoview-active,
+.docs-grille-gm3.docs-gm .docos-anchoreddocoview.docos-docoview-active:hover,
+.docs-grille-gm3.docs-gm .docos-docoview-active .docos-anchoreddocoview-input-pane,
+.docs-grille-gm3.docs-gm .docos-docoview-active .docos-anchoredreplyview,
+.docs-grille-gm3.docs-gm .docos-docoview-active:hover .docos-anchoreddocoview-input-pane,
+.docs-grille-gm3.docs-gm .docos-docoview-active:hover .docos-anchoredreplyview,
+.docs-grille-gm3 .docos-input .docos-input-textarea,
+.docs-grille-gm3 .docos-input .docos-input-textarea:focus,
+.docs-grille-gm3 .docos-streamdocoview-input-pane .docos-input-textarea,
+.docs-grille-gm3 .docos-streamdocoview-input-pane.docos-input .docos-input-textarea:focus,
+.docs-grille-gm3 .docos.docs-gm .jfk-button.jfk-button-standard,
+.docs-grille-gm3.docs-gm .docos-anchoreddocoview.docos-docoview-active .docos-show-less,
+.docs-grille-gm3.docs-gm .docos-anchoreddocoview.docos-docoview-active .docos-show-more,
+.docs-grille-gm3.docs-gm .docos-docoview-active.docos-docoview-tesla-conflict:hover .docos-show-morem,
+.docs-grille-gm3 #docs-instant-bubble,
+.docs-grille-gm3 .left-sidebar-container.pageless-format,
+.docs-grille-gm3.docs-gm .docos-anchoreddocoview.docos-docoview-active .docos-show-less,
+.docs-grille-gm3.docs-gm .docos-anchoreddocoview.docos-docoview-active .docos-show-more,
+.docs-grille-gm3.docs-gm .docos-docoview-active.docos-docoview-tesla-conflict:hover .docos-show-more {
+  background: var(--primary-background-color);
+}
+
+.docs-grille-gm3 .kix-appview-editor,
+body.docs-grille-gm3,
+.docs-grille-gm3.docs-body-pageless .docs-horizontal-ruler,
+.docs-grille-gm3.docs-body-pageless .docs-ruler-background-inner,
+.docs-grille-gm3.docs-body-pageless .docs-vertical-ruler {
+  background-color: var(--primary-background-color) !important;
+}
+
+.docs-grille-gm3.docs-body-pageless .docs-revisions-chromecover-content-color-default,
+.docs-grille-gm3 .docs-revisions-chromecover-content-color-default,
+.companion-collapser-button.app-switcher-button-checked .app-switcher-button-icon-background,
+.companion-theme-light .companion-collapser-button.app-switcher-button-checked .app-switcher-button-icon-background {
+  background-color: var(--primary-background-color);
+}
+
+.right-gutter-resizer-handle-grabber {
+  background-color: var(--primary-border-color);
+}
+
+.docs-grille-gm3.docs-body-pageless .kix-appview-editor[style*="background-image: linear-gradient"] {
+  background-image: linear-gradient(var(--primary-border-color), var(--primary-border-color)), linear-gradient(var(--primary-background-color), var(--primary-background-color)) !important;
+}
+
+.docs-grille-gm3 .docs-horizontal-ruler .docs-ruler-background-inner {
+  border-bottom: 1px solid var(--lighter-border-color);
+}
+
+.right-gutter-resizer-ghost-line,
+.left-sidebar-resizer-ghost-line {
+  background: var(--lighter-border-color);
+}
+
+.docs-grille-gm3 .left-sidebar-container.pageless-format {
+  box-shadow: 1px 0 0 0 var(--primary-border-color);
+}
+
+.right-gutter-resizer-handle-grabber {
+  border: 1px solid var(--lighter-border-color);
+}
+
+.docs-grille-gm3 .kix-page-paginated {
+  outline: var(--gm3_document_border);
+}
+
+.docs-grille-gm3 .docs-gm.docos-xeditor .docos-streamdocoview {
+  outline: 1px solid var(--primary-border-color);
+}
+
+.docs-grille-gm3 #docs-align-palette .goog-toolbar-button,
+.docs-grille-gm3 .docs-main-toolbars .goog-toolbar-button,
+.docs-grille-gm3 .docs-main-toolbars .goog-toolbar-combo-button,
+.docs-grille-gm3 .docs-main-toolbars .goog-toolbar-menu-button,
+.docs-grille-gm3 .trix-palette .goog-toolbar-menu-button {
+  background: transparent;
+}
+
+.docs-grille-gm3 #fontSizeSelect.docs-font-size-inc-dec-combobox.goog-toolbar-combo-button {
+  border: 1px solid var(--secondary-border-color) !important;
+}
+
+.docs-grille-gm3 .docos.docs-gm .jfk-button.jfk-button-standard,
+.docs-grille-gm3 .docos-input .docos-input-textarea,
+.docs-grille-gm3 .docos-input .docos-input-textarea:focus,
+.docs-grille-gm3 .docos-streamdocoview-input-pane .docos-input-textarea,
+.docs-grille-gm3 .docos-streamdocoview-input-pane.docos-input .docos-input-textarea:focus,
+.docs-grille-gm3 .docos.docs-gm .jfk-button.jfk-button-standard.jfk-button-hover {
+  border: 1px solid var(--primary-border-color) !important;
+}
+
+.docos-anchoreddocoview .docos-showrepliesbutton-line {
+  border-top: 1px solid var(--primary-border-color);
+}
+
+.docs-grille-gm3 .docos.docs-gm .jfk-button.jfk-button-standard.jfk-button-hover {
+  background: var(--accent-text-hover);
+}
+
+.docs-grille-gm3 #zoomSelect.docs-toolbar-zoom-combobox.goog-toolbar-combo-button-open,
+.docs-grille-gm3 #fontSizeSelect.docs-font-size-inc-dec-combobox.goog-toolbar-combo-button-open {
+  border: 2px solid var(--accent-text) !important;
+}
+
+.docs-grille-gm3 .docs-main-toolbars .goog-toolbar-button .docs-icon,
+.docs-grille-gm3 .docs-main-toolbars .goog-toolbar-menu-button .docs-icon {
+  filter: brightness(1.6);
+}
+
+.docs-grille-gm3 #docs-toolbar-wrapper .docs-icon-img,
+.docs-grille-gm3 .docs-toolbar-more-toolbar .docs-icon-img {
+  filter: brightness(2);
+}
+
+.docs-grille-gm3 #docs-toolbar-mode-switcher.suggest-mode .docs-icon-img,
+.docs-grille-gm3 #docs-toolbar-mode-switcher.suggest-mode .docs-icon-img:before,
+/* experimental */
+.docs-grille-gm3 #docs-align-palette .goog-toolbar-button-checked .docs-icon-img,
+.docs-grille-gm3 .docs-main-toolbars .goog-toolbar-button-checked .docs-icon-img,
+.docs-grille-gm3 .docs-main-toolbars .goog-toolbar-button.goog-toolbar-button-checked .docs-icon-img,
+.docs-grille-gm3.docs-gm .clean-palette .goog-palette-cell-selected .docs-icon-img,
+.docs-grille-gm3.docs-gm .trix-palette .goog-palette-cell-selected .docs-icon-img {
+  filter: brightness(4);
+}
+
+.docs-grille-gm3 #docs-omnibox-toolbar .docs-omnibox-input::placeholder,
+.docs-gm .docs-link-searchinput-search::placeholder,
+.docs-grille-gm3 .docs-omnibox-input.jfk-textinput::placeholder,
+.docs-grille-gm3 .docs-findinput-input::placeholder,
+.docs-grille-gm3 .docos-input-contenteditable:empty:before,
+.docs-gm .goog-menuitem .docs-display-density-toolbar-menuitem-description,
+.docs-gm .goog-menuitem .docs-toolbar-mode-switcher-menu-description,
+.docs-gm .goog-menuitem .punch-qanda-presenter-view-menu-item-description {
+  color: var(--tertiary-text-color);
+}
+
+.docs-grille .kix-titlebar-approvals-button .docs-material-menu-button-flat-primary-dropdown-icon [fill="#000"],
+.docs-grille .kix-titlebar-mode-switcher .docs-material-menu-button-flat-primary-dropdown-icon [fill="#000"] {
+  fill: var(--primary-border-color);
+}
+
+.docs-grille-gm3 .outline-refresh.navigation-widget-unified-styling .navigation-widget-empty-content {
+  color: var(--tertiary-text-color) !important;
+}
+
+.docs-grille-gm3 #docs-titlebar-share-client-button .jfk-button {
+  background: var(--button-background-color);
+  color: var(--primary-text-color);
+}
+
+.docs-grille-gm3 #docs-titlebar-share-client-button .jfk-button .scb-button-icon {
+  filter: grayscale(100%) invert(100%) brightness(2);
+}
+
+.docs-grille-gm3 #docs-titlebar-share-client-button .jfk-button.jfk-button-hover {
+  color: inherit;
+}
+
+.docs-grille-gm3 #docs-toolbar-mode-switcher .goog-toolbar-menu-button-caption,
+.docs-grille-gm3 .docos-anchoreddocoview .docos-showrepliesbutton-collapsed-internal,
+.docs-grille-gm3 .docos-showrepliesbutton-collapsed {
+  color: var(--secondary-text-color);
+}
+
+.docs-grille-gm3 .docos-anchoredreplyview .docos-anchoredreplyview-body span,
+.docs-grille-gm3 .docos-streamdocoview-body .docos-replyview-body span,
+.docs-grille-gm3 .docos-anchoredreplyview .docos-anchoredreplyview-body [style*="color:#333"] {
+  color: var(--secondary-text-color) !important;
+}
+
+.docs-grille-gm3 .docos-anchoredreplyview .docos-anchoredreplyview-body span[style*="font-weight:bold"],
+.docs-grille-gm3 .docos-streamdocoview-body .docos-replyview-body span[style*="font-weight:bold"] {
+  color: var(--primary-text-color) !important;
+}
+
+.docs-grille-gm3 .docs-smart-link-searchinput-search-container,
+.docs-grille-gm3 .docs-material-bubble .jfk-textinput,
+.docs-grille-gm3 .docs-material-gm-dialog .jfk-textinput,
+.docs-grille-gm3 .modal-dialog .jfk-textinput,
+.docs-gm .docs-findinput-container,
+.docs-gm .docs-gotoinput-container {
+  background-color: inherit !important;
+}
+
+.docs-grille-gm3 #docs-omnibox-toolbar .docs-omnibox-input,
+.docs-grille-gm3 .docs-omnibox-input.jfk-textinput:active,
+.docs-grille-gm3 .docs-omnibox-input.jfk-textinput:focus {
+  background: var(--input-background-color);
+}
+
+.docs-grille-gm3 .docos.docs-gm .jfk-button.jfk-button-standard,
+.docs-grille-gm3 .docos.docs-gm .jfk-button.jfk-button-standard.jfk-button-hover,
+.docs-grille-gm3 .docos-anchoreddocoview.docos-docoview-active .docos-showrepliesbutton-collapsed-internal,
+.docs-grille-gm3 .docos-anchoreddocoview:hover .docos-showrepliesbutton-collapsed-internal,
+.docs-grille-gm3 #docs-toolbar-mode-switcher.suggest-mode .goog-toolbar-menu-button-caption,
+.docs-grille-gm3 .outline-refresh .navigation-item.location-indicator-highlight .navigation-item-content,
+.docs-grille-gm3 .outline-refresh .navigation-item.location-indicator-highlight .navigation-item-content.goog-button-hover {
+  color: var(--accent-text);
+}
+
+.docs-grille-gm3 .docos-anchoreddocoview .docos-showrepliesbutton-collapsed-internal:hover {
+  background-color: var(--accent-text-hover);
+}
+
+.docs-grille-gm3 .docs-material.docs-toolbar-more-bubble .jfk-bubble-arrowup .jfk-bubble-arrowimplafter,
+.docs-grille-gm3 .docs-material.docs-toolbar-more-bubble .jfk-bubble-arrowup .jfk-bubble-arrowimplbefore,
+.docs-grille-gm3 .docs-gm-promo.jfk-bubble.jfk-bubble-promo.docs-promo-bubble .jfk-bubble-arrowimplbefore,
+.docs-grille-gm3 #docs-meet-in-editors-entrypointbutton {
+  border-color: transparent !important;
+}
+
+.docs-grille-gm3 .kix-smart-summary-view-separator {
+  background: var(--primary-border-color);
+}
+
+.docs-grille-gm3 .docos.docs-gm .jfk-button.jfk-button-action.jfk-button-disabled {
+  background: var(--disabled-text);
+}
+
+/* production verbatim */
+.docs-grille-gm3 .docs-gm .docos-streamdocoview.docos-docoview-resolved:hover,
+.docs-grille-gm3 .docs-gm.docos-xeditor .docos-streamdocoview:hover {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 2px 6px 2px rgba(0, 0, 0, .15);
+}
+
+.docs-gm .docs-sidebar-tile.docs-sidebar-tile-expanded {
+  box-shadow: 0 1px 3px 1px rgba(0, 0, 0, .15);
+}
+
+.docs-sidebar-tile-header.docs-sidebar-tile-header-disabled {
+  color: var(--disabled-text);
+}
+
+.docs-grille-gm3 #docs-chrome:not(.docs-hub-chrome) {
+  border-color: transparent;
+}
+
+.docs-grille .docs-material #docs-header .docs-titlebar-buttons {
+  height: 64px;
 }
