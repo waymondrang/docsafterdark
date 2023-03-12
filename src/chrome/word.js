@@ -10,6 +10,7 @@ const link_color = "#90caf9";
 const invert_value = "invert(1)";
 const grayscale_value = "contrast(79%) grayscale(100%)";
 const page_border = "0 0 0 1px";
+const gm3_page_border = "1px solid #404040";
 const backgrounds = {
   default: "#ffffff",
   shade: "#999999",
@@ -196,9 +197,15 @@ function set_up() {
           ? (grayscale ? grayscale_value + " " : "") + invert_value
           : "none"
       );
+
       document.documentElement.style.setProperty(
         "--document_border",
         show_border ? page_border : "none"
+      );
+
+      document.documentElement.style.setProperty(
+        "--gm3_document_border",
+        show_border ? gm3_page_border : "none"
       );
 
       // Do not create notification if not needed
@@ -323,6 +330,14 @@ function set_up() {
       document.documentElement.style.setProperty(
         "--document_border",
         changes.show_border.newValue ? page_border : "none"
+      );
+    }
+
+    // Handle show border option change
+    if (Object.keys(changes).includes("show_border")) {
+      document.documentElement.style.setProperty(
+        "--gm3_document_border",
+        changes.show_border.newValue ? gm3_page_border : "none"
       );
     }
   });
