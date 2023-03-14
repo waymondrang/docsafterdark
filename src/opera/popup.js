@@ -11,7 +11,7 @@ const donate = document.querySelector("#donate");
 var descriptions = {
   default: "The default, white background.",
   shade: "A light shade of gray. Black text is still readable.",
-  dark: "A dark gray. Black text will become hard to read and color changes may be be required", // A special, dark gray. This background is unaffected by the invert option.
+  dark: "A dark gray. Black text will become hard to read and color changes may be be required.", // A special, dark gray. This background is unaffected by the invert option.
   black: "A completely black background.",
   custom:
     "Any valid CSS declaration for the background property may be used here.",

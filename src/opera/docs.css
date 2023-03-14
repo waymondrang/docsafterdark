@@ -1531,7 +1531,7 @@ body.docs-gm:not(.docs-grille-gm3) .docs-number-input-container input {
   filter: var(--document_invert);
 }
 
-.docs-gm:not(.docs-grille-gm3) .kix-appview-editor canvas {
+.docs-gm .kix-appview-editor canvas {
   background: var(--document_background) !important;
 }
 
