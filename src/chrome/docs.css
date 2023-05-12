@@ -114,7 +114,8 @@ textarea,
 .X9XeLb .hA3Ymb,
 .cWKK1c .hA3Ymb,
 .aJfoSc .hA3Ymb,
-.TOb6Ze .hA3Ymb {
+.TOb6Ze .hA3Ymb,
+.kix-ai-text-generator-onboarding-dialog-title {
   color: var(--primary-text-color);
 }
 
@@ -252,7 +253,8 @@ svg.kix-configure-dropdown-button-add-icon {
 .docs-labeled-button-label,
 .docs-sidebar-tile-input-label,
 .docs-sidebar-tile-label,
-.kix-embedded-entity-options .docs-material-gm-select-caption {
+.kix-embedded-entity-options .docs-material-gm-select-caption,
+.kix-ai-text-generator-onboarding-dialog-text {
   color: var(--secondary-text-color);
 }
 
@@ -929,7 +931,8 @@ img.kix-smart-summary-onboarding-promo-content-illustration,
 .visual-treatment-pageless-promo .docos-calltoactionview-header-image,
 .docs-material-button-text-default.docs-material-button,
 .kix-dropdown-entity-configuration-dialog-title-naming-component-header,
-.kix-dropdown-item-selection-bubble {
+.kix-dropdown-item-selection-bubble,
+.kix-ai-text-generator-onboarding-dialog-image {
   border-radius: 6px !important;
 }
 
