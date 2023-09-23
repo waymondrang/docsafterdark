@@ -32,9 +32,9 @@
   --gm3-comment-hover: #252D34;
 }
 
-/* text colors */
+/* TEXT COLORS */
 
-/* primary text color */
+/* PRIMARY TEXT COLOR */
 
 body,
 label,
@@ -108,13 +108,16 @@ textarea,
 .docs-gm .docs-dictionary-titlebar,
 .docs-gm .docs-explore-dictionaryentry-title,
 .docs-gm .docs-explore-dictionaryentries,
-/* generated css classes, volatile */
+/* 
+BELOW CSS CLASSES APPEAR TO BE GENERATED, VOLATILE
+*/
 .hA3Ymb,
 .vhoiae .hA3Ymb,
 .X9XeLb .hA3Ymb,
 .cWKK1c .hA3Ymb,
 .aJfoSc .hA3Ymb,
-.TOb6Ze .hA3Ymb {
+.TOb6Ze .hA3Ymb,
+.kix-ai-text-generator-onboarding-dialog-title {
   color: var(--primary-text-color);
 }
 
@@ -139,7 +142,7 @@ svg.kix-dropdown-item-selection-button-icon {
   fill: var(--primary-text-color) !important;
 }
 
-/* secondary text color */
+/* SECONDARY TEXT COLOR */
 
 .docs-gm .docs-ruler-face-number,
 .docs-gm .docs-menubar .goog-control,
@@ -215,15 +218,6 @@ svg.kix-dropdown-item-selection-button-icon {
   color: var(--secondary-text-color) !important;
 }
 
-.docs-mic-button,
-.docs-mic-svg-icon-path,
-.docs-mic-palette-help>svg,
-.docs-explore-icon.docs-explore-widget-icon.docs-explore-widget-icon-inactive.goog-inline-block>svg>path,
-.i5S8cc,
-svg.kix-configure-dropdown-button-add-icon {
-  fill: var(--secondary-text-color);
-}
-
 .goog-menuitem-highlight .goog-menuitem-content,
 .goog-menuitem-hover .goog-menuitem-content,
 .goog-option-selected .goog-menuitem-content,
@@ -252,11 +246,21 @@ svg.kix-configure-dropdown-button-add-icon {
 .docs-labeled-button-label,
 .docs-sidebar-tile-input-label,
 .docs-sidebar-tile-label,
-.kix-embedded-entity-options .docs-material-gm-select-caption {
+.kix-embedded-entity-options .docs-material-gm-select-caption,
+.kix-ai-text-generator-onboarding-dialog-text {
   color: var(--secondary-text-color);
 }
 
-/* tertiary text */
+.docs-mic-button,
+.docs-mic-svg-icon-path,
+.docs-mic-palette-help>svg,
+.docs-explore-icon.docs-explore-widget-icon.docs-explore-widget-icon-inactive.goog-inline-block>svg>path,
+.i5S8cc,
+svg.kix-configure-dropdown-button-add-icon {
+  fill: var(--secondary-text-color);
+}
+
+/* TERTIARY TEXT COLOR */
 
 .docs-title-save-label,
 .docs-fontmenu .docs-fonts-section-header,
@@ -298,7 +302,7 @@ svg.kix-configure-dropdown-button-add-icon {
   color: var(--tertiary-text-color);
 }
 
-/* disabled text */
+/* DISABLED TEXT */
 
 .docs-gm .goog-menuitem-disabled,
 .docs-gm .goog-menuitem-disabled .goog-menuitem-content,
@@ -325,16 +329,16 @@ svg.kix-configure-dropdown-button-add-icon {
   color: inherit !important;
 }
 
-/* selection color */
+/* SELECTION COLOR */
 
 .docs-gm .goog-toolbar-combo-button-input::selection,
 .docs-gm .docs-link-smartinsertlinkbubble ::selection {
   background-color: var(--selection-background-color);
 }
 
-/* backgrounds */
+/* BACKGROUNDS */
 
-/* primary background color */
+/* PRIMARY BACKGROUND COLOR */
 
 body,
 .docs-gm #docs-editor,
@@ -345,7 +349,11 @@ body,
   background: var(--primary-background-color) !important;
 }
 
-/* secondary background color */
+.yYWAMb {
+  background: var(--primary-background-color);
+}
+
+/* SECONDARY BACKGROUND COLOR */
 
 body.docs-gm:not(.docs-grille-gm3) #kix-vertical-ruler,
 .docs-ruler-contributed-dragger-container,
@@ -393,10 +401,6 @@ body.docs-gm:not(.docs-grille-gm3) .docos-anchoreddocoview,
   background-color: var(--secondary-background-color) !important;
 }
 
-.yYWAMb {
-  background: var(--primary-background-color);
-}
-
 #docs-chrome,
 .docs-material #docs-toolbar-wrapper,
 #kix-vertical-ruler,
@@ -417,7 +421,7 @@ body.docs-gm:not(.docs-grille-gm3) .docos-showrepliesbutton,
   background: var(--secondary-background-color);
 }
 
-/* hover background color */
+/* HOVER BACKGROUND COLOR */
 
 .instant-button:hover,
 .docs-gm .docs-material .docs-chat.jfk-button,
@@ -567,7 +571,7 @@ body.docs-gm:not(.docs-grille-gm3) .docos-showrepliesbutton,
   background-color: var(--hover-background-color);
 }
 
-/* hover background border */
+/* HOVER BACKGROUND BORDER */
 
 .docs-gm.docos-xeditor .docos-streamdocoview:hover {
   border: 2px solid var(--hover-background-color);
@@ -577,7 +581,7 @@ body.docs-gm:not(.docs-grille-gm3) .docos-showrepliesbutton,
   border-color: var(--hover-background-color);
 }
 
-/* input background color */
+/* INPUT BACKGROUND COLOR */
 
 .docs-omnibox-input.jfk-textinput,
 .apps-shortcutshelpcontentimpl-search-focused,
@@ -605,7 +609,7 @@ body.docs-gm:not(.docs-grille-gm3) .docos-showrepliesbutton,
   /* omitted !important */
 }
 
-/* header in changes saved to drive popup */
+/* HEADER IN CHANGES SAVED TO DRIVE POPUP */
 
 .docs-mic-palette .goog-flat-menu-button,
 .docs-findinput-container,
@@ -642,16 +646,16 @@ body.docs-gm:not(.docs-grille-gm3) .docos-showrepliesbutton,
   background-color: var(--hover-background-color);
 }
 
-/* unidentified */
+/* UNIDENTIFIED */
 
 .docs-material #docs-script-button-bar .jfk-button {
   background-color: #ffffff1a !important;
   color: #ffffff9a !important;
 }
 
-/* borders */
+/* BORDERS */
 
-/* primary border, default border */
+/* PRIMARY BORDER */
 
 .docs-ruler-contributed-dragger-container,
 .jfk-tooltip,
@@ -766,7 +770,7 @@ body.docs-gm:not(.docs-grille-gm3) .docs-gm.docos-xeditor .streamdocoview-no-hea
   border-color: var(--primary-border-color) !important;
 }
 
-/* primary border background */
+/* PRIMARY BORDER BACKGROUND */
 
 .docos-xeditor .docos-streamdocoview-header-container,
 .kix-smart-summary-view-separator {
@@ -889,7 +893,7 @@ body.docs-gm:not(.docs-grille-gm3) .docs-sidebar-tile.docs-sidebar-tile-expanded
     border: none;
 } */
 
-/* border radius */
+/* BORDER RADIUS */
 
 .apps-shortcutshelppopup {
   border-radius: 12px;
@@ -929,7 +933,8 @@ img.kix-smart-summary-onboarding-promo-content-illustration,
 .visual-treatment-pageless-promo .docos-calltoactionview-header-image,
 .docs-material-button-text-default.docs-material-button,
 .kix-dropdown-entity-configuration-dialog-title-naming-component-header,
-.kix-dropdown-item-selection-bubble {
+.kix-dropdown-item-selection-bubble,
+.kix-ai-text-generator-onboarding-dialog-image {
   border-radius: 6px !important;
 }
 
@@ -952,7 +957,7 @@ canvas.kix-canvas-tile-content {
   border-radius: 0px;
 }
 
-/* box shadows */
+/* BOX SHADOWS */
 
 .docs-gm .docs-material .docs-chat.jfk-button,
 .docs-gm .docs-material .docs-chat.jfk-button.jfk-button-clear-outline,
@@ -1045,7 +1050,7 @@ body.docs-gm:not(.docs-grille-gm3) .docos-anchoreddocoview:hover,
   color: transparent !important;
 }
 
-/* transparent background */
+/* TRANSPARENT BACKGROUND */
 
 .docs-material .goog-toolbar-button,
 .docs-material .goog-toolbar-combo-button,
@@ -1123,7 +1128,7 @@ body.docs-gm:not(.docs-grille-gm3) .docos-anchoreddocoview:hover,
   border-color: transparent !important;
 }
 
-/* overflow (this is dangerous) */
+/* OVERFLOW (DANGER ZONE) */
 
 /* .picker-iframe.picker-min.goog-menu,
 .apps-shortcutshelpcontentimpl-ac-renderer {
@@ -1143,9 +1148,9 @@ body.docs-gm:not(.docs-grille-gm3) .docos-anchoreddocoview:hover,
   text-decoration: none;
 }
 
-/* filters */
+/* FILTERS */
 
-/* menu background */
+/* MENU BACKGROUND */
 
 /* slightly transparent fallback */
 .goog-menu,
@@ -1178,7 +1183,7 @@ body.docs-gm:not(.docs-grille-gm3) .docos-anchoreddocoview:hover,
     }
 } */
 
-/* full screen share dialog */
+/* FULL SCREEN SHARE DIALOG */
 
 .full-screen-share-client-dialog {
   backdrop-filter: none !important;
@@ -1225,7 +1230,7 @@ body.docs-gm:not(.docs-grille-gm3) .docos-anchoreddocoview:hover,
   filter: invert(1) brightness(0.8);
 }
 
-/* replacements / icons */
+/* REPLACEMENTS & ICONS */
 
 .ita-cp-lens {
   background-image: var(--lens);
@@ -1274,7 +1279,7 @@ body.docs-gm:not(.docs-grille-gm3) .docos-anchoreddocoview:hover,
   background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAACXBIWXMAAAABAAAAAQBPJcTWAAAAJHpUWHRDcmVhdG9yAAAImXNMyU9KVXBMK0ktUnBNS0tNLikGAEF6Bs5qehXFAAAAMklEQVQ4jWN0cHBgoAZggdL/KTCDkYGBgYGJcrdAwKhBowaNGjTEDIIVI4yUGkQ1FwEAFjEB6S6hm5UAAAAASUVORK5CYII=") !important;
 }
 
-/* placeholders */
+/* PLACEHOLDERS */
 
 input::-webkit-input-placeholder {
   /* WebKit, Blink, Edge */
@@ -1308,7 +1313,7 @@ input::placeholder {
   color: #cccccc;
 }
 
-/* accent color */
+/* ACCENT COLOR */
 
 .outline-refresh .location-indicator-highlight.navigation-item,
 .outline-refresh .location-indicator-highlight.navigation-item .navigation-item-level-0,
@@ -1431,7 +1436,7 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
   background-color: var(--accent-text);
 }
 
-/* buttons */
+/* BUTTONS */
 
 .docs-material-button-fill-primary.docs-material-button,
 .docs-gm .modal-dialog .goog-buttonset-action,
@@ -1489,7 +1494,7 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
   background: var(--button-background-color-focus);
 }
 
-/* opacity */
+/* OPACITY */
 
 .docs-gm .modal-dialog button[disabled],
 .docs-gm .modal-dialog .jfk-button-standard.jfk-button-disabled,
@@ -1499,7 +1504,7 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
   opacity: 0.2;
 }
 
-/* fixes */
+/* FIXES */
 
 .goog-inline-block.docs-material-gm-select.docs-revisions-filter-selector.jfk-select {
   height: 39px;
@@ -1558,7 +1563,7 @@ body.docs-gm:not(.docs-grille-gm3) .docs-number-input-container input {
   font-weight: normal;
 }
 
-/* Fix for Firefox */
+/* fix for firefox */
 .kix-canvas-tile-content svg rect {
   fill: transparent !important;
 }
@@ -1608,7 +1613,7 @@ body.docs-gm:not(.docs-grille-gm3) .docs-number-input-container input {
   border: unset !important;
 }
 
-/* material design 3 specific css */
+/* MATERIAL DESIGN 3 */
 
 .docs-grille-gm3.docs-gm .docs-material #docs-toolbar-wrapper,
 .docs-grille-gm3 .docos-anchoreddocoview,
@@ -1807,6 +1812,45 @@ body.docs-grille-gm3,
   border: 1px solid var(--primary-border-color) !important;
 }
 
+/* start: menu search listbox */
+
+@media screen and (max-width: 1600px) {
+  .docs-grille-gm3 #docs-omnibox-toolbar.assisted-actions .docs-omnibox-input {
+    background-color: var(--secondary-background-color);
+  }
+}
+
+.docs-omnibox-input.jfk-textinput {
+  background-color: var(--primary-background-color);
+}
+
+.docs-grille-gm3 #docs-omnibox-toolbar .docs-omnibox-input {
+  background: var(--primary-background-color);
+}
+
+.docs-omnibox-autocomplete .ac-renderer {
+  background: var(--primary-background-color) !important;
+  border: 1px solid var(--primary-border-color);
+  border-top: none;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
+
+.docs-grille-gm3 #docs-omnibox-toolbar.assisted-actions .docs-omnibox-input:focus-within {
+  border: 1px solid var(--primary-border-color);
+  border-bottom: none;
+}
+
+.docs-omnibox-autocomplete .ac-active .docs-omnibox-fallback-divider {
+  background: var(--primary-background-color);
+}
+
+.docs-omnibox-autocomplete .docs-omnibox-fallback-divider .divider {
+  border-color: var(--primary-border-color);
+}
+
+/* end: menu search listbox */
+
 .docos-anchoreddocoview .docos-showrepliesbutton-line {
   border-top: 1px solid var(--primary-border-color);
 }
@@ -1900,7 +1944,6 @@ body.docs-grille-gm3,
   background-color: inherit !important;
 }
 
-.docs-grille-gm3 #docs-omnibox-toolbar .docs-omnibox-input,
 .docs-grille-gm3 .docs-omnibox-input.jfk-textinput:active,
 .docs-grille-gm3 .docs-omnibox-input.jfk-textinput:focus {
   background: var(--input-background-color);
