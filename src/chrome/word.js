@@ -32,6 +32,19 @@ const donation_link = "https://www.buymeacoffee.com/waymondrang";
 var dark_mode_state;
 var docs_homepage = document.querySelector(".docs-homescreen-gb-container");
 
+let auto_mode = false; // if true, script will follow prefers-color-scheme
+const color_scheme = matchMedia("(prefers-color-scheme: dark)");
+function on_color_scheme_change(e) {
+  if (auto_mode) {
+    if (e.matches) {
+      dad();
+    } else {
+      remove_dad();
+    }
+  }
+}
+color_scheme.addEventListener("change", on_color_scheme_change);
+
 function dad() {
   if (document.querySelector("#docs-dark-mode")) {
     return;
@@ -312,10 +325,14 @@ function set_up() {
 
     // Handle toggle change
     if (Object.keys(changes).includes("on")) {
-      if (changes.on.newValue) {
+      auto_mode = false;
+      if (changes.on.newValue == "on") {
         dad();
-      } else {
+      } else if (changes.on.newValue == "off") {
         remove_dad();
+      } else if (changes.on.newValue == "auto") {
+        auto_mode = true;
+        on_color_scheme_change(color_scheme);
       }
     }
 
@@ -350,9 +367,9 @@ chrome.storage.local.get(["on"], function (data) {
   // Initial installation state
   if (data.on == null) {
     dad();
-    chrome.storage.local.set({ on: true }); // Enable by default
+    chrome.storage.local.set({ on: "on" }); // Enable by default
     dark_mode_state = true;
-  } else if (data.on && !docs_homepage) {
+  } else if (data.on == "on" && !docs_homepage) {
     dad();
     dark_mode_state = true;
   }
