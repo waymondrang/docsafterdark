@@ -30,7 +30,7 @@ document.querySelectorAll("#on_off button").forEach(function (e) {
     on_selected.classList.remove("selected");
     this.classList.add("selected");
     on_selected = this;
-    browser.storage.local.set({ on: id == "on" });
+    browser.storage.local.set({ on: id }); // on: "on" or "off" or "auto"
   });
 });
 
@@ -109,7 +109,7 @@ try {
 
       // Initiate settings
       if (on == null) {
-        on = true;
+        on = "on";
         browser.storage.local.set({ on: on });
       }
       if (option == null) {
@@ -158,9 +158,11 @@ try {
         raise_button.checked = true;
       }
 
-      var on_off = on
-        ? document.querySelector("#on")
-        : document.querySelector("#off");
+      var on_off = (on == "on")
+        ? document.querySelector("#on") // if on == "on"
+        : (on == "off")
+        ? document.querySelector("#off") // if on == "off"
+        : document.querySelector("#auto"); // if on == "auto"
       on_selected = on_off;
       on_off.classList.add("selected");
     }
