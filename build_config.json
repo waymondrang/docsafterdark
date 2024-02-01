@@ -1,38 +1,30 @@
 {
-    "project_name_short": "dad",
-    "enforce_version_control": true,
-    "clean_manifest": false,
-    "default_actions": [
-        "copy"
-    ],
-    "release_directory": "./releases",
-    "source": {
-        "directory": "src/chrome",
-        "platform": "chrome"
+  "project_name_short": "dad",
+  "enforce_version_control": true,
+  "clean_manifest": false,
+  "default_actions": ["copy"],
+  "release_directory": "./releases",
+  "source": {
+    "directory": "src/chrome",
+    "platform": "chrome"
+  },
+  "targets": [
+    {
+      "directory": "src/firefox",
+      "platform": "firefox",
+      "manifest_version": 3,
+      "patch": ["popup.js", "word.js"]
     },
-    "targets": [
-        {
-            "directory": "src/firefox",
-            "platform": "firefox",
-            "manifest_version": 2,
-            "patch": [
-                "popup.js",
-                "word.js"
-            ]
-        },
-        {
-            "directory": "src/opera",
-            "platform": "opera",
-            "manifest_version": 3,
-            "patch": [
-                "popup.js",
-                "word.js"
-            ]
-        }
-    ],
-    "git_messages": {
-        "directory_sync": "automated directory sync",
-        "packages": "automated package build"
-    },
-    "debug": false
+    {
+      "directory": "src/opera",
+      "platform": "opera",
+      "manifest_version": 3,
+      "patch": ["popup.js", "word.js"]
+    }
+  ],
+  "git_messages": {
+    "directory_sync": "automated directory sync",
+    "packages": "automated package build"
+  },
+  "debug": false
 }

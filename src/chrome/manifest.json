@@ -1,53 +1,43 @@
 {
-    "name": "DocsAfterDark",
-    "version": "0.6.2",
-    "description": "Modern, dark mode for Google Docs",
-    "author": "Raymond Wang",
-    "manifest_version": 3,
-    "content_scripts": [
-        {
-            "matches": [
-                "*://docs.google.com/document/*"
-            ],
-            "js": [
-                "word.js"
-            ],
-            "css": [
-                "default.css"
-            ]
-        }
-    ],
-    "action": {
-        "default_title": "DocsAfterDark Options",
-        "default_popup": "popup.html"
-    },
-    "web_accessible_resources": [
-        {
-            "resources": [
-                "docs.css",
-                "/assets/checkmark.secondary.png",
-                "/assets/revisions_sprite1.secondary.svg",
-                "/assets/close_18px.svg",
-                "/assets/lens.svg",
-                "/assets/jfk_sprite186.png",
-                "/assets/jfk_sprite186.edited.png",
-                "assets/dimension-unhighlighted.edited.png",
-                "assets/dimension-highlighted.edited.png",
-                "assets/access_denied_transparent.png",
-                "assets/access_denied_600_transparent.png",
-                "assets/gm_add_black_24dp.png"
-            ],
-            "matches": [
-                "*://docs.google.com/*"
-            ]
-        }
-    ],
-    "icons": {
-        "16": "dad16.png",
-        "48": "dad48.png",
-        "128": "dad128.png"
-    },
-    "permissions": [
-        "storage"
-    ]
+  "name": "DocsAfterDark",
+  "version": "0.6.3",
+  "description": "Modern, dark mode for Google Docs",
+  "author": "Raymond Wang",
+  "manifest_version": 3,
+  "content_scripts": [
+    {
+      "matches": ["*://docs.google.com/document/*"],
+      "js": ["word.js"],
+      "css": ["default.css"]
+    }
+  ],
+  "action": {
+    "default_title": "DocsAfterDark Options",
+    "default_popup": "popup.html"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "docs.css",
+        "/assets/checkmark.secondary.png",
+        "/assets/revisions_sprite1.secondary.svg",
+        "/assets/close_18px.svg",
+        "/assets/lens.svg",
+        "/assets/jfk_sprite186.png",
+        "/assets/jfk_sprite186.edited.png",
+        "assets/dimension-unhighlighted.edited.png",
+        "assets/dimension-highlighted.edited.png",
+        "assets/access_denied_transparent.png",
+        "assets/access_denied_600_transparent.png",
+        "assets/gm_add_black_24dp.png"
+      ],
+      "matches": ["*://docs.google.com/*"]
+    }
+  ],
+  "icons": {
+    "16": "dad16.png",
+    "48": "dad48.png",
+    "128": "dad128.png"
+  },
+  "permissions": ["storage"]
 }

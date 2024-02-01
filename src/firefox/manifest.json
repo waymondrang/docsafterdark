@@ -1,7 +1,7 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "DocsAfterDark",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "Modern, dark mode for Google Docs",
   "author": "Raymond Wang",
   "content_scripts": [
@@ -17,23 +17,30 @@
       ]
     }
   ],
-  "browser_action": {
+  "action": {
     "default_title": "DocsAfterDark Options",
     "default_popup": "popup.html"
   },
   "web_accessible_resources": [
-    "docs.css",
-    "/assets/checkmark.secondary.png",
-    "/assets/revisions_sprite1.secondary.svg",
-    "/assets/close_18px.svg",
-    "/assets/lens.svg",
-    "/assets/jfk_sprite186.png",
-    "/assets/jfk_sprite186.edited.png",
-    "assets/dimension-unhighlighted.edited.png",
-    "assets/dimension-highlighted.edited.png",
-    "assets/access_denied_transparent.png",
-    "assets/access_denied_600_transparent.png",
-    "assets/gm_add_black_24dp.png"
+    {
+      "resources": [
+        "docs.css",
+        "/assets/checkmark.secondary.png",
+        "/assets/revisions_sprite1.secondary.svg",
+        "/assets/close_18px.svg",
+        "/assets/lens.svg",
+        "/assets/jfk_sprite186.png",
+        "/assets/jfk_sprite186.edited.png",
+        "assets/dimension-unhighlighted.edited.png",
+        "assets/dimension-highlighted.edited.png",
+        "assets/access_denied_transparent.png",
+        "assets/access_denied_600_transparent.png",
+        "assets/gm_add_black_24dp.png"
+      ],
+      "matches": [
+        "*://docs.google.com/*"
+      ]
+    }
   ],
   "icons": {
     "16": "dad16.png",

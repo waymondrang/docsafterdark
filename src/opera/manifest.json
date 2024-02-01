@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "DocsAfterDark",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "Modern, dark mode for Google Docs",
   "author": "Raymond Wang",
   "content_scripts": [
