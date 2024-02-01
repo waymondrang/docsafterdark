@@ -12,7 +12,7 @@
     {
       "directory": "src/firefox",
       "platform": "firefox",
-      "manifest_version": 3,
+      "manifest_version": 2,
       "patch": ["popup.js", "word.js"]
     },
     {
