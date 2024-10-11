@@ -895,7 +895,12 @@ body.docs-gm:not(.docs-grille-gm3)
 }
 
 /* PRIMARY BORDER BACKGROUND */
-
+.outlines-widget-chaptered .navigation-item:not(.navigation-item:last-child) .navigation-item-vertical-line-bottom,
+.outlines-widget-chaptered .navigation-item:not(.navigation-item.location-indicator-highlight) .navigation-item-vertical-line-middle,
+.outlines-widget-chaptered .navigation-item:not(.navigation-item:last-child) .navigation-item-vertical-line-top,
+.outlines-widget-chaptered .navigation-item:last-child .navigation-item-vertical-line-bottom,
+.outlines-widget-chaptered .navigation-item:last-child .navigation-item-vertical-line-middle,
+.outlines-widget-chaptered .navigation-item:last-child .navigation-item-vertical-line-top,
 .docos-xeditor .docos-streamdocoview-header-container,
 .kix-smart-summary-view-separator {
   background-color: var(--primary-border-color);
@@ -1655,6 +1660,8 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
 
 /* BUTTONS */
 
+.chapter-item-label-and-buttons-container-selected,
+.chapter-item-label-and-buttons-container-selected:focus-within,
 .docs-material-button-fill-primary.docs-material-button,
 .docs-gm .modal-dialog .goog-buttonset-action,
 .docs-gm .modal-dialog .jfk-button-action,
@@ -1666,6 +1673,7 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
   background: var(--button-background-color);
 }
 
+.outlines-widget-chaptered .kix-outlines-widget-header-contents,
 .docs-gm .modal-dialog button,
 .docs-gm .modal-dialog .jfk-button-standard,
 .docs-material-button-hairline-primary.docs-material-button,
@@ -1673,6 +1681,7 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
   background: var(--button-two-background-color);
 }
 
+.outlines-widget-chaptered .kix-outlines-widget-header-contents,
 .docs-gm .modal-dialog button:hover,
 .docs-gm .modal-dialog .jfk-button-standard.jfk-button-hover,
 .docs-gm .modal-dialog button:active,
@@ -1693,6 +1702,8 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
   background: var(--button-two-background-color-hover);
 }
 
+.chapter-item-label-and-buttons-container-selected,
+.chapter-item-label-and-buttons-container-selected:focus-within,
 .docs-gm .modal-dialog .goog-buttonset-action:hover,
 .docs-gm .modal-dialog .jfk-button-action.jfk-button-hover,
 .docs-gm .docs-material-bubble .jfk-button-action.jfk-button-hover,
