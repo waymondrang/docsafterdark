@@ -121,6 +121,14 @@ BELOW CSS CLASSES APPEAR TO BE GENERATED, VOLATILE
   color: var(--primary-text-color);
 }
 
+.outlines-widget .outlines-widget-chaptered .chapter-container .navigation-item .navigation-item-level-0, 
+.outlines-widget .outlines-widget-chaptered .chapter-container .navigation-item .navigation-item-level-1, 
+.outlines-widget .outlines-widget-chaptered .chapter-container .navigation-item .navigation-item-level-2, 
+.outlines-widget .outlines-widget-chaptered .chapter-container .navigation-item .navigation-item-level-3, 
+.outlines-widget .outlines-widget-chaptered .chapter-container .navigation-item .navigation-item-level-4, 
+.outlines-widget .outlines-widget-chaptered .chapter-container .navigation-item .navigation-item-level-5, 
+.outlines-widget .outlines-widget-chaptered .chapter-container .navigation-item .navigation-item-level-6, 
+.outlines-widget .outlines-widget-chaptered .chapter-container .navigation-item .navigation-item-level-7,
 input,
 .docs-title-input:focus,
 .docs-gm .modal-dialog .jfk-textinput,
