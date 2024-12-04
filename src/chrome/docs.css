@@ -50,7 +50,7 @@
   --tertiary-text-color: #999999;
   --disabled-text: #666666;
   --accent-text: #64b5f6;
-  --accent-text-hover: #64b5f608;
+  --accent-hover-text: #5bb4fc;
 
   --comment-active: #1e88e5;
   --comment-hover: #2196f3;
@@ -156,13 +156,49 @@ textarea.docs-search-bar-input.goog-textarea,
 .docos-calltoactionview-header,
 .docs-gm .docs-linkbubble-bubble, .docs-gm .docs-multi-linkbubble-bubble,
 .javascriptMaterialdesignGm3WizList-list-item:hover .javascriptMaterialdesignGm3WizList-list-item__primary-text,
-.javascriptMaterialdesignGm3WizList-list-item:focus .javascriptMaterialdesignGm3WizList-list-item__primary-text
+.javascriptMaterialdesignGm3WizList-list-item:focus .javascriptMaterialdesignGm3WizList-list-item__primary-text,
+.docs-material-hsv-color-picker-input,
+.kix-watermark-sidebar-header,
+.kix-watermark-scale-combobox-container .goog-toolbar-combo-button-input,
+.kix-watermark-text-input-container input,
+.docs-sidebar-toggle-tabs .jfk-button.docs-sidebar-toggle-tab-inactive:hover,
+.javascriptMaterialdesignGm3WizTextFieldFilled-text-field:not(.javascriptMaterialdesignGm3WizTextFieldFilled-text-field--disabled) .javascriptMaterialdesignGm3WizTextFieldFilled-text-field__input,
+.javascriptMaterialdesignGm3WizTextFieldFilled-text-field:not(.javascriptMaterialdesignGm3WizTextFieldFilled-text-field--disabled):not(.javascriptMaterialdesignGm3WizTextFieldFilled-text-field--focused):hover .javascriptMaterialdesignGm3WizTextFieldFilled-text-field__input,
+.docs-gm .kix-bookmark-bubble,
+.pageOrientationDialogHeading,
+.bordersShadingDialogSection,
+.indentationDialogWizHeading,
+.javascriptMaterialdesignGm3WizSelectSharedRefactored-select__selected-text,
+.javascriptMaterialdesignGm3WizSelectSharedRefactored-select.javascriptMaterialdesignGm3WizSelectSharedRefactored-select--focused .javascriptMaterialdesignGm3WizSelectSharedRefactored-select__selected-text,
+.javascriptMaterialdesignGm3WizSelectSharedRefactored-select:hover .javascriptMaterialdesignGm3WizSelectSharedRefactored-select__selected-text,
+.javascriptMaterialdesignGm3WizList-list-item--selected .javascriptMaterialdesignGm3WizList-list-item__primary-text,
+.coverImagePromoTitle,
+.docs-mic-palette .goog-flat-menu-button-caption,
+.docs-voice-activity-bubble, .docs-voice-mic-bubble,
+.appsElementsSidekickHeaderTitle,
+.appsElementsSidekickHeaderIcon,
+.appsElementsSidekickPromptInput,
+.javascriptMaterialdesignGm3WizChipAssistFlatEl .gm3-chip__text-label,
+.javascriptMaterialdesignGm3WizChipAssistFlatEl:not(.gm3-chip--disabled) .gm3-chip__action--primary-interactive:hover .gm3-chip__text-label,
+.appsElementsSidekickFeed,
+.javascriptMaterialdesignGm3WizIconButtonStandard-icon-button:hover,
+.apps-shortcutshelpcontentimpl-dialog-title,
+.apps-actiondatawidget-content-header,
+.apps-actiondatawidget-shortcut-desc,
+.apps-actiondatawidget-shortcut-key,
+.apps-navigationwidget,
+.docs-grille-gm3 #docs-titlebar-share-client-button .jfk-button, .docs-grille-gm3 #scb-quick-actions-menu-button.goog-flat-menu-button,
+.docs-grille-gm3 #docs-titlebar-share-client-button .jfk-button.jfk-button-hover, .docs-grille-gm3 #scb-quick-actions-menu-button.goog-flat-menu-button.goog-flat-menu-button-hover,
+.goog-menu.scb-sqa-menu .goog-menuitem.scb-sqa-menuitem,
+.docs-grille-gm3 #docs-titlebar-share-client-button .jfk-button:focus, .docs-grille-gm3 #scb-quick-actions-menu-button.goog-flat-menu-button:focus,
+.docs-grille-gm3 #docs-titlebar-share-client-button .jfk-button.jfk-button-hover:focus, .docs-grille-gm3 #scb-quick-actions-menu-button.goog-flat-menu-button.goog-flat-menu-button-hover:focus
 {
   color: var(--primary-text-color);
 }
 
 .kix-embedded-entity-bubble .kix-drawing-bubble-edit-button:not(.docs-material-button-disabled),
-.kix-rich-link-view
+.kix-rich-link-view,
+.apps-menuitem .goog-menuitem-label[style*="color: rgb(0, 0, 0);"]
 {
   color: var(--primary-text-color) !important;
 }
@@ -226,12 +262,22 @@ textarea.docs-search-bar-input.goog-textarea,
 .docs-modality-header-message-component-title,
 .kix-tab-to-convert-bubble-message-prefix,
 .javascriptMaterialdesignGm3WizList-list-item__content,
-.javascriptMaterialdesignGm3WizList-list-item__primary-text
+.javascriptMaterialdesignGm3WizList-list-item__primary-text,
+.docs-gm .docs-colormenuitems .docs-colormenuitems-custom-header, .docs-gm .docs-colormenuitems .docs-colormenuitems-scheme-header,
+.kix-watermark-section-header,
+.kix-watermark-format-label,
+.docs-sidebar-toggle-tabs .jfk-button.docs-sidebar-toggle-tab-inactive,
+.coverImagePromoContent,
+.appsElementsGenerativeAiTitleRoot,
+.appsElementsSidekickPromptLibraryCategoryName,
+.outlines-widget .outlines-widget-chaptered .chapter-container .navigation-item .navigation-item-level-0, .outlines-widget .outlines-widget-chaptered .chapter-container .navigation-item .navigation-item-level-1, .outlines-widget .outlines-widget-chaptered .chapter-container .navigation-item .navigation-item-level-2, .outlines-widget .outlines-widget-chaptered .chapter-container .navigation-item .navigation-item-level-3, .outlines-widget .outlines-widget-chaptered .chapter-container .navigation-item .navigation-item-level-4, .outlines-widget .outlines-widget-chaptered .chapter-container .navigation-item .navigation-item-level-5, .outlines-widget .outlines-widget-chaptered .chapter-container .navigation-item .navigation-item-level-6, .outlines-widget .outlines-widget-chaptered .chapter-container .navigation-item .navigation-item-level-7
 {
   color: var(--secondary-text-color);
 }
 
-.docs-linkbubble-link-preview .docs-link-bubble-text-card-component span
+.docs-linkbubble-link-preview .docs-link-bubble-text-card-component span,
+.docs-grille-gm3 .docos-anchoredreplyview .docos-anchoredreplyview-body div,
+.docs-grille-gm3 .docos-anchoredreplyview .docos-anchoredreplyview-body span, .docs-grille-gm3 .docos-streamdocoview-body .docos-replyview-body span
 {
   color: var(--secondary-text-color) !important;
 }
@@ -254,7 +300,6 @@ textarea.docs-search-bar-input.goog-textarea,
 .docs-gm.docos-xeditor .docos-comments-pe .docos-streamdocoview-authorname-timestamp .docos-streamdocoview-timestamp,
 .docs-grille-gm3 .docos-input-contenteditable:empty:before,
 .docs-grille-gm3 .docos-anchoredreplyview .docos-action-text, .docs-grille-gm3 .docos-anchoredreplyview-header .docos-anchoredreplyview-timestamp, .docs-grille-gm3 .docos-streamdocoview .docos-action-text, .docs-grille-gm3.docs-gm .docos-xeditor .docos-streamdocoview-timestamp,
-input::placeholder,
 .docs-sidebar-tile-input-label,
 .docs-number-input-label,
 .docs-labeled-button-label,
@@ -262,9 +307,20 @@ input::placeholder,
 .smart-canvas-date-picker-bubble-gm3 .goog-date-picker-other-month, .smart-canvas-date-picker-bubble-gm3 .goog-date-picker-unavailable-date,
 .docs-grille-gm3 .docos-calltoactionview-body, .docs-grille-gm3 .docos-calltoactionview-dont-show-again-label, .docs-grille-gm3 .docos-calltoactionview-show-less, .docs-grille-gm3 .docos-calltoactionview-show-more,
 .docs-link-bubble-card-component.docs-link-bubble-maps-place-card-component .docs-link-bubble-maps-place-card-text .docs-link-bubble-maps-place-card-address, .docs-link-bubble-card-component.docs-link-bubble-maps-place-card-component .docs-link-bubble-maps-place-card-text .docs-link-bubble-maps-place-card-category,
-.appsElementsLinkInsertionCard
+.appsElementsLinkInsertionCard,
+.aiBlockPreviewBubbleDisclaimer,
+.goog-char-picker-unicode,
+.appsElementsSidekickFeedDisclaimer, .appsElementsSidekickQuotaMessage,
+.javascriptMaterialdesignGm3WizList-list-item__secondary-text,
+.goog-menu .goog-menuitem-disabled.scb-sqa-iconless-menuitem .goog-menuitem-content .scb-sqa-visibility-details, .goog-menu .goog-menuitem-disabled.scb-sqa-iconless-menuitem .goog-menuitem-content .scb-sqa-visibility-summary,
+.docs-titlebar-badge
 {
   color: var(--tertiary-text-color);
+}
+
+input::placeholder
+{
+  color: var(--tertiary-text-color) !important;
 }
 
 /*****************************
@@ -277,7 +333,10 @@ input::placeholder,
 .docs-image-synthesis-sidebar .image-synthesis-creation-button.goog-button-disabled,
 .docs-number-input-disabled .docs-number-input, .docs-number-input-disabled .docs-number-input-label, .docs-number-input-disabled .docs-number-input-unit,
 .docs-sidebar-tile-header.docs-sidebar-tile-header-disabled,
-.docs-sidebar-tile-section-disabled .docs-sidebar-tile-section-title
+.docs-sidebar-tile-section-disabled .docs-sidebar-tile-section-title,
+.kix-watermark-more-image-options-button.docs-material-button-text-default.docs-material-button.docs-material-button-disabled,
+.javascriptMaterialdesignGm3WizRadio-radio--disabled~.javascriptMaterialdesignGm3WizRadio-radio__label,
+.javascriptMaterialdesignGm3WizButtonText-button:disabled .javascriptMaterialdesignGm3WizButtonText-button__label
 {
   color: var(--disabled-text);
 }
@@ -320,7 +379,16 @@ a:link,
 
 .docs-alt-text-tile-advanced-options-title,
 
-.docs-grille-gm3 .docos-calltoactionview-body a
+.docs-grille-gm3 .docos-calltoactionview-body a,
+
+.docs-sidebar-toggle-tabs .jfk-button.docs-sidebar-toggle-tab-active,
+.kix-watermark-remove-button.docs-material-button-hairline-default.docs-material-button, .kix-watermark-remove-button.docs-material-button-hairline-default.docs-material-button.docs-material-button-focused,
+
+.apps-navigationwidget-item-selected,
+
+.docs-grille-gm3 #docs-toolbar-mode-switcher.suggest-mode .goog-toolbar-menu-button-caption,
+
+.outlines-widget .outlines-widget-chaptered .location-indicator-highlight.navigation-item [class*=navigation-item-level-], .outlines-widget .outlines-widget-chaptered .location-indicator-highlight.navigation-item [class*=navigation-item-level-].goog-button-hover
 {
   color: var(--accent-text);
 }
@@ -341,6 +409,16 @@ a:link,
   color: var(--accent-text);
 }
 
+.outlines-widget-chaptered .location-indicator-highlight .navigation-item-vertical-line-middle
+{
+  background: var(--accent-text);
+}
+
+.outline-refresh.navigation-widget-unified-styling .location-indicator-highlight.navigation-item.goog-button-hover, .outline-refresh.navigation-widget-unified-styling .location-indicator-highlight.navigation-item.goog-button-hover .navigation-item-level-0
+{
+  color: var(--accent-hover-text);
+}
+
 /***************************
 * BACKGROUND: ROOT BACKGROUND COLOR *
 ****************************/
@@ -351,31 +429,31 @@ a:link,
 #docs-header:not(.docs-hub-appbar) .docs-titlebar-buttons,
 .kix-citations-accessed-by-select, .kix-citations-format-select, .kix-citations-select, .kix-citations-source-type-select,
 .docs-grille-gm3 .docs-revisions-chromecover-content-color-default,
-.docs-material #docs-equationtoolbar, .docs-material .docs-printpreview-toolbar, /* COULD ALSO BE PRIMARY BACKGROUND COLOR */
 .docs-image-synthesis-sidebar .docs-image-synthesis-search-bar-input-transition .goog-textarea,
 .appsDocsAiGenerativeaiImageGenerationTypePickerPicker .docs-thumbnailcontrol-thumbnailcontainer,
 .imageGenerationStylePresetsSelect.docs-material-gm-select,
 .docs-search-bar,
-textarea.docs-search-bar-input.goog-textarea
+textarea.docs-search-bar-input.goog-textarea,
+.docs-body-pageless .navigation-widget-floating-navigation-button.navigation-widget,
+.docs-body-pageless #docs-chrome.docs-material, .docs-body-pageless #docs-chrome.docs-material .docs-titlebar-buttons
 {
   background: var(--root-background-color);
 }
 
-.kix-appview-editor {
+.kix-appview-editor{
   background: var(--root-background-color) !important;
 }
 
 .outlines-widget-chaptered .kix-outlines-widget-header-contents,
 .docs-ruler-background-inner,
-#kix-vertical-ruler:before,
-.docs-material .goog-toolbar-button, .docs-material .goog-toolbar-combo-button, .docs-material .goog-toolbar-menu-button,
-.docs-grille-gm3 #docs-omnibox-toolbar .docs-omnibox-input
+#kix-vertical-ruler:before
 {
   background-color: var(--root-background-color);
 }
 
 .docs-vertical-ruler,
-.docs-horizontal-ruler
+.docs-horizontal-ruler,
+.docs-body-pageless #kix-horizontal-ruler-container .docs-horizontal-ruler, .docs-body-pageless #kix-horizontal-ruler-container .docs-ruler-background-inner, .docs-body-pageless .docs-vertical-ruler
 {
   background-color: var(--root-background-color) !important;
 }
@@ -388,8 +466,6 @@ textarea.docs-search-bar-input.goog-textarea
 .docs-gm .docs-offline-optinpromo.jfk-bubble, .docs-gm .docs-sync-indicator-popup.jfk-bubble, .docs-gm .modal-dialog, .docs-gm .modal-dialog.google-url-picker,
 .ita-cp-hwt,
 input.ita-cp-input,
-.docs-body-pageless .navigation-widget-floating-navigation-button.navigation-widget,
-.docs-body-pageless #docs-chrome.docs-material, .docs-body-pageless #docs-chrome.docs-material .docs-titlebar-buttons,
 .left-sidebar-container.navigation-widget-in-pageless-format .outlines-widget-chaptered .kix-outlines-widget-header-contents,
 .docs-body-pageless #docs-editor, .docs-body-pageless #docs-editor-container, body.docs-body-pageless, body.docs-hub,
 .docs-contentembedding-titlebar,
@@ -412,7 +488,22 @@ input#docs-findandreplacedialog-replace-input,
 .docs-alt-text-tile-description-text-field,
 .docs-alt-text-tile-title-input,
 .smart-canvas-time-zone-selection-dialog-edit-field,
-.docs-grille-gm3 .docos-calltoactionview-container
+.docs-grille-gm3 .docos-calltoactionview-container,
+.docs-material-hsv-color-picker-input,
+.docs-grille-gm3 #docs-align-palette,
+.docs-gm3-icon-button,
+.aiBlockMenuBarBubbleSecondaryButtonContainer,
+.docs-sidebar-toggle-tabs,
+.kix-watermark-text-input-container input,
+.kix-watermark-format-toolbar.goog-toolbar,
+.kix-watermark-font-size-combo-box-container input,
+.docs-mic-palette .goog-flat-menu-button,
+.docs-material #docs-equationtoolbar, .docs-material .docs-printpreview-toolbar,
+.docs-grille-gm3.docs-gm #docs-toolbar-mode-switcher,
+.javascriptMaterialdesignGm3WizCardOutlined-card,
+.apps-shortcutshelppopup,
+.apps-shortcutshelpcontentimpl-container,
+.apps-shortcutshelpcontentimpl-ac-renderer
 {
   background: var(--primary-background-color);
 }
@@ -463,7 +554,20 @@ input#docs-findandreplacedialog-replace-input,
 .smart-canvas-date-picker-bubble,
 .goog-date-picker,
 .docs-gm .docs-linkbubble-bubble, .docs-gm .docs-multi-linkbubble-bubble,
-.javascriptMaterialdesignGm3WizCardElevated-card
+.javascriptMaterialdesignGm3WizCardElevated-card,
+.docs-material-color-swatch-checkbox-background,
+.kix-watermark-sidebar,
+.kix-watermark-sidebar-header,
+.docs-material-button-hairline-primary.docs-material-button,
+.kix-header-footer-bubble-menu.goog-menu,
+.docs-gm .kix-bookmark-bubble,
+.right-gutter-resizer-expansion-button,
+.docs-palette-title-bar,
+.docs-palette-body,
+.docs-material .goog-toolbar-button, .docs-material .goog-toolbar-combo-button, .docs-material .goog-toolbar-menu-button,
+.appsElementsSidekickZeroStateIconContainer,
+.appsElementsSidekickFooter,
+.docs-ruler-contributed-dragger-container
 {
   background-color: var(--primary-background-color);
 }
@@ -472,7 +576,6 @@ input#docs-findandreplacedialog-replace-input,
 * BACKGROUND: SECONDARY BACKGROUND COLOR *
 ******************************************/
 
-.docs-grille-gm3.docs-gm #docs-toolbar-mode-switcher,
 .docs-grille-gm3.docs-body-pageless #docs-align-palette, .docs-grille-gm3.docs-body-pageless #docs-align-palette .goog-toolbar-button, .docs-grille-gm3.docs-body-pageless .docs-main-toolbars .goog-toolbar-button, .docs-grille-gm3.docs-body-pageless .docs-main-toolbars .goog-toolbar-combo-button, .docs-grille-gm3.docs-body-pageless .docs-main-toolbars .goog-toolbar-menu-button, .docs-grille-gm3.docs-body-pageless .docs-toolbar-more-toolbar, .docs-grille-gm3.docs-body-pageless.docs-gm #docs-toolbar-wrapper,
 .docs-grille-gm3.docs-gm.docs-body-pageless #docs-toolbar-mode-switcher,
 .docs-grille-gm3 .docs-toolbar-more-toolbar, .docs-grille-gm3 .trix-palette,
@@ -481,7 +584,6 @@ input#docs-findandreplacedialog-replace-input,
 .docs-grille-version-history .docs-revisions-tile-selected,
 .docs-gm .docs-grille-version-history.docs-revisions-filter-selector.goog-menu .goog-menuitem.goog-menuitem-highlight.goog-menuitem-active, .docs-gm .docs-grille-version-history.docs-revisions-filter-selector.goog-menu .goog-menuitem.goog-option-selected,
 .docs-explore-searchbar-labelinput,
-.docs-grille-gm3 #docs-align-palette,
 .docs-gm .docs-material .docs-toolbar-split-create-button.goog-toolbar-button-active, .docs-gm .docs-material .docs-toolbar-split-create-button.goog-toolbar-menu-button-active, .docs-gm .docs-material .docs-toolbar-split-create-button.goog-toolbar-menu-button-open, .docs-gm .docs-material .goog-toolbar-button-active, .docs-gm .docs-material .goog-toolbar-button-checked, .docs-gm .docs-material .goog-toolbar-button-selected, .docs-gm .docs-material .goog-toolbar-combo-button-open, .docs-gm .docs-material .goog-toolbar-menu-button-open, .docs-gm .docs-material.trix-palette .goog-palette-cell-selected,
 .docs-image-generation-example-gallery,
 .imageGenerationStylePresetsMenu .imageGenerationStylePresetsMenuItemSelected, .imageGenerationStylePresetsMenu .imageGenerationStylePresetsMenuItemSelected.goog-menuitem-highlight,
@@ -495,7 +597,12 @@ input#docs-findandreplacedialog-replace-input,
 .smart-canvas-date-picker-bubble-time-zone-selection-button,
 .smart-canvas-date-details-bubble-edit-field.smart-canvas-date-details-bubble-edit-field-gm3, .smart-canvas-date-details-bubble-time-zone-edit-field,
 .docs-generative-ai-menu-item .docs-inline-insert-menu-item-icon-container,
-.docos-comments-pe .docos-calltoactionview:active .docos-calltoactionview-container, .docos-comments-pe .docos-calltoactionview:hover .docos-calltoactionview-container, .docos-comments-pe .docos-docoview-active .docos-calltoactionview-container
+.docos-comments-pe .docos-calltoactionview:active .docos-calltoactionview-container, .docos-comments-pe .docos-calltoactionview:hover .docos-calltoactionview-container, .docos-comments-pe .docos-docoview-active .docos-calltoactionview-container,
+.docs-material-button-hairline-default.docs-material-button-hover.docs-material-button-focused, .docs-material-button-hairline-primary.docs-material-button-hover.docs-material-button-focused,
+.docs-material-button-hairline-default.docs-material-button-focused, .docs-material-button-hairline-default.docs-material-button-focused.docs-material-button-no-focus-border, .docs-material-button-hairline-primary.docs-material-button-focused, .docs-material-button-hairline-primary.docs-material-button-focused.docs-material-button-no-focus-border,
+.docs-sidebar-toggle-tabs .jfk-button.docs-sidebar-toggle-tab-active:active, .docs-sidebar-toggle-tabs .jfk-button.docs-sidebar-toggle-tab-active:focus-visible,
+.docs-sidebar-toggle-tabs .jfk-button.docs-sidebar-toggle-tab-inactive:active, .docs-sidebar-toggle-tabs .jfk-button.docs-sidebar-toggle-tab-inactive:focus-visible,
+.goog-palette-cell .docs-preview-palette-item
 {
   background: var(--secondary-background-color);
 }
@@ -507,7 +614,17 @@ input#docs-findandreplacedialog-replace-input,
 .ita-hwt-jfk-standard,
 .docs-bubble .docs-bubble-button.jfk-button.goog-toolbar-button-checked, .docs-bubble .docs-bubble-button.jfk-button:hover:active,
 .docs-material-slider-track-off,
-.docs-alt-text-tile-advanced-options-container-expanded
+.docs-alt-text-tile-advanced-options-container-expanded,
+.goog-char-picker-hovercard,
+.javascriptMaterialdesignGm3WizIconButtonOutlined-icon-button--on,
+.javascriptMaterialdesignGm3WizList-list-item--selected,
+.docs-omnibox-autocomplete .ac-renderer,
+.docs-omnibox-autocomplete .ac-active .docs-omnibox-fallback-divider,
+.javascriptMaterialdesignGm3WizList-list-item,
+.appsElementsSidekickPromptInput,
+.appsElementsGenerativeAiChipRoot,
+.apps-shortcutshelpcontentimpl-search,
+.appsElementsSidekickSuggestionsSkeletonLoader
 {
   background-color: var(--secondary-background-color);
 }
@@ -521,6 +638,11 @@ input#docs-findandreplacedialog-replace-input,
 * BACKGROUND: TERTIARY BACKGROUND COLOR *
 *****************************************/
 
+.docs-grille-gm3.docs-gm #docs-toolbar-mode-switcher.suggest-mode
+{
+  background: var(--tertiary-background-color);
+}
+
 .docs-grille-gm3 .docs-main-toolbars .goog-toolbar-button.goog-toolbar-button-checked, .docs-grille-gm3.docs-gm #docs-align-palette .goog-toolbar-button-checked, .docs-grille-gm3.docs-gm .clean-palette .goog-palette-cell-selected, .docs-grille-gm3.docs-gm .trix-palette .goog-palette-cell-selected,
 .miniChapterSwitcherContainerView.breadcrumbSwitcherUiVariant .miniChapterSwitcherCore .miniChapterSwitcherView.docs-material-gm-select-active.miniChapterSwitcherMultipleChapters .miniChapterSwitcherNavigationEntryPointIcon,
 .docs-grille-gm3 .trix-palette .goog-toolbar-menu-button-open, .docs-grille-gm3.docs-gm .docs-main-toolbars .goog-toolbar-button-active, .docs-grille-gm3.docs-gm .docs-main-toolbars .goog-toolbar-button:focus, .docs-grille-gm3.docs-gm .docs-main-toolbars .goog-toolbar-menu-button-active, .docs-grille-gm3.docs-gm .docs-main-toolbars .goog-toolbar-menu-button.goog-toolbar-menu-button-open, .docs-grille-gm3.docs-gm .docs-main-toolbars .goog-toolbar-menu-button:focus,
@@ -529,7 +651,9 @@ input#docs-findandreplacedialog-replace-input,
 .docos-comments-pe .docos.docs-gm.docos-xeditor .docos-streamdocoview.docos-docoview-active, .docos-comments-pe .docos.docs-gm.docos-xeditor .docos-streamdocoview.docos-docoview-active .docos-show-more,
 .docos-comments-pe .docs-gm .docos-streamdocoview-input-pane .docos-input-textarea,
 .docs-grille-gm3 .docos-input .docos-input-textarea, .docs-grille-gm3 .docos-input .docos-input-textarea:focus, .docs-grille-gm3 .docos-streamdocoview-input-pane .docos-input-textarea, .docs-grille-gm3 .docos-streamdocoview-input-pane.docos-input .docos-input-textarea:focus,
-.docos-replyview-emoji-controls .docs-material-button-raised-default
+.docos-replyview-emoji-controls .docs-material-button-raised-default,
+.docs-omnibox-autocomplete .ac-active,
+.docs-grille-gm3 #docs-titlebar-share-client-button .jfk-button, .docs-grille-gm3 #scb-quick-actions-menu-button.goog-flat-menu-button
 {
   background-color: var(--tertiary-background-color);
 }
@@ -557,7 +681,12 @@ input#docs-findandreplacedialog-replace-input,
 .docs-grille-gm3 .docos-anchoreddocoview.docos-docoview-tesla-conflict:hover .docos-show-more, .docs-grille-gm3 .docos-anchoreddocoview:hover .docos-replyview-first .docos-show-more, .docs-grille-gm3 .docos-anchoreddocoview:hover .docos-show-less, .docs-grille-gm3 .docos-anchoreddocoview:hover .docos-show-more,
 .smart-canvas-time-selection-combo-box-container:hover .goog-combo-button-input,
 .smart-canvas-date-picker-bubble-time-zone-selection-button:hover,
-.smart-canvas-date-details-bubble-edit-field.smart-canvas-date-details-bubble-edit-field-gm3:hover, .smart-canvas-date-details-bubble-time-zone-edit-field:hover
+.smart-canvas-date-details-bubble-edit-field.smart-canvas-date-details-bubble-edit-field-gm3:hover, .smart-canvas-date-details-bubble-time-zone-edit-field:hover,
+.aiBlockMenuBarBubbleAcceptButton:hover, .aiBlockMenuBarBubbleDiscardButton:hover, .aiBlockMenuBarBubbleRefreshButton:hover,
+.docs-material-button-hairline-default.docs-material-button-hover, .docs-material-button-hairline-primary.docs-material-button-hover,
+.docs-grille-gm3.docs-gm #docs-toolbar-mode-switcher.goog-toolbar-menu-button-hover.suggest-mode,
+.docs-grille-gm3 #titlebar-mode-indicator-container>.docs-material-menu-button-flat-primary-hover, .docs-grille-gm3 .kix-titlebar-approvals-button>.docs-material-menu-button-flat-primary-hover, .docs-grille-gm3 .titlebar-request-access-button.docs-material-button.docs-material-button-hover,
+.docs-grille-gm3 #docs-titlebar-share-client-button .jfk-button.jfk-button-hover, .docs-grille-gm3 #scb-quick-actions-menu-button.goog-flat-menu-button.goog-flat-menu-button-hover
 {
   background: var(--hover-background-color);
 }
@@ -584,7 +713,13 @@ input#docs-findandreplacedialog-replace-input,
 .goog-date-picker-button:hover,
 .smart-canvas-date-details-bubble-pattern-picker-button:focus, .smart-canvas-date-details-bubble-pattern-picker-button:hover, .smart-canvas-date-details-icon-button:focus, .smart-canvas-date-details-icon-button:hover,
 .docs-modality-header-message-component-icon-button.goog-flat-button-hover,
-.docs-bubble .docs-bubble-button.jfk-button:focus, .docs-bubble .docs-bubble-button.jfk-button:hover
+.docs-bubble .docs-bubble-button.jfk-button:focus, .docs-bubble .docs-bubble-button.jfk-button:hover,
+.docs-customcolorpalette-eyedropper-button:hover,
+.docs-customcolorpalette-add-custom-color-button:hover,
+.javascriptMaterialdesignGm3WizSelectOutlinedEl .mdc-list-item:not(.mdc-list-item--disabled) .mdc-list-item__ripple:after, .javascriptMaterialdesignGm3WizSelectOutlinedEl .mdc-list-item:not(.mdc-list-item--disabled) .mdc-list-item__ripple:before,
+.appsElementsSidekickPromptInput:hover,
+.apps-navigationwidget-item-hover,
+.apps-shortcutshelpcontentimpl-ac-renderer .ac-active
 {
   background-color: var(--hover-background-color);
 }
@@ -619,7 +754,15 @@ input#docs-findandreplacedialog-replace-input,
 .miniChapterSwitcherContainerView.breadcrumbSwitcherUiVariant .miniChapterSwitcherCore .miniChapterSwitcherView.docs-material-gm-select-active .docs-material-gm-select-outer-box, .miniChapterSwitcherContainerView.breadcrumbSwitcherUiVariant .miniChapterSwitcherCore .miniChapterSwitcherView.docs-material-gm-select-active .miniChapterSwitcherChapterIcon, .miniChapterSwitcherContainerView.breadcrumbSwitcherUiVariant .miniChapterSwitcherCore .miniChapterSwitcherView.docs-material-gm-select-active .miniChapterSwitcherNavigationEntryPointIcon,
 .docs-floating-navigation-button-active .docs-floating-navigation-button-outer-box, .docs-floating-navigation-button-focused .docs-floating-navigation-button-outer-box, .navigation-widget-hat-close.goog-flat-button-active .navigation-widget-hat-close-button-outer-box, .navigation-widget-hat-close.goog-flat-button-focused .navigation-widget-hat-close-button-outer-box,
 .docs-sidebar-gm-titlebar-icon-button:focus,
-.kix-spellcheck-with-explanation-bubble-option:focus
+.kix-spellcheck-with-explanation-bubble-option:focus,
+.docs-grille-gm3.docs-gm #docs-toolbar-mode-switcher.goog-toolbar-menu-button-active.suggest-mode, .docs-grille-gm3.docs-gm #docs-toolbar-mode-switcher.goog-toolbar-menu-button-focused.suggest-mode, .docs-grille-gm3.docs-gm #docs-toolbar-mode-switcher.goog-toolbar-menu-button-open.suggest-mode,
+.docs-grille-gm3 #titlebar-mode-indicator-container>.docs-material-menu-button-flat-primary-focused, .docs-grille-gm3 .titlebar-request-access-button.docs-material-button.docs-material-button-focused,
+.docs-grille-gm3 .docs-material #docs-docos-commentsbutton.jfk-button.jfk-button-active, .docs-grille-gm3 .docs-material #docs-docos-commentsbutton.jfk-button.jfk-button-checked, .docs-grille-gm3 .docs-material #docs-docos-commentsbutton.jfk-button.jfk-button-focused, .docs-grille-gm3 .docs-material #docs-docos-commentsbutton:focus, .docs-grille-gm3 .docs-material .docs-appbar-circle-button.jfk-button-active, .docs-grille-gm3 .docs-material .docs-appbar-circle-button.jfk-button-checked,
+#docs-revisions-appbarbutton.jfk-button-focused,
+.appsElementsSidekickPromptInput:focus, .appsElementsSidekickPromptInput:focus-within,
+.chapter-item-label-and-buttons-container-selected .chapter-overflow-menu-button:focus-within, .chapter-item-label-and-buttons-container-selected .chapterItemArrowContainer:focus-within,
+.docs-grille-gm3 #docs-titlebar-share-client-button .jfk-button.jfk-button-hover:focus, .docs-grille-gm3 #scb-quick-actions-menu-button.goog-flat-menu-button.goog-flat-menu-button-hover:focus,
+.docs-grille-gm3 #docs-titlebar-share-client-button .jfk-button:focus, .docs-grille-gm3 #scb-quick-actions-menu-button.goog-flat-menu-button:focus
 {
   background: var(--secondary-hover-background-color);
 }
@@ -780,17 +923,55 @@ input#docs-findandreplacedialog-replace-input,
 .docs-alt-text-tile-title-input,
 .docs-grille-gm3 .docos-calltoactionview,
 .javascriptMaterialdesignGm3WizTextfieldNotchedOutline-notched-outline__leading, .javascriptMaterialdesignGm3WizTextfieldNotchedOutline-notched-outline__notch, .javascriptMaterialdesignGm3WizTextfieldNotchedOutline-notched-outline__trailing,
-.appsElementsLinkInsertionAdvancedSuggestionsButton:not(:first-child)
+.appsElementsLinkInsertionAdvancedSuggestionsButton:not(:first-child),
+.docs-material-hsv-color-picker-input,
+.docs-material-color-picker-saturation-value-background,
+.kix-watermark-format-toolbar.goog-toolbar,
+.kix-watermark-font-size-combo-box-container input,
+.kix-watermark-font-size-dec-button-container, .kix-watermark-font-size-inc-button-container,
+.docs-bulletpreset,
+.docos-comments-pe .right-gutter-resizer-expansion-button,
+.docs-mic-palette .goog-flat-menu-button,
+.docs-palette-body,
+.docs-palette-title-bar,
+.docs-omnibox-autocomplete .docs-omnibox-fallback-divider .divider,
+.javascriptMaterialdesignGm3WizCardOutlined-card,
+.appsElementsSidekickFooterBorder,
+.appsElementsSidekickScrollDelineation,
+.docs-ruler-contributed-dragger-container
 {
   border-color: var(--primary-border-color);
 }
 
 .docs-contentembedding-sidebar-zero-state .docs-contentembedding-sidebar-zero-state-button,
 .docs-grille-gm3 #fontSizeSelect.docs-font-size-inc-dec-combobox.goog-toolbar-combo-button,
-.docs-material-button-hairline-default.docs-material-button
+.docs-material-button-hairline-default.docs-material-button,
+.docs-material-button-hairline-primary.docs-material-button
 {
   border-color: var(--primary-border-color) !important;
 }
+
+.coverImagePromoContainer .jfk-bubble-arrowimplafter,
+.jfk-bubble-arrowdown .jfk-bubble-arrowimplbefore, .jfk-bubble-arrowup .jfk-bubble-arrowimplbefore,
+.jfk-bubble-arrowdown .jfk-bubble-arrowimplafter, .jfk-bubble-arrowup .jfk-bubble-arrowimplafter
+{
+  border-color: var(--primary-border-color) transparent;
+}
+
+.left-sidebar-resizer-ghost-line,
+.outlines-widget-chaptered .navigation-item+.navigation-item .navigation-item-vertical-line-top, .outlines-widget-chaptered .navigation-item-vertical-line-middle, .outlines-widget-chaptered .navigation-item:not(.navigation-item:last-child) .navigation-item-vertical-line-bottom
+{
+  background: var(--primary-border-color);
+}
+
+.left-sidebar-container.navigation-widget-in-pageless-format .left-sidebar-container-content-child
+{
+  box-shadow: inset -1px 0 0 0 var(--primary-border-color);
+}
+
+/************************
+ * BORDER COLOR: ACCENT *
+ ************************/
 
 .javascriptMaterialdesignGm3WizTabsPrimary-tab-indicator .javascriptMaterialdesignGm3WizTabsPrimary-tab-indicator__content--underline,
 .javascriptMaterialdesignGm3WizTabsPrimary-tab:active .javascriptMaterialdesignGm3WizTabsPrimary-tab-indicator__content--underline, .javascriptMaterialdesignGm3WizTabsPrimary-tab:hover .javascriptMaterialdesignGm3WizTabsPrimary-tab-indicator__content--underline
@@ -832,9 +1013,22 @@ input#docs-findandreplacedialog-replace-input,
 .docos-anchoreddocoview .docos-showrepliesbutton-line, .docos-comments-pe .docos-streamdocoview .docos-showrepliesbutton-line,
 .smart-canvas-date-picker-bubble-control-container,
 .smart-canvas-date-details-bubble-action-bar,
-.docs-link-bubble-calendar-event-action-card-component, .docs-link-bubble-maps-place-action-card-component
+.docs-link-bubble-calendar-event-action-card-component, .docs-link-bubble-maps-place-action-card-component,
+.kix-watermark-remove-button-container,
+.apps-shortcutshelpcontentimpl-tearoff-link-container,
+.scb-sqa-menuitem.scb-sqa-menuseparator
 {
   border-top-color: var(--primary-border-color);
+}
+
+.bordersShadingDialogDash
+{
+  border-top-color: var(--primary-border-color) !important;
+}
+
+.docs-sidebar-toggle-tabs .jfk-button.docs-sidebar-toggle-tab-active>div:after
+{
+  border-top-color: var(--accent-text);
 }
 
 .documentMetricsDialogRow,
@@ -854,7 +1048,10 @@ input#docs-findandreplacedialog-replace-input,
 .docs-number-input-container input,
 .docs-contentembedding-sidebar .docs-contentembedding-sidebar-tile,
 .smart-canvas-date-details-bubble-edit-field.smart-canvas-date-details-bubble-edit-field-gm3, .smart-canvas-date-details-bubble-time-zone-edit-field,
-.docos-calltoactionview-checkbox-container
+.docos-calltoactionview-checkbox-container,
+.kix-watermark-sidebar-headerm,
+.apps-shortcutshelpcontentimpl-header,
+.apps-actiondatawidget-content-element
 {
   border-bottom-color: var(--primary-border-color);
 }
@@ -866,13 +1063,16 @@ input#docs-findandreplacedialog-replace-input,
 
 .goog-char-picker-grid .goog-flat-button,
 .docs-vertical-ruler,
-.ita-hwt-candidate
+.ita-hwt-candidate,
+.docos-comments-pe .right-gutter-resizer-resizer-component,
+.apps-shortcutshelpcontentimpl-sidebar
 {
   border-right-color: var(--primary-border-color);
 }
 
 .docs-horizontal-ruler .docs-ruler-face-major-division, .docs-horizontal-ruler .docs-ruler-face-minor-division,
-.docs-gm .goog-toolbar-separator.goog-inline-block
+.docs-gm .goog-toolbar-separator.goog-inline-block,
+.docs-grille-gm3 #scb-quick-actions-menu-button.goog-flat-menu-button, .docs-grille-gm3 #scb-quick-actions-menu-button.goog-flat-menu-button-disabled, .docs-grille-gm3 #scb-quick-actions-menu-button.goog-flat-menu-button.goog-flat-menu-button-active, .docs-grille-gm3 #scb-quick-actions-menu-button.goog-flat-menu-button.goog-flat-menu-button-hover, .docs-grille-gm3 #scb-quick-actions-menu-button.goog-flat-menu-button.goog-flat-menu-button-hover:focus, .docs-grille-gm3 #scb-quick-actions-menu-button.goog-flat-menu-button:focus
 {
   border-left-color: var(--primary-border-color);
 }
@@ -884,6 +1084,11 @@ input#docs-findandreplacedialog-replace-input,
 /******************************************
 * EXPLICIT BORDERS *
 *******************************************/
+
+.aiBlockPreviewBubble.unifiedPreviewBubbleRoot
+{
+  border: 2px solid var(--accent-text);
+}
 
 .jfk-bubble,
 .docs-gm .docs-save-indicator-popup.jfk-bubble
@@ -912,7 +1117,13 @@ input#docs-findandreplacedialog-replace-input,
 .ita-hwt-ime-st,
 .docs-bubble,
 .apps-search-popup-menu,
-.docs-material-gm-dialog
+.docs-material-gm-dialog,
+.docs-material-color-picker-dragger,
+.docsEmojisWizEmojiPickerTab,
+.docs-palette,
+.docs-mic-palette-body-hover,
+.docs-voice-activity-bubble:focus, .docs-voice-mic-bubble:focus,
+.docs-material-colorpalette-cell.docs-material-colorpalette-cell-hover .docs-material-colorpalette-colorswatch, .docs-material-colorpalette-cell.docs-material-colorpalette-cell-hover .docs-material-colorpalette-colorswatch-translucent-wrapper.docs-material-colorpalette-colorswatch-overlay
 {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.20);
 }
@@ -920,15 +1131,23 @@ input#docs-findandreplacedialog-replace-input,
 .docs-explore-searchbar-labelinput,
 .docs-explore-searchbar-labelinput:focus,
 .goog-palette-cell-selected .docs-preview-palette-item,
-.docos-emoji-counter-button-tooltip
+.docos-emoji-counter-button-tooltip,
+.aiBlockMenuBarBubbleContainer
 {
   box-shadow: none;
 }
 
 /** COLOR SVG ICONS **/
 
-.premiumFeatureDialogTitleIcon > svg > path {
+.premiumFeatureDialogTitleIcon > svg > path
+{
   fill: var(--primary-text-color);
+}
+
+svg.kix-dropdown-item-selection-button-icon,
+svg.kix-configure-dropdown-button-add-icon
+{
+  fill: var(--secondary-text-color);
 }
 
 .pageSetupDialogStaticSvg > svg > rect:first-child
@@ -977,9 +1196,23 @@ input#docs-findandreplacedialog-replace-input,
 .smart-canvas-date-picker-bubble,
 .smart-canvas-date-picker-bubble-date-picker .goog-date-picker,
 .docs-bubble-material,
-.kix-dropdown-item-selection-bubble
+.kix-dropdown-item-selection-bubble,
+.docs-bulletpreset,
+.jfk-bubble,
+.apps-shortcutshelppopup,
+.apps-shortcutshelpcontentimpl-ac-renderer
 {
   border-radius: 8px;
+}
+
+.docs-palette-title-bar
+{
+  border-radius: 8px 8px 0 0;
+}
+
+.docs-palette-body
+{
+  border-radius: 0 0 8px 8px;
 }
 
 img.docs-generativeai-onboarding-dialog-image,
@@ -1066,7 +1299,8 @@ img.docs-generativeai-onboarding-dialog-image,
 /* ENABLE TRANSPARENT BACKGROUND FOR TABLE PROPERTIES FIELDS */
 
 .docs-number-input-container input,
-.docsLinkSmartinsertlinkBubble
+.docsLinkSmartinsertlinkBubble,
+.docs-bubble-material
 {
   background: transparent;
 }
@@ -1078,6 +1312,13 @@ img.docs-generativeai-onboarding-dialog-image,
   background-color: transparent;
 }
 
+.appsElementsSidekickPromptLibraryScrollButtonContainer:after,
+.appsElementsSidekickPromptLibraryScrollButtonContainer:before,
+.docs-material .docos-comments-pe#docs-docos-commentsbutton.jfk-button.jfk-button-checked
+{
+  background: none;
+}
+
 .docsLinkSmartinsertlinkBubble
 {
   border: none;
@@ -1086,4 +1327,22 @@ img.docs-generativeai-onboarding-dialog-image,
 .docsLinkSmartinsertlinkBubble
 {
   box-shadow: none;
+}
+
+.ita-kd-img
+{
+  filter: invert(1) brightness(0.6);
+}
+
+.docs-material .docs-icon-img:before,
+.docs-material .docs-icon-img
+{
+  filter: invert(1);
+}
+
+.docs-grille-gm3 .docs-material .docs-icon-img, .docs-icons-cleanup .docs-material .docs-icon-img,
+.docs-grille-gm3 .docs-material .docs-icon-img:before,
+.docs-gm .docs-material.goog-menu .goog-menuitem.goog-option-selected .goog-menuitem-checkbox
+{
+  filter: brightness(2.4);
 }
