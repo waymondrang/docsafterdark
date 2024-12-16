@@ -108,6 +108,14 @@ textarea,
 .docs-gm .docs-dictionary-titlebar,
 .docs-gm .docs-explore-dictionaryentry-title,
 .docs-gm .docs-explore-dictionaryentries,
+.kix-citations-sidebar-titlebar,
+.kix-citations-source-list-item-content span[style],
+.kix-citations-search-result-view-attributes-bottom,
+.kix-citations-source-type-select-label,
+.kix-citations-accessed-by-select-label,
+.kix-citations-contributors-list-label,
+.kix-citations-create-view-attribute-label,
+.kix-citations-search-result-attribute-label,
 /* 
 BELOW CSS CLASSES APPEAR TO BE GENERATED, VOLATILE
 */
@@ -118,8 +126,10 @@ BELOW CSS CLASSES APPEAR TO BE GENERATED, VOLATILE
 .aJfoSc .hA3Ymb,
 .TOb6Ze .hA3Ymb,
 .kix-ai-text-generator-onboarding-dialog-title {
-  color: var(--primary-text-color);
+  color: var(--primary-text-color) !important;
 }
+
+
 
 input,
 .docs-title-input:focus,
@@ -223,6 +233,7 @@ svg.kix-dropdown-item-selection-button-icon {
 .docs-embeddedcontentpastedialog-message,
 .docs-indentationdialoggm-indentation-special-type.docs-indentationdialoggm-control.jfk-select
   .goog-flat-menu-button-caption,
+.kix-citations-search-result-attribute-value,
 .docs-grille-gm3 .kix-smart-summary-text-container {
   color: var(--secondary-text-color) !important;
 }
@@ -371,6 +382,7 @@ body,
   #kix-horizontal-ruler-container
   .docs-ruler-background-inner,
 .docs-body-pageless .docs-vertical-ruler,
+
 .navigation-widget-floating-navigation-button.navigation-widget {
   background: var(--primary-background-color) !important;
 }
@@ -425,6 +437,16 @@ body.docs-gm:not(.docs-grille-gm3) .docos-anchoreddocoview,
 .docs-gm .docos-streampane-header,
 .docs-gm .docs-dictionary-titlebar,
 .docs-dictionary-sidebar,
+.kix-citations-sidebar,
+.kix-citations-sidebar-titlebar,
+.kix-citations-list-view-top,
+.kix-citations-insert-bibliography-container,
+.kix-citations-create-view-top,
+.kix-citations-create-view-search,
+.kix-citations-create-view-bottom,
+.goog-toolbar.kix-citations-source-list-item-toolbar,
+.kix-citations-search-result-view-attributes-bottom,
+.kix
 #innerContainer div[style*="background"] {
   background-color: var(--secondary-background-color) !important;
 }
@@ -445,7 +467,13 @@ body.docs-gm:not(.docs-grille-gm3) .docos-showrepliesbutton,
 .docs-gm .docos-anchoreddocoview.docos-docoview-active .docos-show-more,
 .docs-gm .docos-anchoreddocoview.docos-docoview-active .docos-show-less,
 .docs-gm .docos-replyview-first .docos-show-more,
-.docs-gm
+.docs-gm,
+.kix-citations-format-select,
+.kix-citations-source-type-select,
+.kix-citations-accessed-by-select,
+.kix-citations-contributor-type-select,
+.kix-citations-create-view-input,
+.kix-citations-search-input,
   .docos-anchoreddocoview.docos-docoview-tesla-conflict:hover
   .docos-show-more {
   background: var(--secondary-background-color);
@@ -661,6 +689,7 @@ body.docs-gm:not(.docs-grille-gm3) .docos-showrepliesbutton,
 .docs-gm .docos-assigneeview.docos-assignee-other,
 #docs-revisions-appbarbutton.jfk-button-disabled:hover,
 #docs-revisions-appbarbutton.jfk-button-hover,
+.kix-citations-source-list-item:hover,
 .docs-grille
   .docs-material
   #docs-docos-commentsbutton.jfk-button.jfk-button-hover {
@@ -835,6 +864,8 @@ body.docs-gm:not(.docs-grille-gm3)
   .docs-gm.docos-xeditor
   .streamdocoview-no-header.docos-streamdocoview,
 .docos-ssd-content hr,
+.kix-citations-create-view-input,
+.kix-citations-search-input,
 #innerContainer div[style*="background"] {
   border: 1px solid var(--primary-border-color) !important;
 }
@@ -1041,6 +1072,11 @@ body.docs-gm:not(.docs-grille-gm3)
     border: none;
 } */
 
+/* SECONDARY BORDER */
+
+.goog-toolbar.kix-citations-source-list-item-toolbar {
+  border: 1px solid var(--secondary-border-color);
+}
 /* BORDER RADIUS */
 
 .apps-shortcutshelppopup {
@@ -1082,6 +1118,7 @@ img.kix-smart-summary-onboarding-promo-content-illustration,
 .docs-material-button-text-default.docs-material-button,
 .kix-dropdown-entity-configuration-dialog-title-naming-component-header,
 .kix-dropdown-item-selection-bubble,
+.jfk-textinput,
 .kix-ai-text-generator-onboarding-dialog-image {
   border-radius: 6px !important;
 }
@@ -2088,6 +2125,11 @@ body.docs-grille-gm3,
     ) !important;
 }
 
+.kix-citations-sidebar-titlebar,
+.kix-citations-source-list-item,
+.kix-citations-create-view-top,
+.kix-citations-list-view-top,
+.kix-citations-create-view-search,
 .docs-grille-gm3 .docs-horizontal-ruler .docs-ruler-background-inner {
   border-bottom: 1px solid var(--lighter-border-color);
 }
