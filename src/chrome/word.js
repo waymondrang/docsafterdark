@@ -8,9 +8,9 @@ const theme = "#90caf9";
 const warning = "#90caf9";
 const link_color = "#90caf9";
 const invert_value = "invert(1)";
-const grayscale_value = "contrast(79%) grayscale(100%)";
+const grayscale_value = "contrast(82%) grayscale(100%)";
 const page_border = "0 0 0 1px";
-const gm3_page_border = "1px solid #404040";
+const gm3_page_border = "1px solid var(--primary-border-color)";
 const backgrounds = {
   default: "#ffffff",
   shade: "#999999",
@@ -83,6 +83,214 @@ function raise_button(condition) {
   );
 }
 
+///////////////////////
+// UTILITY FUNCTIONS //
+///////////////////////
+
+/**
+ * Converts an hex format color to RGB.
+ * https://stackoverflow.com/a/5624139
+ * 
+ * @param {String} hex 
+ * @returns An object containing the RGB values
+ */
+function hexToRgb(hex) {
+  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  hex = hex.replace(shorthandRegex, function (m, r, g, b) {
+    return r + r + g + g + b + b;
+  });
+
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result
+    ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+      }
+    : null;
+}
+
+/**
+ * Converts an RGB component to hex.
+ * 
+ * @param {Number} c 
+ * @returns The hex value of the component
+ */
+function componentToHex(c) {
+  var hex = c.toString(16);
+  return hex.length == 1 ? "0" + hex : hex;
+}
+
+/**
+ * Converts an RGB color value into hex format.
+ * https://stackoverflow.com/a/5624139
+ * 
+ * @returns String of the hex value
+ */
+function rgbToHex({ r, g, b }) {
+  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+/**
+ * Converts an RGB color value to HSL.
+ *
+ * @returns An object containing the HSL values
+ */
+function rgbToHsl({ r, g, b }) {
+  (r /= 255), (g /= 255), (b /= 255);
+
+  var max = Math.max(r, g, b),
+    min = Math.min(r, g, b);
+  var h,
+    s,
+    l = (max + min) / 2;
+
+  if (max == min) {
+    h = s = 0; // achromatic
+  } else {
+    var d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+
+    switch (max) {
+      case r:
+        h = (g - b) / d + (g < b ? 6 : 0);
+        break;
+      case g:
+        h = (b - r) / d + 2;
+        break;
+      case b:
+        h = (r - g) / d + 4;
+        break;
+    }
+
+    h /= 6;
+  }
+
+  return {
+    h: h,
+    s: s,
+    l: l,
+  };
+}
+
+/**
+ * Converts an HSL color value to RGB.
+ *
+ * @param {Number} h
+ * @param {Number} s
+ * @param {Number} l
+ * @returns An object containing the RGB values
+ */
+function hslToRgb(h, s, l) {
+  let r, g, b;
+
+  h /= 360;
+  s /= 100;
+  l /= 100;
+
+  if (s === 0) {
+    r = g = b = l; // achromatic
+  } else {
+    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    const p = 2 * l - q;
+    r = hueToRgb(p, q, h + 1/3);
+    g = hueToRgb(p, q, h);
+    b = hueToRgb(p, q, h - 1/3);
+  }
+
+  return {
+    r: Math.round(r * 255),
+    g: Math.round(g * 255),
+    b: Math.round(b * 255),
+  }
+}
+
+function hueToRgb(p, q, t) {
+  if (t < 0) t += 1;
+  if (t > 1) t -= 1;
+  if (t < 1/6) return p + (q - p) * 6 * t;
+  if (t < 1/2) return q;
+  if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+  return p;
+}
+
+/**
+ * Sets the accent color of the page.
+ * 
+ * @param {{hue: Number}} color 
+ */
+function set_accent_color(color) {
+
+  console.log("SETTING ACCENT COLOR", color);
+
+  // SET COLORS
+  // var rootBackgroundColor = rgbToHex(hslToRgb(hslColorData.h, 100, 99.5));
+  // var secondaryBackgroundColor = rgbToHex(hslToRgb(hslColorData.h, 100, 97.5));
+  // var tertiaryBackgroundColor = rgbToHex(hslToRgb(hslColorData.h, 100, 95.5));
+  // var quaternaryBackgroundColor = rgbToHex(hslToRgb(hslColorData.h, 100, 93.5));
+  // var primaryAccentColor = color; // TODO: USE HUE IF USER PICKS FROM SPECTRUM
+
+  // TESTING SL VALUES
+  var rootBackgroundColor = rgbToHex(hslToRgb(color.hue, 20, 95));
+  var primaryBackgroundColor = rgbToHex(hslToRgb(color.hue, 20, 97.5));
+  var secondaryBackgroundColor = rgbToHex(hslToRgb(color.hue, 25, 90));
+  var tertiaryBackgroundColor = rgbToHex(hslToRgb(color.hue, 30, 85));
+  var quaternaryBackgroundColor = rgbToHex(hslToRgb(color.hue, 35, 80));
+  var backgroundColor5 = rgbToHex(hslToRgb(color.hue, 40, 75));
+  var primaryAccentColor = rgbToHex(hslToRgb(color.hue, 25, 50)); // TODO: USE HUE IF USER PICKS FROM SPECTRUM
+  var secondaryAccentColor = rgbToHex(hslToRgb(color.hue, 25, 60)); // TODO: USE HUE IF USER PICKS FROM SPECTRUM
+
+  document.documentElement.style.setProperty(
+    "--root-background-color",
+    rootBackgroundColor
+  );
+
+  document.documentElement.style.setProperty(
+    "--primary-background-color",
+    primaryBackgroundColor
+  );
+
+  document.documentElement.style.setProperty(
+    "--secondary-background-color",
+    secondaryBackgroundColor
+  );
+
+  document.documentElement.style.setProperty(
+    "--tertiary-background-color",
+    tertiaryBackgroundColor
+  );
+
+  document.documentElement.style.setProperty(
+    "--quaternary-background-color",
+    quaternaryBackgroundColor
+  );
+
+  document.documentElement.style.setProperty(
+    "--background-color-5",
+    backgroundColor5
+  );
+
+  document.documentElement.style.setProperty(
+    "--accent-color",
+    primaryAccentColor
+  );
+
+  document.documentElement.style.setProperty(
+    "--light-accent-color",
+    primaryAccentColor + "1e"
+  );
+
+  document.documentElement.style.setProperty(
+    "--light-accent-hover-color",
+    primaryAccentColor + "28"
+  );
+
+  document.documentElement.style.setProperty(
+    "--accent-hover-color",
+    secondaryAccentColor
+  );
+}
+
 function set_up() {
   document.documentElement.style.setProperty(
     "--checkmark",
@@ -138,8 +346,17 @@ function set_up() {
   let show_border;
 
   console.log("GETTING FROM STORAGE");
+
   chrome.storage.local.get(
-    ["doc_bg", "custom_bg", "invert", "raise_button", "show_border", "updates"],
+    [
+      "doc_bg",
+      "custom_bg",
+      "invert",
+      "raise_button",
+      "show_border",
+      "updates",
+      "accent_color"
+    ],
     function (data) {
       console.log(data);
       if (Object.keys(data).includes("doc_bg")) {
@@ -184,6 +401,16 @@ function set_up() {
       } else {
         // Show border by default
         show_border = true;
+      }
+
+      //////////////////
+      // ACCENT COLOR //
+      //////////////////
+
+      if (Object.keys(data).includes("accent_color")) {
+        set_accent_color(data.accent_color);
+      } else {
+        // TODO: SET DEFAULT ACCENT COLOR
       }
 
       // Handle raise button option
@@ -340,6 +567,11 @@ function set_up() {
         changes.show_border.newValue ? gm3_page_border : "none"
       );
     }
+
+    // TODO: HANDLE ACCENT COLOR CHANGE
+    // if (Object.keys(changes).includes("accent_color")) {
+    //   set_accent_color(changes.accent_color.newValue);
+    // }
   });
 }
 
@@ -357,3 +589,12 @@ chrome.storage.local.get(["on"], function (data) {
     dark_mode_state = true;
   }
 });
+
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  if (request.type == "setAccentColor") {
+    console.log("SETTING ACCENT COLOR", request.color);
+    set_accent_color(request.color);
+  }
+});
+
+console.log("SET UP MESSAGE LISTENER");

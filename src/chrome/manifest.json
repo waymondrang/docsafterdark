@@ -1,6 +1,6 @@
 {
   "name": "DocsAfterDark",
-  "version": "0.6.3",
+  "version": "1.0.0",
   "description": "Modern, dark mode for Google Docs",
   "author": "Raymond Wang",
   "manifest_version": 3,
@@ -39,5 +39,5 @@
     "48": "dad48.png",
     "128": "dad128.png"
   },
-  "permissions": ["storage"]
+  "permissions": ["storage", "activeTab"]
 }

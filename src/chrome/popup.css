@@ -47,6 +47,12 @@ body {
   margin-bottom: 8px;
 }
 
+.section_label
+{
+  color: #999999;
+  margin-bottom: 0px;
+}
+
 .menu_bar {
   display: flex;
   flex-direction: row;
@@ -65,7 +71,7 @@ button {
   border: none;
   padding: 4px 8px;
   cursor: pointer;
-  /* transition: background-color 0.1s ease-out; */
+  transition: opacity 0.1s ease-out;
   /* border-radius: 4px; */
 }
 
@@ -168,7 +174,74 @@ footer {
   text-decoration: none;
 }
 
-#donate:hover {
+#donate:hover
+{
   background-color: var(--button-background-color-focus);
   color: var(--primary-text-color);
+}
+
+#spectrum_container
+{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+#spectrum_bar
+{
+  height: 16px;
+  width: 100%;
+  background: linear-gradient(to right, red, yellow, lime, aqua, blue, magenta, red);
+  border-radius: 4px;
+  box-sizing: border-box;
+  
+  display: flex;
+  align-items: center;
+}
+
+#spectrum_input
+{
+  width: 48px;
+}
+
+#spectrum_knob {
+  position: relative;
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 4px solid #fff;
+  box-sizing: border-box;
+}
+
+#spectrum_reset {
+  background-color: #E61717;
+  border-radius: 4px;
+}
+
+#spectrum_save {
+  background-color: #3c3c3c;
+  border-radius: 4px;
+  margin-right: 4px;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--primary-border-color);
+  margin: 12px 0;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

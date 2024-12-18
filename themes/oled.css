@@ -1,0 +1,81 @@
+:root {
+    --root-background-color: #000000;
+    --primary-background-color: #1A1A1A;
+    --secondary-background-color: #0D0D0D;
+    --tertiary-background-color: #262626;
+    --quaternary-background-color: #333333;
+  
+    --menu-background: var(--secondary-background-color);
+    --hover-background-color: #FFFFFF1a;
+    --secondary-hover-background-color: #FFFFFF1e;
+  
+    --solid-hover-background-color: #404040;
+    --secondary-solid-hover-background-color: #4D4D4D;
+  
+    --primary-border-color: #4D4D4D;
+    --secondary-border-color: #404040;
+    --lighter-border-color: #808080;
+    --hover-border-color: #595959;
+  
+    --primary-text-color: #FFFFFF;
+    --secondary-text-color: #F2F2F2;
+    --tertiary-text-color: #E6E6E6;
+    --disabled-text: #666666;
+  
+    --input-border-color: #666666;
+    --input-hover-border-color: #808080;
+    --input-background-color: var(--tertiary-background-color); /* CURRENTLY USED FOR CALENDAR INPUT */
+  
+    --button-text-color: #fff;
+    
+    --accent-color: #E81A43;
+    --accent-hover-color: #E82E54;
+    --light-accent-color: #E81A431a;
+    --light-accent-hover-color: #E81A431e;
+    
+    --gm3-sys-color-on-surface: var(--primary-text-color);
+    --gm3-sys-color-on-surface-variant: var(--secondary-text-color);
+    
+    --filled-button-text-color: var(--button-text-color);
+    --gm3-button-filled-tonal-hover-label-text-color: var(--filled-button-text-color);      /* FILLED BUTTON TEXT COLOR */
+    --gm3-button-filled-tonal-label-text-color: var(--filled-button-text-color);            /* FILLED BUTTON TEXT COLOR */
+    --gm3-button-filled-tonal-pressed-label-text-color: var(--filled-button-text-color);    /* FILLED BUTTON TEXT COLOR */
+    
+    --gm3-button-filled-container-color: var(--accent-color);
+    --gm3-button-filled-label-text-color: var(--button-text-color);
+    --gm3-button-filled-hover-label-text-color: var(--button-text-color);
+    
+    --gm3-button-filled-tonal-container-color: var(--accent-color);
+    
+    --gm3-data-table-row-item-unselected-container-color: var(--secondary-background-color);
+    --gm3-data-table-row-item-unselected-hover-state-layer-color: var(--hover-background-color);
+    
+    --gm3-text-field-outlined-disabled-input-text-color: var(--disabled-text);
+    --gm3-text-field-filled-container-color: var(--tertiary-background-color);
+    --gm3-text-field-outlined-focus-indicator-outline-color: var(--input-border-color);       /* EMOJI SEARCH OUTLINE */
+  
+    --gm3-button-filled-disabled-container-color: #e6e6e6;                                  /* WHAT IS THIS */
+    --gm3-button-outlined-hover-label-text-color: var(--accent-color);
+    --gm3-progress-button-filled-container-color: var(--accent-color);
+  
+    --gm3-checkbox-selected-container-color: var(--accent-color);
+    --gm3-checkbox-selected-hover-container-color: var(--accent-color);
+    --gm3-checkbox-selected-pressed-container-color: var(--accent-color);
+  
+    --gm3-sys-color-outline: var(--input-border-color);
+    --mdc-outlined-select-text-field-focus-label-text-color: var(--accent-color);
+    --mdc-outlined-select-text-field-outline-color: var(--input-border-color);
+  
+    --gm3-radio-selected-icon-color: var(--accent-color);
+    --gm3-radio-selected-focus-icon-color: var(--accent-color);
+    --gm3-radio-selected-hover-icon-color: var(--accent-hover-color);
+  
+    --gm3-button-outlined-with-icon-hover-icon-color: var(--accent-color);
+  
+    --gm3-select-outlined-text-field-focus-outline-color: var(--accent-color);
+    --gm3-select-shared-text-field-focus-trailing-icon-color: var(--accent-color);
+  
+    --gm3-sys-color-primary: var(--accent-color);
+    --gm3-ripple-hover-color: var(--accent-color);
+    --gm3-ripple-pressed-color: var(--accent-color);
+  }
