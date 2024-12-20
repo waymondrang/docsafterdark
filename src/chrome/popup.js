@@ -138,6 +138,7 @@ const DARK_MODE = 2;
 
 var bg_selected;
 var selected_mode;
+
 const custom_input = document.querySelector("#custom_input");
 const custom_save = document.querySelector("#save_custom");
 const description = document.querySelector("#description");
@@ -222,8 +223,6 @@ custom_save.addEventListener("click", function (e) {
     chrome.storage.local.set({ custom_bg: custom_input.value });
 });
 
-
-
 invert.addEventListener("click", function (e) {
   grayscale.disabled = !e.target.checked;
   grayscale.checked = e.target.checked;
@@ -250,6 +249,26 @@ donate.addEventListener("click", function (e) {
   chrome.tabs.create({ url: "https://www.buymeacoffee.com/waymondrang" });
 });
 
+/**
+ * CALLED WHEN THE COLOR PICKER CHANGES FOR PREVIEWING TEMPORARY COLOR CHANGES
+ * 
+ * @param {{hue: Number}} color
+ */
+function handleTempColorChange(color) {
+  // SEND MESSAGE TO ACTIVE TAB
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, {
+      type: "setAccentColor",
+      color: color,
+    });
+  });
+
+  // SAVE TEMPORARY COLOR TO STORAGE
+  chrome.storage.local.set({ temp_accent_color: color });
+
+  console.log("SAVED TEMP ACCENT COLOR: ", color);
+}
+
 ////////////////////
 // SPECTRUM INPUT //
 ////////////////////
@@ -270,13 +289,7 @@ spectrum_input.addEventListener("input", function (e) {
     // SET BACKGROUND COLOR (CSS HUE RANGE IS [0, 360])
     spectrum_knob.style.backgroundColor = `hsl(${spectrum_input.value}, 100%, 50%)`;
 
-    // SEND MESSAGE TO ACTIVE TAB (TODO: ALL DOCS TABS)
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, {
-        type: "setAccentColor",
-        color: { hue: spectrum_input.value },
-      });
-    });
+    handleTempColorChange({ hue: spectrum_input.value });
   }
 });
 
@@ -289,19 +302,17 @@ spectrum_reset.addEventListener("click", function (e) {
     if (data.accent_color) {
       initiateKnob(data.accent_color.hue);
     } else {
+      // SET DEFAULT ACCENT COLOR
       initiateKnob(0);
     }
 
     // DISABLE RESET BUTTON AFTER RESET
     spectrum_reset.disabled = true;
 
-    // SEND MESSAGE TO ACTIVE TAB (TODO: ALL DOCS TABS)
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, {
-        type: "setAccentColor",
-        color: { hue: spectrum_input.value },
-      });
-    });
+    handleTempColorChange({ hue: spectrum_input.value });
+
+    // REMOVE TEMPORARY COLOR
+    chrome.storage.local.remove("temp_accent_color");
   });
 });
 
@@ -315,6 +326,9 @@ spectrum_save.addEventListener("click", function (e) {
 
     // SAVE HUE TO STORAGE
     chrome.storage.local.set({ accent_color: { hue: spectrum_input.value } });
+
+    // REMOVE TEMPORARY COLOR
+    chrome.storage.local.remove("temp_accent_color");
 
     console.log("SAVED ACCENT HUE VALUE: " + spectrum_input.value);
 
@@ -366,13 +380,7 @@ function moveKnob(e) {
   // SET INPUT VALUE
   spectrum_input.value = hue;
 
-  // SEND MESSAGE TO ACTIVE TAB (TODO: ALL DOCS TABS)
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    chrome.tabs.sendMessage(tabs[0].id, {
-      type: "setAccentColor",
-      color: { hue: hue },
-    });
-  });
+  handleTempColorChange({ hue: hue });
 }
 
 spectrum_knob.addEventListener("mousedown", function (e) {
@@ -429,12 +437,7 @@ spectrum_bar.addEventListener("mousedown", function (e) {
   spectrum_reset.disabled = false;
 
   // SEND MESSAGE TO ACTIVE TAB (TODO: ALL DOCS TABS)
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    chrome.tabs.sendMessage(tabs[0].id, {
-      type: "setAccentColor",
-      color: { hue: hue },
-    });
-  });
+  handleTempColorChange({ hue: hue });
 
   document.addEventListener("mousemove", moveKnob);
   document.addEventListener("mouseup", function (e) {
@@ -454,14 +457,17 @@ spectrum_bar.addEventListener("mousedown", function (e) {
 
 try {
   chrome.storage.local.get(
-    ["doc_bg",
+    [
+      "doc_bg",
       "custom_bg",
       "invert",
       "on", // OLD SETTING, DEPRECATED BUT KEPT FOR BACKWARDS COMPATIBILITY
       "mode",
       "raise_button",
       "show_border",
-      "accent_color"],
+      "accent_color",
+      "temp_accent_color",
+    ],
     function (data) {
       var option = data.doc_bg;
       var custom_data = data.custom_bg;
@@ -555,8 +561,22 @@ try {
         raise_button.checked = true;
       }
 
-      if (data.accent_color) {
+      if (data.temp_accent_color) {
+        console.log("LOADING TEMP ACCENT COLOR");
+        initiateKnob(data.temp_accent_color.hue);
+
+        // ENABLE RESET BUTTON
+        spectrum_reset.disabled = false;
+      } else if (data.accent_color) {
+        console.log("LOADING ACCENT COLOR");
         initiateKnob(data.accent_color.hue);
+
+        // DISABLE RESET BUTTON (SANITY)
+        spectrum_reset.disabled = true;
+      } else {
+        // SET DEFAULT ACCENT COLOR
+
+        spectrum_reset.disabled = true;
       }
     }
   );

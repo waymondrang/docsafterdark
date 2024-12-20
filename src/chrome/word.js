@@ -4,6 +4,12 @@ const head =
   document.documentElement;
 const version = chrome.runtime.getManifest().version;
 
+
+const OFF_MODE = 0;
+const LIGHT_MODE = 1;
+const DARK_MODE = 2;
+const DEFAULT_ACCENT_HUE = 88; // GREEN
+
 const theme = "#90caf9";
 const warning = "#90caf9";
 const link_color = "#90caf9";
@@ -29,34 +35,80 @@ const update_link_href =
 const update_link_style = "color: #cecece; text-decoration: underline;";
 const donation_link = "https://www.buymeacoffee.com/waymondrang";
 
-var dark_mode_state;
-var docs_homepage = document.querySelector(".docs-homescreen-gb-container");
+const static_light_mode_css_variables = {
+  "--primary-text-color":     "#000000",
+  "--secondary-text-color":   "#1A1A1A",
+  "--tertiary-text-color":    "#333333",
+  "--disabled-text":          "#666666",
+};
 
-function dad() {
-  if (document.querySelector("#docs-dark-mode")) {
+const hsl_light_mode_css_variables = {
+  "--root-background-color": {saturation: 20, lightness: 95},
+  "--primary-background-color": {saturation: 20, lightness: 97.5},
+  "--secondary-background-color": {saturation: 25, lightness: 90},
+  "--tertiary-background-color": {saturation: 30, lightness: 85},
+  "--quaternary-background-color": {saturation: 35, lightness: 80},
+  "--background-color-5": {saturation: 40, lightness: 75}
+};
+
+const hsl_accent_color_css_variables = {
+  "--accent-color": {saturation: 25, lightness: 50},
+  "--light-accent-color": {saturation: 25, lightness: 60, alpha: 0.10},
+  "--light-accent-hover-color": {saturation: 25, lightness: 40, alpha: 0.20},
+  "--accent-hover-color": {saturation: 25, lightness: 60}
+}
+
+var mode;
+var accent_color;
+
+// DO NOT ENABLE DARK MODE ON GOOGLE DOCS HOMEPAGE
+if (document.querySelector(".docs-homescreen-gb-container"))
+  throw new Error("NOT ENABLING ON GOOGLE DOCS HOMEPAGE");
+
+function inject_docs_css() {
+  if (document.querySelector("#docs-dark-mode"))
     return;
-  }
-  dark_mode_state = true;
+
   const css = document.createElement("link");
   css.setAttribute("href", chrome.runtime.getURL("docs.css"));
   css.id = "docs-dark-mode";
   css.rel = "stylesheet";
+
   document.body.insertBefore(css, document.body.lastChild);
+}
+
+function inject_dark_mode() {
+  mode = DARK_MODE;
+
+  inject_docs_css();
+  remove_accent_color(); // TODO: USE ACCENT COLOR STILL IN DARK MODE
+
   insert_button();
 }
 
-function remove_dad() {
-  dark_mode_state = false;
+function inject_light_mode() {
+  mode = LIGHT_MODE;
+
+  update_accent_color(accent_color);
+  inject_docs_css();
+
+  insert_button();
+}
+
+function remove_docsafterdark() {
+  mode = OFF_MODE;
+
   if (document.querySelector("#docs-dark-mode"))
     document.querySelector("#docs-dark-mode").remove();
+
   if (document.querySelector("#dark-mode-switch"))
     document.querySelector("#dark-mode-switch").remove();
 }
 
 function insert_button() {
-  if (document.querySelector("#dark-mode-switch")) {
+  if (document.querySelector("#dark-mode-switch"))
     return;
-  }
+
   let toggle_button = document.createElement("button");
   toggle_button.id = "dark-mode-switch";
   toggle_button.textContent = "🌞";
@@ -64,15 +116,16 @@ function insert_button() {
     if (document.querySelector("#docs-dark-mode")) {
       document.querySelector("#docs-dark-mode").remove();
       this.textContent = "🌚";
-      dark_mode_state = false;
+      mode = false;
       //chrome.storage.local.set({ "gc-darkmode": false })
     } else {
-      dad();
+      inject_dark_mode();
       this.textContent = "🌞";
-      dark_mode_state = true;
+      mode = true;
       //chrome.storage.local.set({ "gc-darkmode": true })
     }
   };
+
   document.body.insertBefore(toggle_button, document.body.lastChild);
 }
 
@@ -219,133 +272,85 @@ function hueToRgb(p, q, t) {
  * 
  * @param {{hue: Number}} color 
  */
-function set_accent_color(color) {
+function update_accent_color(color) {
+  accent_color = color;
 
-  console.log("SETTING ACCENT COLOR", color);
+  // SET CSS VARIABLES
+  for (let [key, value] of Object.entries(static_light_mode_css_variables)) {
+    document.documentElement.style.setProperty(key, value);
+  }
 
-  // SET COLORS
-  // var rootBackgroundColor = rgbToHex(hslToRgb(hslColorData.h, 100, 99.5));
-  // var secondaryBackgroundColor = rgbToHex(hslToRgb(hslColorData.h, 100, 97.5));
-  // var tertiaryBackgroundColor = rgbToHex(hslToRgb(hslColorData.h, 100, 95.5));
-  // var quaternaryBackgroundColor = rgbToHex(hslToRgb(hslColorData.h, 100, 93.5));
-  // var primaryAccentColor = color; // TODO: USE HUE IF USER PICKS FROM SPECTRUM
+  for (let [key, value] of Object.entries(hsl_light_mode_css_variables)) {
+    document.documentElement.style.setProperty(key, rgbToHex(hslToRgb(color.hue, value.saturation, value.lightness)) + (value.alpha ? componentToHex(value.alpha * 255) : ""));
+  }
 
-  // TESTING SL VALUES
-  var rootBackgroundColor = rgbToHex(hslToRgb(color.hue, 20, 95));
-  var primaryBackgroundColor = rgbToHex(hslToRgb(color.hue, 20, 97.5));
-  var secondaryBackgroundColor = rgbToHex(hslToRgb(color.hue, 25, 90));
-  var tertiaryBackgroundColor = rgbToHex(hslToRgb(color.hue, 30, 85));
-  var quaternaryBackgroundColor = rgbToHex(hslToRgb(color.hue, 35, 80));
-  var backgroundColor5 = rgbToHex(hslToRgb(color.hue, 40, 75));
-  var primaryAccentColor = rgbToHex(hslToRgb(color.hue, 25, 50)); // TODO: USE HUE IF USER PICKS FROM SPECTRUM
-  var secondaryAccentColor = rgbToHex(hslToRgb(color.hue, 25, 60)); // TODO: USE HUE IF USER PICKS FROM SPECTRUM
+  for (let [key, value] of Object.entries(hsl_accent_color_css_variables)) {
+    document.documentElement.style.setProperty(key, rgbToHex(hslToRgb(color.hue, value.saturation, value.lightness)) + (value.alpha ? componentToHex(value.alpha * 255) : ""));
+  }
 
-  document.documentElement.style.setProperty(
-    "--root-background-color",
-    rootBackgroundColor
-  );
+  // document.documentElement.style.setProperty("--root-background-color", rootBackgroundColor);
+  // document.documentElement.style.setProperty("--primary-background-color", primaryBackgroundColor);
+  // document.documentElement.style.setProperty("--secondary-background-color", secondaryBackgroundColor);
+  // document.documentElement.style.setProperty("--tertiary-background-color", tertiaryBackgroundColor);
+  // document.documentElement.style.setProperty("--quaternary-background-color", quaternaryBackgroundColor);
+  // document.documentElement.style.setProperty("--background-color-5", backgroundColor5);
 
-  document.documentElement.style.setProperty(
-    "--primary-background-color",
-    primaryBackgroundColor
-  );
-
-  document.documentElement.style.setProperty(
-    "--secondary-background-color",
-    secondaryBackgroundColor
-  );
-
-  document.documentElement.style.setProperty(
-    "--tertiary-background-color",
-    tertiaryBackgroundColor
-  );
-
-  document.documentElement.style.setProperty(
-    "--quaternary-background-color",
-    quaternaryBackgroundColor
-  );
-
-  document.documentElement.style.setProperty(
-    "--background-color-5",
-    backgroundColor5
-  );
-
-  document.documentElement.style.setProperty(
-    "--accent-color",
-    primaryAccentColor
-  );
-
-  document.documentElement.style.setProperty(
-    "--light-accent-color",
-    primaryAccentColor + "1e"
-  );
-
-  document.documentElement.style.setProperty(
-    "--light-accent-hover-color",
-    primaryAccentColor + "28"
-  );
-
-  document.documentElement.style.setProperty(
-    "--accent-hover-color",
-    secondaryAccentColor
-  );
+  // document.documentElement.style.setProperty("--accent-color", primaryAccentColor);
+  // document.documentElement.style.setProperty("--light-accent-color", primaryAccentColor + "1e");
+  // document.documentElement.style.setProperty("--light-accent-hover-color", primaryAccentColor + "28");
+  // document.documentElement.style.setProperty("--accent-hover-color", secondaryAccentColor);
 }
 
+function remove_accent_color() {
+  for (let key of Object.keys(static_light_mode_css_variables)) {
+    document.documentElement.style.removeProperty(key);
+  }
+
+  for (let key of Object.keys(hsl_light_mode_css_variables)) {
+    document.documentElement.style.removeProperty(key);
+  }
+
+  for (let key of Object.keys(hsl_accent_color_css_variables)) {
+    document.documentElement.style.removeProperty(key);
+  }
+}
+
+function handle_mode(newMode) {
+  mode = newMode;
+
+  if (newMode == null) {
+    // FIRST INVOCATION; ENABLE DARK MODE BY DEFAULT
+    inject_dark_mode();
+    chrome.storage.local.set({ mode: DARK_MODE });
+    mode = DARK_MODE;
+  } else if (newMode == DARK_MODE) {
+    inject_dark_mode();
+  } else if (newMode == LIGHT_MODE) {
+    inject_light_mode();
+  } else {
+    // TURN OFF DOCSAFTERDARK
+    remove_docsafterdark();
+  }
+}
+
+/**
+ * SET UP FUNCTION, ONLY CALLED ONCE
+ */
 function set_up() {
-  document.documentElement.style.setProperty(
-    "--checkmark",
-    "url(" + chrome.runtime.getURL("assets/checkmark.secondary.png") + ")"
-  );
-  document.documentElement.style.setProperty(
-    "--revisions-sprite1",
-    "url(" +
-      chrome.runtime.getURL("assets/revisions_sprite1.secondary.svg") +
-      ")"
-  );
-  document.documentElement.style.setProperty(
-    "--close_18px",
-    "url(" + chrome.runtime.getURL("assets/close_18px.svg") + ")"
-  );
-  document.documentElement.style.setProperty(
-    "--lens",
-    "url(" + chrome.runtime.getURL("assets/lens.svg") + ")"
-  );
-  document.documentElement.style.setProperty(
-    "--jfk_sprite186",
-    "url(" + chrome.runtime.getURL("assets/jfk_sprite186.edited.png") + ")"
-  );
-  document.documentElement.style.setProperty(
-    "--dimension_highlighted",
-    "url(" +
-      chrome.runtime.getURL("assets/dimension-highlighted.edited.png") +
-      ")"
-  );
-  document.documentElement.style.setProperty(
-    "--dimension_unhighlighted",
-    "url(" +
-      chrome.runtime.getURL("assets/dimension-unhighlighted.edited.png") +
-      ")"
-  );
-  document.documentElement.style.setProperty(
-    "--access_denied",
-    "url(" + chrome.runtime.getURL("assets/access_denied_transparent.png") + ")"
-  );
-  document.documentElement.style.setProperty(
-    "--access_denied_600",
-    "url(" +
-      chrome.runtime.getURL("assets/access_denied_600_transparent.png") +
-      ")"
-  );
-  document.documentElement.style.setProperty(
-    "--gm_add_black_24dp",
-    "url(" + chrome.runtime.getURL("assets/gm_add_black_24dp.png") + ")"
-  );
+  document.documentElement.style.setProperty("--checkmark", "url(" + chrome.runtime.getURL("assets/checkmark.secondary.png") + ")");
+  document.documentElement.style.setProperty("--revisions-sprite1", "url(" + chrome.runtime.getURL("assets/revisions_sprite1.secondary.svg") + ")");
+  document.documentElement.style.setProperty("--close_18px", "url(" + chrome.runtime.getURL("assets/close_18px.svg") + ")");
+  document.documentElement.style.setProperty("--lens", "url(" + chrome.runtime.getURL("assets/lens.svg") + ")");
+  document.documentElement.style.setProperty("--jfk_sprite186", "url(" + chrome.runtime.getURL("assets/jfk_sprite186.edited.png") + ")");
+  document.documentElement.style.setProperty("--dimension_highlighted", "url(" + chrome.runtime.getURL("assets/dimension-highlighted.edited.png") + ")");
+  document.documentElement.style.setProperty("--dimension_unhighlighted", "url(" + chrome.runtime.getURL("assets/dimension-unhighlighted.edited.png") + ")");
+  document.documentElement.style.setProperty("--access_denied", "url(" + chrome.runtime.getURL("assets/access_denied_transparent.png") + ")");
+  document.documentElement.style.setProperty("--access_denied_600", "url(" + chrome.runtime.getURL("assets/access_denied_600_transparent.png") + ")");
+  document.documentElement.style.setProperty("--gm_add_black_24dp", "url(" + chrome.runtime.getURL("assets/gm_add_black_24dp.png") + ")");
 
   let inverted;
   let grayscale;
   let show_border;
-
-  console.log("GETTING FROM STORAGE");
 
   chrome.storage.local.get(
     [
@@ -363,16 +368,10 @@ function set_up() {
         let option = data.doc_bg;
         let custom = data.custom_bg;
         if (option == "custom") {
-          document.documentElement.style.setProperty(
-            "--document_background",
-            custom
-          );
+          document.documentElement.style.setProperty("--document_background", custom);
         } else {
           if (backgrounds[option]) {
-            document.documentElement.style.setProperty(
-              "--document_background",
-              backgrounds[option]
-            );
+            document.documentElement.style.setProperty("--document_background", backgrounds[option]);
           } else {
             console.error("Invalid background option");
           }
@@ -408,9 +407,19 @@ function set_up() {
       //////////////////
 
       if (Object.keys(data).includes("accent_color")) {
-        set_accent_color(data.accent_color);
+        console.log("ACCENT COLOR", data.accent_color);
+
+        accent_color = data.accent_color;
+
+        update_accent_color(data.accent_color);
       } else {
-        // TODO: SET DEFAULT ACCENT COLOR
+        // SET DEFAULT ACCENT COLOR
+        accent_color = { hue: DEFAULT_ACCENT_HUE };
+        
+        update_accent_color(accent_color);
+
+        // SAVE DEFAULT ACCENT COLOR
+        chrome.storage.local.set({ accent_color: { hue: DEFAULT_ACCENT_HUE } });
       }
 
       // Handle raise button option
@@ -418,22 +427,9 @@ function set_up() {
         Object.keys(data).includes("raise_button") ? data.raise_button : false
       );
 
-      document.documentElement.style.setProperty(
-        "--document_invert",
-        inverted
-          ? (grayscale ? grayscale_value + " " : "") + invert_value
-          : "none"
-      );
-
-      document.documentElement.style.setProperty(
-        "--document_border",
-        show_border ? page_border : "none"
-      );
-
-      document.documentElement.style.setProperty(
-        "--gm3_document_border",
-        show_border ? gm3_page_border : "none"
-      );
+      document.documentElement.style.setProperty("--document_invert", inverted ? (grayscale ? grayscale_value + " " : "") + invert_value : "none");
+      document.documentElement.style.setProperty("--document_border", show_border ? page_border : "none");
+      document.documentElement.style.setProperty("--gm3_document_border", show_border ? gm3_page_border : "none");
 
       // Do not create notification if not needed
 
@@ -537,13 +533,9 @@ function set_up() {
       );
     }
 
-    // Handle toggle change
-    if (Object.keys(changes).includes("on")) {
-      if (changes.on.newValue) {
-        dad();
-      } else {
-        remove_dad();
-      }
+    // HANDLE MODE CHANGE
+    if (Object.keys(changes).includes("mode")) {
+      handle_mode(changes.mode.newValue);
     }
 
     // Handle raise button option change
@@ -567,34 +559,19 @@ function set_up() {
         changes.show_border.newValue ? gm3_page_border : "none"
       );
     }
-
-    // TODO: HANDLE ACCENT COLOR CHANGE
-    // if (Object.keys(changes).includes("accent_color")) {
-    //   set_accent_color(changes.accent_color.newValue);
-    // }
   });
 }
 
 set_up();
 
 // Handle global toggle
-chrome.storage.local.get(["on"], function (data) {
-  // Initial installation state
-  if (data.on == null) {
-    dad();
-    chrome.storage.local.set({ on: true }); // Enable by default
-    dark_mode_state = true;
-  } else if (data.on && !docs_homepage) {
-    dad();
-    dark_mode_state = true;
-  }
+chrome.storage.local.get(["mode"], function (data) {
+  handle_mode(data.mode);
 });
 
+// LISTEN FOR MESSAGES FROM POPUP
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.type == "setAccentColor") {
-    console.log("SETTING ACCENT COLOR", request.color);
-    set_accent_color(request.color);
+    update_accent_color(request.color);
   }
 });
-
-console.log("SET UP MESSAGE LISTENER");

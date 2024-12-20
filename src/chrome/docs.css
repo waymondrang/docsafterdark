@@ -87,7 +87,46 @@
   --accent-hover-color: #FFA319;
   --light-accent-color: #E693171a; /* SEMI-TRANSPARENT */
   --light-accent-hover-color: #E693171e;
+}
+
+:root {
+  --primary-text-color: #FFFFFF;
+  --secondary-text-color: #F2F2F2;
+  --tertiary-text-color: #E6E6E6;
+  --disabled-text: #666666;
+
+  --root-background-color: #000000;
+  --primary-background-color: #1A1A1A;
+  --secondary-background-color: #0D0D0D;
+  --tertiary-background-color: #262626;
+  --quaternary-background-color: #333333;
+  --background-color-5: #454545;
+
+  --menu-background: var(--secondary-background-color);
+  --hover-background-color: #FFFFFF1a;
+  --secondary-hover-background-color: #FFFFFF1e;
+
+  --solid-hover-background-color: #404040;
+  --secondary-solid-hover-background-color: #4D4D4D;
+
+  --primary-border-color: #4D4D4D;
+  --secondary-border-color: #404040;
+  --lighter-border-color: #808080;
+  --hover-border-color: #595959;
+
+  --input-border-color: #666666;
+  --input-hover-border-color: #808080;
+  --input-background-color: var(--tertiary-background-color); /* CURRENTLY USED FOR CALENDAR INPUT */
+
+  --button-text-color: #fff;
   
+  --accent-color: #E81A43;
+  --accent-hover-color: #E82E54;
+  --light-accent-color: #E81A431a;
+  --light-accent-hover-color: #E81A431e;
+}
+
+:root {
   --gm3-sys-color-on-surface: var(--primary-text-color);
   --gm3-sys-color-on-surface-variant: var(--secondary-text-color);
   
@@ -109,7 +148,7 @@
   --gm3-text-field-filled-container-color: var(--tertiary-background-color);
   --gm3-text-field-outlined-focus-indicator-outline-color: var(--input-border-color);       /* EMOJI SEARCH OUTLINE */
 
-  --gm3-button-filled-disabled-container-color: #e6e6e6;                                  /* WHAT IS THIS */
+  --gm3-button-filled-disabled-container-color: #e6e6e6;                                  /* WHAT IS THIS? */
   --gm3-button-outlined-hover-label-text-color: var(--accent-color);
   --gm3-progress-button-filled-container-color: var(--accent-color);
 
@@ -762,6 +801,7 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
 .docos-comments-pe .docos-streamdocoview.docos-docoview-resolved .docos-showrepliesbutton-collapsed-internal-container, .docos-comments-pe .docs-gm.docos-xeditor .docos-streamdocoview.docos-docoview-resolved, .docos-comments-pe .docs-gm.docos-xeditor .docos-streamdocoview.docos-docoview-resolved .docos-show-more, .docos-comments-pe .docs-gm.docos-xeditor .docos-streamdocoview.docos-docoview-resolved.docos-docoview-active,
 .javascriptMaterialdesignGm3WizTabsPrimary-tab,
 .aiBlockMenuBarBubblePrimaryButtonContainer,
+.docs-hover-embed-dark-perview-item-body,
 .aiBlockMenuBarBubbleSecondaryButtonContainer,
 .docs-grille-gm3 #docs-instant-bubble /* NOT EXACTLY WHITE, MIDWAY */,
 .docs-material-gm-dialog,
@@ -1051,7 +1091,8 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
 .docs-grille-gm3.docos .jfk-button.jfk-button-action.jfk-button-focused.jfk-button-active, .docs-grille-gm3.docos.docs-gm .jfk-button.jfk-button-action.jfk-button-focused, .docs-grille-gm3.docos.docs-gm .jfk-button.jfk-button-action.jfk-button-focused.jfk-button-hover,
 .docs-material-button-fill-primary.docs-material-button,
 .docos-comments-pe .docos-xeditor .docos-streampane-zero-state-add-comment-button.docs-material-button,
-.docs-image-synthesis-sidebar .image-synthesis-creation-button.image-synthesis-begin-create
+.docs-image-synthesis-sidebar .image-synthesis-creation-button.image-synthesis-begin-create,
+.docs-grille-version-history .docs-revisions-chromecover-titlebar-button-action, .docs-grille-version-history .docs-revisions-chromecover-titlebar-second-button-action
 {
   background: var(--accent-color);
 }
@@ -1064,7 +1105,9 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
 .docs-gm .docs-material-bubble .jfk-button-action.jfk-button-focused, .docs-gm .modal-dialog .goog-buttonset-action:focus, .docs-gm .modal-dialog .jfk-button-action.jfk-button-focused,
 .docos-comments-pe .docos-xeditor .docos-streampane-zero-state-add-comment-button.docs-material-button-hover,
 .docs-image-synthesis-sidebar .image-synthesis-creation-button.image-synthesis-begin-create:hover,
-.docs-gm3-filled-button.docs-gm3-button-hover
+.docs-gm3-filled-button.docs-gm3-button-hover,
+.docs-grille-version-history .docs-revisions-chromecover-titlebar-button-action.goog-flat-button-hover,
+.docs-grille-version-history .docs-revisions-chromecover-titlebar-button-action.goog-flat-button-focused
 {
   background: var(--accent-hover-color);
 }
@@ -1708,4 +1751,10 @@ textarea.docs-search-bar-input.goog-textarea
 .docs-gm.docs-grille-gm3.docos-comments-pe .docos-anchoreddocoview
 {
   background: transparent;
+}
+
+@media screen and (max-width: 1600px) {
+  .docs-grille-gm3 #docs-omnibox-toolbar.assisted-actions .docs-omnibox-input {
+    background-color: var(--secondary-background-color);
+  }
 }
