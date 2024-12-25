@@ -1,8 +1,8 @@
-#dark-mode-switch {
+#docsafterdark_switch {
   position: fixed;
   left: 24px;
   bottom: 24px;
-  bottom: var(--dad-switch-position);
+  bottom: var(--docsafterdark-switch-position);
   border: 0.0625rem solid #3737371a;
   border-radius: 500px;
   background-color: #2121211a;

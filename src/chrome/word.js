@@ -1,141 +1,3 @@
-const head =
-  document.head ||
-  document.getElementsByTagName("head")[0] ||
-  document.documentElement;
-const version = chrome.runtime.getManifest().version;
-
-
-const OFF_MODE = 0;
-const LIGHT_MODE = 1;
-const DARK_MODE = 2;
-const DEFAULT_ACCENT_HUE = 88; // GREEN
-
-const theme = "#90caf9";
-const warning = "#90caf9";
-const link_color = "#90caf9";
-const invert_value = "invert(1)";
-const grayscale_value = "contrast(82%) grayscale(100%)";
-const page_border = "0 0 0 1px";
-const gm3_page_border = "1px solid var(--primary-border-color)";
-const backgrounds = {
-  default: "#ffffff",
-  shade: "#999999",
-  dark: "#1b1b1b",
-  black: "#000000",
-};
-const default_background = "default";
-const update_text_style =
-  "border: 1px solid #4d4d4d; background-color: #212121; padding: 8px 12px; border-radius: 6px; box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); font-size: 12px; font-family: Google Sans,Roboto,sans-serif;"; // use fixed font size
-const close_button_style =
-  "background-color: #4d4d4d; border-radius: 2px; color: #64b5f6; border: none; cursor: pointer; margin-left: 12px; font-size: inherit;";
-const update_notification_style =
-  "position: fixed; top: 12px; left: 0; right: 0; color: #cecece; padding: 12px; text-align: center; z-index: 2500000000; width: fit-content; margin: 0 auto;";
-const update_link_href =
-  "https://github.com/waymondrang/docsafterdark/releases";
-const update_link_style = "color: #cecece; text-decoration: underline;";
-const donation_link = "https://www.buymeacoffee.com/waymondrang";
-
-const static_light_mode_css_variables = {
-  "--primary-text-color":     "#000000",
-  "--secondary-text-color":   "#1A1A1A",
-  "--tertiary-text-color":    "#333333",
-  "--disabled-text":          "#666666",
-};
-
-const hsl_light_mode_css_variables = {
-  "--root-background-color": {saturation: 20, lightness: 95},
-  "--primary-background-color": {saturation: 20, lightness: 97.5},
-  "--secondary-background-color": {saturation: 25, lightness: 90},
-  "--tertiary-background-color": {saturation: 30, lightness: 85},
-  "--quaternary-background-color": {saturation: 35, lightness: 80},
-  "--background-color-5": {saturation: 40, lightness: 75}
-};
-
-const hsl_accent_color_css_variables = {
-  "--accent-color": {saturation: 25, lightness: 50},
-  "--light-accent-color": {saturation: 25, lightness: 60, alpha: 0.10},
-  "--light-accent-hover-color": {saturation: 25, lightness: 40, alpha: 0.20},
-  "--accent-hover-color": {saturation: 25, lightness: 60}
-}
-
-var mode;
-var accent_color;
-
-// DO NOT ENABLE DARK MODE ON GOOGLE DOCS HOMEPAGE
-if (document.querySelector(".docs-homescreen-gb-container"))
-  throw new Error("NOT ENABLING ON GOOGLE DOCS HOMEPAGE");
-
-function inject_docs_css() {
-  if (document.querySelector("#docs-dark-mode"))
-    return;
-
-  const css = document.createElement("link");
-  css.setAttribute("href", chrome.runtime.getURL("docs.css"));
-  css.id = "docs-dark-mode";
-  css.rel = "stylesheet";
-
-  document.body.insertBefore(css, document.body.lastChild);
-}
-
-function inject_dark_mode() {
-  mode = DARK_MODE;
-
-  inject_docs_css();
-  remove_accent_color(); // TODO: USE ACCENT COLOR STILL IN DARK MODE
-
-  insert_button();
-}
-
-function inject_light_mode() {
-  mode = LIGHT_MODE;
-
-  update_accent_color(accent_color);
-  inject_docs_css();
-
-  insert_button();
-}
-
-function remove_docsafterdark() {
-  mode = OFF_MODE;
-
-  if (document.querySelector("#docs-dark-mode"))
-    document.querySelector("#docs-dark-mode").remove();
-
-  if (document.querySelector("#dark-mode-switch"))
-    document.querySelector("#dark-mode-switch").remove();
-}
-
-function insert_button() {
-  if (document.querySelector("#dark-mode-switch"))
-    return;
-
-  let toggle_button = document.createElement("button");
-  toggle_button.id = "dark-mode-switch";
-  toggle_button.textContent = "🌞";
-  toggle_button.onclick = function () {
-    if (document.querySelector("#docs-dark-mode")) {
-      document.querySelector("#docs-dark-mode").remove();
-      this.textContent = "🌚";
-      mode = false;
-      //chrome.storage.local.set({ "gc-darkmode": false })
-    } else {
-      inject_dark_mode();
-      this.textContent = "🌞";
-      mode = true;
-      //chrome.storage.local.set({ "gc-darkmode": true })
-    }
-  };
-
-  document.body.insertBefore(toggle_button, document.body.lastChild);
-}
-
-function raise_button(condition) {
-  document.documentElement.style.setProperty(
-    "--dad-switch-position",
-    condition ? "74px" : "24px"
-  );
-}
-
 ///////////////////////
 // UTILITY FUNCTIONS //
 ///////////////////////
@@ -267,65 +129,220 @@ function hueToRgb(p, q, t) {
   return p;
 }
 
+///////////////////////////
+// END UTILITY FUNCTIONS //
+///////////////////////////
+
+const head =
+  document.head ||
+  document.getElementsByTagName("head")[0] ||
+  document.documentElement;
+const version = chrome.runtime.getManifest().version;
+
+
+const mode_off              = 0;
+const mode_light            = 1;
+const mode_dark             = 2;
+
+const dark_mode_normal      = 0;
+const dark_mode_eclipse     = 1;
+
+const default_accent_hue    = 88; // GREEN
+
+const switch_on             = "🌚";
+const switch_off            = "🌞";
+const default_invert        = { invert: true, grayscale: true, oled: false }; // TODO: CHANGE NAME OF OLED PROPERTY
+
+const replacements_path     = "assets/replacements/";
+const css_path              = "assets/css/";
+
+const replacements = {
+  "--checkmark":                replacements_path + "checkmark.secondary.png",
+  "--revisions-sprite1":        replacements_path + "revisions_sprite1.secondary.svg",
+  "--close_18px":               replacements_path + "close_18px.svg",
+  "--lens":                     replacements_path + "lens.svg",
+  "--jfk_sprite186":            replacements_path + "jfk_sprite186.edited.png",
+  "--dimension_highlighted":    replacements_path + "dimension-highlighted.edited.png",
+  "--dimension_unhighlighted":  replacements_path + "dimension-unhighlighted.edited.png",
+  "--access_denied":            replacements_path + "access_denied_transparent.png",
+  "--access_denied_600":        replacements_path + "access_denied_600_transparent.png",
+  "--gm_add_black_24dp":        replacements_path + "gm_add_black_24dp.png",
+};
+
+const document_inverted_value             = "invert(1)";
+const document_inverted_grayscale_value   = "invert(1) contrast(79.5%) grayscale(100%)";
+const document_inverted_oled_value        = "invert(1) grayscale(100%)";
+
+const page_border = "0 0 0 1px";
+const gm3_page_border = "1px solid var(--primary-border-color)";
+const backgrounds = {
+  default: "#ffffff",
+  shade: "#999999",
+  dark: "#1b1b1b",
+  black: "#000000",
+};
+const default_background = "default";
+const update_text_style =
+  "border: 1px solid #4d4d4d; background-color: #212121; padding: 8px 12px; border-radius: 6px; box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); font-size: 12px; font-family: Google Sans,Roboto,sans-serif;"; // use fixed font size
+const close_button_style =
+  "background-color: #4d4d4d; border-radius: 2px; color: #64b5f6; border: none; cursor: pointer; margin-left: 12px; font-size: inherit;";
+const update_notification_style =
+  "position: fixed; top: 12px; left: 0; right: 0; color: #cecece; padding: 12px; text-align: center; z-index: 2500000000; width: fit-content; margin: 0 auto;";
+const update_link_href =
+  "https://github.com/waymondrang/docsafterdark/releases";
+const update_link_style = "color: #cecece; text-decoration: underline;";
+const donation_link = "https://www.buymeacoffee.com/waymondrang";
+
+var mode;
+var dark_mode_options;
+var button_options;
+var accent_color;
+var toggle_state = false;
+
+// DO NOT ENABLE DARK MODE ON GOOGLE DOCS HOMEPAGE
+if (document.querySelector(".docs-homescreen-gb-container"))
+  throw new Error("NOT ENABLING DOCSAFTERDARK ON GOOGLE DOCS HOMEPAGE");
+
+function inject_css_file(file) {
+  let file_id = "docsafterdark_" + file.replace(".", "_");
+
+  if (document.querySelector("#" + file_id))
+    return;
+
+  const css = document.createElement("link");
+  css.setAttribute("href", chrome.runtime.getURL(css_path + file));
+  css.id = file_id;
+  css.rel = "stylesheet";
+
+  document.body.insertBefore(css, document.body.lastChild);
+}
+
+function remove_css_file(file) {
+  let file_id = "docsafterdark_" + file.replace(".", "_");
+
+  if (document.querySelector("#" + file_id))
+    document.querySelector("#" + file_id).remove();
+}
+
 /**
- * Sets the accent color of the page.
+ * INJECTS DARK MODE VARIANT CSS
  * 
- * @param {{hue: Number}} color 
+ * @param {{ variant: number }} dark_mode
  */
+function inject_dark_mode(dark_mode) {  
+  mode = mode_dark;
+  
+  remove_css_file("light.css");
+  remove_css_file("dark_midnight.css");
+  
+  inject_css_file("docs.css");
+  inject_css_file("dark_normal.css"); // BASE DARK MODE
+  
+  if (dark_mode.variant == dark_mode_eclipse) {
+    inject_css_file("dark_midnight.css");
+    // DO NOT REMOVE NORMAL DARK MODE CSS
+  }
+}
+
+/**
+ * INJECTS LIGHT MODE CSS
+ */
+function inject_light_mode() {
+  mode = mode_light;
+
+  remove_css_file("dark_midnight.css");
+  remove_css_file("dark_normal.css");
+
+  inject_css_file("docs.css");
+  inject_css_file("light.css");
+}
+
+function remove_css_files() {
+  remove_css_file("docs.css");
+  remove_css_file("dark_midnight.css");
+  remove_css_file("dark_normal.css");
+  remove_css_file("light.css");
+}
+
+function remove_docsafterdark() {
+  mode = mode_off;
+
+  remove_css_files();
+
+  if (document.querySelector("#docsafterdark_switch"))
+    document.querySelector("#docsafterdark_switch").remove();
+}
+
+function button_callback(button) {
+  if (toggle_state) {
+    handle_mode(mode);
+
+    toggle_state = false;
+    button.textContent = switch_off;
+  } else {
+    remove_css_files();
+
+    toggle_state = true;
+    button.textContent = switch_on;
+  }
+}
+
+function insert_button() {
+  if (document.querySelector("#docsafterdark_switch"))
+    return;
+
+  let toggle_button = document.createElement("button");
+  toggle_button.id = "docsafterdark_switch";
+  toggle_button.textContent = switch_off;
+  toggle_button.onclick = () => button_callback(toggle_button);
+
+  document.body.insertBefore(toggle_button, document.body.lastChild);
+}
+
+/**
+ * HANDLES BUTTON
+ */
+function handle_button() {
+  if (button_options.show) {
+    insert_button();
+  } else {
+    if (document.querySelector("#docsafterdark_switch"))
+      document.querySelector("#docsafterdark_switch").remove();
+  }
+
+  document.documentElement.style.setProperty(
+    "--docsafterdark-switch-position",
+    button_options.raised ? "74px" : "24px"
+  );
+}
+
 function update_accent_color(color) {
   accent_color = color;
-
-  // SET CSS VARIABLES
-  for (let [key, value] of Object.entries(static_light_mode_css_variables)) {
-    document.documentElement.style.setProperty(key, value);
-  }
-
-  for (let [key, value] of Object.entries(hsl_light_mode_css_variables)) {
-    document.documentElement.style.setProperty(key, rgbToHex(hslToRgb(color.hue, value.saturation, value.lightness)) + (value.alpha ? componentToHex(value.alpha * 255) : ""));
-  }
-
-  for (let [key, value] of Object.entries(hsl_accent_color_css_variables)) {
-    document.documentElement.style.setProperty(key, rgbToHex(hslToRgb(color.hue, value.saturation, value.lightness)) + (value.alpha ? componentToHex(value.alpha * 255) : ""));
-  }
-
-  // document.documentElement.style.setProperty("--root-background-color", rootBackgroundColor);
-  // document.documentElement.style.setProperty("--primary-background-color", primaryBackgroundColor);
-  // document.documentElement.style.setProperty("--secondary-background-color", secondaryBackgroundColor);
-  // document.documentElement.style.setProperty("--tertiary-background-color", tertiaryBackgroundColor);
-  // document.documentElement.style.setProperty("--quaternary-background-color", quaternaryBackgroundColor);
-  // document.documentElement.style.setProperty("--background-color-5", backgroundColor5);
-
-  // document.documentElement.style.setProperty("--accent-color", primaryAccentColor);
-  // document.documentElement.style.setProperty("--light-accent-color", primaryAccentColor + "1e");
-  // document.documentElement.style.setProperty("--light-accent-hover-color", primaryAccentColor + "28");
-  // document.documentElement.style.setProperty("--accent-hover-color", secondaryAccentColor);
+  document.documentElement.style.setProperty("--accent-hue", color.hue);
 }
 
 function remove_accent_color() {
-  for (let key of Object.keys(static_light_mode_css_variables)) {
-    document.documentElement.style.removeProperty(key);
-  }
-
-  for (let key of Object.keys(hsl_light_mode_css_variables)) {
-    document.documentElement.style.removeProperty(key);
-  }
-
-  for (let key of Object.keys(hsl_accent_color_css_variables)) {
-    document.documentElement.style.removeProperty(key);
-  }
+  document.documentElement.style.removeProperty("--accent-hue");
 }
 
-function handle_mode(newMode) {
-  mode = newMode;
+/**
+ * HANDLES MODE AND VARIANT CHANGE
+ * 
+ * @param {{ mode: number | null, dark_mode: { variant: number } | null }} data
+ */
+function handle_mode() {
+  if (mode != mode_off && button_options && button_options.show)
+    handle_button();
 
-  if (newMode == null) {
-    // FIRST INVOCATION; ENABLE DARK MODE BY DEFAULT
+  if (mode == null) {
+    // FIRST INVOCATION (SHOULD NOT BE CALLED); ENABLE DARK MODE BY DEFAULT
     inject_dark_mode();
-    chrome.storage.local.set({ mode: DARK_MODE });
-    mode = DARK_MODE;
-  } else if (newMode == DARK_MODE) {
-    inject_dark_mode();
-  } else if (newMode == LIGHT_MODE) {
+
+    mode = mode_dark;
+    chrome.storage.local.set({ mode: mode });
+  } else if (mode == mode_dark) {
+    inject_dark_mode(dark_mode_options);
+  } else if (mode == mode_light) {
     inject_light_mode();
   } else {
     // TURN OFF DOCSAFTERDARK
@@ -334,239 +351,301 @@ function handle_mode(newMode) {
 }
 
 /**
- * SET UP FUNCTION, ONLY CALLED ONCE
+ * HANDLES DOCUMENT INVERT
+ * 
+ * @param {{invert: boolean, grayscale: boolean, oled: boolean}} invert
  */
-function set_up() {
-  document.documentElement.style.setProperty("--checkmark", "url(" + chrome.runtime.getURL("assets/checkmark.secondary.png") + ")");
-  document.documentElement.style.setProperty("--revisions-sprite1", "url(" + chrome.runtime.getURL("assets/revisions_sprite1.secondary.svg") + ")");
-  document.documentElement.style.setProperty("--close_18px", "url(" + chrome.runtime.getURL("assets/close_18px.svg") + ")");
-  document.documentElement.style.setProperty("--lens", "url(" + chrome.runtime.getURL("assets/lens.svg") + ")");
-  document.documentElement.style.setProperty("--jfk_sprite186", "url(" + chrome.runtime.getURL("assets/jfk_sprite186.edited.png") + ")");
-  document.documentElement.style.setProperty("--dimension_highlighted", "url(" + chrome.runtime.getURL("assets/dimension-highlighted.edited.png") + ")");
-  document.documentElement.style.setProperty("--dimension_unhighlighted", "url(" + chrome.runtime.getURL("assets/dimension-unhighlighted.edited.png") + ")");
-  document.documentElement.style.setProperty("--access_denied", "url(" + chrome.runtime.getURL("assets/access_denied_transparent.png") + ")");
-  document.documentElement.style.setProperty("--access_denied_600", "url(" + chrome.runtime.getURL("assets/access_denied_600_transparent.png") + ")");
-  document.documentElement.style.setProperty("--gm_add_black_24dp", "url(" + chrome.runtime.getURL("assets/gm_add_black_24dp.png") + ")");
-
-  let inverted;
-  let grayscale;
-  let show_border;
-
-  chrome.storage.local.get(
-    [
-      "doc_bg",
-      "custom_bg",
-      "invert",
-      "raise_button",
-      "show_border",
-      "updates",
-      "accent_color"
-    ],
-    function (data) {
-      console.log(data);
-      if (Object.keys(data).includes("doc_bg")) {
-        let option = data.doc_bg;
-        let custom = data.custom_bg;
-        if (option == "custom") {
-          document.documentElement.style.setProperty("--document_background", custom);
-        } else {
-          if (backgrounds[option]) {
-            document.documentElement.style.setProperty("--document_background", backgrounds[option]);
-          } else {
-            console.error("Invalid background option");
-          }
-        }
-      } else {
-        // Use default_background background as default
-        document.documentElement.style.setProperty(
-          "--document_background",
-          backgrounds[default_background]
-        );
-      }
-
-      // Handle invert option
-      if (Object.keys(data).includes("invert")) {
-        inverted = data.invert.invert;
-        grayscale = data.invert.grayscale;
-      } else {
-        // Enable inverted and grayscale by default
-        inverted = true;
-        grayscale = true;
-      }
-
-      // Handle show border option
-      if (Object.keys(data).includes("show_border")) {
-        show_border = data.show_border;
-      } else {
-        // Show border by default
-        show_border = true;
-      }
-
-      //////////////////
-      // ACCENT COLOR //
-      //////////////////
-
-      if (Object.keys(data).includes("accent_color")) {
-        console.log("ACCENT COLOR", data.accent_color);
-
-        accent_color = data.accent_color;
-
-        update_accent_color(data.accent_color);
-      } else {
-        // SET DEFAULT ACCENT COLOR
-        accent_color = { hue: DEFAULT_ACCENT_HUE };
-        
-        update_accent_color(accent_color);
-
-        // SAVE DEFAULT ACCENT COLOR
-        chrome.storage.local.set({ accent_color: { hue: DEFAULT_ACCENT_HUE } });
-      }
-
-      // Handle raise button option
-      raise_button(
-        Object.keys(data).includes("raise_button") ? data.raise_button : false
-      );
-
-      document.documentElement.style.setProperty("--document_invert", inverted ? (grayscale ? grayscale_value + " " : "") + invert_value : "none");
-      document.documentElement.style.setProperty("--document_border", show_border ? page_border : "none");
-      document.documentElement.style.setProperty("--gm3_document_border", show_border ? gm3_page_border : "none");
-
-      // Do not create notification if not needed
-
-      // Show update notification if data.updates is not set or if it is
-      // set but does not include the current version
-      if ((data.updates && !data.updates.includes(version)) || !data.updates) {
-        // Create notification
-        let update_notification;
-
-        update_notification = document.createElement("div");
-        update_notification.id = "bb-update-notification";
-        update_notification.style = update_notification_style;
-
-        var update_text = document.createElement("span");
-        update_text.textContent =
-          "DocsAfterDark has been updated to version " +
-          chrome.runtime.getManifest().version +
-          ". Read update notes on ";
-        update_text.style = update_text_style;
-
-        var update_link = document.createElement("a");
-        update_link.href = update_link_href;
-        update_link.target = "_blank";
-        update_link.textContent = "GitHub";
-        update_link.style = update_link_style;
-        update_text.appendChild(update_link);
-        update_text.appendChild(document.createTextNode("."));
-
-        var close_button = document.createElement("button");
-        close_button.textContent = "Close";
-        close_button.style = close_button_style;
-        close_button.onclick = function () {
-          update_notification.remove();
-        };
-        update_text.appendChild(close_button);
-        update_notification.appendChild(update_text);
-
-        // Insert notification into DOM
-        document.body.prepend(update_notification);
-
-        // Mark as seen in storage
-        if (data.updates) {
-          data.updates.push(version);
-          chrome.storage.local.set({ updates: data.updates });
-        } else {
-          chrome.storage.local.set({ updates: [version] });
-        }
-      }
+function handle_document_invert(invert) {
+  if (invert.invert) {
+    if (invert.grayscale && invert.oled) {
+      document.documentElement.style.setProperty("--document_invert", document_inverted_oled_value);
+    } else if (invert.grayscale) {
+      document.documentElement.style.setProperty("--document_invert", document_inverted_grayscale_value);
+    } else {
+      document.documentElement.style.setProperty("--document_invert", document_inverted_value);
     }
-  );
+  } else {
+    document.documentElement.style.setProperty("--document_invert", "none");
+  }
+}
 
-  chrome.storage.onChanged.addListener(function (changes, area) {
-    console.log(changes, inverted);
+/////////////////
+// ENTRY POINT //
+/////////////////
 
-    // Handle background change
-    if (Object.keys(changes).includes("doc_bg")) {
-      let option = changes.doc_bg.newValue;
-      if (option != "custom") {
+// SET REPLACEMENTS
+for (let [key, value] of Object.entries(replacements)) {
+  document.documentElement.style.setProperty(key, "url(" + chrome.runtime.getURL(value) + ")");
+}
+
+let show_border;
+
+chrome.storage.local.get(
+  [
+    "mode",
+    "dark_mode",
+    "doc_bg",
+    "custom_bg",
+    "invert",
+    "show_border",
+    "updates",
+    "accent_color",
+    "button_options",
+    "raise_button", // DEPRECATED BUT KEEP FOR BACKWARDS COMPATIBILITY
+  ],
+  function (data) {
+    //////////
+    // MODE //
+    //////////
+
+    if (data.mode != null) {
+      mode = data.mode;
+    } else {
+      // SET DEFAULT MODE
+      mode = mode_dark;
+      chrome.storage.local.set({ mode: mode });
+    }
+
+    ///////////////////
+    // MODE VARIANTS //
+    ///////////////////
+
+    if (data.dark_mode != null) {
+      dark_mode_options = data.dark_mode;
+    } else {
+      // SET DEFAULT DARK MODE OPTIONS
+      dark_mode_options = { variant: dark_mode_normal };
+      chrome.storage.local.set({ dark_mode: dark_mode_options });
+    }
+
+    /////////////////////////
+    // DOCUMENT BACKGROUND //
+    /////////////////////////
+
+    if (data.doc_bg != null) {
+      let option = data.doc_bg;
+      let custom = data.custom_bg;
+      if (option == "custom") {
+        document.documentElement.style.setProperty("--document_background", custom);
+      } else {
         if (backgrounds[option]) {
-          document.documentElement.style.setProperty(
-            "--document_background",
-            backgrounds[option]
-          );
+          document.documentElement.style.setProperty("--document_background", backgrounds[option]);
         } else {
           console.error("Invalid background option");
         }
+      }
+    } else {
+      // Use default_background background as default
+      document.documentElement.style.setProperty(
+        "--document_background",
+        backgrounds[default_background]
+      );
+    }
+
+    // HANDLE INVERT
+    if (data.invert != null) {
+      handle_document_invert(data.invert);
+    } else {
+      handle_document_invert(default_invert);
+    }
+
+    // HANDLE SHOW BORDER OPTION
+    if (data.show_border != null) {
+      show_border = data.show_border;
+    } else {
+      // Show border by default
+      show_border = true;
+    }
+
+    //////////////////
+    // ACCENT COLOR //
+    //////////////////
+
+    if (data.accent_color != null) {
+      accent_color = data.accent_color;
+      update_accent_color(data.accent_color);
+    } else {
+      // SET DEFAULT ACCENT COLOR
+      accent_color = { hue: default_accent_hue };
+      update_accent_color(accent_color);
+
+      // SAVE DEFAULT ACCENT COLOR
+      chrome.storage.local.set({ accent_color: { hue: default_accent_hue } });
+    }
+
+    ////////////
+    // BUTTON //
+    ////////////
+
+    // NOTE: MUST BE CALLED BEFORE HANDLE_MODE
+
+    // TODO: USE BACKGROUND WORKER TO CONSOLIDATE DEFAULT OPTIONS AND OPTION MIGRATION
+
+    button_options = data.button_options;
+
+    if (button_options == null) {
+      // CHECK IMPORT RAISED BUTTON SETTING
+      if (data.button_raised != null) {
+        button_options = { show: true, raised: data.button_raised };
       } else {
-        chrome.storage.local.get(["custom_bg"], function (data) {
-          let custom = data.custom_bg;
-          document.documentElement.style.setProperty(
-            "--document_background",
-            custom
-          );
-        });
+        button_options = { show: true, raised: false };
+      }
+
+      chrome.storage.local.set({ button_options: button_options });
+    }
+
+    ////////////////////////////
+    // HANDLE DOCUMENT BORDER //
+    ////////////////////////////
+
+    document.documentElement.style.setProperty("--document_border", show_border ? page_border : "none");
+    document.documentElement.style.setProperty("--gm3_document_border", show_border ? gm3_page_border : "none");
+
+    // Do not create notification if not needed
+
+    // Show update notification if data.updates is not set or if it is
+    // set but does not include the current version
+    if ((data.updates && !data.updates.includes(version)) || !data.updates) {
+      // Create notification
+      let update_notification;
+
+      update_notification = document.createElement("div");
+      update_notification.id = "bb-update-notification";
+      update_notification.style = update_notification_style;
+
+      var update_text = document.createElement("span");
+      update_text.textContent =
+        "DocsAfterDark has been updated to version " +
+        chrome.runtime.getManifest().version +
+        ". Read update notes on ";
+      update_text.style = update_text_style;
+
+      var update_link = document.createElement("a");
+      update_link.href = update_link_href;
+      update_link.target = "_blank";
+      update_link.textContent = "GitHub";
+      update_link.style = update_link_style;
+      update_text.appendChild(update_link);
+      update_text.appendChild(document.createTextNode("."));
+
+      var close_button = document.createElement("button");
+      close_button.textContent = "Close";
+      close_button.style = close_button_style;
+      close_button.onclick = function () {
+        update_notification.remove();
+      };
+      update_text.appendChild(close_button);
+      update_notification.appendChild(update_text);
+
+      // Insert notification into DOM
+      document.body.prepend(update_notification);
+
+      // Mark as seen in storage
+      if (data.updates) {
+        data.updates.push(version);
+        chrome.storage.local.set({ updates: data.updates });
+      } else {
+        chrome.storage.local.set({ updates: [version] });
       }
     }
 
-    // Handle custom background change. This differs from above
-    // because it is only called when doc_bg is already set
-    // to "custom"
-    if (Object.keys(changes).includes("custom_bg")) {
-      var custom = changes.custom_bg.newValue;
-      document.documentElement.style.setProperty(
-        "--document_background",
-        custom
-      );
+    /////////////////////
+    // INVOKE HANDLERS //
+    /////////////////////
+
+    handle_mode();
+  }
+);
+
+chrome.storage.onChanged.addListener(function (changes, area) {
+  // Handle background change
+  if (Object.keys(changes).includes("doc_bg")) {
+    let option = changes.doc_bg.newValue;
+    if (option != "custom") {
+      if (backgrounds[option]) {
+        document.documentElement.style.setProperty(
+          "--document_background",
+          backgrounds[option]
+        );
+      } else {
+        console.error("Invalid background option");
+      }
+    } else {
+      chrome.storage.local.get(["custom_bg"], function (data) {
+        let custom = data.custom_bg;
+        document.documentElement.style.setProperty(
+          "--document_background",
+          custom
+        );
+      });
     }
+  }
 
-    // Handle invert option change
-    if (Object.keys(changes).includes("invert")) {
-      console.log("INVERT CHANGED", inverted, changes);
-      let invert_changes = changes.invert.newValue;
-      inverted = invert_changes.invert;
-      grayscale = invert_changes.grayscale;
-      // Invert toggle property
-      document.documentElement.style.setProperty(
-        "--document_invert",
-        inverted
-          ? (grayscale ? grayscale_value + " " : "") + invert_value
-          : "none"
-      );
-    }
+  // Handle custom background change. This differs from above
+  // because it is only called when doc_bg is already set
+  // to "custom"
+  if (Object.keys(changes).includes("custom_bg")) {
+    var custom = changes.custom_bg.newValue;
+    document.documentElement.style.setProperty(
+      "--document_background",
+      custom
+    );
+  }
 
-    // HANDLE MODE CHANGE
-    if (Object.keys(changes).includes("mode")) {
-      handle_mode(changes.mode.newValue);
-    }
+  // Handle invert option change
+  if (changes.invert != null) {
+    handle_document_invert(changes.invert.newValue);
+  }
 
-    // Handle raise button option change
-    if (Object.keys(changes).includes("raise_button")) {
-      console.log("RAISE BUTTON CHANGED", changes);
-      raise_button(changes.raise_button.newValue);
-    }
+  //////////
+  // MODE //
+  //////////
 
-    // Handle show border option change
-    if (Object.keys(changes).includes("show_border")) {
-      document.documentElement.style.setProperty(
-        "--document_border",
-        changes.show_border.newValue ? page_border : "none"
-      );
-    }
+  if (changes.mode != null) {
+    mode = changes.mode.newValue;
+  }
 
-    // Handle show border option change
-    if (Object.keys(changes).includes("show_border")) {
-      document.documentElement.style.setProperty(
-        "--gm3_document_border",
-        changes.show_border.newValue ? gm3_page_border : "none"
-      );
-    }
-  });
-}
+  ///////////////////////
+  // DARK MODE VARIANT //
+  ///////////////////////
 
-set_up();
+  if (changes.dark_mode != null) {
+    dark_mode_options = changes.dark_mode.newValue;
+  }
 
-// Handle global toggle
-chrome.storage.local.get(["mode"], function (data) {
-  handle_mode(data.mode);
+  ////////////
+  // BUTTON //
+  ////////////
+
+  // NOTE: MUST BE CALLED BEFORE HANDLE_MODE
+
+  if (changes.button_options != null) {
+    button_options = changes.button_options.newValue;
+    handle_button();
+  }
+
+  // Handle show border option change
+  if (Object.keys(changes).includes("show_border")) {
+    document.documentElement.style.setProperty(
+      "--document_border",
+      changes.show_border.newValue ? page_border : "none"
+    );
+  }
+
+  // Handle show border option change
+  if (Object.keys(changes).includes("show_border")) {
+    document.documentElement.style.setProperty(
+      "--gm3_document_border",
+      changes.show_border.newValue ? gm3_page_border : "none"
+    );
+  }
+
+  /////////////////////
+  // INVOKE HANDLERS //
+  /////////////////////
+
+  if (changes.mode != null || changes.dark_mode != null) 
+    handle_mode(); // ONLY HANDLE MODE IF THERE ARE CHANGES
 });
 
 // LISTEN FOR MESSAGES FROM POPUP
