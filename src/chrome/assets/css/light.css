@@ -4,12 +4,12 @@
   --tertiary-text-color: #333333;
   --disabled-text: #666666;
 
-  --root-background-color: hsl(var(--accent-hue), 20%, 95%);
-  --primary-background-color: hsl(var(--accent-hue), 20%, 97.5%);
-  --secondary-background-color: hsl(var(--accent-hue), 25%, 90%);
-  --tertiary-background-color: hsl(var(--accent-hue), 30%, 85%);
-  --quaternary-background-color: hsl(var(--accent-hue), 35%, 80%);
-  --background-color-5: hsl(var(--accent-hue), 40%, 75%);
+  --root-background-color: hsl(var(--docsafterdark-accent-hue), 20%, 95%);
+  --primary-background-color: hsl(var(--docsafterdark-accent-hue), 20%, 97.5%);
+  --secondary-background-color: hsl(var(--docsafterdark-accent-hue), 25%, 90%);
+  --tertiary-background-color: hsl(var(--docsafterdark-accent-hue), 30%, 85%);
+  --quaternary-background-color: hsl(var(--docsafterdark-accent-hue), 35%, 80%);
+  --background-color-5: hsl(var(--docsafterdark-accent-hue), 40%, 75%);
 
   --menu-background: var(--primary-background-color);
   --hover-background-color: #0000001a;
@@ -22,10 +22,10 @@
   --lighter-border-color: #808080;
   --hover-border-color: #595959;
 
-  --accent-color: hsl(var(--accent-hue), 25%, 50%);
-  --light-accent-color: hsla(var(--accent-hue), 25%, 60%, 0.10);
-  --light-accent-hover-color: hsla(var(--accent-hue), 25%, 40%, 0.20);
-  --accent-hover-color: hsla(var(--accent-hue), 25%, 60%, 1);
+  --accent-color: hsl(var(--docsafterdark-accent-hue), 25%, 50%);
+  --light-accent-color: hsla(var(--docsafterdark-accent-hue), 25%, 60%, 0.10);
+  --light-accent-hover-color: hsla(var(--docsafterdark-accent-hue), 25%, 40%, 0.20);
+  --accent-hover-color: hsla(var(--docsafterdark-accent-hue), 25%, 60%, 1);
 }
 
 .docs-gm .goog-menu

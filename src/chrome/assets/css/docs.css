@@ -816,7 +816,8 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
 .docs-grille-gm3.docs-gm .docos-anchoreddocoview.docos-docoview-active, .docs-grille-gm3.docs-gm .docos-anchoreddocoview.docos-docoview-active:hover, .docs-grille-gm3.docs-gm .docos-comments-pe .docos-docoview-active .docos-anchoreddocoview-internal, .docs-grille-gm3.docs-gm .docos-comments-pe .docos-docoview-active.docos-anchoreddocoview:hover .docos-anchoreddocoview-internal, .docs-grille-gm3.docs-gm .docos-docoview-active .docos-anchoreddocoview-input-pane, .docs-grille-gm3.docs-gm .docos-docoview-active .docos-anchoredreplyview, .docs-grille-gm3.docs-gm .docos-docoview-active:hover .docos-anchoreddocoview-input-pane, .docs-grille-gm3.docs-gm .docos-docoview-active:hover .docos-anchoredreplyview,
 .docos-comments-pe .docos.docs-gm.docos-xeditor .docos-streamdocoview.docos-docoview-active, .docos-comments-pe .docos.docs-gm.docos-xeditor .docos-streamdocoview.docos-docoview-active .docos-show-more,
 .docos-comments-pe .docos-streampane-searchbar .docos-streampane-search-input,
-.kix-citations-accessed-by-select, .kix-citations-format-select, .kix-citations-select, .kix-citations-source-type-select
+.kix-citations-accessed-by-select, .kix-citations-format-select, .kix-citations-select, .kix-citations-source-type-select,
+.docs-grille-gm3 .docos-calltoactionview
 {
   background: var(--primary-background-color);
 }
@@ -1002,7 +1003,8 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
 .docs-material-button-fill-primary.docs-material-button-hover.docs-material-button-focused,
 /* SHOULD REALLY BE TERTIARY ACCENT COLOR */
 .docs-material-button-fill-primary.docs-material-button-focused, .docs-material-button-fill-primary.docs-material-button-focused.docs-material-button-no-focus-border,
-.docs-image-synthesis-sidebar .image-synthesis-creation-button.image-synthesis-begin-create:focus
+.docs-image-synthesis-sidebar .image-synthesis-creation-button.image-synthesis-begin-create:focus,
+.docos.docs-gm .docs-material-gm-checkbox.docs-material-gm-checkbox-checked, .docos.docs-gm .docs-material-gm-checkbox.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused
 {
   background: var(--accent-color);
 }
@@ -1227,7 +1229,8 @@ textarea.docs-search-bar-input.goog-textarea,
 .kix-documentmetrics-widget,
 .docs-gm .kix-spell-bubble,
 .kix-watermark-sidebar-header,
-.document-margin-floating-control-bubble.docs-bubble.document-margin-floating-control-grouped
+.document-margin-floating-control-bubble.docs-bubble.document-margin-floating-control-grouped,
+.docs-bubble.docs-toc-menu-bubble
 {
   border-color: var(--primary-border-color);
 }
@@ -1275,7 +1278,8 @@ div.docs-material-gm-checkbox-focused, span.docs-material-gm-checkbox-focused,
 .docos-ssd-content .docos-ssd-radio-button-group .jfk-radiobutton-checked .jfk-radiobutton-radio,
 .docs-checkupdialog-suggestion-button-focused.jfk-button,
 .goog-date-picker-today:before, .goog-date-picker-today:hover:before,
-.ita-cp-search.ita-cp-focus
+.ita-cp-search.ita-cp-focus,
+.docos.docs-gm .docs-material-gm-checkbox.docs-material-gm-checkbox-checked, .docos.docs-gm .docs-material-gm-checkbox.docs-material-gm-checkbox-focused
 {
   border-color: var(--accent-color);
 }
@@ -1620,11 +1624,13 @@ img.docs-generativeai-onboarding-dialog-image,
   .docs-grille-gm3 #docs-omnibox-toolbar.assisted-actions .docs-omnibox-input {
     background-color: var(--secondary-background-color);
   }
-}
 
-@media screen and (max-width: 1600px) {
   .docs-grille-gm3 #docs-omnibox-toolbar.assisted-actions .docs-omnibox-input:hover {
     background-color: var(--hover-background-color);
+  }
+
+  .docs-grille-gm3.docs-body-pageless #docs-omnibox-toolbar.assisted-actions .docs-omnibox-input {
+    background-color: var(--secondary-background-color);
   }
 }
 
@@ -1701,5 +1707,5 @@ img.docs-generativeai-onboarding-dialog-image,
 /* DOCUMENT BORDER SHOULD BE CONTROLLABLE IN ANY MODE */
 
 .kix-page-paginated {
-  outline: var(--gm3_document_border);
+  outline: var(--docsafterdark_document_border);
 }

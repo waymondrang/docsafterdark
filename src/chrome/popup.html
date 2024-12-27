@@ -23,20 +23,28 @@
 
       <div id="tip_container" class="hidden">
         <div id="tip">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fefefe">
-            <path
-              d="M240-400h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM480-80 373-240H160q-33 0-56.5-23.5T80-320v-480q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H587L480-80Zm0-144 64-96h256v-480H160v480h256l64 96Zm0-336Z" />
-          </svg>
-          <p>All options will auto-save, with the exception of Accent Color.</p>
+          <div>
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
+              <path
+                d="M240-400h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM480-80 373-240H160q-33 0-56.5-23.5T80-320v-480q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H587L480-80Zm0-144 64-96h256v-480H160v480h256l64 96Zm0-336Z" />
+            </svg>
+          </div>
+          <div>
+            <p>
+              All options will auto-save, with the exception of Accent Color. Document invert assumes the background is white.
+            </p>
+          </div>
         </div>
-        </div>
-
-      <p class="section_label">Mode Toggle</p>
-      <div id="modes" class="button_row">
-        <button id="dark" class="accent_button">Dark</button>
-        <button id="light" class="accent_button">Light</button>
-        <button id="off" class="accent_button">Off</button>
       </div>
+
+        <div class="option_section">
+          <p class="section_label">Mode Toggle</p>
+          <div id="modes" class="button_row">
+            <button id="dark" class="accent_button">Dark</button>
+            <button id="light" class="accent_button">Light</button>
+            <button id="off" class="accent_button">Off</button>
+          </div>
+        </div>
 
       <div class="option_section">
         <p class="section_label">Dark Mode Variant</p>
@@ -48,20 +56,28 @@
 
       <div class="option_section">
         <p class="section_label">Document Options</p>
-        <div class="checkbox_row option_row">
-          <div class="input">
-            <input type="checkbox" id="document_inverted" name="document_inverted" /><label for="document_inverted">Invert</label>
+        <div class="option_container">
+          <div class="option_row">
+            <label class="checkbox_container" for="document_inverted">Invert
+              <input type="checkbox" id="document_inverted" name="document_inverted">
+              <span class="checkbox_checkmark"></span>
+            </label>
+      
+            <label class="checkbox_container" for="document_inverted_grayscale">Grayscale
+              <input type="checkbox" id="document_inverted_grayscale" name="document_inverted_grayscale">
+              <span class="checkbox_checkmark"></span>
+            </label>
+      
+            <label class="checkbox_container" for="document_inverted_black">Black
+              <input type="checkbox" id="document_inverted_black" name="document_inverted_black">
+              <span class="checkbox_checkmark"></span>
+            </label>
           </div>
-          <div class="input">
-            <input type="checkbox" id="document_inverted_grayscale" name="document_inverted_grayscale" /><label for="document_inverted_grayscale">Grayscale</label>
-          </div>
-          <div class="input">
-            <input type="checkbox" id="document_inverted_oled" name="document_inverted_oled" /><label for="document_inverted_oled">Black</label>
-          </div>
-        </div>
-        <div class="checkbox_row option_row">
-          <div class="input">
-            <input type="checkbox" id="show_border" name="show_border" /><label for="show_border">Show Border</label>
+          <div class="option_row">
+            <label class="checkbox_container" for="show_border">Show Border
+              <input type="checkbox" id="show_border" name="show_border">
+              <span class="checkbox_checkmark"></span>
+            </label>
           </div>
         </div>
       </div>
@@ -94,25 +110,52 @@
 
       <div class="option_section">
         <p class="section_label">Toggle Button Options</p>
-        <div class="checkbox_row option_row">
-          <div class="input">
-            <input type="checkbox" id="show_button" name="show_button" /><label for="show_button">Show Button</label>
-          </div>
-          <div class="input">
-            <input type="checkbox" id="raise_button" name="raise_button" /><label for="raise_button">Raise Button</label>
-          </div>
+        <div class="option_row">
+          <label class="checkbox_container" for="show_button">Show Button
+            <input type="checkbox" id="show_button" name="show_button" >
+            <span class="checkbox_checkmark"></span>
+          </label>
+
+          <label class="checkbox_container" for="raise_button">Raise Button
+            <input type="checkbox" id="raise_button" name="raise_button" >
+            <span class="checkbox_checkmark"></span>
+          </label>
         </div>
       </div>
 
-      <p class="section_label">Accent Color</p>
-      <div id="spectrum_container">
-        <div id="spectrum_bar">
-          <div id="spectrum_knob"></div>
+      <div class="option_section">
+        <p class="section_label">Accent Color</p>
+        <div id="spectrum_container">
+          <div id="spectrum_bar">
+            <div id="spectrum_knob"></div>
+          </div>
+          <input id="spectrum_input" type="number" min="0" max="360" maxlength="3" />
         </div>
-        <input id="spectrum_input" type="number" min="0" max="360" maxlength="3" />
+      
+        <button id="spectrum_save">Save</button>
+        <button id="spectrum_reset" disabled>Reset</button>
       </div>
-      <button id="spectrum_save">Save</button>
-      <button id="spectrum_reset" disabled>Reset</button>
+
+      <div class="option_section" id="debug_section">
+        <p class="section_label">Debug</p>
+        <div class="option_container">
+          <div class="option_row">
+            <input id="debug_storage_key" placeholder="Storage Key" />
+            <button id="debug_storage_key_clear">Clear</button>
+          </div>
+          <div class="option_bordered">
+            <div class="option_row">
+              <input id="debug_kv_key" placeholder="Key" />
+              <input id="debug_kv_value" placeholder="Value" />
+            </div>
+            <hr />
+            <input id="debug_key_value" placeholder="Value" />
+          </div>
+          <button id="debug_save">Save</button>
+          <button id="debug_clear">Clear Storage</button>
+        </div>
+      </div>
+
       <hr />
       <footer>
         <p id="version"></p>

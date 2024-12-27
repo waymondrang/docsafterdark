@@ -129,6 +129,34 @@ function hueToRgb(p, q, t) {
   return p;
 }
 
+/**
+ * UPDATES A STORAGE OBJECT WITH A NEW KEY-VALUE PAIR
+ * 
+ * @param {String} storage_object 
+ * @param {String} key 
+ * @param {*} value 
+ */
+function update_storage(storage_object, key, value) {
+  chrome.storage.local.get(storage_object, function (data) {
+    if (data[storage_object] != null)
+      data[storage_object][key] = value;
+    else
+      data[storage_object] = { [key]: value };
+    
+    chrome.storage.local.set({ [storage_object]: data[storage_object] });
+  });
+}
+
+/**
+ * SETS A STORAGE OBJECT WITH A NEW VALUE
+ * 
+ * @param {String} storage_object
+ * @param {*} value
+ */
+function set_storage(storage_object, value) {
+  chrome.storage.local.set({ [storage_object]: value });
+}
+
 ///////////////////////////
 // END UTILITY FUNCTIONS //
 ///////////////////////////
@@ -151,7 +179,7 @@ const default_accent_hue    = 88; // GREEN
 
 const switch_on             = "🌚";
 const switch_off            = "🌞";
-const default_invert        = { invert: true, grayscale: true, oled: false }; // TODO: CHANGE NAME OF OLED PROPERTY
+const default_invert        = { invert: true, grayscale: true, black: false };
 
 const replacements_path     = "assets/replacements/";
 const css_path              = "assets/css/";
@@ -171,27 +199,27 @@ const replacements = {
 
 const document_inverted_value             = "invert(1)";
 const document_inverted_grayscale_value   = "invert(1) contrast(79.5%) grayscale(100%)";
-const document_inverted_oled_value        = "invert(1) grayscale(100%)";
+const document_inverted_black_value       = "invert(1) grayscale(100%)";
 
-const page_border = "0 0 0 1px";
-const gm3_page_border = "1px solid var(--primary-border-color)";
+const docsafterdark_page_border = "1px solid var(--primary-border-color)";
+
+const update_link_href  = "https://github.com/waymondrang/docsafterdark/releases";
+const donation_link     = "https://www.buymeacoffee.com/waymondrang";
+
+const docsafterdark_version = chrome.runtime.getManifest().version
+
+////////////////////////////////
+// DOCUMENT BACKGROUND VALUES //
+////////////////////////////////
+
 const backgrounds = {
   default: "#ffffff",
   shade: "#999999",
   dark: "#1b1b1b",
   black: "#000000",
 };
+
 const default_background = "default";
-const update_text_style =
-  "border: 1px solid #4d4d4d; background-color: #212121; padding: 8px 12px; border-radius: 6px; box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22); font-size: 12px; font-family: Google Sans,Roboto,sans-serif;"; // use fixed font size
-const close_button_style =
-  "background-color: #4d4d4d; border-radius: 2px; color: #64b5f6; border: none; cursor: pointer; margin-left: 12px; font-size: inherit;";
-const update_notification_style =
-  "position: fixed; top: 12px; left: 0; right: 0; color: #cecece; padding: 12px; text-align: center; z-index: 2500000000; width: fit-content; margin: 0 auto;";
-const update_link_href =
-  "https://github.com/waymondrang/docsafterdark/releases";
-const update_link_style = "color: #cecece; text-decoration: underline;";
-const donation_link = "https://www.buymeacoffee.com/waymondrang";
 
 var mode;
 var dark_mode_options;
@@ -310,19 +338,16 @@ function handle_button() {
       document.querySelector("#docsafterdark_switch").remove();
   }
 
-  document.documentElement.style.setProperty(
-    "--docsafterdark-switch-position",
-    button_options.raised ? "74px" : "24px"
-  );
+  document.documentElement.style.setProperty("--docsafterdark-switch-position", button_options.raised ? "74px" : "24px");
 }
 
 function update_accent_color(color) {
   accent_color = color;
-  document.documentElement.style.setProperty("--accent-hue", color.hue);
+  document.documentElement.style.setProperty("--docsafterdark-accent-hue", color.hue);
 }
 
 function remove_accent_color() {
-  document.documentElement.style.removeProperty("--accent-hue");
+  document.documentElement.style.removeProperty("--docsafterdark-accent-hue");
 }
 
 /**
@@ -337,9 +362,7 @@ function handle_mode() {
   if (mode == null) {
     // FIRST INVOCATION (SHOULD NOT BE CALLED); ENABLE DARK MODE BY DEFAULT
     inject_dark_mode();
-
-    mode = mode_dark;
-    chrome.storage.local.set({ mode: mode });
+    set_storage("mode", mode_dark);
   } else if (mode == mode_dark) {
     inject_dark_mode(dark_mode_options);
   } else if (mode == mode_light) {
@@ -353,12 +376,12 @@ function handle_mode() {
 /**
  * HANDLES DOCUMENT INVERT
  * 
- * @param {{invert: boolean, grayscale: boolean, oled: boolean}} invert
+ * @param {{invert: boolean, grayscale: boolean, black: boolean}} invert
  */
 function handle_document_invert(invert) {
   if (invert.invert) {
-    if (invert.grayscale && invert.oled) {
-      document.documentElement.style.setProperty("--document_invert", document_inverted_oled_value);
+    if (invert.grayscale && invert.black) {
+      document.documentElement.style.setProperty("--document_invert", document_inverted_black_value);
     } else if (invert.grayscale) {
       document.documentElement.style.setProperty("--document_invert", document_inverted_grayscale_value);
     } else {
@@ -388,9 +411,10 @@ chrome.storage.local.get(
     "custom_bg",
     "invert",
     "show_border",
-    "updates",
     "accent_color",
     "button_options",
+    "version",
+    "updates",
     "raise_button", // DEPRECATED BUT KEEP FOR BACKWARDS COMPATIBILITY
   ],
   function (data) {
@@ -402,8 +426,7 @@ chrome.storage.local.get(
       mode = data.mode;
     } else {
       // SET DEFAULT MODE
-      mode = mode_dark;
-      chrome.storage.local.set({ mode: mode });
+      set_storage("mode", mode_dark);
     }
 
     ///////////////////
@@ -414,8 +437,7 @@ chrome.storage.local.get(
       dark_mode_options = data.dark_mode;
     } else {
       // SET DEFAULT DARK MODE OPTIONS
-      dark_mode_options = { variant: dark_mode_normal };
-      chrome.storage.local.set({ dark_mode: dark_mode_options });
+      set_storage("dark_mode", { variant: dark_mode_normal });
     }
 
     /////////////////////////
@@ -436,10 +458,7 @@ chrome.storage.local.get(
       }
     } else {
       // Use default_background background as default
-      document.documentElement.style.setProperty(
-        "--document_background",
-        backgrounds[default_background]
-      );
+      document.documentElement.style.setProperty("--document_background", backgrounds[default_background]);
     }
 
     // HANDLE INVERT
@@ -449,13 +468,17 @@ chrome.storage.local.get(
       handle_document_invert(default_invert);
     }
 
-    // HANDLE SHOW BORDER OPTION
+    /////////////////
+    // SHOW BORDER //
+    /////////////////
+
     if (data.show_border != null) {
       show_border = data.show_border;
     } else {
-      // Show border by default
       show_border = true;
     }
+
+    document.documentElement.style.setProperty("--docsafterdark_document_border", show_border ? docsafterdark_page_border : "none");
 
     //////////////////
     // ACCENT COLOR //
@@ -470,7 +493,7 @@ chrome.storage.local.get(
       update_accent_color(accent_color);
 
       // SAVE DEFAULT ACCENT COLOR
-      chrome.storage.local.set({ accent_color: { hue: default_accent_hue } });
+      update_storage("accent_color", "hue", default_accent_hue);
     }
 
     ////////////
@@ -478,7 +501,6 @@ chrome.storage.local.get(
     ////////////
 
     // NOTE: MUST BE CALLED BEFORE HANDLE_MODE
-
     // TODO: USE BACKGROUND WORKER TO CONSOLIDATE DEFAULT OPTIONS AND OPTION MIGRATION
 
     button_options = data.button_options;
@@ -491,63 +513,54 @@ chrome.storage.local.get(
         button_options = { show: true, raised: false };
       }
 
-      chrome.storage.local.set({ button_options: button_options });
+      set_storage("button_options", button_options);
     }
 
-    ////////////////////////////
-    // HANDLE DOCUMENT BORDER //
-    ////////////////////////////
+    ////////////////////
+    // HANDLE VERSION //
+    ////////////////////
 
-    document.documentElement.style.setProperty("--document_border", show_border ? page_border : "none");
-    document.documentElement.style.setProperty("--gm3_document_border", show_border ? gm3_page_border : "none");
+    if (data.version == null || data.version.last_version != docsafterdark_version) {
+      console.log("DocsAfterDark has been updated to version " + docsafterdark_version);
 
-    // Do not create notification if not needed
-
-    // Show update notification if data.updates is not set or if it is
-    // set but does not include the current version
-    if ((data.updates && !data.updates.includes(version)) || !data.updates) {
       // Create notification
-      let update_notification;
+      let update_notification   = document.createElement("div");
+      update_notification.id    = "docsafterdark_update_notification";
 
-      update_notification = document.createElement("div");
-      update_notification.id = "bb-update-notification";
-      update_notification.style = update_notification_style;
+      let update_container      = document.createElement("div");
+      update_container.id       = "docsafterdark_update_container";
+      update_notification.appendChild(update_container);
 
-      var update_text = document.createElement("span");
-      update_text.textContent =
-        "DocsAfterDark has been updated to version " +
-        chrome.runtime.getManifest().version +
-        ". Read update notes on ";
-      update_text.style = update_text_style;
+      var update_text = document.createElement("p");
+      if (data.version == null) {
+        update_text.textContent =
+          "Thank you for installing DocsAfterDark! You can read release notes on ";
+      } else {
+        update_text.textContent =
+          "DocsAfterDark has been updated to version " +
+          docsafterdark_version +
+          ". Read release notes on ";
+      }
 
       var update_link = document.createElement("a");
       update_link.href = update_link_href;
       update_link.target = "_blank";
       update_link.textContent = "GitHub";
-      update_link.style = update_link_style;
       update_text.appendChild(update_link);
       update_text.appendChild(document.createTextNode("."));
 
       var close_button = document.createElement("button");
       close_button.textContent = "Close";
-      close_button.style = close_button_style;
       close_button.onclick = function () {
         update_notification.remove();
       };
       update_text.appendChild(close_button);
-      update_notification.appendChild(update_text);
+      update_container.appendChild(update_text);
 
-      // Insert notification into DOM
       document.body.prepend(update_notification);
-
-      // Mark as seen in storage
-      if (data.updates) {
-        data.updates.push(version);
-        chrome.storage.local.set({ updates: data.updates });
-      } else {
-        chrome.storage.local.set({ updates: [version] });
-      }
     }
+
+    update_storage("version", "last_version", docsafterdark_version);
 
     /////////////////////
     // INVOKE HANDLERS //
@@ -556,6 +569,10 @@ chrome.storage.local.get(
     handle_mode();
   }
 );
+
+////////////////////////////
+// HANDLE STORAGE CHANGES //
+////////////////////////////
 
 chrome.storage.onChanged.addListener(function (changes, area) {
   // Handle background change
@@ -613,6 +630,15 @@ chrome.storage.onChanged.addListener(function (changes, area) {
     dark_mode_options = changes.dark_mode.newValue;
   }
 
+  //////////////////
+  // ACCENT COLOR //
+  //////////////////
+
+  if (changes.accent_color != null) {
+    accent_color = changes.accent_color.newValue;
+    update_accent_color(accent_color);
+  }
+
   ////////////
   // BUTTON //
   ////////////
@@ -624,20 +650,12 @@ chrome.storage.onChanged.addListener(function (changes, area) {
     handle_button();
   }
 
-  // Handle show border option change
-  if (Object.keys(changes).includes("show_border")) {
-    document.documentElement.style.setProperty(
-      "--document_border",
-      changes.show_border.newValue ? page_border : "none"
-    );
-  }
+  /////////////////
+  // SHOW BORDER //
+  /////////////////
 
-  // Handle show border option change
-  if (Object.keys(changes).includes("show_border")) {
-    document.documentElement.style.setProperty(
-      "--gm3_document_border",
-      changes.show_border.newValue ? gm3_page_border : "none"
-    );
+  if (changes.show_border != null) {
+    document.documentElement.style.setProperty("--docsafterdark_document_border", changes.show_border.newValue ? docsafterdark_page_border : "none");
   }
 
   /////////////////////

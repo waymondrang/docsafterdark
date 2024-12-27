@@ -139,6 +139,49 @@ function sendMessageToTabs(message) {
   });
 }
 
+/**
+ * UPDATES A STORAGE OBJECT WITH A NEW KEY-VALUE PAIR
+ * 
+ * @param {String} storage_object 
+ * @param {String} key 
+ * @param {*} value 
+ */
+function update_storage(storage_object, key, value) {
+  chrome.storage.local.get(storage_object, function (data) {
+    if (data[storage_object] != null)
+      data[storage_object][key] = value;
+    else
+      data[storage_object] = { [key]: value };
+    
+    chrome.storage.local.set({ [storage_object]: data[storage_object] });
+  });
+}
+
+/**
+ * SETS A STORAGE OBJECT WITH A NEW VALUE
+ * 
+ * @param {String} storage_object
+ * @param {*} value
+ */
+function set_storage(storage_object, value) {
+  chrome.storage.local.set({ [storage_object]: value });
+}
+
+/**
+ * REMOVES A KEY FROM A STORAGE OBJECT
+ * 
+ * @param {String} key 
+ */
+function remove_storage(key) {
+  chrome.storage.local.remove(key);
+}
+
+/**
+ * CLEARS ALL STORAGE
+ */
+function clear_storage() {
+  chrome.storage.local.clear();
+}
 
 ///////////////
 // VARIABLES //
@@ -170,7 +213,7 @@ const dark_mode_eclipse_button  = document.querySelector("#dark_mode_eclipse");
 // DOCUMENT OPTIONS
 const document_inverted_checkbox            = document.querySelector("#document_inverted");
 const document_inverted_grayscale_checkbox  = document.querySelector("#document_inverted_grayscale");
-const document_inverted_oled_checkbox       = document.querySelector("#document_inverted_oled");
+const document_inverted_black_checkbox       = document.querySelector("#document_inverted_black");
 
 // BUTTON OPTIONS
 const show_button_checkbox      = document.querySelector("#show_button");
@@ -205,31 +248,17 @@ const versionElement = document.querySelector("#version");
 versionElement.textContent = version ? "v" + version : "";
 
 /**
- * UPDATES A STORAGE OBJECT WITH A NEW KEY-VALUE PAIR
+ * DISABLES A CHECKBOX AND ADDS A DISABLED CLASS TO THE PARENT ELEMENT
  * 
- * @param {String} storage_object 
- * @param {String} key 
- * @param {*} value 
+ * @param {HTMLInputElement} checkbox
+ * @param {Boolean} disabled
  */
-function update_storage(storage_object, key, value) {
-  chrome.storage.local.get(storage_object, function (data) {
-    if (data[storage_object])
-      data[storage_object][key] = value;
-    else
-      data[storage_object] = { [key]: value };
-    
-    chrome.storage.local.set({ [storage_object]: data[storage_object] });
-  });
-}
-
-/**
- * SETS A STORAGE OBJECT WITH A NEW VALUE
- * 
- * @param {String} storage_object
- * @param {*} value
- */
-function set_storage(storage_object, value) {
-  chrome.storage.local.set({ [storage_object]: value });
+function checkbox_disable(checkbox, disabled) {
+  checkbox.disabled = disabled;
+  if (disabled)
+    checkbox.parentElement.classList.add("disabled");
+  else
+    checkbox.parentElement.classList.remove("disabled");
 }
 
 /////////////////////
@@ -251,8 +280,8 @@ document.querySelectorAll("#modes button").forEach(function (e) {
       document_inverted_checkbox.checked = false;
 
       // DISABLE INVERT SETTINGS
-      document_inverted_grayscale_checkbox.disabled = true;
-      document_inverted_oled_checkbox.disabled = true;
+      checkbox_disable(document_inverted_grayscale_checkbox, true);
+      checkbox_disable(document_inverted_black_checkbox, true);
 
       update_storage("invert", "invert", false);
     } else if (this.id == "dark") {
@@ -266,10 +295,10 @@ dark_mode_normal_button.addEventListener("click", (e) => {
   e.target.classList.add("selected");
 
   // UPDATE INVERT SETTINGS
-  document_inverted_oled_checkbox.checked = false;
+  document_inverted_black_checkbox.checked = false;
 
   update_storage("dark_mode", "variant", dark_mode_normal);
-  update_storage("invert", "oled", false); // INVERT STILL USES OLED
+  update_storage("invert", "black", false);
 });
 
 dark_mode_eclipse_button.addEventListener("click", (e) => {
@@ -277,10 +306,10 @@ dark_mode_eclipse_button.addEventListener("click", (e) => {
   e.target.classList.add("selected");
 
   // UPDATE INVERT SETTINGS
-  document_inverted_oled_checkbox.checked = true;
+  document_inverted_black_checkbox.checked = true;
 
   update_storage("dark_mode", "variant", dark_mode_eclipse);
-  update_storage("invert", "oled", true); // INVERT STILL USES OLED
+  update_storage("invert", "black", true);
 });
 
 tip_button.addEventListener("mouseenter", (e) => {
@@ -299,7 +328,7 @@ tip_container.addEventListener("mouseleave", (e) => {
 });
 
 show_button_checkbox.addEventListener("click", function (e) {
-  raise_button_checkbox.disabled = !e.target.checked;
+  checkbox_disable(raise_button_checkbox, !e.target.checked);
 
   update_storage("button_options", "show", e.target.checked);
 });
@@ -320,7 +349,7 @@ document.querySelectorAll("#document_bg button").forEach(function (e) {
 
     document_inverted_checkbox.checked = false;
     document_inverted_grayscale_checkbox.checked = false;
-    document_inverted_grayscale_checkbox.disabled = true;
+    checkbox_disable(document_inverted_grayscale_checkbox, true);
 
     if (id != "custom") {
       custom_input.classList.add("hidden");
@@ -353,23 +382,23 @@ custom_save.addEventListener("click", function (e) {
 document_inverted_checkbox.addEventListener("click", function (e) {
   document_inverted_state = e.target.checked;
 
-  document_inverted_grayscale_checkbox.disabled  = !document_inverted_state;
-  document_inverted_oled_checkbox.disabled       = !document_inverted_state || !document_inverted_grayscale_checkbox.checked;
+  checkbox_disable(document_inverted_grayscale_checkbox, !document_inverted_state);
+  checkbox_disable(document_inverted_black_checkbox, !document_inverted_state || !document_inverted_grayscale_checkbox.checked);
 
   update_storage("invert", "invert", document_inverted_state); // TODO: SEPARATE INVERT FROM INVERT OPTIONS OR CONSOLIDATE OPTIONS INTO DOCUMENT OPTIONS
 });
 
 document_inverted_grayscale_checkbox.addEventListener("click", function (e) {
-  document_inverted_oled_checkbox.disabled = !e.target.checked;
+  checkbox_disable(document_inverted_black_checkbox, !e.target.checked);
   
   chrome.storage.local.set({
-    invert: { invert: document_inverted_state, grayscale: e.target.checked, oled: document_inverted_oled_checkbox.checked },
+    invert: { invert: document_inverted_state, grayscale: e.target.checked, black: document_inverted_black_checkbox.checked },
   });
 });
 
-document_inverted_oled_checkbox.addEventListener("click", function (e) {
+document_inverted_black_checkbox.addEventListener("click", function (e) {
   chrome.storage.local.set({
-    invert: { invert: document_inverted_state, grayscale: document_inverted_grayscale_checkbox.checked, oled: e.target.checked },
+    invert: { invert: document_inverted_state, grayscale: document_inverted_grayscale_checkbox.checked, black: e.target.checked },
   });
 });
 
@@ -411,7 +440,7 @@ function handleTempColorChange(color, saveToStorage = true) {
 ////////////////////////////
 
 function setPopupAccentColor(color) {
-  document.documentElement.style.setProperty("--accent-hue", color.hue);
+  document.documentElement.style.setProperty("--docsafterdark-accent-hue", color.hue);
 }
 
 ////////////////////
@@ -663,16 +692,16 @@ try {
       ////////////
 
       if (invert_data == null) {
-        invert_data = { invert: true, grayscale: true, oled: false };
+        invert_data = { invert: true, grayscale: true, black: false };
         chrome.storage.local.set({ invert: invert_data });
       }
 
       document_inverted_checkbox.checked = invert_data.invert;
       document_inverted_grayscale_checkbox.checked = invert_data.grayscale;
-      document_inverted_oled_checkbox.checked = invert_data.oled;
+      document_inverted_black_checkbox.checked = invert_data.black;
       
-      document_inverted_grayscale_checkbox.disabled = !invert_data.invert;
-      document_inverted_oled_checkbox.disabled = !invert_data.grayscale || !invert_data.invert;
+      checkbox_disable(document_inverted_grayscale_checkbox, !invert_data.invert);
+      checkbox_disable(document_inverted_black_checkbox, !invert_data.grayscale || !invert_data.invert);
       
       document_inverted_state = invert_data.invert;
 
@@ -725,7 +754,7 @@ try {
       show_button_checkbox.checked = button_options.show;
 
       raise_button_checkbox.checked = button_options.raised;
-      raise_button_checkbox.disabled = !button_options.show;
+      checkbox_disable(raise_button_checkbox, !button_options.show);
 
       //////////////////
       // ACCENT COLOR //
@@ -779,3 +808,36 @@ try {
   description.textContent = "SOMETHING WENT WRONG!";
   console.log(e);
 }
+
+///////////
+// DEBUG //
+///////////
+
+const debug_storage_key_input         = document.querySelector("#debug_storage_key");
+const debug_storage_key_clear_button  = document.querySelector("#debug_storage_key_clear");
+const debug_kv_key                    = document.querySelector("#debug_kv_key");
+const debug_kv_value                  = document.querySelector("#debug_kv_value");
+const debug_key_value                 = document.querySelector("#debug_key_value");
+const debug_save_button               = document.querySelector("#debug_save");
+const debug_clear_button              = document.querySelector("#debug_clear");
+
+debug_storage_key_clear_button.addEventListener("click", function (e) {
+  if (debug_storage_key_input.value) {
+    remove_storage(debug_storage_key_input.value);
+    debug_storage_key_input.value = "";
+  }
+});
+
+debug_save_button.addEventListener("click", function (e) {
+  if (debug_storage_key_input.value && debug_kv_key.value && debug_kv_value.value) {
+    update_storage(debug_storage_key_input.value, debug_kv_key.value, debug_kv_value.value);
+  } else if (debug_storage_key_input.value && debug_key_value.value) {
+    set_storage(debug_storage_key_input.value, debug_key_value.value);
+  }
+});
+
+debug_clear_button.addEventListener("click", function (e) {
+  clear_storage();
+});
+
+
