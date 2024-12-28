@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
   "name": "DocsAfterDark",
-  "version": "0.6.3",
-  "description": "Modern, dark mode for Google Docs",
+  "version": "1.0.0",
+  "description": "Beyond dark mode for Google Docs",
   "author": "Raymond Wang",
   "content_scripts": [
     {
@@ -13,7 +13,7 @@
         "word.js"
       ],
       "css": [
-        "default.css"
+        "assets/css/default.css"
       ]
     }
   ],
@@ -22,25 +22,17 @@
     "default_popup": "popup.html"
   },
   "web_accessible_resources": [
-    "docs.css",
-    "/assets/checkmark.secondary.png",
-    "/assets/revisions_sprite1.secondary.svg",
-    "/assets/close_18px.svg",
-    "/assets/lens.svg",
-    "/assets/jfk_sprite186.png",
-    "/assets/jfk_sprite186.edited.png",
-    "assets/dimension-unhighlighted.edited.png",
-    "assets/dimension-highlighted.edited.png",
-    "assets/access_denied_transparent.png",
-    "assets/access_denied_600_transparent.png",
-    "assets/gm_add_black_24dp.png"
+    "assets/css/*.css",
+    "assets/replacements/*.png",
+    "assets/replacements/*.svg"
   ],
   "icons": {
-    "16": "dad16.png",
-    "48": "dad48.png",
-    "128": "dad128.png"
+    "16": "assets/icons/docsafterdark_16.png",
+    "48": "assets/icons/docsafterdark_48.png",
+    "128": "assets/icons/docsafterdark_128.png"
   },
   "permissions": [
-    "storage"
+    "storage",
+    "activeTab"
   ]
 }

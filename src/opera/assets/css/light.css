@@ -1,0 +1,52 @@
+:root {
+  --primary-text-color: #000000;
+  --secondary-text-color: #1A1A1A;
+  --tertiary-text-color: #333333;
+  --disabled-text: #666666;
+
+  --root-background-color: hsl(var(--docsafterdark-accent-hue), 20%, 95%);
+  --primary-background-color: hsl(var(--docsafterdark-accent-hue), 20%, 97.5%);
+  --secondary-background-color: hsl(var(--docsafterdark-accent-hue), 25%, 90%);
+  --tertiary-background-color: hsl(var(--docsafterdark-accent-hue), 30%, 85%);
+  --quaternary-background-color: hsl(var(--docsafterdark-accent-hue), 35%, 80%);
+  --background-color-5: hsl(var(--docsafterdark-accent-hue), 40%, 75%);
+
+  --menu-background: var(--primary-background-color);
+  --hover-background-color: #0000001a;
+  --secondary-hover-background-color: #0000001e;
+
+  --input-background-color: var(--secondary-background-color); /* CURRENTLY USED FOR CALENDAR INPUT */
+
+  --primary-border-color: #CCCCCC;
+  --secondary-border-color: #404040;
+  --lighter-border-color: #808080;
+  --hover-border-color: #595959;
+
+  --accent-color: hsl(var(--docsafterdark-accent-hue), 25%, 50%);
+  --light-accent-color: hsla(var(--docsafterdark-accent-hue), 25%, 60%, 0.10);
+  --light-accent-hover-color: hsla(var(--docsafterdark-accent-hue), 25%, 40%, 0.20);
+  --accent-hover-color: hsla(var(--docsafterdark-accent-hue), 25%, 60%, 1);
+}
+
+.docs-gm .goog-menu
+{
+  border-color: transparent;
+}
+
+/*******************/
+/* GRAYSCALE ICONS */
+/*******************/
+
+.docs-grille-gm3 .docs-material .docs-icon-img, .docs-icons-cleanup .docs-material .docs-icon-img,
+.apps-share-sprite,
+.baseCopyDocDialogUtilSvgIcon,
+.docs-material .docs-icon-img,
+.docs-gm .docs-icon-video-camera-front-18 .docs-icon-img, .docs-gm .docs-icon-video-camera-front-24 .docs-icon-img, .docs-gm .docs-material .docs-analytics-sidebar-tab-selected .docs-icon-img, .docs-gm .docs-material .docs-smart-summary-tinted.docs-icon-img, .docs-gm .docs-material .kix-calendar-template-date-range-picker-blue-icon .docs-icon-img, .docs-gm .docs-material .kix-task-bubble-blue-icon .docs-icon-img, .docs-gm .docs-material .waffle-named-ranges-promo-title .docs-icon-img, .docs-gm .docs-material.docs-sheet-active-tab .docs-icon-img, .docs-material .docs-icon-system-applied-labels.docs-icon-img, .docs-material .docs-odp-banner-icon .docs-icon-editors-ia-label.docs-icon-img, .docs-material .smart-canvas-date-details-bubble-book-meeting-button .docs-icon-img, .docs-material .smart-canvas-date-details-bubble-pattern-picker-button .docs-icon-img, .docs-material .smart-canvas-date-details-bubble-pattern-picker-button-original .docs-icon-img
+{
+  filter: grayscale(1);
+}
+
+.baseCopyDocDialogSvgIcon
+{
+  filter: none;
+}
