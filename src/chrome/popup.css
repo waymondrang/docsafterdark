@@ -9,13 +9,6 @@
   --hover-background-color: #FFFFFF1a;
   --secondary-hover-background-color: #FFFFFF1e;
 
-  /* buttons */
-  --button-background-color: #4d4d4d;
-  --button-background-color-hover: #2196f3;
-  --button-background-color-focus: #2196f3;
-  --button-two-background-color: #262626;
-  --button-two-background-color-hover: #333333;
-
   --selected-background-color: #808080;
   --selection-background-color: #999999;
 
@@ -254,17 +247,27 @@ footer {
   display: none;
 }
 
-button#save_custom {
+#document_bg_section {
+  margin-bottom: 12px;
+}
+
+#document_bg_buttons,
+#document_bg_custom_container {
+  margin-bottom: 8px;
+}
+
+#document_bg_description {
+  color: var(--secondary-text-color);
+  margin: 0;
+}
+
+button#document_bg_save_custom {
   background-color: var(--secondary-background-color);
   border-radius: 4px;
 }
 
-button#save_custom:hover {
+button#document_bg_save_custom:hover {
   background-color: var(--accent-color);
-}
-
-#custom_input {
-  margin-top: 8px;
 }
 
 #version {
@@ -482,12 +485,4 @@ button#save_custom:hover {
 
 #debug_section #debug_clear:hover {
   background-color: #ff0000;
-}
-
-/*******************/
-/* CHROME-ONLY CSS */
-/*******************/
-
-#document_background_section {
-  display: none;
 }

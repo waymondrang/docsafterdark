@@ -1,0 +1,7 @@
+/*******************/
+/* CHROME-ONLY CSS */
+/*******************/
+
+.__chrome_hidden {
+    display: none;
+}

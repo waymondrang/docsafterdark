@@ -40,14 +40,16 @@
 .ita-cp-lens,
 .ita-cp-whole-pad .modal-dialog-title-close:after,
 .docs-dialog .modal-dialog-title-close:after,
-.unifiedPreviewBubbleContent canvas
+.unifiedPreviewBubbleContent canvas,
+.docs-ml-img:before
 {
   filter: invert(1);
 }
 
 .apps-share-sprite,
 .docs-grille-gm3 #docs-align-palette .goog-toolbar-button-checked .docs-icon-img, .docs-grille-gm3 .docs-main-toolbars .goog-toolbar-button-checked .docs-icon-img, .docs-grille-gm3 .docs-main-toolbars .goog-toolbar-button.goog-toolbar-button-checked .docs-icon-img, .docs-grille-gm3.docs-gm .clean-palette .goog-palette-cell-selected .docs-icon-img, .docs-grille-gm3.docs-gm .trix-palette .goog-palette-cell-selected .docs-icon-img,
-.docs-material .docs-icon-img
+.docs-material .docs-icon-imgm
+.baseCopyDocDialogUtilSvgIcon
 {
   filter: invert(1) grayscale(1);
 }
@@ -65,14 +67,4 @@
 {
   /* GRAYSCALE TO TAKE AWAY COLOR */
   filter: brightness(2.6) grayscale(1);
-}
-
-
-/* .docs-gm .kix-appview-editor canvas {
-  background: var(--document_background) !important;
-} */
-
-#contents > div {
-  background-color: transparent;
-  background: var(--document_background);
 }

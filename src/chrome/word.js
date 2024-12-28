@@ -381,14 +381,14 @@ function handle_mode() {
 function handle_document_invert(invert) {
   if (invert.invert) {
     if (invert.grayscale && invert.black) {
-      document.documentElement.style.setProperty("--document_invert", document_inverted_black_value);
+      document.documentElement.style.setProperty("--docsafterdark_document_invert", document_inverted_black_value);
     } else if (invert.grayscale) {
-      document.documentElement.style.setProperty("--document_invert", document_inverted_grayscale_value);
+      document.documentElement.style.setProperty("--docsafterdark_document_invert", document_inverted_grayscale_value);
     } else {
-      document.documentElement.style.setProperty("--document_invert", document_inverted_value);
+      document.documentElement.style.setProperty("--docsafterdark_document_invert", document_inverted_value);
     }
   } else {
-    document.documentElement.style.setProperty("--document_invert", "none");
+    document.documentElement.style.setProperty("--docsafterdark_document_invert", "none");
   }
 }
 
@@ -414,7 +414,7 @@ chrome.storage.local.get(
     "accent_color",
     "button_options",
     "version",
-    "updates",
+    "updates", // DEPRECATED BUT KEEP FOR BACKWARDS COMPATIBILITY
     "raise_button", // DEPRECATED BUT KEEP FOR BACKWARDS COMPATIBILITY
   ],
   function (data) {
@@ -448,17 +448,17 @@ chrome.storage.local.get(
       let option = data.doc_bg;
       let custom = data.custom_bg;
       if (option == "custom") {
-        document.documentElement.style.setProperty("--document_background", custom);
+        document.documentElement.style.setProperty("--docsafterdark_document_background", custom);
       } else {
         if (backgrounds[option]) {
-          document.documentElement.style.setProperty("--document_background", backgrounds[option]);
+          document.documentElement.style.setProperty("--docsafterdark_document_background", backgrounds[option]);
         } else {
           console.error("Invalid background option");
         }
       }
     } else {
       // Use default_background background as default
-      document.documentElement.style.setProperty("--document_background", backgrounds[default_background]);
+      document.documentElement.style.setProperty("--docsafterdark_document_background", backgrounds[default_background]);
     }
 
     // HANDLE INVERT
@@ -532,7 +532,7 @@ chrome.storage.local.get(
       update_notification.appendChild(update_container);
 
       var update_text = document.createElement("p");
-      if (data.version == null) {
+      if (data.version == null && data.updates == null) { // IF UPDATES IS NOT NULL, THEN NOT NEW INSTALL
         update_text.textContent =
           "Thank you for installing DocsAfterDark! You can read release notes on ";
       } else {
@@ -581,7 +581,7 @@ chrome.storage.onChanged.addListener(function (changes, area) {
     if (option != "custom") {
       if (backgrounds[option]) {
         document.documentElement.style.setProperty(
-          "--document_background",
+          "--docsafterdark_document_background",
           backgrounds[option]
         );
       } else {
@@ -591,7 +591,7 @@ chrome.storage.onChanged.addListener(function (changes, area) {
       chrome.storage.local.get(["custom_bg"], function (data) {
         let custom = data.custom_bg;
         document.documentElement.style.setProperty(
-          "--document_background",
+          "--docsafterdark_document_background",
           custom
         );
       });
@@ -604,7 +604,7 @@ chrome.storage.onChanged.addListener(function (changes, area) {
   if (Object.keys(changes).includes("custom_bg")) {
     var custom = changes.custom_bg.newValue;
     document.documentElement.style.setProperty(
-      "--document_background",
+      "--docsafterdark_document_background",
       custom
     );
   }

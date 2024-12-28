@@ -196,12 +196,13 @@ const dark_mode_eclipse   = 1;
 
 const default_accent_hue  = 88; // GREEN
 
-const custom_input  = document.querySelector("#custom_input");
-const custom_save   = document.querySelector("#save_custom");
-const description   = document.querySelector("#description");
-const show_border   = document.querySelector("#show_border");
+const document_bg_custom_container  = document.querySelector("#document_bg_custom_container");
+const document_bg_custom_input      = document.querySelector("#document_bg_custom_input");
+const document_bg_custom_save       = document.querySelector("#document_bg_save_custom");
+const document_bg_description       = document.querySelector("#document_bg_description");
+const show_border                   = document.querySelector("#show_border");
 
-var document_background_option;
+var document_bg_option;
 var selected_mode;
 
 var document_inverted_state = false;
@@ -338,29 +339,27 @@ raise_button_checkbox.addEventListener("click", function (e) {
 });
 
 // DEPRECATED IN CHROME (FOR NOW)
-document.querySelectorAll("#document_bg button").forEach(function (e) {
+document.querySelectorAll("#document_bg_buttons button").forEach(function (e) {
   e.addEventListener("click", function (e) {
     var id = this.id;
 
-    document_background_option.classList.remove("selected");
+    document_bg_option.classList.remove("selected");
     this.classList.add("selected");
 
-    document_background_option = this;
+    document_bg_option = this;
 
     document_inverted_checkbox.checked = false;
     document_inverted_grayscale_checkbox.checked = false;
     checkbox_disable(document_inverted_grayscale_checkbox, true);
 
     if (id != "custom") {
-      custom_input.classList.add("hidden");
-      custom_save.classList.add("hidden");
+      document_bg_custom_container.classList.add("hidden");
     } else {
-      custom_input.classList.remove("hidden");
-      custom_save.classList.remove("hidden");
+      document_bg_custom_container.classList.remove("hidden");
     }
     for (d in descriptions) {
       if (id == d) {
-        description.textContent = descriptions[d];
+        document_bg_description.textContent = descriptions[d];
       }
     }
     chrome.storage.local.set({
@@ -370,9 +369,9 @@ document.querySelectorAll("#document_bg button").forEach(function (e) {
   });
 });
 
-custom_save.addEventListener("click", function (e) {
-  if (custom_input.value)
-    chrome.storage.local.set({ custom_bg: custom_input.value });
+document_bg_custom_save.addEventListener("click", function (e) {
+  if (document_bg_custom_input.value)
+    chrome.storage.local.set({ custom_bg: document_bg_custom_input.value });
 });
 
 ////////////////////////////
@@ -721,13 +720,12 @@ try {
 
       var selected_option = document.querySelector(`#${option}`);
       selected_option.classList.add("selected");
-      document_background_option = selected_option;
-      description.textContent = descriptions[option];
+      document_bg_option = selected_option;
+      document_bg_description.textContent = descriptions[option];
 
       if (option == "custom") {
-        custom_input.classList.remove("hidden");
-        custom_input.value = custom_data;
-        custom_save.classList.remove("hidden");
+        document_bg_custom_container.classList.remove("hidden");
+        document_bg_custom_input.value = custom_data;
       }
 
       if (border_shown) {
@@ -805,7 +803,7 @@ try {
     }
   );
 } catch (e) {
-  description.textContent = "SOMETHING WENT WRONG!";
+  document_bg_description.textContent = "SOMETHING WENT WRONG!";
   console.log(e);
 }
 
@@ -813,31 +811,31 @@ try {
 // DEBUG //
 ///////////
 
-const debug_storage_key_input         = document.querySelector("#debug_storage_key");
-const debug_storage_key_clear_button  = document.querySelector("#debug_storage_key_clear");
-const debug_kv_key                    = document.querySelector("#debug_kv_key");
-const debug_kv_value                  = document.querySelector("#debug_kv_value");
-const debug_key_value                 = document.querySelector("#debug_key_value");
-const debug_save_button               = document.querySelector("#debug_save");
-const debug_clear_button              = document.querySelector("#debug_clear");
+// const debug_storage_key_input         = document.querySelector("#debug_storage_key");
+// const debug_storage_key_clear_button  = document.querySelector("#debug_storage_key_clear");
+// const debug_kv_key                    = document.querySelector("#debug_kv_key");
+// const debug_kv_value                  = document.querySelector("#debug_kv_value");
+// const debug_key_value                 = document.querySelector("#debug_key_value");
+// const debug_save_button               = document.querySelector("#debug_save");
+// const debug_clear_button              = document.querySelector("#debug_clear");
 
-debug_storage_key_clear_button.addEventListener("click", function (e) {
-  if (debug_storage_key_input.value) {
-    remove_storage(debug_storage_key_input.value);
-    debug_storage_key_input.value = "";
-  }
-});
+// debug_storage_key_clear_button.addEventListener("click", function (e) {
+//   if (debug_storage_key_input.value) {
+//     remove_storage(debug_storage_key_input.value);
+//     debug_storage_key_input.value = "";
+//   }
+// });
 
-debug_save_button.addEventListener("click", function (e) {
-  if (debug_storage_key_input.value && debug_kv_key.value && debug_kv_value.value) {
-    update_storage(debug_storage_key_input.value, debug_kv_key.value, debug_kv_value.value);
-  } else if (debug_storage_key_input.value && debug_key_value.value) {
-    set_storage(debug_storage_key_input.value, debug_key_value.value);
-  }
-});
+// debug_save_button.addEventListener("click", function (e) {
+//   if (debug_storage_key_input.value && debug_kv_key.value && debug_kv_value.value) {
+//     update_storage(debug_storage_key_input.value, debug_kv_key.value, debug_kv_value.value);
+//   } else if (debug_storage_key_input.value && debug_key_value.value) {
+//     set_storage(debug_storage_key_input.value, debug_key_value.value);
+//   }
+// });
 
-debug_clear_button.addEventListener("click", function (e) {
-  clear_storage();
-});
+// debug_clear_button.addEventListener("click", function (e) {
+//   clear_storage();
+// });
 
 

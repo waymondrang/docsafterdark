@@ -48,6 +48,7 @@
 
 #docsafterdark_update_notification button {
   height: 24px;
+  padding: 0 6px;
 
   background-color: var(--accent-color, #4d4d4d);
   border-radius: 4px;

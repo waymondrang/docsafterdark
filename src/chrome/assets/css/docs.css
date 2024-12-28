@@ -817,7 +817,8 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
 .docos-comments-pe .docos.docs-gm.docos-xeditor .docos-streamdocoview.docos-docoview-active, .docos-comments-pe .docos.docs-gm.docos-xeditor .docos-streamdocoview.docos-docoview-active .docos-show-more,
 .docos-comments-pe .docos-streampane-searchbar .docos-streampane-search-input,
 .kix-citations-accessed-by-select, .kix-citations-format-select, .kix-citations-select, .kix-citations-source-type-select,
-.docs-grille-gm3 .docos-calltoactionview
+.docs-grille-gm3 .docos-calltoactionview,
+.docs-ml-header
 {
   background: var(--primary-background-color);
 }
@@ -1392,7 +1393,8 @@ div.docs-material-gm-checkbox-focused, span.docs-material-gm-checkbox-focused,
 .docos-calltoactionview-checkbox-container,
 .kix-watermark-sidebar-headerm,
 .apps-shortcutshelpcontentimpl-header,
-.apps-actiondatawidget-content-element
+.apps-actiondatawidget-content-element,
+.docs-ml-header
 {
   border-bottom-color: var(--primary-border-color);
 }
@@ -1694,6 +1696,24 @@ img.docs-generativeai-onboarding-dialog-image,
   background-image: var(--checkmark);
 }
 
+/***********************/
+/* DOCUMENT BACKGROUND */
+/***********************/
+
+.kix-canvas-tile-content {
+  background: transparent;
+  background-size: contain;
+}
+
+.docs-gm .kix-appview-editor canvas {
+  background: var(--docsafterdark_document_background) !important;
+}
+
+#contents > div {
+  background-color: transparent;
+  background: var(--docsafterdark_document_background);
+}
+
 /************************/
 /* CONTROLLED VARIABLES */
 /************************/
@@ -1701,7 +1721,7 @@ img.docs-generativeai-onboarding-dialog-image,
 .kix-appview-editor canvas,
 .kix-cursor
 {
-  filter: var(--document_invert);
+  filter: var(--docsafterdark_document_invert);
 }
 
 /* DOCUMENT BORDER SHOULD BE CONTROLLABLE IN ANY MODE */

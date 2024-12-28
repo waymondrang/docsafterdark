@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="popup.css" />
-    <link rel="stylesheet" href="assets/css/special.css" />
+    <link rel="stylesheet" href="special.css" />
     <title>DocsAfterDark Settings</title>
   </head>
 
@@ -82,11 +82,11 @@
         </div>
       </div>
 
-      <div id="document_background_section"> 
+      <div id="document_bg_section" class="__chrome_hidden"> 
         <p class="section_label">
-          Document Background<span class="__firefox-exclude">&nbsp;(May Be Unstable)</span>
+          Document Background<span class="__firefox_hidden">&nbsp;(May Be Unstable)</span>
         </p>
-        <div id="document_bg" class="button_row">
+        <div id="document_bg_buttons" class="button_row">
           <button id="default">
             Default
           </button>
@@ -103,9 +103,11 @@
             Custom
           </button>
         </div>
-        <input id="custom_input" class="hidden" placeholder="Custom Color/CSS" />
-        <button id="save_custom" class="hidden">Save</button>
-        <p id="description"></p>
+        <div id="document_bg_custom_container" class="option_row hidden">
+          <input id="document_bg_custom_input" placeholder="Custom Color/CSS" />
+          <button id="document_bg_save_custom">Save</button>
+        </div>
+        <p id="document_bg_description"></p>
       </div>
 
       <div class="option_section">
@@ -136,7 +138,7 @@
         <button id="spectrum_reset" disabled>Reset</button>
       </div>
 
-      <div class="option_section" id="debug_section">
+      <!-- <div class="option_section" id="debug_section">
         <p class="section_label">Debug</p>
         <div class="option_container">
           <div class="option_row">
@@ -154,7 +156,7 @@
           <button id="debug_save">Save</button>
           <button id="debug_clear">Clear Storage</button>
         </div>
-      </div>
+      </div> -->
 
       <hr />
       <footer>
