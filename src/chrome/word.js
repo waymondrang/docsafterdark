@@ -1,133 +1,23 @@
+///////////////
+// NAMESPACE //
+///////////////
+
+var browser_namespace;
+
+// PREFER BROWSER NAMESPACE OVER CHROME
+if (typeof browser != "undefined") {
+  console.log("\"BROWSER\" NAMESPACE FOUND");
+  browser_namespace = browser;
+} else if (typeof chrome != "undefined") {
+  console.log("\"CHROME\" NAMESPACE FOUND");
+  browser_namespace = chrome;
+} else {
+  throw new Error("COULD NOT FIND BROWSER NAMESPACE");
+}
+
 ///////////////////////
 // UTILITY FUNCTIONS //
 ///////////////////////
-
-/**
- * Converts an hex format color to RGB.
- * https://stackoverflow.com/a/5624139
- * 
- * @param {String} hex 
- * @returns An object containing the RGB values
- */
-function hexToRgb(hex) {
-  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  hex = hex.replace(shorthandRegex, function (m, r, g, b) {
-    return r + r + g + g + b + b;
-  });
-
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result
-    ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-      }
-    : null;
-}
-
-/**
- * Converts an RGB component to hex.
- * 
- * @param {Number} c 
- * @returns The hex value of the component
- */
-function componentToHex(c) {
-  var hex = c.toString(16);
-  return hex.length == 1 ? "0" + hex : hex;
-}
-
-/**
- * Converts an RGB color value into hex format.
- * https://stackoverflow.com/a/5624139
- * 
- * @returns String of the hex value
- */
-function rgbToHex({ r, g, b }) {
-  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-}
-
-/**
- * Converts an RGB color value to HSL.
- *
- * @returns An object containing the HSL values
- */
-function rgbToHsl({ r, g, b }) {
-  (r /= 255), (g /= 255), (b /= 255);
-
-  var max = Math.max(r, g, b),
-    min = Math.min(r, g, b);
-  var h,
-    s,
-    l = (max + min) / 2;
-
-  if (max == min) {
-    h = s = 0; // achromatic
-  } else {
-    var d = max - min;
-    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-
-    switch (max) {
-      case r:
-        h = (g - b) / d + (g < b ? 6 : 0);
-        break;
-      case g:
-        h = (b - r) / d + 2;
-        break;
-      case b:
-        h = (r - g) / d + 4;
-        break;
-    }
-
-    h /= 6;
-  }
-
-  return {
-    h: h,
-    s: s,
-    l: l,
-  };
-}
-
-/**
- * Converts an HSL color value to RGB.
- *
- * @param {Number} h
- * @param {Number} s
- * @param {Number} l
- * @returns An object containing the RGB values
- */
-function hslToRgb(h, s, l) {
-  let r, g, b;
-
-  h /= 360;
-  s /= 100;
-  l /= 100;
-
-  if (s === 0) {
-    r = g = b = l; // achromatic
-  } else {
-    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-    const p = 2 * l - q;
-    r = hueToRgb(p, q, h + 1/3);
-    g = hueToRgb(p, q, h);
-    b = hueToRgb(p, q, h - 1/3);
-  }
-
-  return {
-    r: Math.round(r * 255),
-    g: Math.round(g * 255),
-    b: Math.round(b * 255),
-  }
-}
-
-function hueToRgb(p, q, t) {
-  if (t < 0) t += 1;
-  if (t > 1) t -= 1;
-  if (t < 1/6) return p + (q - p) * 6 * t;
-  if (t < 1/2) return q;
-  if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
-  return p;
-}
 
 /**
  * UPDATES A STORAGE OBJECT WITH A NEW KEY-VALUE PAIR
@@ -137,13 +27,13 @@ function hueToRgb(p, q, t) {
  * @param {*} value 
  */
 function update_storage(storage_object, key, value) {
-  chrome.storage.local.get(storage_object, function (data) {
+  browser_namespace.storage.local.get(storage_object, function (data) {
     if (data[storage_object] != null)
       data[storage_object][key] = value;
     else
       data[storage_object] = { [key]: value };
     
-    chrome.storage.local.set({ [storage_object]: data[storage_object] });
+    browser_namespace.storage.local.set({ [storage_object]: data[storage_object] });
   });
 }
 
@@ -154,7 +44,7 @@ function update_storage(storage_object, key, value) {
  * @param {*} value
  */
 function set_storage(storage_object, value) {
-  chrome.storage.local.set({ [storage_object]: value });
+  browser_namespace.storage.local.set({ [storage_object]: value });
 }
 
 ///////////////////////////
@@ -165,7 +55,7 @@ const head =
   document.head ||
   document.getElementsByTagName("head")[0] ||
   document.documentElement;
-const version = chrome.runtime.getManifest().version;
+const version = browser_namespace.runtime.getManifest().version;
 
 
 const mode_off              = 0;
@@ -206,7 +96,7 @@ const docsafterdark_page_border = "1px solid var(--primary-border-color)";
 const update_link_href  = "https://github.com/waymondrang/docsafterdark/releases";
 const donation_link     = "https://www.buymeacoffee.com/waymondrang";
 
-const docsafterdark_version = chrome.runtime.getManifest().version
+const docsafterdark_version = browser_namespace.runtime.getManifest().version
 
 ////////////////////////////////
 // DOCUMENT BACKGROUND VALUES //
@@ -238,7 +128,7 @@ function inject_css_file(file) {
     return;
 
   const css = document.createElement("link");
-  css.setAttribute("href", chrome.runtime.getURL(css_path + file));
+  css.setAttribute("href", browser_namespace.runtime.getURL(css_path + file));
   css.id = file_id;
   css.rel = "stylesheet";
 
@@ -398,12 +288,12 @@ function handle_document_invert(invert) {
 
 // SET REPLACEMENTS
 for (let [key, value] of Object.entries(replacements)) {
-  document.documentElement.style.setProperty(key, "url(" + chrome.runtime.getURL(value) + ")");
+  document.documentElement.style.setProperty(key, "url(" + browser_namespace.runtime.getURL(value) + ")");
 }
 
 let show_border;
 
-chrome.storage.local.get(
+browser_namespace.storage.local.get(
   [
     "mode",
     "dark_mode",
@@ -485,9 +375,11 @@ chrome.storage.local.get(
     //////////////////
 
     if (data.accent_color != null) {
+      console.log("FOUND SAVED ACCENT COLOR");
       accent_color = data.accent_color;
       update_accent_color(data.accent_color);
     } else {
+      console.log("NO SAVED ACCENT COLOR FOUND");
       // SET DEFAULT ACCENT COLOR
       accent_color = { hue: default_accent_hue };
       update_accent_color(accent_color);
@@ -495,6 +387,8 @@ chrome.storage.local.get(
       // SAVE DEFAULT ACCENT COLOR
       update_storage("accent_color", "hue", default_accent_hue);
     }
+
+    console.log("ACCENT COLOR:", accent_color);
 
     ////////////
     // BUTTON //
@@ -574,7 +468,7 @@ chrome.storage.local.get(
 // HANDLE STORAGE CHANGES //
 ////////////////////////////
 
-chrome.storage.onChanged.addListener(function (changes, area) {
+browser_namespace.storage.onChanged.addListener(function (changes, area) {
   // Handle background change
   if (Object.keys(changes).includes("doc_bg")) {
     let option = changes.doc_bg.newValue;
@@ -588,7 +482,7 @@ chrome.storage.onChanged.addListener(function (changes, area) {
         console.error("Invalid background option");
       }
     } else {
-      chrome.storage.local.get(["custom_bg"], function (data) {
+      browser_namespace.storage.local.get(["custom_bg"], function (data) {
         let custom = data.custom_bg;
         document.documentElement.style.setProperty(
           "--docsafterdark_document_background",
@@ -667,7 +561,7 @@ chrome.storage.onChanged.addListener(function (changes, area) {
 });
 
 // LISTEN FOR MESSAGES FROM POPUP
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+browser_namespace.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.type == "setAccentColor") {
     update_accent_color(request.color);
   }
