@@ -337,7 +337,9 @@ textarea.docs-search-bar-input.goog-textarea,
 .kix-citations-source-list-item-content,
 .docs-chat-title-bar,
 .docs-gm .docs-chat-edit-box,
-.kix-header-footer-bubble-description
+.kix-header-footer-bubble-description,
+.kix-citations-search-input,
+.kix-citations-search-result-attribute-value
 {
   color: var(--primary-text-color);
 }
@@ -471,7 +473,8 @@ textarea.docs-search-bar-input.goog-textarea,
 .kix-citations-create-view-zero-state-content, .kix-citations-source-list-zero-state-content,
 .kix-citations-create-view-attribute-label,
 .docs-chat-title-message>h2,
-.docs-chat-status
+.docs-chat-status,
+.kix-citations-search-result-attribute-label
 {
   color: var(--tertiary-text-color);
 }
