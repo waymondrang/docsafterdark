@@ -1,0 +1,20 @@
+{
+  "name": "docsafterdark",
+  "version": "0.0.0",
+  "description": "Beyond dark mode for Google Docs",
+  "devDependencies": {
+    "archiver": "^7.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/waymondrang/docsafterdark.git"
+  },
+  "author": "Raymond Wang",
+  "bugs": {
+    "url": "https://github.com/waymondrang/docsafterdark/issues"
+  },
+  "homepage": "https://github.com/waymondrang/docsafterdark#readme",
+  "scripts": {
+    "build": "node package.js"
+  }
+}
