@@ -229,21 +229,25 @@ document.querySelectorAll("#modes button").forEach(function (e) {
     } else if (selected_mode == "light") {
       set_storage("mode", mode_light);
 
-      // UPDATE INVERT CHECKBOXES
-      document_inverted_checkbox.checked = false;
-      checkbox_disable(document_inverted_grayscale_checkbox, true);
-      checkbox_disable(document_inverted_black_checkbox, true);
+      if (document_bg_option != "black" && document_bg_option != "custom") {
+        // UPDATE INVERT CHECKBOXES
+        document_inverted_checkbox.checked = false;
+        checkbox_disable(document_inverted_grayscale_checkbox, true);
+        checkbox_disable(document_inverted_black_checkbox, true);
 
-      update_storage("invert", "invert", false);
+        update_storage("invert", "invert", false);
+      }
     } else if (selected_mode == "dark") {
       set_storage("mode", mode_dark);
 
-      // UPDATE INVERT CHECKBOXES
-      document_inverted_checkbox.checked = true;
-      checkbox_disable(document_inverted_grayscale_checkbox, false);
-      checkbox_disable(document_inverted_black_checkbox, false);
+      if (document_bg_option != "default" && document_bg_option != "custom") {
+        // UPDATE INVERT CHECKBOXES
+        document_inverted_checkbox.checked = true;
+        checkbox_disable(document_inverted_grayscale_checkbox, false);
+        checkbox_disable(document_inverted_black_checkbox, false);
 
-      update_storage("invert", "invert", true);
+        update_storage("invert", "invert", true);
+      }
     }
   });
 });
