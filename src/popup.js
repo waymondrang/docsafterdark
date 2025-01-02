@@ -217,13 +217,16 @@ function checkbox_disable(checkbox, disabled) {
 
 document.querySelectorAll("#modes button").forEach(function (e) {
   e.addEventListener("click", function (e) {
-    selected_mode.classList.remove("selected");
+    document.querySelectorAll("#modes button").forEach(function (e) {
+      e.classList.remove("selected");
+    });
+
     this.classList.add("selected");
-    selected_mode = this;
+    selected_mode = this.value;
     
-    if (this.value == "off") {
+    if (selected_mode == "off") {
       set_storage("mode", mode_off);
-    } else if (this.value == "light") {
+    } else if (selected_mode == "light") {
       set_storage("mode", mode_light);
 
       // UPDATE INVERT CHECKBOXES
@@ -232,8 +235,15 @@ document.querySelectorAll("#modes button").forEach(function (e) {
       checkbox_disable(document_inverted_black_checkbox, true);
 
       update_storage("invert", "invert", false);
-    } else if (this.value == "dark") {
+    } else if (selected_mode == "dark") {
       set_storage("mode", mode_dark);
+
+      // UPDATE INVERT CHECKBOXES
+      document_inverted_checkbox.checked = true;
+      checkbox_disable(document_inverted_grayscale_checkbox, false);
+      checkbox_disable(document_inverted_black_checkbox, false);
+
+      update_storage("invert", "invert", true);
     }
   });
 });
@@ -287,33 +297,49 @@ raise_button_checkbox.addEventListener("click", function (e) {
 
 document.querySelectorAll("#document_bg_buttons button").forEach(function (e) {
   e.addEventListener("click", function (e) {
-    document_bg_option.classList.remove("selected");
-    this.classList.add("selected");
-    document_bg_option = this;
+    document.querySelectorAll("#document_bg_buttons button").forEach(function (e) {
+      e.classList.remove("selected");
+    });
 
-    if (this.value != "custom") {
+    this.classList.add("selected");
+    document_bg_option = this.value;
+
+    if (document_bg_option != "custom") {
       document_bg_custom_container.classList.add("hidden");
     } else {
       document_bg_custom_container.classList.remove("hidden");
     }
     
     // DO NOT MODIFY INVERT SETTINGS FOR CUSTOM BACKGROUND
-    if (this.value == "default") {
-      document_inverted_checkbox.checked = false;
-      update_storage("invert", "invert", false);
-    } else if (this.value != "custom") {
-      document_inverted_checkbox.checked = true;      
-      document_inverted_grayscale_checkbox.checked = true;
+    if (selected_mode == "light") {
+      if (document_bg_option == "black") {
+        document_inverted_checkbox.checked = true;      
+        document_inverted_grayscale_checkbox.checked = true;
+  
+        let batch = new update_storage_batch("invert");
+        batch.set("invert", true).set("grayscale", true).update();
+      } else {
+        document_inverted_checkbox.checked = false;
+        update_storage("invert", "invert", false);
+      }
+    } else if (selected_mode == "dark") {
+      if (document_bg_option == "default") {
+        document_inverted_checkbox.checked = false;
+        update_storage("invert", "invert", false);
+      } else if (document_bg_option != "custom") {
+        document_inverted_checkbox.checked = true;      
+        document_inverted_grayscale_checkbox.checked = true;
 
-      let batch = new update_storage_batch("invert");
-      batch.set("invert", true).set("grayscale", true).update();
+        let batch = new update_storage_batch("invert");
+        batch.set("invert", true).set("grayscale", true).update();
+      }
     }
 
     document_inverted_state = document_inverted_checkbox.checked;
     checkbox_disable(document_inverted_grayscale_checkbox, !document_inverted_state);
     checkbox_disable(document_inverted_black_checkbox, !document_inverted_state || !document_inverted_grayscale_checkbox.checked);
 
-    set_storage("doc_bg", this.value);
+    set_storage("doc_bg", document_bg_option);
   });
 });
 
@@ -609,35 +635,37 @@ try {
 
       if (data.mode == null) {
         set_storage("mode", mode_dark);
-        selected_mode = document.querySelector("#mode_dark");
+        selected_mode = "dark";
       } else {
         if (data.mode == mode_off) {
-          selected_mode = document.querySelector("#mode_off");
+          selected_mode = "off";
         } else if (data.mode == mode_light) {
-          selected_mode = document.querySelector("#mode_light");
+          selected_mode = "light";
         } else {
-          selected_mode = document.querySelector("#mode_dark");
+          selected_mode = "dark";
         }
       }
 
-      selected_mode.classList.add("selected");
+      let selected_mode_button = document.querySelector(`#mode_${selected_mode}`);
+      selected_mode_button.classList.add("selected");
 
       /////////////////////////
       // DOCUMENT BACKGROUND //
       /////////////////////////
       
       try {
-        if (data.doc_bg == null) {
-          // SET DEFAULT BACKGROUND
-          data.doc_bg = default_background;
-          set_storage("doc_bg", data.doc_bg);
-        }
-        
-        var selected_option = document.querySelector(`#document_bg_${data.doc_bg}`);
-        selected_option.classList.add("selected");
-        document_bg_option = selected_option;
+        document_bg_option = data.doc_bg;
 
-        if (data.doc_bg == "custom") {
+        if (document_bg_option == null) {
+          // SET DEFAULT BACKGROUND
+          document_bg_option = default_background;
+          set_storage("doc_bg", document_bg_option);
+        }
+
+        var selected_option = document.querySelector(`#document_bg_${document_bg_option}`);
+        selected_option.classList.add("selected");
+
+        if (document_bg_option == "custom") {
           document_bg_custom_container.classList.remove("hidden");
           document_bg_custom_input.value = custom_data;
         }
