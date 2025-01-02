@@ -339,7 +339,9 @@ textarea.docs-search-bar-input.goog-textarea,
 .docs-gm .docs-chat-edit-box,
 .kix-header-footer-bubble-description,
 .kix-citations-search-input,
-.kix-citations-search-result-attribute-value
+.kix-citations-search-result-attribute-value,
+.chapters-in-cslv .docs-grille-version-history .docs-revisions-authorwidget-hat,
+.docs-grille-gm3 .docs-chat-message-tooltip-content
 {
   color: var(--primary-text-color);
 }
@@ -421,7 +423,8 @@ textarea.docs-search-bar-input.goog-textarea,
 .docs-parent-collections-container-prefix, .docs-parent-collections-container-text,
 .docs-parent-collections-container-folder-name,
 .docos-comments-pe .docos-streampane-searchbar .docos-streampane-search-input,
-.docs-chat-messages
+.docs-chat-messages,
+.miniChapterSwitcherChapterItemTitle
 {
   color: var(--secondary-text-color);
 }
@@ -667,7 +670,8 @@ body,
 .docs-grille-gm3.docs-body-pageless .docos-emoji-reaction-doco-view-emojis .docs-material-button-flat-primary,
 .miniChapterSwitcherContainerView.miniChapterSwitcherPageless .miniChapterSwitcherCore .miniChapterSwitcherView.docs-material-gm-select .docs-material-gm-select-outer-box, .miniChapterSwitcherContainerView.miniChapterSwitcherPageless .miniChapterSwitcherCore .miniChapterSwitcherView.docs-material-gm-select .miniChapterSwitcherChapterIcon, .miniChapterSwitcherContainerView.miniChapterSwitcherPageless .miniChapterSwitcherCore .miniChapterSwitcherView.docs-material-gm-select .miniChapterSwitcherNavigationEntryPointIcon,
 .miniChapterSwitcherContainerView.miniChapterSwitcherPageless.breadcrumbSwitcherUiVariant .miniChapterSwitcherCore .miniChapterSwitcherView.docs-material-gm-select .miniChapterSwitcherNavigationEntryPointMask,
-.goog-toolbar.kix-citations-source-list-item-toolbar
+.goog-toolbar.kix-citations-source-list-item-toolbar,
+.miniChapterSwitcherChapterList.goog-menu.goog-menu-vertical.miniChapterSwitcherChapterListViewContainer .goog-menuitem.goog-menuitem-active, .miniChapterSwitcherChapterList.goog-menu.goog-menu-vertical.miniChapterSwitcherChapterListViewContainer .goog-menuitem.goog-option-selected
 {
   background: var(--secondary-background-color);
 }
@@ -897,7 +901,8 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
 .docs-chat-messages,
 .docs-gm .docs-chat-pane-container,
 .docs-chat-pane,
-.docs-material .docs-presence-plus-collab-widget-color-block, .docs-material.docs-presence-plus-widget-overflow-menu .docs-presence-plus-collab-widget-color-block
+.docs-material .docs-presence-plus-collab-widget-color-block, .docs-material.docs-presence-plus-widget-overflow-menu .docs-presence-plus-collab-widget-color-block,
+.miniChapterSwitcherChapterList.goog-menu.goog-menu-vertical.miniChapterSwitcherChapterListViewContainer
 {
   background-color: var(--primary-background-color);
 }
@@ -940,7 +945,8 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
 .kix-citations-source-list-item:focus, .kix-citations-source-list-item:hover,
 .goog-toolbar.kix-citations-source-list-item-toolbar .goog-toolbar-button-hover:not(.goog-toolbar-menu-button-open), .goog-toolbar.kix-citations-source-list-item-toolbar .goog-toolbar-menu-button-hover:not(.goog-toolbar-menu-button-open),
 .kix-citations-bibliography-bubble .kix-citations-bibliography-bubble-option-close:active, .kix-citations-bibliography-bubble .kix-citations-bibliography-bubble-option-close:focus, .kix-citations-bibliography-bubble .kix-citations-bibliography-bubble-option-close:hover, .kix-citations-bibliography-bubble .kix-citations-bibliography-bubble-option-help:active, .kix-citations-bibliography-bubble .kix-citations-bibliography-bubble-option-help:focus, .kix-citations-bibliography-bubble .kix-citations-bibliography-bubble-option-help:hover, .kix-citations-bibliography-bubble.kix-citations-bibliography-bubble-feedback-enabled .kix-citations-bibliography-bubble-option-feedback:active, .kix-citations-bibliography-bubble.kix-citations-bibliography-bubble-feedback-enabled .kix-citations-bibliography-bubble-option-feedback:focus, .kix-citations-bibliography-bubble.kix-citations-bibliography-bubble-feedback-enabled .kix-citations-bibliography-bubble-option-feedback:hover,
-.kix-header-footer-bubble .kix-header-footer-bubble-menu-button.goog-flat-menu-button.goog-flat-menu-button-focused, .kix-header-footer-bubble .kix-header-footer-bubble-menu-button.goog-flat-menu-button.goog-flat-menu-button-hover, .kix-header-footer-bubble .kix-header-footer-bubble-menu-button.goog-flat-menu-button.goog-flat-menu-button-open
+.kix-header-footer-bubble .kix-header-footer-bubble-menu-button.goog-flat-menu-button.goog-flat-menu-button-focused, .kix-header-footer-bubble .kix-header-footer-bubble-menu-button.goog-flat-menu-button.goog-flat-menu-button-hover, .kix-header-footer-bubble .kix-header-footer-bubble-menu-button.goog-flat-menu-button.goog-flat-menu-button-open,
+.miniChapterSwitcherChapterList.goog-menu.goog-menu-vertical.miniChapterSwitcherChapterListViewContainer .goog-menuitem.goog-menuitem-highlight
 {
   background: var(--hover-background-color);
 }
@@ -1059,7 +1065,8 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
 .docs-material-button-fill-primary.docs-material-button-focused, .docs-material-button-fill-primary.docs-material-button-focused.docs-material-button-no-focus-border,
 .docs-image-synthesis-sidebar .image-synthesis-creation-button.image-synthesis-begin-create:focus,
 .docos.docs-gm .docs-material-gm-checkbox.docs-material-gm-checkbox-checked, .docos.docs-gm .docs-material-gm-checkbox.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
-.docs-grille-gm3 .docs-material .docs-chat-badge
+.docs-grille-gm3 .docs-material .docs-chat-badge,
+.docs-revisions-new-changes-badge
 {
   background: var(--accent-color);
 }
@@ -1609,7 +1616,9 @@ div.docs-material-gm-checkbox-focused, span.docs-material-gm-checkbox-focused,
 .document-details-bubble-container,
 .kix-documentmetrics-widget,
 .docs-gm .docs-toolbar-more-bubble,
-.goog-toolbar.kix-citations-source-list-item-toolbar
+.goog-toolbar.kix-citations-source-list-item-toolbar,
+.miniChapterSwitcherChapterList.goog-menu.goog-menu-vertical.miniChapterSwitcherChapterListViewContainer,
+.docs-grille-gm3 .docs-chat-message-tooltip-container
 {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.20);
 }
@@ -1627,6 +1636,11 @@ div.docs-material-gm-checkbox-focused, span.docs-material-gm-checkbox-focused,
 .left-sidebar-container.navigation-widget-in-pageless-format .left-sidebar-container-content-child
 {
   box-shadow: inset -1px 0 0 0 var(--primary-border-color);
+}
+
+.docs-gm .docs-chat-edit-container.docs-chat-shadow
+{
+  box-shadow: 0 -2px 6px 2px rgba(0, 0, 0, 0.2);
 }
 
 /*********/
