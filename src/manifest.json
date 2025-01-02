@@ -1,20 +1,14 @@
 {
-  "manifest_version": 3,
   "name": "DocsAfterDark",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Beyond dark mode for Google Docs",
   "author": "Raymond Wang",
+  "manifest_version": 3,
   "content_scripts": [
     {
-      "matches": [
-        "*://docs.google.com/document/*"
-      ],
-      "js": [
-        "word.js"
-      ],
-      "css": [
-        "assets/css/default.css"
-      ]
+      "matches": ["*://docs.google.com/document/*"],
+      "js": ["word.js"],
+      "css": ["assets/css/default.css"]
     }
   ],
   "action": {
@@ -28,9 +22,7 @@
         "assets/replacements/*.png",
         "assets/replacements/*.svg"
       ],
-      "matches": [
-        "*://docs.google.com/*"
-      ]
+      "matches": ["*://docs.google.com/*"]
     }
   ],
   "icons": {
@@ -38,8 +30,5 @@
     "48": "assets/icons/docsafterdark_48.png",
     "128": "assets/icons/docsafterdark_128.png"
   },
-  "permissions": [
-    "storage",
-    "activeTab"
-  ]
+  "permissions": ["storage", "activeTab"]
 }

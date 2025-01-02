@@ -40,9 +40,9 @@
         <div class="option_section">
           <p class="section_label">Mode Toggle</p>
           <div id="modes" class="button_row">
-            <button id="dark" class="accent_button">Dark</button>
-            <button id="light" class="accent_button">Light</button>
-            <button id="off" class="accent_button">Off</button>
+            <button id="mode_dark" value="dark" class="accent_button">Dark</button>
+            <button id="mode_light" value="light" class="accent_button">Light</button>
+            <button id="mode_off" value="off" class="accent_button">Off</button>
           </div>
         </div>
 
@@ -52,6 +52,34 @@
           <button id="dark_mode_normal">Normal</button>
           <button id="dark_mode_eclipse">Midnight</button>
         </div>
+      </div>
+
+      <div id="document_bg_section" class="__chrome_hidden">
+        <p class="section_label">
+          Document Background<span class="__firefox_hidden">&nbsp;(May Be Unstable)</span>
+        </p>
+        <div id="document_bg_buttons" class="button_row">
+          <button id="document_bg_default" value="default">
+            Default
+          </button>
+          <button id="document_bg_shade" value="shade">
+            Shade
+          </button>
+          <button id="document_bg_dark" value="dark">
+            Dark
+          </button>
+          <button id="document_bg_black" value="black">
+            Black
+          </button>
+          <button id="document_bg_custom" value="custom">
+            Custom
+          </button>
+        </div>
+        <div id="document_bg_custom_container" class="option_row hidden">
+          <input id="document_bg_custom_input" placeholder="Custom Color/CSS" />
+          <button id="document_bg_save_custom">Save</button>
+        </div>
+        <!-- <p id="document_bg_description"></p> -->
       </div>
 
       <div class="option_section">
@@ -80,34 +108,6 @@
             </label>
           </div>
         </div>
-      </div>
-
-      <div id="document_bg_section" class="__chrome_hidden"> 
-        <p class="section_label">
-          Document Background<span class="__firefox_hidden">&nbsp;(May Be Unstable)</span>
-        </p>
-        <div id="document_bg_buttons" class="button_row">
-          <button id="default">
-            Default
-          </button>
-          <button id="shade">
-            Shade
-          </button>
-          <button id="dark">
-            Dark
-          </button>
-          <button id="black">
-            Black
-          </button>
-          <button id="custom">
-            Custom
-          </button>
-        </div>
-        <div id="document_bg_custom_container" class="option_row hidden">
-          <input id="document_bg_custom_input" placeholder="Custom Color/CSS" />
-          <button id="document_bg_save_custom">Save</button>
-        </div>
-        <p id="document_bg_description"></p>
       </div>
 
       <div class="option_section">

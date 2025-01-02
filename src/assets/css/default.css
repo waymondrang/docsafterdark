@@ -24,15 +24,17 @@
   margin: 0 auto;
 }
 
-#docsafterdark_update_notification div {
-  height: 40px;
+#docsafterdark_update_notification p {
+  margin: 0;
+}
 
+#docsafterdark_update_notification div {
   display: flex;
   align-items: center;
 
   border: 1px solid var(--primary-border-color, #4d4d4d);
   background-color: var(--primary-background-color, #212121);
-  padding: 0px 12px;
+  padding: 6px 12px;
   border-radius: 8px;
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
   font-size: 14px;

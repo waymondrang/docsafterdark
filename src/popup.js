@@ -1,132 +1,23 @@
+///////////////
+// NAMESPACE //
+///////////////
+
+var browser_namespace;
+
+// PREFER BROWSER NAMESPACE OVER CHROME
+if (typeof browser != "undefined") {
+  console.log("\"BROWSER\" NAMESPACE FOUND");
+  browser_namespace = browser;
+} else if (typeof chrome != "undefined") {
+  console.log("\"CHROME\" NAMESPACE FOUND");
+  browser_namespace = chrome;
+} else {
+  throw new Error("COULD NOT FIND BROWSER NAMESPACE");
+}
+
 ///////////////////////
 // UTILITY FUNCTIONS //
 ///////////////////////
-
-/**
- * Converts an hex format color to RGB.
- * https://stackoverflow.com/a/5624139
- *
- * @param {String} hex
- * @returns An object containing the RGB values
- */
-function hexToRgb(hex) {
-  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  hex = hex.replace(shorthandRegex, function (m, r, g, b) {
-    return r + r + g + g + b + b;
-  });
-
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result
-    ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-      }
-    : null;
-}
-
-/**
- * Converts an RGB component to hex.
- *
- * @param {Number} c
- * @returns The hex value of the component
- */
-function componentToHex(c) {
-  var hex = c.toString(16);
-  return hex.length == 1 ? "0" + hex : hex;
-}
-
-/**
- * Converts an RGB color value into hex format.
- * https://stackoverflow.com/a/5624139
- *
- * @returns String of the hex value
- */
-function rgbToHex({ r, g, b }) {
-  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-}
-
-/**
- * Converts an RGB color value to HSL.
- *
- * @returns An object containing the HSL values
- */
-function rgbToHsl({ r, g, b }) {
-  (r /= 255), (g /= 255), (b /= 255);
-
-  var max = Math.max(r, g, b),
-    min = Math.min(r, g, b);
-  var h,
-    s,
-    l = (max + min) / 2;
-
-  if (max == min) {
-    h = s = 0; // achromatic
-  } else {
-    var d = max - min;
-    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-
-    switch (max) {
-      case r:
-        h = (g - b) / d + (g < b ? 6 : 0);
-        break;
-      case g:
-        h = (b - r) / d + 2;
-        break;
-      case b:
-        h = (r - g) / d + 4;
-        break;
-    }
-
-    h /= 6;
-  }
-
-  return {
-    h: h,
-    s: s,
-    l: l,
-  };
-}
-
-/**
- * Converts an HSL color value to RGB.
- *
- * @param {Number} h
- * @param {Number} s
- * @param {Number} l
- * @returns An object containing the RGB values
- */
-function hslToRgb(h, s, l) {
-  let r, g, b;
-
-  s /= 100;
-  l /= 100;
-
-  if (s === 0) {
-    r = g = b = l; // achromatic
-  } else {
-    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-    const p = 2 * l - q;
-    r = hueToRgb(p, q, h + 1 / 3);
-    g = hueToRgb(p, q, h);
-    b = hueToRgb(p, q, h - 1 / 3);
-  }
-
-  return {
-    r: Math.round(r * 255),
-    g: Math.round(g * 255),
-    b: Math.round(b * 255),
-  };
-}
-
-function hueToRgb(p, q, t) {
-  if (t < 0) t += 1;
-  if (t > 1) t -= 1;
-  if (t < 1 / 6) return p + (q - p) * 6 * t;
-  if (t < 1 / 2) return q;
-  if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
-  return p;
-}
 
 /**
  * HELPER FUNCTION TO SEND MESSAGES TO ACTIVE TAB
@@ -134,9 +25,67 @@ function hueToRgb(p, q, t) {
  * @param {*} message 
  */
 function sendMessageToTabs(message) {
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    chrome.tabs.sendMessage(tabs[0].id, message);
-  });
+  try {
+    browser_namespace.tabs.query(
+      { active: true, currentWindow: true },
+      function (tabs) {
+        browser_namespace.tabs.sendMessage(tabs[0].id, message);
+      }
+    );
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+class update_storage_batch {
+  constructor(storage_object) {
+    this.storage_object = storage_object;
+    this.storage = {};
+  }
+
+  /**
+   * SETS THE STORAGE OBJECT
+   * 
+   * @param {String} storage_object 
+   */
+  set_storage_object(storage_object) {
+    this.storage_object = storage_object;
+
+    return this;
+  }
+
+  /**
+   * SETS A KEY-VALUE PAIR
+   * 
+   * @param {String} key 
+   * @param {*} value 
+   */
+  set(key, value) {
+    this.storage[key] = value;
+
+    return this;
+  }
+
+  /**
+   * SAVES THE STORAGE OBJECT
+   */
+  update() {
+    console.log("UPDATING STORAGE: " + this.storage_object + " WITH: " + JSON.stringify(this.storage));
+    
+    const that = this;
+
+    browser_namespace.storage.local.get(this.storage_object, function (data) {
+      if (data[that.storage_object] != null) {
+        for (var key in that.storage) {
+          data[that.storage_object][key] = that.storage[key];
+        }
+      } else {
+        data[that.storage_object] = that.storage;
+      }
+
+      browser_namespace.storage.local.set({ [that.storage_object]: data[that.storage_object] });
+    });
+  }
 }
 
 /**
@@ -147,13 +96,15 @@ function sendMessageToTabs(message) {
  * @param {*} value 
  */
 function update_storage(storage_object, key, value) {
-  chrome.storage.local.get(storage_object, function (data) {
+  console.log("UPDATING STORAGE: " + storage_object + " KEY: " + key + " VALUE: " + value);
+
+  browser_namespace.storage.local.get(storage_object, function (data) {
     if (data[storage_object] != null)
       data[storage_object][key] = value;
     else
       data[storage_object] = { [key]: value };
     
-    chrome.storage.local.set({ [storage_object]: data[storage_object] });
+    browser_namespace.storage.local.set({ [storage_object]: data[storage_object] });
   });
 }
 
@@ -164,7 +115,7 @@ function update_storage(storage_object, key, value) {
  * @param {*} value
  */
 function set_storage(storage_object, value) {
-  chrome.storage.local.set({ [storage_object]: value });
+  browser_namespace.storage.local.set({ [storage_object]: value });
 }
 
 /**
@@ -173,14 +124,14 @@ function set_storage(storage_object, value) {
  * @param {String} key 
  */
 function remove_storage(key) {
-  chrome.storage.local.remove(key);
+  browser_namespace.storage.local.remove(key);
 }
 
 /**
  * CLEARS ALL STORAGE
  */
 function clear_storage() {
-  chrome.storage.local.clear();
+  browser_namespace.storage.local.clear();
 }
 
 ///////////////
@@ -195,11 +146,11 @@ const dark_mode_normal    = 0;
 const dark_mode_eclipse   = 1;
 
 const default_accent_hue  = 88; // GREEN
+const default_background = "dark";
 
 const document_bg_custom_container  = document.querySelector("#document_bg_custom_container");
 const document_bg_custom_input      = document.querySelector("#document_bg_custom_input");
 const document_bg_custom_save       = document.querySelector("#document_bg_save_custom");
-const document_bg_description       = document.querySelector("#document_bg_description");
 const show_border                   = document.querySelector("#show_border");
 
 var document_bg_option;
@@ -241,9 +192,7 @@ var descriptions = {
     "Any valid CSS declaration for the background property may be used here.",
 };
 
-const default_background = "default";
-
-const manifestData = chrome.runtime.getManifest();
+const manifestData = browser_namespace.runtime.getManifest();
 const version = manifestData.version;
 const versionElement = document.querySelector("#version");
 versionElement.textContent = version ? "v" + version : "";
@@ -272,20 +221,18 @@ document.querySelectorAll("#modes button").forEach(function (e) {
     this.classList.add("selected");
     selected_mode = this;
     
-    if (this.id == "off") {
+    if (this.value == "off") {
       set_storage("mode", mode_off);
-    } else if (this.id == "light") {
+    } else if (this.value == "light") {
       set_storage("mode", mode_light);
 
-      // UPDATE INVERT SETTINGS
+      // UPDATE INVERT CHECKBOXES
       document_inverted_checkbox.checked = false;
-
-      // DISABLE INVERT SETTINGS
       checkbox_disable(document_inverted_grayscale_checkbox, true);
       checkbox_disable(document_inverted_black_checkbox, true);
 
       update_storage("invert", "invert", false);
-    } else if (this.id == "dark") {
+    } else if (this.value == "dark") {
       set_storage("mode", mode_dark);
     }
   });
@@ -338,40 +285,41 @@ raise_button_checkbox.addEventListener("click", function (e) {
   update_storage("button_options", "raised", e.target.checked);
 });
 
-// DEPRECATED IN CHROME (FOR NOW)
 document.querySelectorAll("#document_bg_buttons button").forEach(function (e) {
   e.addEventListener("click", function (e) {
-    var id = this.id;
-
     document_bg_option.classList.remove("selected");
     this.classList.add("selected");
-
     document_bg_option = this;
 
-    document_inverted_checkbox.checked = false;
-    document_inverted_grayscale_checkbox.checked = false;
-    checkbox_disable(document_inverted_grayscale_checkbox, true);
-
-    if (id != "custom") {
+    if (this.value != "custom") {
       document_bg_custom_container.classList.add("hidden");
     } else {
       document_bg_custom_container.classList.remove("hidden");
     }
-    for (d in descriptions) {
-      if (id == d) {
-        document_bg_description.textContent = descriptions[d];
-      }
+    
+    // DO NOT MODIFY INVERT SETTINGS FOR CUSTOM BACKGROUND
+    if (this.value == "default") {
+      document_inverted_checkbox.checked = false;
+      update_storage("invert", "invert", false);
+    } else if (this.value != "custom") {
+      document_inverted_checkbox.checked = true;      
+      document_inverted_grayscale_checkbox.checked = true;
+
+      let batch = new update_storage_batch("invert");
+      batch.set("invert", true).set("grayscale", true).update();
     }
-    chrome.storage.local.set({
-      doc_bg: id,
-      invert: { invert: false, grayscale: false },
-    });
+
+    document_inverted_state = document_inverted_checkbox.checked;
+    checkbox_disable(document_inverted_grayscale_checkbox, !document_inverted_state);
+    checkbox_disable(document_inverted_black_checkbox, !document_inverted_state || !document_inverted_grayscale_checkbox.checked);
+
+    set_storage("doc_bg", this.value);
   });
 });
 
 document_bg_custom_save.addEventListener("click", function (e) {
   if (document_bg_custom_input.value)
-    chrome.storage.local.set({ custom_bg: document_bg_custom_input.value });
+    set_storage("custom_bg", document_bg_custom_input.value);
 });
 
 ////////////////////////////
@@ -389,16 +337,12 @@ document_inverted_checkbox.addEventListener("click", function (e) {
 
 document_inverted_grayscale_checkbox.addEventListener("click", function (e) {
   checkbox_disable(document_inverted_black_checkbox, !e.target.checked);
-  
-  chrome.storage.local.set({
-    invert: { invert: document_inverted_state, grayscale: e.target.checked, black: document_inverted_black_checkbox.checked },
-  });
+
+  update_storage("invert", "grayscale", e.target.checked);
 });
 
 document_inverted_black_checkbox.addEventListener("click", function (e) {
-  chrome.storage.local.set({
-    invert: { invert: document_inverted_state, grayscale: document_inverted_grayscale_checkbox.checked, black: e.target.checked },
-  });
+  update_storage("invert", "black", e.target.checked);
 });
 
 ////////////////////////////////
@@ -406,11 +350,11 @@ document_inverted_black_checkbox.addEventListener("click", function (e) {
 ////////////////////////////////
 
 show_border.addEventListener("click", function (e) {
-  chrome.storage.local.set({ show_border: e.target.checked });
+  set_storage("show_border", e.target.checked);
 });
 
 donate.addEventListener("click", function (e) {
-  chrome.tabs.create({ url: "https://www.buymeacoffee.com/waymondrang" });
+  browser_namespace.tabs.create({ url: "https://www.buymeacoffee.com/waymondrang" });
 });
 
 /**
@@ -426,9 +370,7 @@ function handleTempColorChange(color, saveToStorage = true) {
 
   // SAVE TEMPORARY COLOR TO STORAGE
   if (saveToStorage)
-    chrome.storage.local.set({ temp_accent_color: color });
-
-  console.log("SAVED TEMP ACCENT COLOR: ", color);
+    set_storage("temp_accent_color", color);
 
   // SET POPUP ACCENT COLOR
   setPopupAccentColor(color);
@@ -472,12 +414,12 @@ spectrum_input.addEventListener("input", function (e) {
 ////////////////////
 
 spectrum_reset.addEventListener("click", function (e) {
-  chrome.storage.local.get("accent_color", function (data) {
+  browser_namespace.storage.local.get("accent_color", function (data) {
     if (data.accent_color) {
       initiateKnob(data.accent_color.hue);
     } else {
       // SET DEFAULT ACCENT COLOR
-      initiateKnob(0);
+      initiateKnob(default_accent_hue);
     }
 
     // DISABLE RESET AND SAVE BUTTONS AFTER RESET
@@ -488,7 +430,7 @@ spectrum_reset.addEventListener("click", function (e) {
     handleTempColorChange({ hue: spectrum_input.value }, false);
 
     // REMOVE TEMPORARY COLOR
-    chrome.storage.local.remove("temp_accent_color");
+    remove_storage("temp_accent_color");
   });
 });
 
@@ -501,10 +443,10 @@ spectrum_save.addEventListener("click", function (e) {
     // TODO: VALIDATE HUE VALUE
 
     // SAVE HUE TO STORAGE
-    chrome.storage.local.set({ accent_color: { hue: spectrum_input.value } });
+    update_storage("accent_color", "hue", spectrum_input.value);
 
     // REMOVE TEMPORARY COLOR
-    chrome.storage.local.remove("temp_accent_color");
+    remove_storage("temp_accent_color");
 
     console.log("SAVED ACCENT HUE VALUE: " + spectrum_input.value);
 
@@ -635,7 +577,7 @@ spectrum_bar.addEventListener("mousedown", function (e) {
 ///////////////////
 
 try {
-  chrome.storage.local.get(
+  browser_namespace.storage.local.get(
     [
       "doc_bg",
       "custom_bg",
@@ -650,10 +592,10 @@ try {
       "on", // DEPRECATED BUT KEEP FOR BACKWARDS COMPATIBILITY
     ],
     function (data) {
-      let option        = data.doc_bg;
+      // TODO: REMOVE THESE VARIABLES AND INSTEAD USE data.XXX
+      
       let custom_data   = data.custom_bg;
       let invert_data   = data.invert;
-      let button_raised = data.raise_button;
       let border_shown  = data.show_border;
 
       ////////////////////
@@ -666,24 +608,42 @@ try {
       });
 
       if (data.mode == null) {
-        chrome.storage.local.set({ mode: mode_dark });
-        selected_mode = document.querySelector("#dark");
+        set_storage("mode", mode_dark);
+        selected_mode = document.querySelector("#mode_dark");
       } else {
         if (data.mode == mode_off) {
-          selected_mode = document.querySelector("#off");
+          selected_mode = document.querySelector("#mode_off");
         } else if (data.mode == mode_light) {
-          selected_mode = document.querySelector("#light");
+          selected_mode = document.querySelector("#mode_light");
         } else {
-          selected_mode = document.querySelector("#dark");
+          selected_mode = document.querySelector("#mode_dark");
         }
       }
 
       selected_mode.classList.add("selected");
 
-      if (option == null) {
-        // Set default option to default_background
-        option = default_background;
-        chrome.storage.local.set({ doc_bg: option });
+      /////////////////////////
+      // DOCUMENT BACKGROUND //
+      /////////////////////////
+      
+      try {
+        if (data.doc_bg == null) {
+          // SET DEFAULT BACKGROUND
+          data.doc_bg = default_background;
+          set_storage("doc_bg", data.doc_bg);
+        }
+        
+        var selected_option = document.querySelector(`#document_bg_${data.doc_bg}`);
+        selected_option.classList.add("selected");
+        document_bg_option = selected_option;
+
+        if (data.doc_bg == "custom") {
+          document_bg_custom_container.classList.remove("hidden");
+          document_bg_custom_input.value = custom_data;
+        }
+      } catch (e) {
+        console.log("ERROR SETTING DOCUMENT BACKGROUND");
+        console.log(e);
       }
 
       ////////////
@@ -691,8 +651,9 @@ try {
       ////////////
 
       if (invert_data == null) {
+        // DEFAULT INVERT SETTINGS
         invert_data = { invert: true, grayscale: true, black: false };
-        chrome.storage.local.set({ invert: invert_data });
+        set_storage("invert", invert_data);
       }
 
       document_inverted_checkbox.checked = invert_data.invert;
@@ -708,29 +669,16 @@ try {
       // END INVERT //
       ////////////////
 
-      if (button_raised == null) {
-        button_raised = false;
-        chrome.storage.local.set({ raise_button: button_raised });
-      }
+      /////////////////
+      // SHOW BORDER //
+      /////////////////
 
       if (border_shown == null) {
         border_shown = true;
-        chrome.storage.local.set({ show_border: border_shown });
+        set_storage("show_border", border_shown);
       }
 
-      var selected_option = document.querySelector(`#${option}`);
-      selected_option.classList.add("selected");
-      document_bg_option = selected_option;
-      document_bg_description.textContent = descriptions[option];
-
-      if (option == "custom") {
-        document_bg_custom_container.classList.remove("hidden");
-        document_bg_custom_input.value = custom_data;
-      }
-
-      if (border_shown) {
-        show_border.checked = true;
-      }
+      show_border.checked = border_shown;
 
       ////////////
       // BUTTON //
@@ -746,7 +694,7 @@ try {
           button_options = { show: true, raised: false };
         }
 
-        chrome.storage.local.set({ button_options: button_options });
+        set_storage("button_options", button_options);
       }
 
       show_button_checkbox.checked = button_options.show;
@@ -774,6 +722,9 @@ try {
       } else {
         spectrum_reset.disabled = true;
         spectrum_save.disabled = true;
+        
+        // SAVE DEFAULT ACCENT COLOR
+        set_storage("accent_color", accent_color);
       }
 
       initiateKnob(accent_color.hue);
@@ -785,7 +736,7 @@ try {
 
       if (data.dark_mode == null) {
         data.dark_mode = { variant: dark_mode_normal };
-        chrome.storage.local.set({ dark_mode: data.dark_mode });
+        set_storage("dark_mode", data.dark_mode);
       }
 
       dark_mode_normal_button.classList.remove("selected");
@@ -793,8 +744,10 @@ try {
  
       if (data.dark_mode.variant == dark_mode_eclipse) {
         dark_mode_eclipse_button.classList.add("selected");
-      } else {
+      } else if (data.dark_mode.variant == dark_mode_normal) {
         dark_mode_normal_button.classList.add("selected");
+      } else {
+        console.log("UNKNOWN DARK MODE VARIANT");
       }
 
       ///////////////////////////
@@ -803,7 +756,6 @@ try {
     }
   );
 } catch (e) {
-  document_bg_description.textContent = "SOMETHING WENT WRONG!";
   console.log(e);
 }
 

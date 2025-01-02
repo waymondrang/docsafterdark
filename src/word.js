@@ -1,133 +1,34 @@
+/////////////
+// LOGGING //
+/////////////
+
+class log {
+  static debug(...args) { return; console.log("[DEBUG]", ...args); }
+  static info(...args) { console.log("[INFO]", ...args); }
+  static warn(...args) { console.log("\x1b[33m%s\x1b[0m", "[WARN]", ...args); }
+  static error(...args) { console.log("\x1b[31m%s\x1b[0m", "[ERROR]", ...args); }
+}
+
+///////////////
+// NAMESPACE //
+///////////////
+
+var browser_namespace;
+
+// PREFER BROWSER NAMESPACE OVER CHROME
+if (typeof browser != "undefined") {
+  log.debug("\"BROWSER\" NAMESPACE FOUND");
+  browser_namespace = browser;
+} else if (typeof chrome != "undefined") {
+  log.debug("\"CHROME\" NAMESPACE FOUND");
+  browser_namespace = chrome;
+} else {
+  throw new Error("COULD NOT FIND BROWSER NAMESPACE");
+}
+
 ///////////////////////
 // UTILITY FUNCTIONS //
 ///////////////////////
-
-/**
- * Converts an hex format color to RGB.
- * https://stackoverflow.com/a/5624139
- * 
- * @param {String} hex 
- * @returns An object containing the RGB values
- */
-function hexToRgb(hex) {
-  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  hex = hex.replace(shorthandRegex, function (m, r, g, b) {
-    return r + r + g + g + b + b;
-  });
-
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result
-    ? {
-        r: parseInt(result[1], 16),
-        g: parseInt(result[2], 16),
-        b: parseInt(result[3], 16),
-      }
-    : null;
-}
-
-/**
- * Converts an RGB component to hex.
- * 
- * @param {Number} c 
- * @returns The hex value of the component
- */
-function componentToHex(c) {
-  var hex = c.toString(16);
-  return hex.length == 1 ? "0" + hex : hex;
-}
-
-/**
- * Converts an RGB color value into hex format.
- * https://stackoverflow.com/a/5624139
- * 
- * @returns String of the hex value
- */
-function rgbToHex({ r, g, b }) {
-  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-}
-
-/**
- * Converts an RGB color value to HSL.
- *
- * @returns An object containing the HSL values
- */
-function rgbToHsl({ r, g, b }) {
-  (r /= 255), (g /= 255), (b /= 255);
-
-  var max = Math.max(r, g, b),
-    min = Math.min(r, g, b);
-  var h,
-    s,
-    l = (max + min) / 2;
-
-  if (max == min) {
-    h = s = 0; // achromatic
-  } else {
-    var d = max - min;
-    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-
-    switch (max) {
-      case r:
-        h = (g - b) / d + (g < b ? 6 : 0);
-        break;
-      case g:
-        h = (b - r) / d + 2;
-        break;
-      case b:
-        h = (r - g) / d + 4;
-        break;
-    }
-
-    h /= 6;
-  }
-
-  return {
-    h: h,
-    s: s,
-    l: l,
-  };
-}
-
-/**
- * Converts an HSL color value to RGB.
- *
- * @param {Number} h
- * @param {Number} s
- * @param {Number} l
- * @returns An object containing the RGB values
- */
-function hslToRgb(h, s, l) {
-  let r, g, b;
-
-  h /= 360;
-  s /= 100;
-  l /= 100;
-
-  if (s === 0) {
-    r = g = b = l; // achromatic
-  } else {
-    const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-    const p = 2 * l - q;
-    r = hueToRgb(p, q, h + 1/3);
-    g = hueToRgb(p, q, h);
-    b = hueToRgb(p, q, h - 1/3);
-  }
-
-  return {
-    r: Math.round(r * 255),
-    g: Math.round(g * 255),
-    b: Math.round(b * 255),
-  }
-}
-
-function hueToRgb(p, q, t) {
-  if (t < 0) t += 1;
-  if (t > 1) t -= 1;
-  if (t < 1/6) return p + (q - p) * 6 * t;
-  if (t < 1/2) return q;
-  if (t < 2/3) return p + (q - p) * (2/3 - t) * 6;
-  return p;
-}
 
 /**
  * UPDATES A STORAGE OBJECT WITH A NEW KEY-VALUE PAIR
@@ -137,13 +38,13 @@ function hueToRgb(p, q, t) {
  * @param {*} value 
  */
 function update_storage(storage_object, key, value) {
-  chrome.storage.local.get(storage_object, function (data) {
+  browser_namespace.storage.local.get(storage_object, function (data) {
     if (data[storage_object] != null)
       data[storage_object][key] = value;
     else
       data[storage_object] = { [key]: value };
     
-    chrome.storage.local.set({ [storage_object]: data[storage_object] });
+    browser_namespace.storage.local.set({ [storage_object]: data[storage_object] });
   });
 }
 
@@ -154,7 +55,81 @@ function update_storage(storage_object, key, value) {
  * @param {*} value
  */
 function set_storage(storage_object, value) {
-  chrome.storage.local.set({ [storage_object]: value });
+  browser_namespace.storage.local.set({ [storage_object]: value });
+}
+
+class update_storage_batch {
+  constructor(storage_object) {
+    this.storage_object = storage_object;
+    this.storage = {};
+  }
+
+  /**
+   * SETS THE STORAGE OBJECT
+   * 
+   * @param {String} storage_object 
+   */
+  set_storage_object(storage_object) {
+    this.storage_object = storage_object;
+
+    return this;
+  }
+
+  /**
+   * SETS A KEY-VALUE PAIR
+   * 
+   * @param {String} key 
+   * @param {*} value 
+   */
+  set(key, value) {
+    this.storage[key] = value;
+
+    return this;
+  }
+
+  /**
+   * SAVES THE STORAGE OBJECT
+   */
+  update() {
+    console.log("UPDATING STORAGE: " + this.storage_object + " WITH: " + JSON.stringify(this.storage));
+    
+    const that = this;
+
+    browser_namespace.storage.local.get(this.storage_object, function (data) {
+      if (data[that.storage_object] != null) {
+        for (var key in that.storage) {
+          data[that.storage_object][key] = that.storage[key];
+        }
+      } else {
+        data[that.storage_object] = that.storage;
+      }
+
+      browser_namespace.storage.local.set({ [that.storage_object]: data[that.storage_object] });
+    });
+  }
+}
+
+/**
+ * CHECKS IF CURRENT VERSION IS NEWER OR EQUAL TO TARGET VERSION
+ * 
+ * @param {String} current_version 
+ * @param {String} target_version 
+ * @returns {boolean}
+ */
+function is_newer_or_equal_version(current_version, target_version) {
+  let current = current_version.split(".");
+  let target = target_version.split(".");
+
+  for (let i = 0; i < current.length; i++) {
+    if (parseInt(current[i]) > parseInt(target[i])) {
+      return true;
+    } else if (parseInt(current[i]) < parseInt(target[i])) {
+      return false;
+    }
+  }
+
+  // CURRENT VERSION IS EQUAL TO TARGET VERSION
+  return true;
 }
 
 ///////////////////////////
@@ -165,7 +140,7 @@ const head =
   document.head ||
   document.getElementsByTagName("head")[0] ||
   document.documentElement;
-const version = chrome.runtime.getManifest().version;
+const version = browser_namespace.runtime.getManifest().version;
 
 
 const mode_off              = 0;
@@ -176,10 +151,12 @@ const dark_mode_normal      = 0;
 const dark_mode_eclipse     = 1;
 
 const default_accent_hue    = 88; // GREEN
+const default_background    = "dark";
+const default_dark_mode     = { variant: dark_mode_normal };
+const default_invert        = { invert: true, grayscale: true, black: false };
 
 const switch_on             = "🌚";
 const switch_off            = "🌞";
-const default_invert        = { invert: true, grayscale: true, black: false };
 
 const replacements_path     = "assets/replacements/";
 const css_path              = "assets/css/";
@@ -201,12 +178,11 @@ const document_inverted_value             = "invert(1)";
 const document_inverted_grayscale_value   = "invert(1) contrast(79.5%) grayscale(100%)";
 const document_inverted_black_value       = "invert(1) grayscale(100%)";
 
-const docsafterdark_page_border = "1px solid var(--primary-border-color)";
+const docsafterdark_page_border           = "1px solid var(--primary-border-color)";
 
-const update_link_href  = "https://github.com/waymondrang/docsafterdark/releases";
-const donation_link     = "https://www.buymeacoffee.com/waymondrang";
-
-const docsafterdark_version = chrome.runtime.getManifest().version
+const update_link_href      = "https://github.com/waymondrang/docsafterdark/releases";
+const donation_link         = "https://www.buymeacoffee.com/waymondrang";
+const docsafterdark_version = browser_namespace.runtime.getManifest().version
 
 ////////////////////////////////
 // DOCUMENT BACKGROUND VALUES //
@@ -214,12 +190,12 @@ const docsafterdark_version = chrome.runtime.getManifest().version
 
 const backgrounds = {
   default: "#ffffff",
-  shade: "#999999",
-  dark: "#1b1b1b",
+  shade: "var(--secondary-background-color)",
+  dark: "var(--root-background-color)",
   black: "#000000",
 };
 
-const default_background = "default";
+// TODO: TOGGLE INVERT IF DARK OR BLACK BACKGROUND IS SELECTED
 
 var mode;
 var dark_mode_options;
@@ -238,7 +214,7 @@ function inject_css_file(file) {
     return;
 
   const css = document.createElement("link");
-  css.setAttribute("href", chrome.runtime.getURL(css_path + file));
+  css.setAttribute("href", browser_namespace.runtime.getURL(css_path + file));
   css.id = file_id;
   css.rel = "stylesheet";
 
@@ -353,15 +329,14 @@ function remove_accent_color() {
 /**
  * HANDLES MODE AND VARIANT CHANGE
  * 
- * @param {{ mode: number | null, dark_mode: { variant: number } | null }} data
  */
 function handle_mode() {
   if (mode != mode_off && button_options && button_options.show)
     handle_button();
 
   if (mode == null) {
-    // FIRST INVOCATION (SHOULD NOT BE CALLED); ENABLE DARK MODE BY DEFAULT
-    inject_dark_mode();
+    // FIRST INVOCATION (SHOULD NOT BE CALLED); ENABLE DEFAULT DARK MODE BY DEFAULT
+    inject_dark_mode(default_dark_mode);
     set_storage("mode", mode_dark);
   } else if (mode == mode_dark) {
     inject_dark_mode(dark_mode_options);
@@ -398,12 +373,12 @@ function handle_document_invert(invert) {
 
 // SET REPLACEMENTS
 for (let [key, value] of Object.entries(replacements)) {
-  document.documentElement.style.setProperty(key, "url(" + chrome.runtime.getURL(value) + ")");
+  document.documentElement.style.setProperty(key, "url(" + browser_namespace.runtime.getURL(value) + ")");
 }
 
 let show_border;
 
-chrome.storage.local.get(
+browser_namespace.storage.local.get(
   [
     "mode",
     "dark_mode",
@@ -426,7 +401,8 @@ chrome.storage.local.get(
       mode = data.mode;
     } else {
       // SET DEFAULT MODE
-      set_storage("mode", mode_dark);
+      mode = mode_dark;
+      set_storage("mode", mode);
     }
 
     ///////////////////
@@ -437,7 +413,8 @@ chrome.storage.local.get(
       dark_mode_options = data.dark_mode;
     } else {
       // SET DEFAULT DARK MODE OPTIONS
-      set_storage("dark_mode", { variant: dark_mode_normal });
+      dark_mode_options = { variant: dark_mode_normal };
+      set_storage("dark_mode", dark_mode_options);
     }
 
     /////////////////////////
@@ -445,28 +422,32 @@ chrome.storage.local.get(
     /////////////////////////
 
     if (data.doc_bg != null) {
-      let option = data.doc_bg;
-      let custom = data.custom_bg;
-      if (option == "custom") {
-        document.documentElement.style.setProperty("--docsafterdark_document_background", custom);
+      if (data.doc_bg == "custom") {
+        document.documentElement.style.setProperty("--docsafterdark_document_background", data.custom_bg);
       } else {
-        if (backgrounds[option]) {
-          document.documentElement.style.setProperty("--docsafterdark_document_background", backgrounds[option]);
+        if (backgrounds[data.doc_bg]) {
+          document.documentElement.style.setProperty("--docsafterdark_document_background", backgrounds[data.doc_bg]);
         } else {
           console.error("Invalid background option");
         }
       }
     } else {
-      // Use default_background background as default
+      // SET DEFAULT BACKGROUND
       document.documentElement.style.setProperty("--docsafterdark_document_background", backgrounds[default_background]);
+      set_storage("doc_bg", default_background);
     }
 
-    // HANDLE INVERT
-    if (data.invert != null) {
-      handle_document_invert(data.invert);
-    } else {
-      handle_document_invert(default_invert);
+    ////////////
+    // INVERT //
+    ////////////
+   
+    if (data.invert == null) {
+      // SET DEFAULT INVERT
+      data.invert = default_invert;
+      set_storage("invert", default_invert);
     }
+
+    handle_document_invert(data.invert);
 
     /////////////////
     // SHOW BORDER //
@@ -485,9 +466,11 @@ chrome.storage.local.get(
     //////////////////
 
     if (data.accent_color != null) {
+      log.debug("FOUND SAVED ACCENT COLOR");
       accent_color = data.accent_color;
       update_accent_color(data.accent_color);
     } else {
+      log.debug("NO SAVED ACCENT COLOR FOUND");
       // SET DEFAULT ACCENT COLOR
       accent_color = { hue: default_accent_hue };
       update_accent_color(accent_color);
@@ -495,6 +478,8 @@ chrome.storage.local.get(
       // SAVE DEFAULT ACCENT COLOR
       update_storage("accent_color", "hue", default_accent_hue);
     }
+
+    log.debug("ACCENT COLOR:", accent_color);
 
     ////////////
     // BUTTON //
@@ -521,9 +506,12 @@ chrome.storage.local.get(
     ////////////////////
 
     if (data.version == null || data.version.last_version != docsafterdark_version) {
-      console.log("DocsAfterDark has been updated to version " + docsafterdark_version);
+      log.info("DocsAfterDark has been updated to version " + docsafterdark_version);
 
-      // Create notification
+      ////////////////////////////////
+      // CREATE UPDATE NOTIFICATION //
+      ////////////////////////////////
+
       let update_notification   = document.createElement("div");
       update_notification.id    = "docsafterdark_update_notification";
 
@@ -558,6 +546,22 @@ chrome.storage.local.get(
       update_container.appendChild(update_text);
 
       document.body.prepend(update_notification);
+
+      /////////////////////////////////////
+      // ONE-TIME VERSION OPTION PATCHES //
+      /////////////////////////////////////
+
+      // if (
+      //   data.version != null &&
+      //   is_newer_or_equal_version(docsafterdark_version, "1.1.0") &&
+      //   !is_newer_or_equal_version(data.version.last_version, "1.1.0")
+      // ) {
+      //   // ENABLE INVERT IF DOCUMENT BACKGROUND IS NOT DEFAULT OR CUSTOM
+      //   if (data.doc_bg != "default" && data.doc_bg != "custom") {
+      //     let batch = new update_storage_batch("invert");
+      //     batch.set("invert", true).set("grayscale", true).update();
+      //   }
+      // }
     }
 
     update_storage("version", "last_version", docsafterdark_version);
@@ -574,26 +578,23 @@ chrome.storage.local.get(
 // HANDLE STORAGE CHANGES //
 ////////////////////////////
 
-chrome.storage.onChanged.addListener(function (changes, area) {
-  // Handle background change
-  if (Object.keys(changes).includes("doc_bg")) {
-    let option = changes.doc_bg.newValue;
-    if (option != "custom") {
-      if (backgrounds[option]) {
-        document.documentElement.style.setProperty(
-          "--docsafterdark_document_background",
-          backgrounds[option]
-        );
+browser_namespace.storage.onChanged.addListener(function (changes, area) {
+  /////////////////////////
+  // DOCUMENT BACKGROUND //
+  /////////////////////////
+
+  if (changes.doc_bg != null) {
+    log.debug("BACKGROUND CHANGES", changes.doc_bg.newValue);
+
+    if (changes.doc_bg.newValue != "custom") {
+      if (backgrounds[changes.doc_bg.newValue] != null) {
+        document.documentElement.style.setProperty("--docsafterdark_document_background", backgrounds[changes.doc_bg.newValue]);
       } else {
-        console.error("Invalid background option");
+        console.error("INVALID BACKGROUND OPTION");
       }
     } else {
-      chrome.storage.local.get(["custom_bg"], function (data) {
-        let custom = data.custom_bg;
-        document.documentElement.style.setProperty(
-          "--docsafterdark_document_background",
-          custom
-        );
+      browser_namespace.storage.local.get(["custom_bg"], function (data) {
+        document.documentElement.style.setProperty("--docsafterdark_document_background", data.custom_bg);
       });
     }
   }
@@ -601,16 +602,16 @@ chrome.storage.onChanged.addListener(function (changes, area) {
   // Handle custom background change. This differs from above
   // because it is only called when doc_bg is already set
   // to "custom"
-  if (Object.keys(changes).includes("custom_bg")) {
-    var custom = changes.custom_bg.newValue;
-    document.documentElement.style.setProperty(
-      "--docsafterdark_document_background",
-      custom
-    );
+  if (changes.custom_bg != null) {
+    document.documentElement.style.setProperty("--docsafterdark_document_background", changes.custom_bg.newValue);
   }
 
-  // Handle invert option change
+  ////////////
+  // INVERT //
+  ////////////
+  
   if (changes.invert != null) {
+    log.debug("INVERT CHANGES", changes.invert.newValue);
     handle_document_invert(changes.invert.newValue);
   }
 
@@ -667,7 +668,7 @@ chrome.storage.onChanged.addListener(function (changes, area) {
 });
 
 // LISTEN FOR MESSAGES FROM POPUP
-chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+browser_namespace.runtime.onMessage.addListener(function (request, sender, sendResponse) {
   if (request.type == "setAccentColor") {
     update_accent_color(request.color);
   }
