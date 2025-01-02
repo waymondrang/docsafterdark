@@ -424,7 +424,8 @@ textarea.docs-search-bar-input.goog-textarea,
 .docs-parent-collections-container-folder-name,
 .docos-comments-pe .docos-streampane-searchbar .docos-streampane-search-input,
 .docs-chat-messages,
-.miniChapterSwitcherChapterItemTitle
+.miniChapterSwitcherChapterItemTitle,
+.kix-header-footer-bubble-checkbox-label
 {
   color: var(--secondary-text-color);
 }
