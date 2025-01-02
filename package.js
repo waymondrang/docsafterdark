@@ -6,17 +6,26 @@ class log {
     static info(...args) { console.log("[INFO]", ...args); }
     static warn(...args) { console.log("\x1b[33m%s\x1b[0m", "[WARN]", ...args); }
     static error(...args) { console.log("\x1b[31m%s\x1b[0m", "[ERROR]", ...args); }
+    static success(...args) { console.log("\x1b[32m%s\x1b[0m", "[OKAY]", ...args); }
 }
 
 ///////////////////
 // CONFIGURATION //
 ///////////////////
 
+// TODO: GENERATE V2 MANIFEST FROM V3 MANIFEST
+const manifest_v3_file = "manifest.json";
+const manifest_v2_file = "manifest_v2.json";
+
 const global_special_files = [
     {
         file: "special*",
         include: false,
     },
+    {
+      file: "manifest*",
+      include: false,
+  },
 ];
 
 const releases = [
@@ -28,6 +37,10 @@ const releases = [
         include: true,
         rename: "special.css",
       },
+      {
+        file: "manifest.json",
+        include: true,
+      },
     ],
   },
   {
@@ -38,14 +51,35 @@ const releases = [
         include: true,
         rename: "special.css",
       },
+      {
+        file: "manifest_v2.json",
+        include: true,
+        rename: "manifest.json",
+      },
     ],
   }
 ];
 
+const global_tests = [
+  {
+    name: "manifest_test",
+    run: () => {
+      const manifest_v3 = JSON.parse(fs.readFileSync(path.join(source_directory, manifest_v3_file)));
+      const manifest_v2 = JSON.parse(fs.readFileSync(path.join(source_directory, manifest_v2_file)));
+
+      if (manifest_v3.version !== manifest_v2.version) {
+        log.error("manifest versions do not match!");
+        process.exit(1);
+      } else {
+        log.success("manifest versions match");
+      }
+    },
+  },
+]
+
 const releases_directory = "releases";
 const source_directory = "src";
-const manifest_file = "manifest.json";
-const manifest = JSON.parse(fs.readFileSync(path.join(source_directory, manifest_file)));
+const manifest = JSON.parse(fs.readFileSync(path.join(source_directory, manifest_v3_file)));
 
 const force_package = process.argv.includes("--force") || process.argv.includes("-f");
 
@@ -66,7 +100,7 @@ function generate_release(release) {
     );
 
     if (!force_package) return;
-    else log.info("force packaging enabled, overwriting release");
+    else log.warn("force packaging enabled, overwriting release");
   }
 
   // ensure releases directory exists
@@ -86,7 +120,7 @@ function generate_release(release) {
 
   // listen for all archive data to be written
   output.on("close", function () {
-    log.info(
+    log.success(
       `${release_name} (${archive.pointer()} bytes) has been packaged into \"${releases_directory}\"`
     );
   });
@@ -118,7 +152,7 @@ function generate_release(release) {
     // add renamed special files
     if (special_file.length > 0) {
       archive.file(path.join(source_directory, file), {
-        name: file.replace(special_file[0].file, special_file[0].rename),
+        name: special_file[0].rename || file,
       });
       continue;
     }
@@ -137,6 +171,13 @@ function generate_release(release) {
 
   // finalize the archive
   archive.finalize();
+}
+
+log.info(`running global tests`);
+
+for (const test of global_tests) {
+  log.info(`running test: ${test.name}`);
+  test.run();
 }
 
 for (const release of releases) {
