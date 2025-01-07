@@ -3,3 +3,4 @@ node_modules/
 releases/
 temp/
 .archive/
+unpacked/

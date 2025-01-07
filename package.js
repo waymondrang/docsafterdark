@@ -18,13 +18,13 @@ const manifest_v3_file = "manifest.json";
 const manifest_v2_file = "manifest_v2.json";
 
 const global_special_files = [
-    {
-        file: "special*",
-        include: false,
-    },
-    {
-      file: "manifest*",
-      include: false,
+  {
+    file: "special*",
+    include: false,
+  },
+  {
+    file: "manifest*",
+    include: false,
   },
 ];
 
@@ -57,15 +57,19 @@ const releases = [
         rename: "manifest.json",
       },
     ],
-  }
+  },
 ];
 
 const global_tests = [
   {
     name: "manifest_test",
     run: () => {
-      const manifest_v3 = JSON.parse(fs.readFileSync(path.join(source_directory, manifest_v3_file)));
-      const manifest_v2 = JSON.parse(fs.readFileSync(path.join(source_directory, manifest_v2_file)));
+      const manifest_v3 = JSON.parse(
+        fs.readFileSync(path.join(source_directory, manifest_v3_file))
+      );
+      const manifest_v2 = JSON.parse(
+        fs.readFileSync(path.join(source_directory, manifest_v2_file))
+      );
 
       if (manifest_v3.version !== manifest_v2.version) {
         log.error("manifest versions do not match!");
@@ -75,17 +79,22 @@ const global_tests = [
       }
     },
   },
-]
+];
 
 const releases_directory = "releases";
+const unpacked_directory = "unpacked";
 const source_directory = "src";
-const manifest = JSON.parse(fs.readFileSync(path.join(source_directory, manifest_v3_file)));
+const manifest = JSON.parse(
+  fs.readFileSync(path.join(source_directory, manifest_v3_file))
+);
 
-const force_package = process.argv.includes("--force") || process.argv.includes("-f");
+const force_package =
+  process.argv.includes("--force") || process.argv.includes("-f");
+const unpack = process.argv.includes("--unpack") || process.argv.includes("-u");
 
 /**
  * generate a release
- * 
+ *
  * @param {{browser: string, special_files: {file: string, include: boolean, rename?: string}[]}} release
  */
 function generate_release(release) {
@@ -173,6 +182,72 @@ function generate_release(release) {
   archive.finalize();
 }
 
+function unpack_release(release) {
+  const browser_unpacked_directory = path.join(
+    unpacked_directory,
+    release.browser
+  );
+
+  log.info(
+    `unpacking ${release.browser} v${manifest.version} release into \"${browser_unpacked_directory}\"`
+  );
+
+  // ensure releases directory exists
+  if (!fs.existsSync(browser_unpacked_directory)) {
+    log.info("creating unpacked directory: ", browser_unpacked_directory);
+    fs.mkdirSync(browser_unpacked_directory, { recursive: true });
+  }
+
+  // get a recursive list of files in the source directory
+  var files = fs.readdirSync(source_directory, { recursive: true });
+
+  // filter out directories
+  files = files.filter(
+    (file) => !fs.lstatSync(path.join(source_directory, file)).isDirectory()
+  );
+
+  for (const file of files) {
+    // find special files
+    var special_file = release.special_files.filter(
+      (special_file) => special_file.include && file.match(special_file.file)
+    );
+
+    // add renamed special files
+    if (special_file.length > 0) {
+      fs.copyFileSync(
+        path.join(source_directory, file),
+        path.join(browser_unpacked_directory, special_file[0].rename || file)
+      );
+      continue;
+    }
+
+    // skip global filtered files
+    if (
+      global_special_files
+        .filter((special_file) => !special_file.include)
+        .some((special_file) => file.match(special_file.file))
+    ) {
+      continue;
+    }
+
+    // ensure directory exists
+    const directory = path.join(browser_unpacked_directory, path.dirname(file));
+
+    if (!fs.existsSync(directory)) {
+      fs.mkdirSync(directory, { recursive: true });
+    }
+
+    fs.copyFileSync(
+      path.join(source_directory, file),
+      path.join(browser_unpacked_directory, file)
+    );
+  }
+
+  log.success(
+    `unpacked ${release.browser} v${manifest.version} release into \"${browser_unpacked_directory}\"`
+  );
+}
+
 log.info(`running global tests`);
 
 for (const test of global_tests) {
@@ -180,6 +255,14 @@ for (const test of global_tests) {
   test.run();
 }
 
-for (const release of releases) {
-  generate_release(release);
+if (unpack) {
+  log.info("unpacking extension");
+
+  for (const release of releases) {
+    unpack_release(release);
+  }
+} else {
+  for (const release of releases) {
+    generate_release(release);
+  }
 }
