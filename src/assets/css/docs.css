@@ -425,7 +425,8 @@ textarea.docs-search-bar-input.goog-textarea,
 .docos-comments-pe .docos-streampane-searchbar .docos-streampane-search-input,
 .docs-chat-messages,
 .miniChapterSwitcherChapterItemTitle,
-.kix-header-footer-bubble-checkbox-label
+.kix-header-footer-bubble-checkbox-label,
+.hiddenFeaturesBubbleTitle
 {
   color: var(--secondary-text-color);
 }
@@ -478,7 +479,8 @@ textarea.docs-search-bar-input.goog-textarea,
 .kix-citations-create-view-attribute-label,
 .docs-chat-title-message>h2,
 .docs-chat-status,
-.kix-citations-search-result-attribute-label
+.kix-citations-search-result-attribute-label,
+.hiddenFeaturesBubbleBody
 {
   color: var(--tertiary-text-color);
 }
@@ -571,7 +573,10 @@ a:link,
 .kix-citations-create-view-attributes-subtitle,
 .kix-citations-source-list-item-insert-button,
 .docs-material-button-flat-primary,
-.kix-header-footer-bubble .kix-header-footer-bubble-menu-button.goog-flat-menu-button
+.kix-header-footer-bubble .kix-header-footer-bubble-menu-button.goog-flat-menu-button,
+.hiddenFeaturesBubbleSwitchModeButton,
+.hiddenFeaturesBubbleGotItButton,
+.hiddenFeaturesBubbleLearnMoreLink, .hiddenFeaturesBubbleLearnMoreLink:active, .hiddenFeaturesBubbleLearnMoreLink:link, .hiddenFeaturesBubbleLearnMoreLink:visited
 {
   color: var(--accent-color);
 }
@@ -615,7 +620,7 @@ body,
   background: var(--root-background-color);
 }
 
-.kix-appview-editor{
+.kix-appview-editor[style*="background-color: rgb(249, 251, 253);"] {
   background: var(--root-background-color) !important;
 }
 
@@ -672,7 +677,8 @@ body,
 .miniChapterSwitcherContainerView.miniChapterSwitcherPageless .miniChapterSwitcherCore .miniChapterSwitcherView.docs-material-gm-select .docs-material-gm-select-outer-box, .miniChapterSwitcherContainerView.miniChapterSwitcherPageless .miniChapterSwitcherCore .miniChapterSwitcherView.docs-material-gm-select .miniChapterSwitcherChapterIcon, .miniChapterSwitcherContainerView.miniChapterSwitcherPageless .miniChapterSwitcherCore .miniChapterSwitcherView.docs-material-gm-select .miniChapterSwitcherNavigationEntryPointIcon,
 .miniChapterSwitcherContainerView.miniChapterSwitcherPageless.breadcrumbSwitcherUiVariant .miniChapterSwitcherCore .miniChapterSwitcherView.docs-material-gm-select .miniChapterSwitcherNavigationEntryPointMask,
 .goog-toolbar.kix-citations-source-list-item-toolbar,
-.miniChapterSwitcherChapterList.goog-menu.goog-menu-vertical.miniChapterSwitcherChapterListViewContainer .goog-menuitem.goog-menuitem-active, .miniChapterSwitcherChapterList.goog-menu.goog-menu-vertical.miniChapterSwitcherChapterListViewContainer .goog-menuitem.goog-option-selected
+.miniChapterSwitcherChapterList.goog-menu.goog-menu-vertical.miniChapterSwitcherChapterListViewContainer .goog-menuitem.goog-menuitem-active, .miniChapterSwitcherChapterList.goog-menu.goog-menu-vertical.miniChapterSwitcherChapterListViewContainer .goog-menuitem.goog-option-selected,
+.hiddenFeaturesBubbleContainer
 {
   background: var(--secondary-background-color);
 }
@@ -1858,6 +1864,11 @@ img.docs-generativeai-onboarding-dialog-image,
 #contents > div {
   background-color: transparent;
   background: var(--docsafterdark_document_background);
+}
+
+.kix-canvas-tile-content[style*="background-color: rgb(255, 255, 255)"],
+.kix-appview-editor {
+  background-color: var(--docsafterdark_document_background) !important;
 }
 
 /************************/
