@@ -365,7 +365,7 @@ function handle_mode() {
     tempStartTime.setHours(timerStartTime[0], timerStartTime[1], 0);
     if((tempTime >= tempStartTime)){
       document.documentElement.style.setProperty("--docsafterdark_document_invert", document_inverted_value);
-      inject_dark_mode(default_dark_mode);
+      inject_dark_mode(dark_mode_options);
     }
     else{
       document.documentElement.style.setProperty("--docsafterdark_document_invert", "none");
@@ -393,20 +393,21 @@ async function timerFunctionality(){
   if(timerETime <= timerSTime){
     timerETime.setDate((parseInt(timerETime.getDate())+1)) //To Account for Day Roll Overs
   }
-  //Add Seconds to this from curTime
+  
   var checkBackInOn; 
-  if(timerStartTime < curTime){
-  checkBackInOn = Math.abs((((timerEndTime[0]-curTime.getHours())*360)+((timerEndTime[1]-curTime.getMinutes())*60))*1000)
+   if(timerSTime <= curTime){
+  checkBackInOn = Math.abs((((timerEndTime[0]-parseInt(curTime.getHours()))*3600000)+((timerEndTime[1]-parseInt(curTime.getMinutes()))*60000)))
   }
   else{
-    checkBackInOn = Math.abs((((timerEndTime[0]-timerStartTime[0])*360)+((timerEndTime[1]-timerStartTime[1])*60))*1000)
+    checkBackInOn = Math.abs((((timerEndTime[0]-timerStartTime[0])*3600000)+((timerEndTime[1]-timerStartTime[1])*60000)))
   }
+  //If we have a faked, we can just check 
 
   console.log("Start Time: "+timerSTime.toLocaleTimeString()+", End Time: "+timerETime.toLocaleTimeString()+", Pause Time: "+checkBackInOn);
-  if(mode == mode_timer){
+  if(mode == mode_timer && checkBackInOn != NaN){
   if(curTime >= timerSTime){
 document.documentElement.style.setProperty("--docsafterdark_document_invert", document_inverted_value);
-inject_dark_mode(default_dark_mode);
+inject_dark_mode(dark_mode_options);
 }
 //
 if(curTime >= timerETime){ 
@@ -417,10 +418,10 @@ inject_light_mode();
 await new Promise((resolve, reject) => 
   
   setTimeout(resolve, checkBackInOn)
-
 );
 
 }
+
 timerFunctionality();
 
 }
@@ -731,7 +732,7 @@ browser_namespace.storage.onChanged.addListener(function (changes, area) {
     mode = changes.mode.newValue;
   }
 
-  //Timer Values; I think this needs to Be Done on an Event Listener? 
+  //Timer Values; Add a Listener so then we send an Abort Signal Function so then we don't need to Click and Such? 
   if((changes.startTime != null) && (changes.endTime != null)){
     browser_namespace.storage.local.get(["startTime"], changes.startTime)
     browser_namespace.storage.local.get(["endTime"], changes.endTime)

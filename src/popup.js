@@ -232,7 +232,7 @@ document.querySelectorAll("#modes button").forEach(function (e) {
     this.classList.add("selected");
     selected_mode = this.value;
 
-    //Making this 
+    //
     if(selected_mode != "timer"){
       timer_for_mode_switch.classList.add("hidden");
     }
