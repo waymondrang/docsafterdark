@@ -42,9 +42,17 @@
           <div id="modes" class="button_row">
             <button id="mode_dark" value="dark" class="accent_button">Dark</button>
             <button id="mode_light" value="light" class="accent_button">Light</button>
+            <button id="mode_timer" value ="timer" class = "accent_button">Dark on Times</button>
             <button id="mode_off" value="off" class="accent_button">Off</button>
           </div>
+          <div id="timer_for_mode_switch" class="option_row hidden">
+            <input id="startTime" placeholder="8:00 PM/20:00" />
+            <input id="endTime" placeholder="8:00 AM/8:00" />
+            <button id="timer_save_times">Set</button>
+            <!-- TO DO: Add in Checkboxes to Switch from Dark > Light or Dark > Off -->
         </div>
+        </div>
+
 
       <div class="option_section">
         <p class="section_label">Dark Mode Variant</p>
@@ -138,6 +146,7 @@
         <button id="spectrum_reset" disabled>Reset</button>
       </div>
 
+      
       <!-- <div class="option_section" id="debug_section">
         <p class="section_label">Debug</p>
         <div class="option_container">
@@ -157,7 +166,6 @@
           <button id="debug_clear">Clear Storage</button>
         </div>
       </div> -->
-
       <hr />
       <footer>
         <p id="version"></p>

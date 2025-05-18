@@ -132,6 +132,7 @@ function is_newer_or_equal_version(current_version, target_version) {
   return true;
 }
 
+
 ///////////////////////////
 // END UTILITY FUNCTIONS //
 ///////////////////////////
@@ -146,6 +147,7 @@ const version = browser_namespace.runtime.getManifest().version;
 const mode_off              = 0;
 const mode_light            = 1;
 const mode_dark             = 2;
+const mode_timer            = 3;
 
 const dark_mode_normal      = 0;
 const dark_mode_eclipse     = 1;
@@ -195,13 +197,18 @@ const backgrounds = {
   black: "#000000",
 };
 
-// TODO: TOGGLE INVERT IF DARK OR BLACK BACKGROUND IS SELECTED
 
+
+// TODO: TOGGLE INVERT IF DARK OR BLACK BACKGROUND IS SELECTED
 var mode;
 var dark_mode_options;
 var button_options;
 var accent_color;
 var toggle_state = false;
+var notSetToTimer = true; 
+//Defaults for Timer
+var timerStartTime = []; 
+var timerEndTime = [];
 
 // DO NOT ENABLE DARK MODE ON GOOGLE DOCS HOMEPAGE
 if (document.querySelector(".docs-homescreen-gb-container"))
@@ -234,8 +241,10 @@ function remove_css_file(file) {
  * @param {{ variant: number }} dark_mode
  */
 function inject_dark_mode(dark_mode) {  
+  if(notSetToTimer){
   mode = mode_dark;
-  
+  }
+
   remove_css_file("light.css");
   remove_css_file("dark_midnight.css");
   
@@ -252,8 +261,9 @@ function inject_dark_mode(dark_mode) {
  * INJECTS LIGHT MODE CSS
  */
 function inject_light_mode() {
+  if(notSetToTimer){
   mode = mode_light;
-
+  }
   remove_css_file("dark_midnight.css");
   remove_css_file("dark_normal.css");
 
@@ -330,6 +340,8 @@ function remove_accent_color() {
  * HANDLES MODE AND VARIANT CHANGE
  * 
  */
+
+
 function handle_mode() {
   if (mode != mode_off && button_options && button_options.show)
     handle_button();
@@ -339,14 +351,81 @@ function handle_mode() {
     inject_dark_mode(default_dark_mode);
     set_storage("mode", mode_dark);
   } else if (mode == mode_dark) {
+    notSetToTimer = true;
     inject_dark_mode(dark_mode_options);
   } else if (mode == mode_light) {
     inject_light_mode();
-  } else {
+  }  
+  else if(mode == mode_timer){
+    notSetToTimer = false; 
+    const tempTime = new Date(); 
+    const tempStartTime = new Date();
+    const tempEndTime = new Date(); 
+    tempEndTime.setHours(timerEndTime[0], timerEndTime[1], 0)
+    tempStartTime.setHours(timerStartTime[0], timerStartTime[1], 0);
+    if((tempTime >= tempStartTime)){
+      document.documentElement.style.setProperty("--docsafterdark_document_invert", document_inverted_value);
+      inject_dark_mode(default_dark_mode);
+    }
+    else{
+      document.documentElement.style.setProperty("--docsafterdark_document_invert", "none");
+      inject_light_mode();
+    }
+
+    timerFunctionality();  
+  }
+  else {
     // TURN OFF DOCSAFTERDARK
     remove_docsafterdark();
   }
 }
+
+
+///Timer Function. 
+async function timerFunctionality(){
+  //This Should be reduced to a Single thing
+  const timerSTime = new Date();
+  const timerETime = new Date();
+  const curTime = new Date(); 
+  timerSTime.setHours(parseInt(timerStartTime[0]), parseInt(timerStartTime[1]), 0);
+  timerETime.setHours(parseInt(timerEndTime[0]), parseInt(timerEndTime[1]), 0); 
+  
+  if(timerETime <= timerSTime){
+    timerETime.setDate((parseInt(timerETime.getDate())+1)) //To Account for Day Roll Overs
+  }
+  //Add Seconds to this from curTime
+  var checkBackInOn; 
+  if(timerStartTime < curTime){
+  checkBackInOn = Math.abs((((timerEndTime[0]-curTime.getHours())*360)+((timerEndTime[1]-curTime.getMinutes())*60))*1000)
+  }
+  else{
+    checkBackInOn = Math.abs((((timerEndTime[0]-timerStartTime[0])*360)+((timerEndTime[1]-timerStartTime[1])*60))*1000)
+  }
+
+  console.log("Start Time: "+timerSTime.toLocaleTimeString()+", End Time: "+timerETime.toLocaleTimeString()+", Pause Time: "+checkBackInOn);
+  if(mode == mode_timer){
+  if(curTime >= timerSTime){
+document.documentElement.style.setProperty("--docsafterdark_document_invert", document_inverted_value);
+inject_dark_mode(default_dark_mode);
+}
+//
+if(curTime >= timerETime){ 
+document.documentElement.style.setProperty("--docsafterdark_document_invert", "none");
+inject_light_mode();
+}
+//Need to add an AbortSignal to this. 
+await new Promise((resolve, reject) => 
+  
+  setTimeout(resolve, checkBackInOn)
+
+);
+
+}
+timerFunctionality();
+
+}
+
+
 
 /**
  * HANDLES DOCUMENT INVERT
@@ -388,6 +467,8 @@ browser_namespace.storage.local.get(
     "show_border",
     "accent_color",
     "button_options",
+    "endTime", 
+    "startTime", //Timer Values
     "version",
     "updates", // DEPRECATED BUT KEEP FOR BACKWARDS COMPATIBILITY
     "raise_button", // DEPRECATED BUT KEEP FOR BACKWARDS COMPATIBILITY
@@ -416,7 +497,31 @@ browser_namespace.storage.local.get(
       dark_mode_options = { variant: dark_mode_normal };
       set_storage("dark_mode", dark_mode_options);
     }
+    ///////////
 
+      //Set The Timer Times and Calculate them as needed
+    if((data.startTime != null) && (data.endTime != null)){
+    tempSTime = data.startTime.split(":")
+    tempETime = data.endTime.split(":")
+    //This should just be a function so we can Parse All Of them Equally at the same time
+    if(tempETime[1].includes("PM") && (tempETime[0] != "12")){
+    tempETime[0] = (parseInt(tempETime[0])+12)
+    }
+    if(tempETime[0] == "12" && tempETime[1].includes("AM")){
+      tempETime[0] = 0;
+    }
+
+    //Start Time
+    if(tempSTime[1].includes("PM") && (tempSTime[0] != "12")){
+    tempSTime[0] = (parseInt(tempSTime[0])+12)
+    }
+    if(tempSTime[0] == "12" && tempSTime[1].includes("AM")){
+      tempSTime[0] = 0;
+    }    
+    timerStartTime = [parseInt(tempSTime[0]), parseInt(tempSTime[1])]
+    timerEndTime = [parseInt(tempETime[0]), parseInt(tempETime[1])]
+    }
+ 
     /////////////////////////
     // DOCUMENT BACKGROUND //
     /////////////////////////
@@ -436,6 +541,7 @@ browser_namespace.storage.local.get(
       document.documentElement.style.setProperty("--docsafterdark_document_background", backgrounds[default_background]);
       set_storage("doc_bg", default_background);
     }
+
 
     ////////////
     // INVERT //
@@ -487,7 +593,6 @@ browser_namespace.storage.local.get(
 
     // NOTE: MUST BE CALLED BEFORE HANDLE_MODE
     // TODO: USE BACKGROUND WORKER TO CONSOLIDATE DEFAULT OPTIONS AND OPTION MIGRATION
-
     button_options = data.button_options;
 
     if (button_options == null) {
@@ -500,6 +605,8 @@ browser_namespace.storage.local.get(
 
       set_storage("button_options", button_options);
     }
+
+
 
     ////////////////////
     // HANDLE VERSION //
@@ -574,10 +681,11 @@ browser_namespace.storage.local.get(
   }
 );
 
+
+
 ////////////////////////////
 // HANDLE STORAGE CHANGES //
 ////////////////////////////
-
 browser_namespace.storage.onChanged.addListener(function (changes, area) {
   /////////////////////////
   // DOCUMENT BACKGROUND //
@@ -623,6 +731,14 @@ browser_namespace.storage.onChanged.addListener(function (changes, area) {
     mode = changes.mode.newValue;
   }
 
+  //Timer Values; I think this needs to Be Done on an Event Listener? 
+  if((changes.startTime != null) && (changes.endTime != null)){
+    browser_namespace.storage.local.get(["startTime"], changes.startTime)
+    browser_namespace.storage.local.get(["endTime"], changes.endTime)
+    timerFunctionality()
+}
+  //
+
   ///////////////////////
   // DARK MODE VARIANT //
   ///////////////////////
@@ -645,7 +761,6 @@ browser_namespace.storage.onChanged.addListener(function (changes, area) {
   ////////////
 
   // NOTE: MUST BE CALLED BEFORE HANDLE_MODE
-
   if (changes.button_options != null) {
     button_options = changes.button_options.newValue;
     handle_button();
@@ -673,3 +788,5 @@ browser_namespace.runtime.onMessage.addListener(function (request, sender, sendR
     update_accent_color(request.color);
   }
 });
+
+

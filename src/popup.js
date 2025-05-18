@@ -134,6 +134,7 @@ function clear_storage() {
   browser_namespace.storage.local.clear();
 }
 
+
 ///////////////
 // VARIABLES //
 ///////////////
@@ -141,6 +142,7 @@ function clear_storage() {
 const mode_off            = 0;
 const mode_light          = 1;
 const mode_dark           = 2;
+const mode_timer          = 3; 
 
 const dark_mode_normal    = 0;
 const dark_mode_eclipse   = 1;
@@ -157,6 +159,12 @@ var document_bg_option;
 var selected_mode;
 
 var document_inverted_state = false;
+
+//Timing Related Variables for Switching on and Off. 
+const timer_for_mode_switch         = document.querySelector("#timer_for_mode_switch");
+const timer_set_times              = document.querySelector("#timer_save_times"); 
+const timer_start_times             = document.querySelector("#startTime");
+const timer_end_times             = document.querySelector("#endTime"); 
 
 // DARK MODE VARIANTS
 const dark_mode_normal_button   = document.querySelector("#dark_mode_normal");
@@ -223,12 +231,22 @@ document.querySelectorAll("#modes button").forEach(function (e) {
 
     this.classList.add("selected");
     selected_mode = this.value;
-    
+
+    //Making this 
+    if(selected_mode != "timer"){
+      timer_for_mode_switch.classList.add("hidden");
+    }
+    else{
+      timer_for_mode_switch.classList.remove("hidden");
+      set_storage("mode", mode_timer)
+    }
+//
     if (selected_mode == "off") {
       set_storage("mode", mode_off);
-    } else if (selected_mode == "light") {
+    } 
+  
+    else if (selected_mode == "light") {
       set_storage("mode", mode_light);
-
       if (document_bg_option != "black" && document_bg_option != "custom") {
         // UPDATE INVERT CHECKBOXES
         document_inverted_checkbox.checked = false;
@@ -239,7 +257,6 @@ document.querySelectorAll("#modes button").forEach(function (e) {
       }
     } else if (selected_mode == "dark") {
       set_storage("mode", mode_dark);
-
       if (document_bg_option != "default" && document_bg_option != "custom") {
         // UPDATE INVERT CHECKBOXES
         document_inverted_checkbox.checked = true;
@@ -249,6 +266,9 @@ document.querySelectorAll("#modes button").forEach(function (e) {
         update_storage("invert", "invert", true);
       }
     }
+
+
+
   });
 });
 
@@ -350,6 +370,12 @@ document.querySelectorAll("#document_bg_buttons button").forEach(function (e) {
 document_bg_custom_save.addEventListener("click", function (e) {
   if (document_bg_custom_input.value)
     set_storage("custom_bg", document_bg_custom_input.value);
+});
+
+// Add Timer Values to the Storage 
+timer_set_times.addEventListener("click", function (e) {
+  set_storage("startTime", timer_start_times.value);
+  set_storage("endTime", timer_end_times.value);
 });
 
 ////////////////////////////
@@ -602,6 +628,7 @@ spectrum_bar.addEventListener("mousedown", function (e) {
   });
 });
 
+
 ///////////////////
 // LOAD SETTINGS //
 ///////////////////
@@ -618,6 +645,8 @@ try {
       "temp_accent_color",
       "dark_mode",
       "button_options",
+      "endTime", 
+      "startTime", 
       "raise_button", // DEPRECATED BUT KEEP FOR BACKWARDS COMPATIBILITY
       "on", // DEPRECATED BUT KEEP FOR BACKWARDS COMPATIBILITY
     ],
@@ -627,7 +656,8 @@ try {
       let custom_data   = data.custom_bg;
       let invert_data   = data.invert;
       let border_shown  = data.show_border;
-
+      let setEndTime = data.endTime; 
+      let setStartTime = data.startTime; 
       ////////////////////
       // PARSE SETTINGS //
       ////////////////////
@@ -645,7 +675,15 @@ try {
           selected_mode = "off";
         } else if (data.mode == mode_light) {
           selected_mode = "light";
-        } else {
+        } 
+        else if(data.mode == mode_timer){
+          selected_mode = "timer";
+          timer_for_mode_switch.classList.remove("hidden");
+          timer_start_times.value = setStartTime;
+          timer_end_times.value = setEndTime; 
+
+        }
+        else {
           selected_mode = "dark";
         }
       }
@@ -762,6 +800,7 @@ try {
       initiateKnob(accent_color.hue);
       setPopupAccentColor(accent_color);
 
+
       ///////////////////////
       // DARK MODE VARIANT //
       ///////////////////////
@@ -821,5 +860,6 @@ try {
 // debug_clear_button.addEventListener("click", function (e) {
 //   clear_storage();
 // });
+
 
 

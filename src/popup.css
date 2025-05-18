@@ -270,6 +270,17 @@ button#document_bg_save_custom:hover {
   background-color: var(--accent-color);
 }
 
+/* Timer CSS */
+button#timer_save_times {
+  background-color: var(--secondary-background-color);
+  border-radius: 4px;
+}
+
+button#timer_save_times:hover {
+  background-color: var(--accent-color);
+}
+/* */
+
 #version {
   color: var(--tertiary-text-color);
   margin: 0;
