@@ -374,8 +374,10 @@ document_bg_custom_save.addEventListener("click", function (e) {
 
 // Add Timer Values to the Storage 
 timer_set_times.addEventListener("click", function (e) {
+  if(timer_start_times.value){
   set_storage("startTime", timer_start_times.value);
   set_storage("endTime", timer_end_times.value);
+  }
 });
 
 ////////////////////////////

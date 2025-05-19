@@ -159,6 +159,7 @@ const default_invert        = { invert: true, grayscale: true, black: false };
 
 const switch_on             = "🌚";
 const switch_off            = "🌞";
+//
 
 const replacements_path     = "assets/replacements/";
 const css_path              = "assets/css/";
@@ -205,11 +206,12 @@ var dark_mode_options;
 var button_options;
 var accent_color;
 var toggle_state = false;
+//Timer Variables. 
 var notSetToTimer = true; 
-//Defaults for Timer
+var startTime = ""; //Can we leave this blank RQ? 
+var endTime = "";
 var timerStartTime = []; 
 var timerEndTime = [];
-
 // DO NOT ENABLE DARK MODE ON GOOGLE DOCS HOMEPAGE
 if (document.querySelector(".docs-homescreen-gb-container"))
   throw new Error("NOT ENABLING DOCSAFTERDARK ON GOOGLE DOCS HOMEPAGE");
@@ -336,18 +338,20 @@ function remove_accent_color() {
   document.documentElement.style.removeProperty("--docsafterdark-accent-hue");
 }
 
+//Additional Timer Setting Functions
+
+///
+
 /**
  * HANDLES MODE AND VARIANT CHANGE
  * 
  */
-
-
 function handle_mode() {
   if (mode != mode_off && button_options && button_options.show)
     handle_button();
-
   if (mode == null) {
     // FIRST INVOCATION (SHOULD NOT BE CALLED); ENABLE DEFAULT DARK MODE BY DEFAULT
+    //Should we set our Times on our First invocation too??? 
     inject_dark_mode(default_dark_mode);
     set_storage("mode", mode_dark);
   } else if (mode == mode_dark) {
@@ -357,12 +361,14 @@ function handle_mode() {
     inject_light_mode();
   }  
   else if(mode == mode_timer){
+    
     notSetToTimer = false; 
     const tempTime = new Date(); 
     const tempStartTime = new Date();
     const tempEndTime = new Date(); 
     tempEndTime.setHours(timerEndTime[0], timerEndTime[1], 0)
     tempStartTime.setHours(timerStartTime[0], timerStartTime[1], 0);
+    if(!(isNaN(tempEndTime.getTime())) && !(isNaN(tempStartTime.getTime()))){
     if((tempTime >= tempStartTime)){
       document.documentElement.style.setProperty("--docsafterdark_document_invert", document_inverted_value);
       inject_dark_mode(dark_mode_options);
@@ -371,8 +377,9 @@ function handle_mode() {
       document.documentElement.style.setProperty("--docsafterdark_document_invert", "none");
       inject_light_mode();
     }
-
     timerFunctionality();  
+    }
+    ///
   }
   else {
     // TURN OFF DOCSAFTERDARK
@@ -383,7 +390,7 @@ function handle_mode() {
 
 ///Timer Function. 
 async function timerFunctionality(){
-  //This Should be reduced to a Single thing
+  //This needs to be Manually itterated over. 
   const timerSTime = new Date();
   const timerETime = new Date();
   const curTime = new Date(); 
@@ -401,31 +408,27 @@ async function timerFunctionality(){
   else{
     checkBackInOn = Math.abs((((timerEndTime[0]-timerStartTime[0])*3600000)+((timerEndTime[1]-timerStartTime[1])*60000)))
   }
-  //If we have a faked, we can just check 
-
+  
   console.log("Start Time: "+timerSTime.toLocaleTimeString()+", End Time: "+timerETime.toLocaleTimeString()+", Pause Time: "+checkBackInOn);
+  //Only run if we have Valid Times + Timer is Set. 
   if(mode == mode_timer && checkBackInOn != NaN){
   if(curTime >= timerSTime){
-document.documentElement.style.setProperty("--docsafterdark_document_invert", document_inverted_value);
-inject_dark_mode(dark_mode_options);
+    document.documentElement.style.setProperty("--docsafterdark_document_invert", document_inverted_value);
+    inject_dark_mode(dark_mode_options);
 }
 //
 if(curTime >= timerETime){ 
 document.documentElement.style.setProperty("--docsafterdark_document_invert", "none");
 inject_light_mode();
 }
-//Need to add an AbortSignal to this. 
+
 await new Promise((resolve, reject) => 
-  
-  setTimeout(resolve, checkBackInOn)
-);
-
+  testArray.push(window.setTimeout(function(){}, resolve, checkBackInOn)));
 }
-
 timerFunctionality();
-
 }
 
+var testArray = [];
 
 
 /**
@@ -457,7 +460,6 @@ for (let [key, value] of Object.entries(replacements)) {
 }
 
 let show_border;
-
 browser_namespace.storage.local.get(
   [
     "mode",
@@ -500,10 +502,12 @@ browser_namespace.storage.local.get(
     }
     ///////////
 
-      //Set The Timer Times and Calculate them as needed
+    //Set The Timer Times and Calculate them as needed
     if((data.startTime != null) && (data.endTime != null)){
-    tempSTime = data.startTime.split(":")
-    tempETime = data.endTime.split(":")
+    startTime = data.startTime;
+    endTime = data.endTime; 
+    tempSTime = startTime.split(":")
+    tempETime = endTime.split(":")
     //This should just be a function so we can Parse All Of them Equally at the same time
     if(tempETime[1].includes("PM") && (tempETime[0] != "12")){
     tempETime[0] = (parseInt(tempETime[0])+12)
@@ -511,8 +515,6 @@ browser_namespace.storage.local.get(
     if(tempETime[0] == "12" && tempETime[1].includes("AM")){
       tempETime[0] = 0;
     }
-
-    //Start Time
     if(tempSTime[1].includes("PM") && (tempSTime[0] != "12")){
     tempSTime[0] = (parseInt(tempSTime[0])+12)
     }
@@ -521,7 +523,11 @@ browser_namespace.storage.local.get(
     }    
     timerStartTime = [parseInt(tempSTime[0]), parseInt(tempSTime[1])]
     timerEndTime = [parseInt(tempETime[0]), parseInt(tempETime[1])]
+    set_storage("endTime", endTime)
+    set_storage("startTime", startTime)
+    timerFunctionality();
     }
+
  
     /////////////////////////
     // DOCUMENT BACKGROUND //
@@ -723,7 +729,6 @@ browser_namespace.storage.onChanged.addListener(function (changes, area) {
     log.debug("INVERT CHANGES", changes.invert.newValue);
     handle_document_invert(changes.invert.newValue);
   }
-
   //////////
   // MODE //
   //////////
@@ -732,13 +737,35 @@ browser_namespace.storage.onChanged.addListener(function (changes, area) {
     mode = changes.mode.newValue;
   }
 
-  //Timer Values; Add a Listener so then we send an Abort Signal Function so then we don't need to Click and Such? 
-  if((changes.startTime != null) && (changes.endTime != null)){
-    browser_namespace.storage.local.get(["startTime"], changes.startTime)
-    browser_namespace.storage.local.get(["endTime"], changes.endTime)
-    timerFunctionality()
-}
-  //
+  //Change the Time on Set, Still not Done and Just need to figure this last thing out 
+  if((changes.startTime != null) || (changes.endTime != null)){
+    console.log(startTime)
+    if(changes.startTime != null){
+      startTime = changes.startTime.newValue;
+    }
+    if(changes.endTime != null){
+      endTime = changes.endTime.newValue;
+    }
+    tempSTime = startTime.split(":")
+    tempETime = endTime.split(":")
+    //This should just be a function so we can Parse All Of them Equally at the same time
+    if(tempETime[1].includes("PM") && (tempETime[0] != "12")){
+    tempETime[0] = (parseInt(tempETime[0])+12)
+    }
+    if(tempETime[0] == "12" && tempETime[1].includes("AM")){
+      tempETime[0] = 0;
+    }
+    if(tempSTime[1].includes("PM") && (tempSTime[0] != "12")){
+    tempSTime[0] = (parseInt(tempSTime[0])+12)
+    }
+    if(tempSTime[0] == "12" && tempSTime[1].includes("AM")){
+      tempSTime[0] = 0;
+    }    
+    timerStartTime = [parseInt(tempSTime[0]), parseInt(tempSTime[1])]
+    timerEndTime = [parseInt(tempETime[0]), parseInt(tempETime[1])]
+
+    handle_mode(); //Properly Run again? 
+  }
 
   ///////////////////////
   // DARK MODE VARIANT //
