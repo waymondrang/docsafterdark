@@ -208,7 +208,7 @@ var accent_color;
 var toggle_state = false;
 //Timer Variables. 
 var notSetToTimer = true; 
-var startTime = ""; //Can we leave this blank RQ? 
+var startTime = ""; 
 var endTime = "";
 var timerStartTime = []; 
 var timerEndTime = [];
@@ -377,6 +377,7 @@ function handle_mode() {
       document.documentElement.style.setProperty("--docsafterdark_document_invert", "none");
       inject_light_mode();
     }
+    //this is being set 3 Times; which SHouldn't be set
     timerFunctionality();  
     }
     ///
@@ -388,47 +389,66 @@ function handle_mode() {
 }
 
 
+function cleanTimeForTimer(timeRecieved){
+ hourThenMinutes =  timeRecieved.split(":");
+    
+    if(hourThenMinutes[1].includes("PM") && (hourThenMinutes[0] != "12")){
+    hourThenMinutes[0] = (parseInt(hourThenMinutes[0])+12)
+    }
+    if(hourThenMinutes[0] == "12" && hourThenMinutes[1].includes("AM")){
+      hourThenMinutes[0] = 0;
+    }
+    hourThenMinutes[1] = parseInt(hourThenMinutes[1].substring(0,2))
+ return hourThenMinutes; 
+}
+
 ///Timer Function. 
 async function timerFunctionality(){
-  //This needs to be Manually itterated over. 
+  clearTimeout();
   const timerSTime = new Date();
   const timerETime = new Date();
   const curTime = new Date(); 
-  timerSTime.setHours(parseInt(timerStartTime[0]), parseInt(timerStartTime[1]), 0);
-  timerETime.setHours(parseInt(timerEndTime[0]), parseInt(timerEndTime[1]), 0); 
+  timerSTime.setHours(timerStartTime[0], timerStartTime[1], 0);
+  timerETime.setHours(timerEndTime[0], timerEndTime[1], 0); 
   
+  //To Account for Day Roll Overs + Passing it's current time. 
   if(timerETime <= timerSTime){
     timerETime.setDate((parseInt(timerETime.getDate())+1)) //To Account for Day Roll Overs
   }
-  
+  if((timerSTime < curTime) && (timerETime < curTime) ){
+    timerSTime.setDate((parseInt(timerETime.getDate())+1))
+  }
+  //////
   var checkBackInOn; 
-   if(timerSTime <= curTime){
-  checkBackInOn = Math.abs((((timerEndTime[0]-parseInt(curTime.getHours()))*3600000)+((timerEndTime[1]-parseInt(curTime.getMinutes()))*60000)))
+  //Make this a Switch Case Since we need to change what we're doing. 
+  if(curTime < timerSTime){
+  checkBackInOn = (Math.abs((((timerStartTime[0]-parseInt(curTime.getHours()))*3600000)+((timerStartTime[1]-parseInt(curTime.getMinutes()))*60000)))-(parseInt(curTime.getSeconds())*1000))
+  }
+  else if(timerSTime <= curTime){
+  checkBackInOn = (Math.abs((((timerEndTime[0]-parseInt(curTime.getHours()))*3600000)+((timerEndTime[1]-parseInt(curTime.getMinutes()))*60000)))-(parseInt(curTime.getSeconds())*1000))
   }
   else{
-    checkBackInOn = Math.abs((((timerEndTime[0]-timerStartTime[0])*3600000)+((timerEndTime[1]-timerStartTime[1])*60000)))
+    checkBackInOn = (Math.abs((((timerEndTime[0]-timerStartTime[0])*3600000)+((timerEndTime[1]-timerStartTime[1])*60000))))
   }
-  
+  ///
   console.log("Start Time: "+timerSTime.toLocaleTimeString()+", End Time: "+timerETime.toLocaleTimeString()+", Pause Time: "+checkBackInOn);
-  //Only run if we have Valid Times + Timer is Set. 
-  if(mode == mode_timer && checkBackInOn != NaN){
-  if(curTime >= timerSTime){
+  
+  if(mode == mode_timer && checkBackInOn != NaN && checkBackInOn > 0){
+//Only run if we have Valid Times + Timer is Set. 
+ if((curTime >= timerSTime) && (curTime < timerETime)){
     document.documentElement.style.setProperty("--docsafterdark_document_invert", document_inverted_value);
     inject_dark_mode(dark_mode_options);
 }
-//
-if(curTime >= timerETime){ 
+else{ 
 document.documentElement.style.setProperty("--docsafterdark_document_invert", "none");
 inject_light_mode();
 }
-
 await new Promise((resolve, reject) => 
-  testArray.push(window.setTimeout(function(){}, resolve, checkBackInOn)));
+ setTimeout(resolve, checkBackInOn));
 }
+//Running Recursively under the Assumption of "Set it and Forget it"
 timerFunctionality();
 }
-
-var testArray = [];
 
 
 /**
@@ -506,26 +526,11 @@ browser_namespace.storage.local.get(
     if((data.startTime != null) && (data.endTime != null)){
     startTime = data.startTime;
     endTime = data.endTime; 
-    tempSTime = startTime.split(":")
-    tempETime = endTime.split(":")
-    //This should just be a function so we can Parse All Of them Equally at the same time
-    if(tempETime[1].includes("PM") && (tempETime[0] != "12")){
-    tempETime[0] = (parseInt(tempETime[0])+12)
-    }
-    if(tempETime[0] == "12" && tempETime[1].includes("AM")){
-      tempETime[0] = 0;
-    }
-    if(tempSTime[1].includes("PM") && (tempSTime[0] != "12")){
-    tempSTime[0] = (parseInt(tempSTime[0])+12)
-    }
-    if(tempSTime[0] == "12" && tempSTime[1].includes("AM")){
-      tempSTime[0] = 0;
-    }    
-    timerStartTime = [parseInt(tempSTime[0]), parseInt(tempSTime[1])]
-    timerEndTime = [parseInt(tempETime[0]), parseInt(tempETime[1])]
+    timerStartTime = cleanTimeForTimer(startTime)
+    timerEndTime = cleanTimeForTimer(endTime)
     set_storage("endTime", endTime)
     set_storage("startTime", startTime)
-    timerFunctionality();
+    handle_mode();
     }
 
  
@@ -739,32 +744,15 @@ browser_namespace.storage.onChanged.addListener(function (changes, area) {
 
   //Change the Time on Set, Still not Done and Just need to figure this last thing out 
   if((changes.startTime != null) || (changes.endTime != null)){
-    console.log(startTime)
     if(changes.startTime != null){
       startTime = changes.startTime.newValue;
     }
     if(changes.endTime != null){
       endTime = changes.endTime.newValue;
-    }
-    tempSTime = startTime.split(":")
-    tempETime = endTime.split(":")
-    //This should just be a function so we can Parse All Of them Equally at the same time
-    if(tempETime[1].includes("PM") && (tempETime[0] != "12")){
-    tempETime[0] = (parseInt(tempETime[0])+12)
-    }
-    if(tempETime[0] == "12" && tempETime[1].includes("AM")){
-      tempETime[0] = 0;
-    }
-    if(tempSTime[1].includes("PM") && (tempSTime[0] != "12")){
-    tempSTime[0] = (parseInt(tempSTime[0])+12)
-    }
-    if(tempSTime[0] == "12" && tempSTime[1].includes("AM")){
-      tempSTime[0] = 0;
-    }    
-    timerStartTime = [parseInt(tempSTime[0]), parseInt(tempSTime[1])]
-    timerEndTime = [parseInt(tempETime[0]), parseInt(tempETime[1])]
-
-    handle_mode(); //Properly Run again? 
+    } 
+    timerStartTime = cleanTimeForTimer(startTime)
+    timerEndTime = cleanTimeForTimer(endTime)
+    handle_mode(); //Properly Run again using this. 
   }
 
   ///////////////////////
