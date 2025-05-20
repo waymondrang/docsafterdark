@@ -361,13 +361,15 @@ function handle_mode() {
     inject_light_mode();
   }  
   else if(mode == mode_timer){
-    
+  
     notSetToTimer = false; 
+    //We Should condense this into a Single time. 
     const tempTime = new Date(); 
     const tempStartTime = new Date();
     const tempEndTime = new Date(); 
     tempEndTime.setHours(timerEndTime[0], timerEndTime[1], 0)
     tempStartTime.setHours(timerStartTime[0], timerStartTime[1], 0);
+    //Setting this Initially to Ensure the change is more Smooth. 
     if(!(isNaN(tempEndTime.getTime())) && !(isNaN(tempStartTime.getTime()))){
     if((tempTime >= tempStartTime)){
       document.documentElement.style.setProperty("--docsafterdark_document_invert", document_inverted_value);
@@ -377,7 +379,6 @@ function handle_mode() {
       document.documentElement.style.setProperty("--docsafterdark_document_invert", "none");
       inject_light_mode();
     }
-    //this is being set 3 Times; which SHouldn't be set
     timerFunctionality();  
     }
     ///
@@ -391,7 +392,6 @@ function handle_mode() {
 
 function cleanTimeForTimer(timeRecieved){
  hourThenMinutes =  timeRecieved.split(":");
-    
     if(hourThenMinutes[1].includes("PM") && (hourThenMinutes[0] != "12")){
     hourThenMinutes[0] = (parseInt(hourThenMinutes[0])+12)
     }
@@ -405,6 +405,7 @@ function cleanTimeForTimer(timeRecieved){
 ///Timer Function. 
 async function timerFunctionality(){
   clearTimeout();
+  //Can't we condense these? We use this on as well. 
   const timerSTime = new Date();
   const timerETime = new Date();
   const curTime = new Date(); 
@@ -412,27 +413,29 @@ async function timerFunctionality(){
   timerETime.setHours(timerEndTime[0], timerEndTime[1], 0); 
   
   //To Account for Day Roll Overs + Passing it's current time. 
-  if(timerETime <= timerSTime){
-    timerETime.setDate((parseInt(timerETime.getDate())+1)) //To Account for Day Roll Overs
-  }
   if((timerSTime < curTime) && (timerETime < curTime) ){
-    timerSTime.setDate((parseInt(timerETime.getDate())+1))
+    timerSTime.setDate((parseInt(timerSTime.getDate())+1))
   }
-  //////
+  if(timerETime <= timerSTime){
+    timerETime.setDate((parseInt(timerETime.getDate())+1))
+  }
   var checkBackInOn; 
-  //Make this a Switch Case Since we need to change what we're doing. 
-  if(curTime < timerSTime){
-  checkBackInOn = (Math.abs((((timerStartTime[0]-parseInt(curTime.getHours()))*3600000)+((timerStartTime[1]-parseInt(curTime.getMinutes()))*60000)))-(parseInt(curTime.getSeconds())*1000))
+
+  //This is Gross. It works but it's gross. 
+  if(curTime.getDate() < timerSTime.getDate()){
+    checkBackInOn = 86400000-(Math.abs((((timerStartTime[0]-parseInt(curTime.getHours()))*3600000)+((timerStartTime[1]-parseInt(curTime.getMinutes()))*60000)))-(parseInt(curTime.getSeconds())*1000))
+  }
+  else if((curTime < timerSTime) && (curTime.getDate() == timerSTime.getDate())){
+    checkBackInOn = (Math.abs((((timerStartTime[0]-parseInt(curTime.getHours()))*3600000)+((timerStartTime[1]-parseInt(curTime.getMinutes()))*60000)))-(parseInt(curTime.getSeconds())*1000))
   }
   else if(timerSTime <= curTime){
-  checkBackInOn = (Math.abs((((timerEndTime[0]-parseInt(curTime.getHours()))*3600000)+((timerEndTime[1]-parseInt(curTime.getMinutes()))*60000)))-(parseInt(curTime.getSeconds())*1000))
+    checkBackInOn = (Math.abs((((timerEndTime[0]-parseInt(curTime.getHours()))*3600000)+((timerEndTime[1]-parseInt(curTime.getMinutes()))*60000)))-(parseInt(curTime.getSeconds())*1000))
   }
   else{
-    checkBackInOn = (Math.abs((((timerEndTime[0]-timerStartTime[0])*3600000)+((timerEndTime[1]-timerStartTime[1])*60000))))
+    checkBackInOn = (Math.abs((((timerEndTime[0]-timerStartTime[0])*3600000)+((timerEndTime[1]-timerStartTime[1])*60000)))) 
   }
-  ///
-  console.log("Start Time: "+timerSTime.toLocaleTimeString()+", End Time: "+timerETime.toLocaleTimeString()+", Pause Time: "+checkBackInOn);
-  
+/* console.log("Start Time: "+timerSTime.toLocaleDateString()+", End Time: "+timerETime.toLocaleDateString()+", Pause Time: "+checkBackInOn);
+  console.log("Start Time: "+timerSTime.toLocaleTimeString()+", End Time: "+timerETime.toLocaleTimeString()+", Pause Time: "+checkBackInOn); */
   if(mode == mode_timer && checkBackInOn != NaN && checkBackInOn > 0){
 //Only run if we have Valid Times + Timer is Set. 
  if((curTime >= timerSTime) && (curTime < timerETime)){
@@ -446,7 +449,6 @@ inject_light_mode();
 await new Promise((resolve, reject) => 
  setTimeout(resolve, checkBackInOn));
 }
-//Running Recursively under the Assumption of "Set it and Forget it"
 timerFunctionality();
 }
 
