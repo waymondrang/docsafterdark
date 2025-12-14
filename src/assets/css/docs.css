@@ -100,6 +100,19 @@
   --gm3-sys-color-primary: var(--accent-color);
   --gm3-ripple-hover-color: var(--accent-color);
   --gm3-ripple-pressed-color: var(--accent-color);
+
+  /* GEMINI / SIDEBAR FIXES */
+  /* Overriding general surface colors to ensure chips and containers inherit dark mode */
+  --gm3-sys-color-surface: var(--primary-background-color);
+  --gm3-sys-color-surface-variant: var(--secondary-background-color);
+  --gm3-sys-color-surface-container: var(--primary-background-color);
+  --gm3-sys-color-surface-container-high: var(--secondary-background-color);
+  --gm3-sys-color-surface-container-highest: var(--tertiary-background-color);
+  --gm3-sys-color-surface-container-low: var(--primary-background-color);
+  --gm3-sys-color-surface-container-lowest: var(--root-background-color);
+  
+  --gm3-sys-color-secondary-container: var(--tertiary-background-color);
+  --gm3-sys-color-on-secondary-container: var(--primary-text-color);
 }
 
 .docsCommonWiz
