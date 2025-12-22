@@ -2,19 +2,33 @@
 // LOGGING //
 /////////////
 
+const LOG_LEVELS = { DEBUG: 0, INFO: 1, WARN: 2, ERROR: 3, OFF: 4 };
+
 class log {
+    static currentLevel = LOG_LEVELS.DEBUG;
+
     static debug(...args) {
-        return;
-        console.log("[DEBUG]", ...args);
+        if (this.currentLevel <= LOG_LEVELS.DEBUG) {
+            console.debug("[DocsAfterDark][DEBG]", ...args);
+        }
     }
+
     static info(...args) {
-        console.log("[INFO]", ...args);
+        if (this.currentLevel <= LOG_LEVELS.INFO) {
+            console.info("[DocsAfterDark][INFO]", ...args);
+        }
     }
+
     static warn(...args) {
-        console.log("\x1b[33m%s\x1b[0m", "[WARN]", ...args);
+        if (this.currentLevel <= LOG_LEVELS.WARN) {
+            console.warn("[DocsAfterDark][WARN]", ...args);
+        }
     }
+
     static error(...args) {
-        console.log("\x1b[31m%s\x1b[0m", "[ERROR]", ...args);
+        if (this.currentLevel <= LOG_LEVELS.ERROR) {
+            console.error("[DocsAfterDark][ERRO]", ...args);
+        }
     }
 }
 
@@ -22,17 +36,17 @@ class log {
 // NAMESPACE //
 ///////////////
 
-var browser_namespace;
+let browser_namespace;
 
-// PREFER BROWSER NAMESPACE OVER CHROME
-if (typeof browser != "undefined") {
-    log.debug('"BROWSER" NAMESPACE FOUND');
+// Prefer "browser" namespace over "chrome"
+if (typeof browser !== "undefined") {
+    log.debug("Using 'browser' namespace");
     browser_namespace = browser;
-} else if (typeof chrome != "undefined") {
-    log.debug('"CHROME" NAMESPACE FOUND');
+} else if (typeof chrome !== "undefined") {
+    log.debug("Using 'chrome' namespace");
     browser_namespace = chrome;
 } else {
-    throw new Error("COULD NOT FIND BROWSER NAMESPACE");
+    throw new Error("Could not find browser namespace");
 }
 
 ///////////////////////
@@ -40,7 +54,7 @@ if (typeof browser != "undefined") {
 ///////////////////////
 
 /**
- * UPDATES A STORAGE OBJECT WITH A NEW KEY-VALUE PAIR
+ * Updates a storage object with a new key-value pair
  *
  * @param {String} storage_object
  * @param {String} key
@@ -58,7 +72,7 @@ function update_storage(storage_object, key, value) {
 }
 
 /**
- * SETS A STORAGE OBJECT WITH A NEW VALUE
+ * Sets a storage object with a new value
  *
  * @param {String} storage_object
  * @param {*} value
@@ -73,11 +87,6 @@ class update_storage_batch {
         this.storage = {};
     }
 
-    /**
-     * SETS THE STORAGE OBJECT
-     *
-     * @param {String} storage_object
-     */
     set_storage_object(storage_object) {
         this.storage_object = storage_object;
 
@@ -85,7 +94,7 @@ class update_storage_batch {
     }
 
     /**
-     * SETS A KEY-VALUE PAIR
+     * Set a key-value pair
      *
      * @param {String} key
      * @param {*} value
@@ -97,10 +106,10 @@ class update_storage_batch {
     }
 
     /**
-     * SAVES THE STORAGE OBJECT
+     * Saves the storage object
      */
     update() {
-        console.log(
+        log.debug(
             "UPDATING STORAGE: " +
                 this.storage_object +
                 " WITH: " +
@@ -129,7 +138,7 @@ class update_storage_batch {
 }
 
 /**
- * CHECKS IF CURRENT VERSION IS NEWER OR EQUAL TO TARGET VERSION
+ * Check if the current version is newer or equal to target version
  *
  * @param {String} current_version
  * @param {String} target_version
@@ -147,7 +156,9 @@ function is_newer_or_equal_version(current_version, target_version) {
         }
     }
 
-    // CURRENT VERSION IS EQUAL TO TARGET VERSION
+    // If the loop has not yet returned, the current version is equal to the
+    // target version.
+
     return true;
 }
 
@@ -168,7 +179,7 @@ const mode_dark = 2;
 const dark_mode_normal = 0;
 const dark_mode_eclipse = 1;
 
-const default_accent_hue = 88; // GREEN
+const default_accent_hue = 88; // Green hue
 const default_background = "dark";
 const default_dark_mode = { variant: dark_mode_normal };
 const default_invert = { invert: true, grayscale: true, black: false };
@@ -219,7 +230,7 @@ const backgrounds = {
     black: "#000000",
 };
 
-// TODO: TOGGLE INVERT IF DARK OR BLACK BACKGROUND IS SELECTED
+// TODO: Toggle invert if dark or black background is selected.
 
 var mode;
 var dark_mode_options;
@@ -227,7 +238,7 @@ var button_options;
 var accent_color;
 var toggle_state = false;
 
-// DO NOT ENABLE DARK MODE ON GOOGLE DOCS HOMEPAGE
+// Ensure that dark mode does not get enabled on Google Docs homepage
 if (document.querySelector(".docs-homescreen-gb-container"))
     throw new Error("NOT ENABLING DOCSAFTERDARK ON GOOGLE DOCS HOMEPAGE");
 
@@ -252,7 +263,7 @@ function remove_css_file(file) {
 }
 
 /**
- * INJECTS DARK MODE VARIANT CSS
+ * Injects dark mode variant CSS
  *
  * @param {{ variant: number }} dark_mode
  */
@@ -263,16 +274,16 @@ function inject_dark_mode(dark_mode) {
     remove_css_file("dark_midnight.css");
 
     inject_css_file("docs.css");
-    inject_css_file("dark_normal.css"); // BASE DARK MODE
+    inject_css_file("dark_normal.css"); // Base dark mode
 
     if (dark_mode.variant == dark_mode_eclipse) {
         inject_css_file("dark_midnight.css");
-        // DO NOT REMOVE NORMAL DARK MODE CSS
+        // Do not remove normal dark mode CSS
     }
 }
 
 /**
- * INJECTS LIGHT MODE CSS
+ * Injects light mode CSS
  */
 function inject_light_mode() {
     mode = mode_light;
@@ -326,7 +337,7 @@ function insert_button() {
 }
 
 /**
- * HANDLES BUTTON
+ * Handles button
  */
 function handle_button() {
     if (button_options.show) {
@@ -355,7 +366,7 @@ function remove_accent_color() {
 }
 
 /**
- * HANDLES MODE AND VARIANT CHANGE
+ * Handles mode and variant change
  *
  */
 function handle_mode() {
@@ -363,7 +374,8 @@ function handle_mode() {
         handle_button();
 
     if (mode == null) {
-        // FIRST INVOCATION (SHOULD NOT BE CALLED); ENABLE DEFAULT DARK MODE BY DEFAULT
+        // First invocation (which should not be called), enable deafult dark
+        // mode by default.
         inject_dark_mode(default_dark_mode);
         set_storage("mode", mode_dark);
     } else if (mode == mode_dark) {
@@ -371,13 +383,13 @@ function handle_mode() {
     } else if (mode == mode_light) {
         inject_light_mode();
     } else {
-        // TURN OFF DOCSAFTERDARK
+        // Turn off DocsAfterDark
         remove_docsafterdark();
     }
 }
 
 /**
- * HANDLES DOCUMENT INVERT
+ * Handles document invert
  *
  * @param {{invert: boolean, grayscale: boolean, black: boolean}} invert
  */
@@ -411,7 +423,7 @@ function handle_document_invert(invert) {
 // ENTRY POINT //
 /////////////////
 
-// SET REPLACEMENTS
+// Set replacements
 for (let [key, value] of Object.entries(replacements)) {
     document.documentElement.style.setProperty(
         key,
@@ -432,8 +444,8 @@ browser_namespace.storage.local.get(
         "accent_color",
         "button_options",
         "version",
-        "updates", // DEPRECATED BUT KEEP FOR BACKWARDS COMPATIBILITY
-        "raise_button", // DEPRECATED BUT KEEP FOR BACKWARDS COMPATIBILITY
+        "updates", // Deprecated but kept for backwards capacity
+        "raise_button", // Deprecated but kept for backwards capacity
     ],
     function (data) {
         //////////
@@ -443,7 +455,7 @@ browser_namespace.storage.local.get(
         if (data.mode != null) {
             mode = data.mode;
         } else {
-            // SET DEFAULT MODE
+            // Set default mode
             mode = mode_dark;
             set_storage("mode", mode);
         }
@@ -455,7 +467,7 @@ browser_namespace.storage.local.get(
         if (data.dark_mode != null) {
             dark_mode_options = data.dark_mode;
         } else {
-            // SET DEFAULT DARK MODE OPTIONS
+            // Set default dark mode options
             dark_mode_options = { variant: dark_mode_normal };
             set_storage("dark_mode", dark_mode_options);
         }
@@ -477,11 +489,11 @@ browser_namespace.storage.local.get(
                         backgrounds[data.doc_bg]
                     );
                 } else {
-                    console.error("Invalid background option");
+                    log.error("Invalid background option");
                 }
             }
         } else {
-            // SET DEFAULT BACKGROUND
+            // Set default background
             document.documentElement.style.setProperty(
                 "--docsafterdark_document_background",
                 backgrounds[default_background]
@@ -494,7 +506,7 @@ browser_namespace.storage.local.get(
         ////////////
 
         if (data.invert == null) {
-            // SET DEFAULT INVERT
+            // Set default invert
             data.invert = default_invert;
             set_storage("invert", default_invert);
         }
@@ -526,11 +538,11 @@ browser_namespace.storage.local.get(
             update_accent_color(data.accent_color);
         } else {
             log.debug("NO SAVED ACCENT COLOR FOUND");
-            // SET DEFAULT ACCENT COLOR
+            // Set default accent color
             accent_color = { hue: default_accent_hue };
             update_accent_color(accent_color);
 
-            // SAVE DEFAULT ACCENT COLOR
+            // Save default accent color
             update_storage("accent_color", "hue", default_accent_hue);
         }
 
@@ -540,13 +552,14 @@ browser_namespace.storage.local.get(
         // BUTTON //
         ////////////
 
-        // NOTE: MUST BE CALLED BEFORE HANDLE_MODE
-        // TODO: USE BACKGROUND WORKER TO CONSOLIDATE DEFAULT OPTIONS AND OPTION MIGRATION
+        // NOTE: Must be called before handle_mode
+        // TODO: Use background worker to consolidate default options and option
+        //       migration
 
         button_options = data.button_options;
 
         if (button_options == null) {
-            // CHECK IMPORT RAISED BUTTON SETTING
+            // Check import raised button setting
             if (data.button_raised != null) {
                 button_options = { show: true, raised: data.button_raised };
             } else {
@@ -582,7 +595,7 @@ browser_namespace.storage.local.get(
 
             var update_text = document.createElement("p");
             if (data.version == null && data.updates == null) {
-                // IF UPDATES IS NOT NULL, THEN NOT NEW INSTALL
+                // If updates is not null, then not new install
                 update_text.textContent =
                     "Thank you for installing DocsAfterDark! You can read release notes on ";
             } else {
@@ -618,7 +631,7 @@ browser_namespace.storage.local.get(
             //   is_newer_or_equal_version(docsafterdark_version, "1.1.0") &&
             //   !is_newer_or_equal_version(data.version.last_version, "1.1.0")
             // ) {
-            //   // ENABLE INVERT IF DOCUMENT BACKGROUND IS NOT DEFAULT OR CUSTOM
+            //   // Enable invert if document background is not default or custom
             //   if (data.doc_bg != "default" && data.doc_bg != "custom") {
             //     let batch = new update_storage_batch("invert");
             //     batch.set("invert", true).set("grayscale", true).update();
@@ -655,7 +668,7 @@ browser_namespace.storage.onChanged.addListener(function (changes, area) {
                     backgrounds[changes.doc_bg.newValue]
                 );
             } else {
-                console.error("INVALID BACKGROUND OPTION");
+                log.error("INVALID BACKGROUND OPTION");
             }
         } else {
             browser_namespace.storage.local.get(["custom_bg"], function (data) {
@@ -667,9 +680,9 @@ browser_namespace.storage.onChanged.addListener(function (changes, area) {
         }
     }
 
-    // Handle custom background change. This differs from above
-    // because it is only called when doc_bg is already set
-    // to "custom"
+    // Handle custom background change. This differs from above because it is
+    // only called when doc_bg is already set to "custom".
+
     if (changes.custom_bg != null) {
         document.documentElement.style.setProperty(
             "--docsafterdark_document_background",
@@ -715,7 +728,7 @@ browser_namespace.storage.onChanged.addListener(function (changes, area) {
     // BUTTON //
     ////////////
 
-    // NOTE: MUST BE CALLED BEFORE HANDLE_MODE
+    // NOTE: Must be called before handle_mode
 
     if (changes.button_options != null) {
         button_options = changes.button_options.newValue;
@@ -737,10 +750,13 @@ browser_namespace.storage.onChanged.addListener(function (changes, area) {
     // INVOKE HANDLERS //
     /////////////////////
 
-    if (changes.mode != null || changes.dark_mode != null) handle_mode(); // ONLY HANDLE MODE IF THERE ARE CHANGES
+    // Only handle mode if there are changes
+    if (changes.mode != null || changes.dark_mode != null) {
+        handle_mode();
+    }
 });
 
-// LISTEN FOR MESSAGES FROM POPUP
+// Listen for messages from popup
 browser_namespace.runtime.onMessage.addListener(
     function (request, sender, sendResponse) {
         if (request.type == "setAccentColor") {
