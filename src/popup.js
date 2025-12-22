@@ -4,7 +4,7 @@
 
 var browser_namespace;
 
-// PREFER BROWSER NAMESPACE OVER CHROME
+// Prefer browser namespace over chrome
 if (typeof browser != "undefined") {
     console.log('"BROWSER" NAMESPACE FOUND');
     browser_namespace = browser;
@@ -20,7 +20,7 @@ if (typeof browser != "undefined") {
 ///////////////////////
 
 /**
- * HELPER FUNCTION TO SEND MESSAGES TO ACTIVE TAB
+ * Helper function to send messages to active tab
  *
  * @param {*} message
  */
@@ -44,7 +44,7 @@ class update_storage_batch {
     }
 
     /**
-     * SETS THE STORAGE OBJECT
+     * Sets the storage object
      *
      * @param {String} storage_object
      */
@@ -55,7 +55,7 @@ class update_storage_batch {
     }
 
     /**
-     * SETS A KEY-VALUE PAIR
+     * Set a key-value pair
      *
      * @param {String} key
      * @param {*} value
@@ -67,7 +67,7 @@ class update_storage_batch {
     }
 
     /**
-     * SAVES THE STORAGE OBJECT
+     * Saves the storage object
      */
     update() {
         console.log(
@@ -99,7 +99,7 @@ class update_storage_batch {
 }
 
 /**
- * UPDATES A STORAGE OBJECT WITH A NEW KEY-VALUE PAIR
+ * Updates a storage object with a new key-value pair
  *
  * @param {String} storage_object
  * @param {String} key
@@ -126,7 +126,7 @@ function update_storage(storage_object, key, value) {
 }
 
 /**
- * SETS A STORAGE OBJECT WITH A NEW VALUE
+ * Sets a storage object with a new value
  *
  * @param {String} storage_object
  * @param {*} value
@@ -136,7 +136,7 @@ function set_storage(storage_object, value) {
 }
 
 /**
- * REMOVES A KEY FROM A STORAGE OBJECT
+ * Removes a key from a storage object
  *
  * @param {String} key
  */
@@ -145,7 +145,7 @@ function remove_storage(key) {
 }
 
 /**
- * CLEARS ALL STORAGE
+ * Clears all storage
  */
 function clear_storage() {
     browser_namespace.storage.local.clear();
@@ -162,7 +162,7 @@ const mode_dark = 2;
 const dark_mode_normal = 0;
 const dark_mode_eclipse = 1;
 
-const default_accent_hue = 88; // GREEN
+const default_accent_hue = 88; // Green
 const default_background = "dark";
 
 const document_bg_custom_container = document.querySelector(
@@ -181,11 +181,11 @@ var selected_mode;
 
 var document_inverted_state = false;
 
-// DARK MODE VARIANTS
+// Dark mode variants
 const dark_mode_normal_button = document.querySelector("#dark_mode_normal");
 const dark_mode_eclipse_button = document.querySelector("#dark_mode_eclipse");
 
-// DOCUMENT OPTIONS
+// Document options
 const document_inverted_checkbox = document.querySelector("#document_inverted");
 const document_inverted_grayscale_checkbox = document.querySelector(
     "#document_inverted_grayscale"
@@ -194,11 +194,11 @@ const document_inverted_black_checkbox = document.querySelector(
     "#document_inverted_black"
 );
 
-// BUTTON OPTIONS
+// Button options
 const show_button_checkbox = document.querySelector("#show_button");
 const raise_button_checkbox = document.querySelector("#raise_button");
 
-// TIP
+// Tip
 const tip_button = document.querySelector("#tip_button");
 const tip_container = document.querySelector("#tip_container");
 
@@ -213,7 +213,8 @@ const spectrum_knob = document.querySelector("#spectrum_knob");
 var descriptions = {
     default: "The default, white background.",
     shade: "A light shade of gray. Black text is still readable.",
-    dark: "A dark gray. Black text will become hard to read and color changes may be be required.", // A special, dark gray. This background is unaffected by the invert option.
+    // A special, dark gray. This background is unaffected by the invert option.
+    dark: "A dark gray. Black text will become hard to read and color changes may be be required.",
     black: "A completely black background.",
     custom: "Any valid CSS declaration for the background property may be used here.",
 };
@@ -224,7 +225,7 @@ const versionElement = document.querySelector("#version");
 versionElement.textContent = version ? "v" + version : "";
 
 /**
- * DISABLES A CHECKBOX AND ADDS A DISABLED CLASS TO THE PARENT ELEMENT
+ * Disables a checkbox and adds a disabled class to the parent element
  *
  * @param {HTMLInputElement} checkbox
  * @param {Boolean} disabled
@@ -257,7 +258,7 @@ document.querySelectorAll("#modes button").forEach(function (e) {
                 document_bg_option != "black" &&
                 document_bg_option != "custom"
             ) {
-                // UPDATE INVERT CHECKBOXES
+                // Update invert checkboxes
                 document_inverted_checkbox.checked = false;
                 checkbox_disable(document_inverted_grayscale_checkbox, true);
                 checkbox_disable(document_inverted_black_checkbox, true);
@@ -271,7 +272,7 @@ document.querySelectorAll("#modes button").forEach(function (e) {
                 document_bg_option != "default" &&
                 document_bg_option != "custom"
             ) {
-                // UPDATE INVERT CHECKBOXES
+                // Update invert checkboxes
                 document_inverted_checkbox.checked = true;
                 checkbox_disable(document_inverted_grayscale_checkbox, false);
                 checkbox_disable(document_inverted_black_checkbox, false);
@@ -286,7 +287,7 @@ dark_mode_normal_button.addEventListener("click", (e) => {
     dark_mode_eclipse_button.classList.remove("selected");
     e.target.classList.add("selected");
 
-    // UPDATE INVERT SETTINGS
+    // Update invert settings
     document_inverted_black_checkbox.checked = false;
 
     update_storage("dark_mode", "variant", dark_mode_normal);
@@ -297,7 +298,7 @@ dark_mode_eclipse_button.addEventListener("click", (e) => {
     dark_mode_normal_button.classList.remove("selected");
     e.target.classList.add("selected");
 
-    // UPDATE INVERT SETTINGS
+    // Update invert settings
     document_inverted_black_checkbox.checked = true;
 
     update_storage("dark_mode", "variant", dark_mode_eclipse);
@@ -305,7 +306,7 @@ dark_mode_eclipse_button.addEventListener("click", (e) => {
 });
 
 tip_button.addEventListener("mouseenter", (e) => {
-    // WAIT BEFORE SHOWING TIP
+    // Wait before showing tip
     let timeout = setTimeout(() => {
         tip_container.classList.remove("hidden");
     }, 250);
@@ -346,7 +347,7 @@ document.querySelectorAll("#document_bg_buttons button").forEach(function (e) {
             document_bg_custom_container.classList.remove("hidden");
         }
 
-        // DO NOT MODIFY INVERT SETTINGS FOR CUSTOM BACKGROUND
+        // Do not modify invert settings for custom background
         if (selected_mode == "light") {
             if (document_bg_option == "black") {
                 document_inverted_checkbox.checked = true;
@@ -408,7 +409,10 @@ document_inverted_checkbox.addEventListener("click", function (e) {
             !document_inverted_grayscale_checkbox.checked
     );
 
-    update_storage("invert", "invert", document_inverted_state); // TODO: SEPARATE INVERT FROM INVERT OPTIONS OR CONSOLIDATE OPTIONS INTO DOCUMENT OPTIONS
+    // TODO: Separate invert from invert options or consolidate options into
+    //       document options
+
+    update_storage("invert", "invert", document_inverted_state);
 });
 
 document_inverted_grayscale_checkbox.addEventListener("click", function (e) {
@@ -436,7 +440,7 @@ donate.addEventListener("click", function (e) {
 });
 
 /**
- * CALLED WHEN THE COLOR PICKER CHANGES FOR PREVIEWING TEMPORARY COLOR CHANGES
+ * Called when the color picker changes for previewing temporary color changes
  *
  * @param {{hue: Number}} color
  */
@@ -446,10 +450,10 @@ function handleTempColorChange(color, saveToStorage = true) {
         color: color,
     });
 
-    // SAVE TEMPORARY COLOR TO STORAGE
+    // Save temporary color to storage
     if (saveToStorage) set_storage("temp_accent_color", color);
 
-    // SET POPUP ACCENT COLOR
+    // Set popup accent color
     setPopupAccentColor(color);
 }
 
@@ -470,20 +474,20 @@ function setPopupAccentColor(color) {
 
 spectrum_input.addEventListener("input", function (e) {
     if (spectrum_input.value) {
-        // ENABLE RESET AND SAVE BUTTONS
+        // Enable reset and save buttons
         spectrum_reset.disabled = false;
         spectrum_save.disabled = false;
 
-        // CLAMP INPUT VALUE
+        // Clamp input value
         spectrum_input.value = Math.min(Math.max(spectrum_input.value, 0), 360);
 
-        // SET KNOB POSITION (USING LEFT OFFSET)
+        // Set knob position (using left offset)
         let fraction = spectrum_input.value / 360;
         let offset =
             fraction * (spectrum_bar.offsetWidth - spectrum_knob.offsetWidth);
         spectrum_knob.style.left = offset + "px";
 
-        // SET BACKGROUND COLOR (CSS HUE RANGE IS [0, 360])
+        // Set background color (CSS hue range is [0, 360])
         spectrum_knob.style.backgroundColor = `hsl(${spectrum_input.value}, 100%, 50%)`;
 
         handleTempColorChange({ hue: spectrum_input.value });
@@ -499,18 +503,18 @@ spectrum_reset.addEventListener("click", function (e) {
         if (data.accent_color) {
             initiateKnob(data.accent_color.hue);
         } else {
-            // SET DEFAULT ACCENT COLOR
+            // Set default accent color
             initiateKnob(default_accent_hue);
         }
 
-        // DISABLE RESET AND SAVE BUTTONS AFTER RESET
+        // Disable reset and save buttons after reset
         spectrum_reset.disabled = true;
         spectrum_save.disabled = true;
 
-        // DO NOT SAVE TEMPORARY COLOR WHEN RESET
+        // Do not save temporary color when reset
         handleTempColorChange({ hue: spectrum_input.value }, false);
 
-        // REMOVE TEMPORARY COLOR
+        // Remove temporary color
         remove_storage("temp_accent_color");
     });
 });
@@ -521,17 +525,17 @@ spectrum_reset.addEventListener("click", function (e) {
 
 spectrum_save.addEventListener("click", function (e) {
     if (spectrum_input.value) {
-        // TODO: VALIDATE HUE VALUE
+        // TODO: Validate hue value
 
-        // SAVE HUE TO STORAGE
+        // Save hue to storage
         update_storage("accent_color", "hue", spectrum_input.value);
 
-        // REMOVE TEMPORARY COLOR
+        // Remove temporary color
         remove_storage("temp_accent_color");
 
         console.log("SAVED ACCENT HUE VALUE: " + spectrum_input.value);
 
-        // DISABLE RESET AND SAVE BUTTONS AFTER SAVING
+        // Disable reset and save buttons after saving
         spectrum_reset.disabled = true;
         spectrum_save.disabled = true;
     }
@@ -550,21 +554,21 @@ function initiateKnob(hue) {
     let offset =
         fraction * (spectrum_bar.offsetWidth - spectrum_knob.offsetWidth);
 
-    // SET KNOB POSITION (USING LEFT OFFSET)
+    // Set knob position (using left offset)
     spectrum_knob.style.left = offset + "px";
 
-    // SET BACKGROUND COLOR (CSS HUE RANGE IS [0, 360])
+    // Set background color (CSS hue range is [0, 360])
     spectrum_knob.style.backgroundColor = `hsl(${hue}, 100%, 50%)`;
 
-    // SET INPUT VALUE
+    // Set input value
     spectrum_input.value = hue;
 
-    // UPDATE KNOB OFFSET
+    // Update knob offset
     knobOffset = offset;
 }
 
 function moveKnob(e) {
-    // ENABLE RESET AND SAVE BUTTONS
+    // Enable reset and save buttons
     spectrum_reset.disabled = false;
     spectrum_save.disabled = false;
 
@@ -577,13 +581,13 @@ function moveKnob(e) {
         offset / (spectrum_bar.offsetWidth - spectrum_knob.offsetWidth);
     let hue = Math.min(Math.max(Math.round(fraction * 360), 0), 360);
 
-    // SET KNOB POSITION (USING LEFT OFFSET)
+    // Set knob position (using left offset)
     spectrum_knob.style.left = offset + "px";
 
-    // SET BACKGROUND COLOR (CSS HUE RANGE IS [0, 360])
+    // Set background color (CSS hue range is [0, 360])
     spectrum_knob.style.backgroundColor = `hsl(${hue}, 100%, 50%)`;
 
-    // SET INPUT VALUE
+    // Set input value
     spectrum_input.value = hue;
 
     handleTempColorChange({ hue: hue });
@@ -594,20 +598,20 @@ spectrum_knob.addEventListener("mousedown", function (e) {
 
     e.preventDefault();
 
-    // SET DRAGGING FLAG
+    // Set dragging flag
     knobDragging = true;
 
-    // SAVE MOUSE START POSITION
+    // Save mouse start position
     mouseStartPosition = e.clientX;
 
     document.addEventListener("mousemove", moveKnob);
     document.addEventListener("mouseup", function (e) {
         document.removeEventListener("mousemove", moveKnob);
 
-        // UPDATE KNOB OFFSET
+        // Update knob offset
         knobOffset = parseFloat(spectrum_knob.style.left);
 
-        // UNSET DRAGGING FLAG
+        // Unset dragging flag
         knobDragging = false;
     });
 });
@@ -617,7 +621,7 @@ spectrum_bar.addEventListener("mousedown", function (e) {
 
     e.preventDefault();
 
-    // SET DRAGGING FLAG
+    // Set dragging flag
     knobDragging = true;
 
     let offset = Math.max(
@@ -630,39 +634,39 @@ spectrum_bar.addEventListener("mousedown", function (e) {
         0
     );
 
-    // UPDATE KNOB OFFSET
+    // Update knob offset
     knobOffset = offset;
 
-    // SAVE MOUSE START POSITION
+    // Save mouse start position
     mouseStartPosition = e.clientX;
 
-    // SET KNOB POSITION (USING LEFT OFFSET)
+    // Set knob position (using left offset)
     spectrum_knob.style.left = offset + "px";
 
-    // SET BACKGROUND COLOR (CSS HUE RANGE IS [0, 360])
+    // Set background color (CSS hue range is [0, 360])
     let fraction =
         offset / (spectrum_bar.offsetWidth - spectrum_knob.offsetWidth);
     let hue = Math.min(Math.max(Math.round(fraction * 360), 0), 360);
     spectrum_knob.style.backgroundColor = `hsl(${hue}, 100%, 50%)`;
 
-    // SET INPUT VALUE
+    // Set input value
     spectrum_input.value = hue;
 
-    // ENABLE RESET AND SAVE BUTTONS
+    // Enable reset and save buttons
     spectrum_reset.disabled = false;
     spectrum_save.disabled = false;
 
-    // SEND MESSAGE TO ACTIVE TAB (TODO: ALL DOCS TABS)
+    // Send message to active tab (TODO: All docs tabs)
     handleTempColorChange({ hue: hue });
 
     document.addEventListener("mousemove", moveKnob);
     document.addEventListener("mouseup", function (e) {
         document.removeEventListener("mousemove", moveKnob);
 
-        // UNSET DRAGGING FLAG
+        // Unset dragging flag
         knobDragging = false;
 
-        // UPDATE KNOB OFFSET
+        // Update knob offset
         knobOffset = parseFloat(spectrum_knob.style.left);
     });
 });
@@ -683,11 +687,11 @@ try {
             "temp_accent_color",
             "dark_mode",
             "button_options",
-            "raise_button", // DEPRECATED BUT KEEP FOR BACKWARDS COMPATIBILITY
-            "on", // DEPRECATED BUT KEEP FOR BACKWARDS COMPATIBILITY
+            "raise_button", // Deprecated but keep for backwards compatibility
+            "on", // Deprecated but keep for backwards compatibility
         ],
         function (data) {
-            // TODO: REMOVE THESE VARIABLES AND INSTEAD USE data.XXX
+            // TODO: Remove these variables and instead use data.xxx
 
             let custom_data = data.custom_bg;
             let invert_data = data.invert;
@@ -697,7 +701,7 @@ try {
             // PARSE SETTINGS //
             ////////////////////
 
-            // RESET SETTINGS
+            // Reset settings
             document.querySelectorAll("#modes button").forEach(function (e) {
                 e.classList.remove("selected");
             });
@@ -728,7 +732,7 @@ try {
                 document_bg_option = data.doc_bg;
 
                 if (document_bg_option == null) {
-                    // SET DEFAULT BACKGROUND
+                    // Set default background
                     document_bg_option = default_background;
                     set_storage("doc_bg", document_bg_option);
                 }
@@ -752,7 +756,7 @@ try {
             ////////////
 
             if (invert_data == null) {
-                // DEFAULT INVERT SETTINGS
+                // Default invert settings
                 invert_data = { invert: true, grayscale: true, black: false };
                 set_storage("invert", invert_data);
             }
@@ -795,7 +799,7 @@ try {
             let button_options = data.button_options;
 
             if (button_options == null) {
-                // CHECK IMPORT RAISED BUTTON SETTING
+                // Check import raised button setting
                 if (data.button_raised != null) {
                     button_options = { show: true, raised: data.button_raised };
                 } else {
@@ -814,24 +818,24 @@ try {
             // ACCENT COLOR //
             //////////////////
 
-            // SET DEFAULT ACCENT COLOR
+            // Set default accent color
             let accent_color = { hue: default_accent_hue };
 
             if (data.temp_accent_color) {
                 accent_color = data.temp_accent_color;
-                // ENABLE RESET AND SAVE BUTTONS
+                // Enable reset and save buttons
                 spectrum_reset.disabled = false;
                 spectrum_save.disabled = false;
             } else if (data.accent_color) {
                 accent_color = data.accent_color;
-                // DISABLE RESET AND SAVE BUTTONS (SANITY)
+                // Disable reset and save buttons (sanity)
                 spectrum_reset.disabled = true;
                 spectrum_save.disabled = true;
             } else {
                 spectrum_reset.disabled = true;
                 spectrum_save.disabled = true;
 
-                // SAVE DEFAULT ACCENT COLOR
+                // Save default accent color
                 set_storage("accent_color", accent_color);
             }
 
