@@ -1,66 +1,68 @@
 #docsafterdark_switch {
-  position: fixed;
-  left: 24px;
-  bottom: 24px;
-  bottom: var(--docsafterdark-switch-position);
-  border: 0.0625rem solid #7F7F7F28;
-  border-radius: 999px;
-  background-color: #ffffff0A;
-  color: #cecece;
-  padding: 2px 8px;
-  z-index: 2500000000;
+    position: fixed;
+    left: 24px;
+    bottom: 24px;
+    bottom: var(--docsafterdark-switch-position);
+    border: 0.0625rem solid #7f7f7f28;
+    border-radius: 999px;
+    background-color: #ffffff0a;
+    color: #cecece;
+    padding: 2px 8px;
+    z-index: 2500000000;
 }
 
 #docsafterdark_update_notification {
-  position: fixed;
-  top: 12px;
-  left: 0;
-  right: 0;
-  color: var(--secondary-text-color, #F2F2F2);
-  padding: 12px;
-  text-align: center;
-  z-index: 2500000000;
-  width: fit-content;
-  margin: 0 auto;
+    position: fixed;
+    top: 12px;
+    left: 0;
+    right: 0;
+    color: var(--secondary-text-color, #f2f2f2);
+    padding: 12px;
+    text-align: center;
+    z-index: 2500000000;
+    width: fit-content;
+    margin: 0 auto;
 }
 
 #docsafterdark_update_notification p {
-  margin: 0;
+    margin: 0;
 }
 
 #docsafterdark_update_notification div {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 
-  border: 1px solid var(--primary-border-color, #4d4d4d);
-  background-color: var(--primary-background-color, #212121);
-  padding: 6px 12px;
-  border-radius: 8px;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-  font-size: 14px;
-  font-family: Arial, Helvetica, sans-serif;
+    border: 1px solid var(--primary-border-color, #4d4d4d);
+    background-color: var(--primary-background-color, #212121);
+    padding: 6px 12px;
+    border-radius: 8px;
+    box-shadow:
+        0 14px 28px rgba(0, 0, 0, 0.25),
+        0 10px 10px rgba(0, 0, 0, 0.22);
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
 
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 #docsafterdark_update_notification a {
-  color: var(--accent-color, #64b5f6);
-  text-decoration: underline;
+    color: var(--accent-color, #64b5f6);
+    text-decoration: underline;
 }
 
 #docsafterdark_update_notification button {
-  height: 24px;
-  padding: 0 6px;
+    height: 24px;
+    padding: 0 6px;
 
-  background-color: var(--accent-color, #4d4d4d);
-  border-radius: 4px;
-  color: var(--button-text-color, #64b5f6);
-  border: none;
-  cursor: pointer;
-  margin-left: 12px;
-  font-size: inherit;
+    background-color: var(--accent-color, #4d4d4d);
+    border-radius: 4px;
+    color: var(--button-text-color, #64b5f6);
+    border: none;
+    cursor: pointer;
+    margin-left: 12px;
+    font-size: inherit;
 }
 
 #docsafterdark_update_notification button:hover {
-  background-color: var(--accent-hover-color, #595959);
+    background-color: var(--accent-hover-color, #595959);
 }

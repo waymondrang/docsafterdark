@@ -6,13 +6,13 @@ Customize the look of Google Docs with a modern dark mode and a dynamic, colorfu
 
 Access settings in the extension option menu, which can be accessed by clicking on the extension icon in the browser toolbar.
 
-Easily switch between dark and light mode for any document without modifying the original project. 
+Easily switch between dark and light mode for any document without modifying the original project.
 
 Change the accent color by using the hue slider in the option menu.
 
 Customize the document background to a darker shade, or use any valid background CSS value in the custom field, including images, gradients, and transparent backgrounds.\*
 
-Use the invert option to render document content in a comfortable dark mode.\*\* 
+Use the invert option to render document content in a comfortable dark mode.\*\*
 
 Turn off document borders to create a seamless workspace.
 
