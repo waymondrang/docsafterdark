@@ -2,7 +2,7 @@
 // NAMESPACE //
 ///////////////
 
-var browser_namespace;
+let browser_namespace;
 
 // Prefer browser namespace over chrome
 if (typeof browser != "undefined") {
@@ -83,7 +83,7 @@ class update_storage_batch {
             this.storage_object,
             function (data) {
                 if (data[that.storage_object] != null) {
-                    for (var key in that.storage) {
+                    for (let key in that.storage) {
                         data[that.storage_object][key] = that.storage[key];
                     }
                 } else {
@@ -176,10 +176,10 @@ const document_bg_custom_save = document.querySelector(
 );
 const show_border = document.querySelector("#show_border");
 
-var document_bg_option;
-var selected_mode;
+let document_bg_option;
+let selected_mode;
 
-var document_inverted_state = false;
+let document_inverted_state = false;
 
 // Dark mode variants
 const dark_mode_normal_button = document.querySelector("#dark_mode_normal");
@@ -210,12 +210,12 @@ const spectrum_reset = document.querySelector("#spectrum_reset");
 const spectrum_bar = document.querySelector("#spectrum_bar");
 const spectrum_knob = document.querySelector("#spectrum_knob");
 
-var descriptions = {
+let descriptions = {
     default: "The default, white background.",
     shade: "A light shade of gray. Black text is still readable.",
     // A special, dark gray. This background is unaffected by the invert option.
     dark: "A dark gray. Black text will become hard to read and color changes may be be required.",
-    black: "A completely black background.",
+    black: "A complet ely black background.",
     custom: "Any valid CSS declaration for the background property may be used here.",
 };
 
@@ -545,9 +545,9 @@ spectrum_save.addEventListener("click", function (e) {
 // SPECTRUM KNOB DRAGGING //
 ////////////////////////////
 
-var mouseStartPosition = 0;
-var knobOffset = 0;
-var knobDragging = false;
+let mouseStartPosition = 0;
+let knobOffset = 0;
+let knobDragging = false;
 
 function initiateKnob(hue) {
     let fraction = hue / 360;
@@ -737,7 +737,7 @@ try {
                     set_storage("doc_bg", document_bg_option);
                 }
 
-                var selected_option = document.querySelector(
+                let selected_option = document.querySelector(
                     `#document_bg_${document_bg_option}`
                 );
                 selected_option.classList.add("selected");

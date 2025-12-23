@@ -122,7 +122,7 @@ class update_storage_batch {
             this.storage_object,
             function (data) {
                 if (data[that.storage_object] != null) {
-                    for (var key in that.storage) {
+                    for (let key in that.storage) {
                         data[that.storage_object][key] = that.storage[key];
                     }
                 } else {
@@ -232,11 +232,11 @@ const backgrounds = {
 
 // TODO: Toggle invert if dark or black background is selected.
 
-var mode;
-var dark_mode_options;
-var button_options;
-var accent_color;
-var toggle_state = false;
+let mode;
+let dark_mode_options;
+let button_options;
+let accent_color;
+let toggle_state = false;
 
 // Ensure that dark mode does not get enabled on Google Docs homepage
 if (document.querySelector(".docs-homescreen-gb-container"))
@@ -593,7 +593,7 @@ browser_namespace.storage.local.get(
             update_container.id = "docsafterdark_update_container";
             update_notification.appendChild(update_container);
 
-            var update_text = document.createElement("p");
+            let update_text = document.createElement("p");
             if (data.version == null && data.updates == null) {
                 // If updates is not null, then not new install
                 update_text.textContent =
@@ -605,14 +605,14 @@ browser_namespace.storage.local.get(
                     ". Read release notes on ";
             }
 
-            var update_link = document.createElement("a");
+            let update_link = document.createElement("a");
             update_link.href = update_link_href;
             update_link.target = "_blank";
             update_link.textContent = "GitHub";
             update_text.appendChild(update_link);
             update_text.appendChild(document.createTextNode("."));
 
-            var close_button = document.createElement("button");
+            let close_button = document.createElement("button");
             close_button.textContent = "Close";
             close_button.onclick = function () {
                 update_notification.remove();
