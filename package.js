@@ -162,7 +162,7 @@ function generate_release(release) {
 
     for (const file of files) {
         // find special files
-        var special_file = release.special_files.filter(
+        let special_file = release.special_files.filter(
             (special_file) =>
                 special_file.include && file.match(special_file.file)
         );
@@ -208,7 +208,7 @@ function unpack_release(release) {
     }
 
     // get a recursive list of files in the source directory
-    var files = fs.readdirSync(source_directory, { recursive: true });
+    let files = fs.readdirSync(source_directory, { recursive: true });
 
     // filter out directories
     files = files.filter(
@@ -217,7 +217,7 @@ function unpack_release(release) {
 
     for (const file of files) {
         // find special files
-        var special_file = release.special_files.filter(
+        let special_file = release.special_files.filter(
             (special_file) =>
                 special_file.include && file.match(special_file.file)
         );

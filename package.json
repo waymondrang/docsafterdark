@@ -3,8 +3,12 @@
     "version": "0.0.0",
     "description": "Beyond dark mode for Google Docs",
     "devDependencies": {
+        "@eslint/js": "^9.39.2",
         "archiver": "^7.0.1",
-        "prettier": "^3.7.4"
+        "eslint": "^9.39.2",
+        "globals": "^16.5.0",
+        "prettier": "^3.7.4",
+        "web-ext": "^9.2.0"
     },
     "repository": {
         "type": "git",
@@ -17,7 +21,8 @@
     "homepage": "https://github.com/waymondrang/docsafterdark#readme",
     "scripts": {
         "build": "node package.js",
-        "check": "prettier --check .",
+        "check": "prettier --check . && eslint src && web-ext lint",
+        "dev": "cd src && web-ext run",
         "format": "prettier --write ."
     }
 }
