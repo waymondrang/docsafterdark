@@ -67,27 +67,25 @@ function isVersionNewer(curr: string, target: string) {
 /**
  * Sets a storage object with a new value
  */
-function setStorage(key: string, value: any): Promise<any> {
+function setStorage(key: string, value: any): Promise<void> {
     return getBrowserNamespace().storage.local.set({
         [key]: value,
-    }) as Promise<any>;
+    }) as Promise<void>;
 }
 
 /**
- * Gets a storage object with the given key
- * @param key
- * @returns
+ * Gets storage objects with the given key(s)
  */
-function getStorage(key: string): Promise<any> {
+function getStorage<T = any>(keys: string[]): Promise<T> {
     return new Promise((resolve, reject) => {
-        getBrowserNamespace()
-            .storage.local.get([key])
-            .then(
-                (result: any) => {
-                    resolve(result[key]);
-                },
-                () => reject(getBrowserNamespace().runtime.lastError)
-            );
+        const browser = getBrowserNamespace();
+
+        browser.storage.local.get(keys).then(
+            (result: any) => {
+                resolve(result);
+            },
+            () => reject(browser.runtime.lastError)
+        );
     });
 }
 

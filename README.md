@@ -1,4 +1,4 @@
-# DocsAfterDark Reborn
+# DocsAfterDark Rework
 
 Currently DocsAfterDark is going through a major refactoring/rewrite.
 
