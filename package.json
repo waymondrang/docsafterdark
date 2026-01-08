@@ -5,6 +5,7 @@
     "devDependencies": {
         "@eslint/js": "^9.39.2",
         "archiver": "^7.0.1",
+        "concurrently": "^9.2.1",
         "eslint": "^9.39.2",
         "globals": "^16.5.0",
         "prettier": "^3.7.4",
@@ -22,11 +23,11 @@
     "bugs": {
         "url": "https://github.com/waymondrang/docsafterdark/issues"
     },
-    "homepage": "https://github.com/waymondrang/docsafterdark#readme",
+    "homepage": "https://docsafterdark.com/",
     "scripts": {
         "build": "webpack",
         "check": "prettier --check . && eslint src && web-ext lint",
-        "dev": "web-ext run --source-dir ./test/",
+        "dev": "concurrently --names 'webpack,web-ext' --prefix-colors 'green,magenta' 'webpack --watch' 'web-ext run --source-dir ./test/'",
         "format": "prettier --write ."
     }
 }

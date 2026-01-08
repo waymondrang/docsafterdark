@@ -1,6 +1,7 @@
 const path = require("path");
 
 module.exports = {
+    mode: "production",
     entry: {
         word: "./src/word.ts",
     },

@@ -14,12 +14,6 @@ const REPLACEMENTS_PATH = "assets/replacements/";
 const CSS_PATH = "assets/css/";
 const ELEMENT_ID_PREFIX = "DocsAfterDark_";
 
-// Do not run extension on Google Docs homepage
-if (document.querySelector(".docs-homescreen-gb-container")) {
-    Logger.debug("Not enabling on Google Docs homepage");
-    throw new Error("Not enabling DocsAfterDark on Google Docs homepage");
-}
-
 function getElementId(id: string): string {
     return (ELEMENT_ID_PREFIX + id).replace(/\.|\ /g, "_");
 }
@@ -96,6 +90,12 @@ function setReplacementVariables() {
 
 (async () => {
     Logger.info("Hello from DocsAfterDark!");
+
+    // Do not run extension on Google Docs homepage
+    if (document.querySelector(".docs-homescreen-gb-container")) {
+        Logger.debug("Not enabling on Google Docs homepage");
+        return;
+    }
 
     const data = await getStorage<StorageData>([
         "mode",
