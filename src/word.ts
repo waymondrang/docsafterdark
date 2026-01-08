@@ -4,15 +4,11 @@ import {
     DarkModeOperation,
     ExtensionOperation,
     LightModeOperation,
-    type InitData,
+    type StorageData,
 } from "./types";
 import { getBrowserNamespace, getStorage, setStorage } from "./util";
 
 const browser = getBrowserNamespace();
-
-let extensionOperation = ExtensionOperation.DarkMode;
-let darkModeOperation = DarkModeOperation.Normal;
-let lightModeOperation = LightModeOperation.Normal;
 
 const REPLACEMENTS_PATH = "assets/replacements/";
 const CSS_PATH = "assets/css/";
@@ -45,32 +41,38 @@ function appendStylesheet(filename: string) {
     document.body.appendChild(link);
 }
 
-function updateDarkMode() {
-    if (darkModeOperation == DarkModeOperation.Normal) {
-    } else if (darkModeOperation == DarkModeOperation.Eclipse) {
+function updateDarkMode(operation: DarkModeOperation) {
+    if (operation === DarkModeOperation.Normal) {
+        // TODO: Apply normal dark mode
+    } else if (operation === DarkModeOperation.Eclipse) {
         // Instead of injecting another stylesheet change the HTML element
         // classes to control themeing
     } else {
-        throw new Error("Unknown dark mode operation: " + darkModeOperation);
+        throw new Error("Unknown dark mode operation: " + operation);
     }
 }
 
-function updateLightMode() {
-    if (lightModeOperation == LightModeOperation.Normal) {
+function updateLightMode(operation: LightModeOperation) {
+    if (operation === LightModeOperation.Normal) {
+        // TODO: Apply normal light mode
     } else {
-        throw new Error("Unknown light mode operation: " + lightModeOperation);
+        throw new Error("Unknown light mode operation: " + operation);
     }
 }
 
-function updateExtension() {
-    if (extensionOperation == ExtensionOperation.DarkMode) {
-        updateDarkMode();
-    } else if (extensionOperation == ExtensionOperation.LightMode) {
-        updateLightMode();
-    } else if (extensionOperation == ExtensionOperation.Off) {
+function updateExtension(
+    operation: ExtensionOperation,
+    darkMode: DarkModeOperation,
+    lightMode: LightModeOperation
+) {
+    if (operation === ExtensionOperation.DarkMode) {
+        updateDarkMode(darkMode);
+    } else if (operation === ExtensionOperation.LightMode) {
+        updateLightMode(lightMode);
+    } else if (operation === ExtensionOperation.Off) {
         removeExtension();
     } else {
-        throw new Error("Unknown extension operation: " + extensionOperation);
+        throw new Error("Unknown extension operation: " + operation);
     }
 }
 
@@ -95,7 +97,7 @@ function setReplacementVariables() {
 (async () => {
     Logger.info("Hello from DocsAfterDark!");
 
-    const data = await getStorage<InitData>([
+    const data = await getStorage<StorageData>([
         "mode",
         "dark_mode",
         "doc_bg",
@@ -108,6 +110,12 @@ function setReplacementVariables() {
         "updates", // Deprecated, kept for backwards capacity
         "raise_button", // Deprecated, kept for backwards capacity
     ]);
+
+    let extensionOperation = data.mode ?? ExtensionOperation.DarkMode;
+    let darkModeOperation = data.dark_mode ?? DarkModeOperation.Normal;
+    let lightModeOperation = data.light_mode ?? LightModeOperation.Normal;
+
+    updateExtension(extensionOperation, darkModeOperation, lightModeOperation);
 
     // NOTE: InitData is an incomplete type
 
