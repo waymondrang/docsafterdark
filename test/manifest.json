@@ -1,0 +1,14 @@
+{
+    "manifest_version": 3,
+    "name": "test",
+    "version": "0.0.1",
+    "description": "testtest",
+    "author": "testdev",
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["word.bundle.js"]
+        }
+    ],
+    "permissions": ["storage"]
+}

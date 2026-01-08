@@ -73,6 +73,10 @@ function setStorage(key: string, value: any): Promise<void> {
     }) as Promise<void>;
 }
 
+function setStorageBatch(data: { [key: string]: any }) {
+    return getBrowserNamespace().storage.local.set(data) as Promise<void>;
+}
+
 /**
  * Gets storage objects with the given key(s)
  */
@@ -89,4 +93,10 @@ function getStorage<T = any>(keys: string[]): Promise<T> {
     });
 }
 
-export { isVersionNewer, getBrowserNamespace, setStorage, getStorage };
+export {
+    getBrowserNamespace,
+    isVersionNewer,
+    setStorage,
+    setStorageBatch,
+    getStorage,
+};

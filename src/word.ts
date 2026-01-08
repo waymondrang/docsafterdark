@@ -6,7 +6,7 @@ import {
     LightModeOperation,
     type StorageData,
 } from "./types";
-import { getBrowserNamespace, getStorage, setStorage } from "./util";
+import { getBrowserNamespace, getStorage, setStorageBatch } from "./util";
 
 const browser = getBrowserNamespace();
 
@@ -35,46 +35,6 @@ function appendStylesheet(filename: string) {
     document.body.appendChild(link);
 }
 
-function updateDarkMode(operation: DarkModeOperation) {
-    if (operation === DarkModeOperation.Normal) {
-        // TODO: Apply normal dark mode
-    } else if (operation === DarkModeOperation.Eclipse) {
-        // Instead of injecting another stylesheet change the HTML element
-        // classes to control themeing
-    } else {
-        throw new Error("Unknown dark mode operation: " + operation);
-    }
-}
-
-function updateLightMode(operation: LightModeOperation) {
-    if (operation === LightModeOperation.Normal) {
-        // TODO: Apply normal light mode
-    } else {
-        throw new Error("Unknown light mode operation: " + operation);
-    }
-}
-
-function updateExtension(
-    operation: ExtensionOperation,
-    darkMode: DarkModeOperation,
-    lightMode: LightModeOperation
-) {
-    if (operation === ExtensionOperation.DarkMode) {
-        updateDarkMode(darkMode);
-    } else if (operation === ExtensionOperation.LightMode) {
-        updateLightMode(lightMode);
-    } else if (operation === ExtensionOperation.Off) {
-        removeExtension();
-    } else {
-        throw new Error("Unknown extension operation: " + operation);
-    }
-}
-
-function removeExtension() {
-    removeElement("docs.css");
-    removeElement("button");
-}
-
 function setReplacementVariables() {
     for (let [key, value] of Object.entries(replacements)) {
         document.documentElement.style.setProperty(
@@ -84,42 +44,103 @@ function setReplacementVariables() {
     }
 }
 
+class DocsAfterDark {
+    private extensionOperation = ExtensionOperation.DarkMode;
+    private darkModeOperation = DarkModeOperation.Normal;
+    private lightModeOperation = LightModeOperation.Normal;
+
+    async initialize(): Promise<void> {
+        const data = await this.getStorageData();
+
+        this.extensionOperation = data.mode ?? this.extensionOperation;
+        this.darkModeOperation =
+            data.dark_mode?.variant ?? this.darkModeOperation;
+        this.lightModeOperation =
+            data.light_mode?.variant ?? this.lightModeOperation;
+
+        Logger.debug(data);
+
+        this.updateExtension();
+
+        // Save the storage data to persist the default settings
+        this.saveStorageData();
+    }
+
+    private async saveStorageData(): Promise<void> {
+        const data: StorageData = {
+            mode: this.extensionOperation,
+            dark_mode: { variant: this.darkModeOperation },
+            light_mode: { variant: this.lightModeOperation },
+        };
+
+        await setStorageBatch(data);
+    }
+
+    private getStorageData(): Promise<StorageData> {
+        return getStorage<StorageData>([
+            "mode",
+            "dark_mode",
+            "light_mode",
+            "doc_bg",
+            "custom_bg",
+            "invert",
+            "show_border",
+            "accent_color",
+            "button_options",
+            "version",
+            "updates", // Deprecated, kept for backwards capacity
+            "raise_button", // Deprecated, kept for backwards capacity
+        ]);
+    }
+
+    private updateDarkMode() {
+        if (this.darkModeOperation === DarkModeOperation.Normal) {
+            // TODO: Apply normal dark mode
+        } else if (this.darkModeOperation === DarkModeOperation.Eclipse) {
+            // Instead of injecting another stylesheet change the HTML element
+            // classes to control themeing
+        } else {
+            throw new Error(
+                "Unknown dark mode operation: " + this.darkModeOperation
+            );
+        }
+    }
+
+    private updateLightMode() {
+        if (this.lightModeOperation === LightModeOperation.Normal) {
+            // TODO: Apply normal light mode
+        } else {
+            throw new Error(
+                "Unknown light mode operation: " + this.lightModeOperation
+            );
+        }
+    }
+
+    private updateExtension() {
+        if (this.extensionOperation === ExtensionOperation.DarkMode) {
+            this.updateDarkMode();
+        } else if (this.extensionOperation === ExtensionOperation.LightMode) {
+            this.updateLightMode();
+        } else if (this.extensionOperation === ExtensionOperation.Off) {
+            this.removeExtension();
+        } else {
+            throw new Error(
+                "Unknown extension operation: " + this.extensionOperation
+            );
+        }
+    }
+
+    private removeExtension() {
+        removeElement("docs.css");
+        removeElement("button");
+    }
+}
+
 /////////////////
 // ENTRY POINT //
 /////////////////
 
 (async () => {
-    Logger.info("Hello from DocsAfterDark!");
-
-    // Do not run extension on Google Docs homepage
-    if (document.querySelector(".docs-homescreen-gb-container")) {
-        Logger.debug("Not enabling on Google Docs homepage");
-        return;
-    }
-
-    const data = await getStorage<StorageData>([
-        "mode",
-        "dark_mode",
-        "doc_bg",
-        "custom_bg",
-        "invert",
-        "show_border",
-        "accent_color",
-        "button_options",
-        "version",
-        "updates", // Deprecated, kept for backwards capacity
-        "raise_button", // Deprecated, kept for backwards capacity
-    ]);
-
-    let extensionOperation = data.mode ?? ExtensionOperation.DarkMode;
-    let darkModeOperation = data.dark_mode ?? DarkModeOperation.Normal;
-    let lightModeOperation = data.light_mode ?? LightModeOperation.Normal;
-
-    updateExtension(extensionOperation, darkModeOperation, lightModeOperation);
-
-    // NOTE: InitData is an incomplete type
-
-    Logger.debug("Storage data:", data);
-
-    await setStorage("mode", 99);
+    const extension = new DocsAfterDark();
+    extension.initialize();
 })();
