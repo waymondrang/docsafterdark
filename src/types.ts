@@ -50,7 +50,7 @@ interface InvertOptions {
     black: boolean;
 }
 
-interface AccentColor {
+interface AccentColorOptions {
     hue: number;
 }
 
@@ -68,21 +68,21 @@ interface VersionInfo {
 ////////////////////
 
 interface StorageData {
-    mode?: ExtensionOperation;
-    dark_mode?: DarkModeOptions;
+    mode: ExtensionOperation;
+    dark_mode: DarkModeOptions;
     // NOTE: Currently there is no light mode operation, the light_mode field
     //       only exists to provide consistency with the other mode fields.
-    light_mode?: LightModeOptions;
+    light_mode: LightModeOptions;
 
-    doc_bg?: DocumentBackground | string;
-    custom_bg?: string;
-    invert?: InvertOptions;
-    show_border?: boolean;
+    doc_bg: DocumentBackground;
+    custom_bg: string;
+    invert: InvertOptions;
+    show_border: boolean;
 
-    accent_color?: AccentColor;
-    button_options?: ButtonOptions;
+    accent_color: AccentColorOptions;
+    button_options: ButtonOptions;
 
-    version?: VersionInfo;
+    version: VersionInfo;
 
     // Deprecated fields (kept for backwards compatibility)
     // Very very few, if any, users will still use these fields.
@@ -99,7 +99,7 @@ export {
     type DarkModeOptions,
     type LightModeOptions,
     type InvertOptions,
-    type AccentColor,
+    type AccentColorOptions,
     type ButtonOptions,
     type VersionInfo,
 };
