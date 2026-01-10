@@ -26,7 +26,7 @@ const ELEMENT_ID_PREFIX = "DocsAfterDark_";
 const STYLE_PROPERTY_PREFIX = "--DocsAfterDark_";
 
 function getElementId(id: string): string {
-    return (ELEMENT_ID_PREFIX + id).replace(/\.|\ /g, "_");
+    return (ELEMENT_ID_PREFIX + id).replace(/\.| /g, "_");
 }
 
 function removeElement(id: string) {
@@ -47,7 +47,7 @@ function appendStylesheet(filename: string) {
 }
 
 function setReplacementVariables() {
-    for (let [key, value] of Object.entries(replacements)) {
+    for (const [key, value] of Object.entries(replacements)) {
         document.documentElement.style.setProperty(
             key,
             "url(" + browser.runtime.getURL(REPLACEMENTS_PATH + value) + ")"

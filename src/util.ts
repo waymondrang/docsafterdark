@@ -1,5 +1,19 @@
-declare const browser: any;
-declare const chrome: any;
+interface BrowserAPI {
+    storage: {
+        local: {
+            set(data: Record<string, unknown>): Promise<void>;
+            get(keys: string[]): Promise<Record<string, unknown>>;
+        };
+    };
+    runtime: {
+        lastError: Error;
+        getManifest(): { version: string };
+        getURL(path: string): string;
+    };
+}
+
+declare const browser: BrowserAPI;
+declare const chrome: BrowserAPI;
 
 /**
  * Returns the global namespace object used to access Web APIs
@@ -31,9 +45,9 @@ function isVersionNewer(curr: string, target: string) {
         return false;
     }
 
-    let currSplit = curr.split(".");
-    let targetSplit = target.split(".");
-    let minLength = Math.min(currSplit.length, targetSplit.length);
+    const currSplit = curr.split(".");
+    const targetSplit = target.split(".");
+    const minLength = Math.min(currSplit.length, targetSplit.length);
 
     for (let i = 0; i < minLength; i++) {
         // In the case that a section of the version is empty (i.e. "5..1"),
@@ -67,26 +81,26 @@ function isVersionNewer(curr: string, target: string) {
 /**
  * Sets a storage object with a new value
  */
-function setStorage(key: string, value: any): Promise<void> {
+function setStorage(key: string, value: unknown): Promise<void> {
     return getBrowserNamespace().storage.local.set({
         [key]: value,
     }) as Promise<void>;
 }
 
-function setStorageBatch(data: { [key: string]: any }) {
+function setStorageBatch(data: Record<string, unknown>) {
     return getBrowserNamespace().storage.local.set(data) as Promise<void>;
 }
 
 /**
  * Gets storage objects with the given key(s)
  */
-function getStorage<T = any>(keys: string[]): Promise<T> {
+function getStorage<T>(keys: string[]): Promise<T> {
     return new Promise((resolve, reject) => {
         const browser = getBrowserNamespace();
 
         browser.storage.local.get(keys).then(
-            (result: any) => {
-                resolve(result);
+            (result) => {
+                resolve(result as T);
             },
             () => reject(browser.runtime.lastError)
         );

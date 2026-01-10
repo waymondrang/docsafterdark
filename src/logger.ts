@@ -12,25 +12,25 @@ class Logger {
         this.prefixName = name;
     }
 
-    static debug(...args: any[]) {
+    static debug(...args: unknown[]) {
         if (this.currentLevel <= LOG_LEVELS.DEBUG) {
             console.debug(`[${this.prefixName}][DEBG]`, ...args);
         }
     }
 
-    static info(...args: any[]) {
+    static info(...args: unknown[]) {
         if (this.currentLevel <= LOG_LEVELS.INFO) {
             console.info(`[${this.prefixName}][INFO]`, ...args);
         }
     }
 
-    static warn(...args: any[]) {
+    static warn(...args: unknown[]) {
         if (this.currentLevel <= LOG_LEVELS.WARN) {
             console.warn(`[${this.prefixName}][WARN]`, ...args);
         }
     }
 
-    static error(...args: any[]) {
+    static error(...args: unknown[]) {
         if (this.currentLevel <= LOG_LEVELS.ERROR) {
             console.error(`[${this.prefixName}][ERRO]`, ...args);
         }

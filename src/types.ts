@@ -67,7 +67,7 @@ interface VersionInfo {
 // STORAGE SCHEMA //
 ////////////////////
 
-interface StorageData {
+type StorageData = {
     mode: ExtensionOperation;
     dark_mode: DarkModeOptions;
     // NOTE: Currently there is no light mode operation, the light_mode field
@@ -86,9 +86,9 @@ interface StorageData {
 
     // Deprecated fields (kept for backwards compatibility)
     // Very very few, if any, users will still use these fields.
-    updates?: any;
+    updates?: unknown;
     raise_button?: boolean;
-}
+};
 
 export {
     ExtensionOperation,
