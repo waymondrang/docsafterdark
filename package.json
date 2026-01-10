@@ -11,6 +11,7 @@
         "prettier": "^3.7.4",
         "ts-loader": "^9.5.4",
         "typescript": "^5.9.3",
+        "typescript-eslint": "^8.52.0",
         "web-ext": "^9.2.0",
         "webpack": "^5.104.1",
         "webpack-cli": "^6.0.1"
