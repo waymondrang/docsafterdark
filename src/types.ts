@@ -90,6 +90,48 @@ type StorageData = {
     raise_button?: boolean;
 };
 
+///////////////////////////
+// BROWSER EXTENSION API //
+///////////////////////////
+
+// Reference: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/storage/StorageChange
+type StorageChange<T> = {
+    oldValue?: T;
+    newValue?: T;
+};
+
+type StorageChanges = {
+    // Use ?: over Partial<StorageChanges> because the changes will always
+    // be partial, so having StorageChanges without optional fields would
+    // be meaningless.
+    [K in keyof StorageData]?: StorageChange<StorageData[K]>;
+};
+
+type StorageListener = (
+    changes: StorageChanges,
+    area: "sync" | "local" | "managed"
+) => void;
+
+// Reference: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/
+interface BrowserAPI {
+    storage: {
+        local: {
+            set(data: Record<string, unknown>): Promise<void>;
+            get(keys: string[]): Promise<Record<string, unknown>>;
+        };
+        onChanged: {
+            addListener(listener: StorageListener): void;
+            removeListener(listener: StorageListener): void;
+            hasListener(listener: StorageListener): boolean;
+        };
+    };
+    runtime: {
+        lastError: Error;
+        getManifest(): { version: string };
+        getURL(path: string): string;
+    };
+}
+
 export {
     ExtensionOperation,
     DarkModeOperation,
@@ -102,4 +144,8 @@ export {
     type AccentColorOptions,
     type ButtonOptions,
     type VersionInfo,
+    type BrowserAPI,
+    type StorageChange,
+    type StorageChanges,
+    type StorageListener,
 };

@@ -14,8 +14,14 @@ import {
     LightModeOperation,
     type InvertOptions,
     type StorageData,
+    type StorageListener,
 } from "./types";
-import { getBrowserNamespace, getStorage, setStorageBatch } from "./util";
+import {
+    getBrowserNamespace,
+    getStorage,
+    registerStorageListener,
+    setStorageBatch,
+} from "./util";
 
 const browser = getBrowserNamespace();
 const CURRENT_VERSION = browser.runtime.getManifest().version;
@@ -44,15 +50,6 @@ function appendStylesheet(filename: string) {
     link.href = browser.runtime.getURL(CSS_PATH + filename);
 
     document.body.appendChild(link);
-}
-
-function setReplacementVariables() {
-    for (const [key, value] of Object.entries(replacements)) {
-        document.documentElement.style.setProperty(
-            key,
-            "url(" + browser.runtime.getURL(REPLACEMENTS_PATH + value) + ")"
-        );
-    }
 }
 
 /**
@@ -135,11 +132,122 @@ class DocsAfterDark {
 
         Logger.debug(this.extensionData);
 
+        // Set CSS replacement URLs
+        this.replaceStyleURLs();
+
         this.updateExtension();
 
         // Save the storage data to persist the default settings
         this.saveExtensionData();
+
+        registerStorageListener(this.handleStorageUpdate);
     }
+
+    private handleStorageUpdate: StorageListener = (changes) => {
+        Logger.debug("Storage changed:", changes);
+
+        //////////
+        // MODE //
+        //////////
+
+        // NOTE: Do not early stop if new mode is off because the state of the
+        //       extension should still be synced (other variables must be
+        //       updated).
+
+        if (changes.mode !== undefined && changes.mode.newValue !== undefined) {
+            this.extensionData.mode = changes.mode.newValue;
+        }
+
+        ///////////////////////
+        // DARK MODE VARIANT //
+        ///////////////////////
+
+        if (
+            changes.dark_mode !== undefined &&
+            changes.dark_mode.newValue !== undefined
+        ) {
+            this.extensionData.dark_mode = changes.dark_mode.newValue;
+        }
+
+        ////////////////////////
+        // LIGHT MODE VARIANT //
+        ////////////////////////
+
+        if (
+            changes.light_mode !== undefined &&
+            changes.light_mode.newValue !== undefined
+        ) {
+            this.extensionData.light_mode = changes.light_mode.newValue;
+        }
+
+        /////////////////////////
+        // DOCUMENT BACKGROUND //
+        /////////////////////////
+
+        if (
+            changes.doc_bg !== undefined &&
+            changes.doc_bg.newValue !== undefined
+        ) {
+            this.extensionData.doc_bg = changes.doc_bg.newValue;
+        }
+
+        ////////////////////////////////
+        // CUSTOM DOCUMENT BACKGROUND //
+        ////////////////////////////////
+
+        if (
+            changes.custom_bg !== undefined &&
+            changes.custom_bg.newValue !== undefined
+        ) {
+            this.extensionData.custom_bg = changes.custom_bg.newValue;
+        }
+
+        ////////////
+        // INVERT //
+        ////////////
+
+        if (
+            changes.invert !== undefined &&
+            changes.invert.newValue !== undefined
+        ) {
+            this.extensionData.invert = changes.invert.newValue;
+        }
+
+        //////////////////
+        // ACCENT COLOR //
+        //////////////////
+
+        if (
+            changes.accent_color !== undefined &&
+            changes.accent_color.newValue !== undefined
+        ) {
+            this.extensionData.accent_color = changes.accent_color.newValue;
+        }
+
+        ////////////
+        // BUTTON //
+        ////////////
+
+        if (
+            changes.button_options !== undefined &&
+            changes.button_options.newValue !== undefined
+        ) {
+            this.extensionData.button_options = changes.button_options.newValue;
+        }
+
+        ////////////
+        // BORDER //
+        ////////////
+
+        if (
+            changes.show_border !== undefined &&
+            changes.show_border.newValue !== undefined
+        ) {
+            this.extensionData.show_border = changes.show_border.newValue;
+        }
+
+        this.updateExtension();
+    };
 
     private async saveExtensionData(): Promise<void> {
         await setStorageBatch(this.extensionData);
@@ -320,6 +428,15 @@ class DocsAfterDark {
         textElement.appendChild(closeButton);
         containerElement.appendChild(textElement);
         document.body.prepend(notificationElement);
+    }
+
+    private replaceStyleURLs() {
+        for (const [key, value] of Object.entries(replacements)) {
+            setStyleProperty(
+                key,
+                "url(" + browser.runtime.getURL(REPLACEMENTS_PATH + value) + ")"
+            );
+        }
     }
 
     private updateVersion() {

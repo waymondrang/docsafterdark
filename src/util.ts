@@ -1,16 +1,4 @@
-interface BrowserAPI {
-    storage: {
-        local: {
-            set(data: Record<string, unknown>): Promise<void>;
-            get(keys: string[]): Promise<Record<string, unknown>>;
-        };
-    };
-    runtime: {
-        lastError: Error;
-        getManifest(): { version: string };
-        getURL(path: string): string;
-    };
-}
+import type { BrowserAPI, StorageListener } from "./types";
 
 declare const browser: BrowserAPI;
 declare const chrome: BrowserAPI;
@@ -107,10 +95,25 @@ function getStorage<T>(keys: string[]): Promise<T> {
     });
 }
 
+function registerStorageListener(callback: StorageListener) {
+    browser.storage.onChanged.addListener(callback);
+}
+
+function hasStorageListener(callback: StorageListener) {
+    return browser.storage.onChanged.hasListener(callback);
+}
+
+function removeStorageListener(callback: StorageListener) {
+    browser.storage.onChanged.removeListener(callback);
+}
+
 export {
     getBrowserNamespace,
     isVersionNewer,
     setStorage,
     setStorageBatch,
     getStorage,
+    registerStorageListener,
+    hasStorageListener,
+    removeStorageListener,
 };
