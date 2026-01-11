@@ -144,3 +144,5 @@ vite.config.ts.timestamp-*
 
 # bundled js files
 *.bundle.*
+
+test/

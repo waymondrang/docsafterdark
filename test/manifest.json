@@ -1,14 +1,34 @@
 {
     "manifest_version": 3,
-    "name": "test",
-    "version": "0.0.1",
-    "description": "testtest",
-    "author": "testdev",
+    "name": "DocsAfterDark",
+    "version": "1.1.1",
+    "description": "Beyond dark mode for Google Docs",
+    "author": "Raymond Wang",
     "content_scripts": [
         {
             "matches": ["<all_urls>"],
-            "js": ["word.bundle.js"]
+            "js": ["word.bundle.js"],
+            "css": ["assets/css/default.css"]
         }
     ],
-    "permissions": ["storage"]
+    "action": {
+        "default_title": "DocsAfterDark Options",
+        "default_popup": "popup.html"
+    },
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "assets/css/*.css",
+                "assets/replacements/*.png",
+                "assets/replacements/*.svg"
+            ],
+            "matches": ["*://docs.google.com/*"]
+        }
+    ],
+    "icons": {
+        "16": "assets/icons/docsafterdark_16.png",
+        "48": "assets/icons/docsafterdark_48.png",
+        "128": "assets/icons/docsafterdark_128.png"
+    },
+    "permissions": ["storage", "activeTab"]
 }
