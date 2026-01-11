@@ -12,13 +12,16 @@ import {
     DocumentBackground,
     ExtensionOperation,
     LightModeOperation,
+    type AccentColorOptions,
     type InvertOptions,
+    type MessageListener,
     type StorageData,
     type StorageListener,
 } from "./types";
 import {
     getBrowserNamespace,
     getStorage,
+    registerMessageListener,
     registerStorageListener,
     setStorageBatch,
 } from "./util";
@@ -91,6 +94,8 @@ class DocsAfterDark {
     };
 
     async initialize(): Promise<void> {
+        Logger.debug("Hello from DocsAfterDark!");
+
         const data = await this.getExtensionData();
 
         // Update extensionData with saved data (or use default values)
@@ -138,13 +143,25 @@ class DocsAfterDark {
         this.updateExtension();
 
         // Save the storage data to persist the default settings
-        this.saveExtensionData();
+        await this.saveExtensionData();
 
         registerStorageListener(this.handleStorageUpdate);
+        registerMessageListener(this.handleMessageUpdate);
     }
 
+    private handleMessageUpdate: MessageListener = (message) => {
+        Logger.debug("Update via message:", message);
+
+        if (message.type == "setAccentColor") {
+            this.extensionData.accent_color =
+                message.color as AccentColorOptions;
+        }
+
+        this.updateExtension();
+    };
+
     private handleStorageUpdate: StorageListener = (changes) => {
-        Logger.debug("Storage changed:", changes);
+        // Logger.debug("Update via storage:", changes);
 
         //////////
         // MODE //

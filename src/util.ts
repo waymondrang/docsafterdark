@@ -1,12 +1,14 @@
-import type { BrowserAPI, StorageListener } from "./types";
+import type { BrowserAPI, MessageListener, StorageListener } from "./types";
 
 declare const browser: BrowserAPI;
 declare const chrome: BrowserAPI;
 
+// TODO: Clean up namespacing as some functions use browser const.
+
 /**
  * Returns the global namespace object used to access Web APIs
  */
-function getBrowserNamespace() {
+function getBrowserNamespace(): BrowserAPI {
     let namespace;
 
     // Prefer "browser" namespace over "chrome"
@@ -95,16 +97,29 @@ function getStorage<T>(keys: string[]): Promise<T> {
     });
 }
 
-function registerStorageListener(callback: StorageListener) {
-    browser.storage.onChanged.addListener(callback);
+function registerStorageListener(listener: StorageListener) {
+    browser.storage.onChanged.addListener(listener);
 }
 
-function hasStorageListener(callback: StorageListener) {
-    return browser.storage.onChanged.hasListener(callback);
+function hasStorageListener(listener: StorageListener) {
+    return browser.storage.onChanged.hasListener(listener);
 }
 
-function removeStorageListener(callback: StorageListener) {
-    browser.storage.onChanged.removeListener(callback);
+function removeStorageListener(listener: StorageListener) {
+    browser.storage.onChanged.removeListener(listener);
+}
+
+// Reference: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/runtime/onMessage
+function registerMessageListener(listener: MessageListener) {
+    browser.runtime.onMessage.addListener(listener);
+}
+
+function hasMessageListener(listener: MessageListener) {
+    browser.runtime.onMessage.hasListener(listener);
+}
+
+function removeMessageListener(listener: MessageListener) {
+    browser.runtime.onMessage.removeListener(listener);
 }
 
 export {
@@ -116,4 +131,7 @@ export {
     registerStorageListener,
     hasStorageListener,
     removeStorageListener,
+    registerMessageListener,
+    hasMessageListener,
+    removeMessageListener,
 };

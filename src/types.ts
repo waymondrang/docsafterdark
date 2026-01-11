@@ -112,6 +112,23 @@ type StorageListener = (
     area: "sync" | "local" | "managed"
 ) => void;
 
+interface MessagePayload {
+    type: string;
+    color: AccentColorOptions;
+}
+
+type MessageListener = (
+    message: MessagePayload,
+    sender: unknown,
+    sendResponse: (payload: unknown) => void
+) => void;
+
+interface ListenerFunctions<T> {
+    addListener(listener: T): void;
+    removeListener(listener: T): void;
+    hasListener(listener: T): boolean;
+}
+
 // Reference: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/
 interface BrowserAPI {
     storage: {
@@ -119,16 +136,13 @@ interface BrowserAPI {
             set(data: Record<string, unknown>): Promise<void>;
             get(keys: string[]): Promise<Record<string, unknown>>;
         };
-        onChanged: {
-            addListener(listener: StorageListener): void;
-            removeListener(listener: StorageListener): void;
-            hasListener(listener: StorageListener): boolean;
-        };
+        onChanged: ListenerFunctions<StorageListener>;
     };
     runtime: {
         lastError: Error;
         getManifest(): { version: string };
         getURL(path: string): string;
+        onMessage: ListenerFunctions<MessageListener>;
     };
 }
 
@@ -148,4 +162,5 @@ export {
     type StorageChange,
     type StorageChanges,
     type StorageListener,
+    type MessageListener,
 };
