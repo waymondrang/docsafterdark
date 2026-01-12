@@ -1,4 +1,9 @@
-import type { BrowserAPI, MessageListener, StorageListener } from "./types";
+import type {
+    BrowserAPI,
+    ExtensionData,
+    MessageListener,
+    StorageListener,
+} from "./types";
 
 declare const browser: BrowserAPI;
 declare const chrome: BrowserAPI;
@@ -140,6 +145,23 @@ function removeMessageListener(listener: MessageListener) {
     browser.runtime.onMessage.removeListener(listener);
 }
 
+function getExtensionData(): Promise<Partial<ExtensionData>> {
+    return getStorage<Partial<ExtensionData>>([
+        "mode",
+        "dark_mode",
+        "light_mode",
+        "doc_bg",
+        "custom_bg",
+        "invert",
+        "show_border",
+        "accent_color",
+        "button_options",
+        "version",
+        "updates", // Deprecated, kept for backwards capacity
+        "raise_button", // Deprecated, kept for backwards capacity
+    ]);
+}
+
 export {
     getBrowserNamespace,
     isVersionNewer,
@@ -153,4 +175,5 @@ export {
     hasMessageListener,
     removeMessageListener,
     messageTabs,
+    getExtensionData,
 };

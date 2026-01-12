@@ -22,7 +22,7 @@ import {
 } from "./types";
 import {
     getBrowserNamespace,
-    getStorage,
+    getExtensionData,
     registerMessageListener,
     registerStorageListener,
     setStorageBatch,
@@ -60,7 +60,7 @@ class DocsAfterDark {
     async initialize(): Promise<void> {
         Logger.debug("Hello from DocsAfterDark!");
 
-        const data = await this.getExtensionData();
+        const data = await getExtensionData();
 
         // Update extensionData with saved data (or use default values)
 
@@ -107,7 +107,7 @@ class DocsAfterDark {
         this.updateExtension();
 
         // Save the storage data to persist the default settings
-        await this.saveExtensionData();
+        await setStorageBatch(this.extensionData);
 
         registerStorageListener(this.handleStorageUpdate);
         registerMessageListener(this.handleMessageUpdate);
@@ -229,27 +229,6 @@ class DocsAfterDark {
 
         this.updateExtension();
     };
-
-    private async saveExtensionData(): Promise<void> {
-        await setStorageBatch(this.extensionData);
-    }
-
-    private getExtensionData(): Promise<Partial<ExtensionData>> {
-        return getStorage<Partial<ExtensionData>>([
-            "mode",
-            "dark_mode",
-            "light_mode",
-            "doc_bg",
-            "custom_bg",
-            "invert",
-            "show_border",
-            "accent_color",
-            "button_options",
-            "version",
-            "updates", // Deprecated, kept for backwards capacity
-            "raise_button", // Deprecated, kept for backwards capacity
-        ]);
-    }
 
     // NOTE: When this function is called, the extension will be in DarkMode
     //       operation.

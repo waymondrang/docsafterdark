@@ -1,11 +1,12 @@
 import { Logger } from "./logger";
 import {
     DarkModeOperation,
+    DocumentBackground,
     ExtensionOperation,
     type DarkModeOptions,
     type ExtensionData,
 } from "./types";
-import { getBrowserNamespace, setStorage } from "./util";
+import { getBrowserNamespace, getExtensionData, setStorage } from "./util";
 import { defaultExtensionData } from "./values";
 
 const browser = getBrowserNamespace();
@@ -175,35 +176,198 @@ class SpectrumManager {
     private knob = document.querySelector("#spectrum_knob");
 }
 
-class DocumentBackgroundManager {
-    private container = document.querySelector("#document_bg_custom_container");
-    private customInput = document.querySelector("#document_bg_custom_input");
-    private customSave = document.querySelector("#document_bg_save_custom");
+class DocumentBackgroundManager extends StateSubscriber {
+    private buttons = document.querySelectorAll(
+        "#document_bg_buttons button"
+    ) as NodeListOf<HTMLButtonElement>;
+    private customContainer = document.querySelector(
+        "#document_bg_custom_container"
+    ) as HTMLDivElement;
+    private customInput = document.querySelector(
+        "#document_bg_custom_input"
+    ) as HTMLInputElement;
+    private customSave = document.querySelector(
+        "#document_bg_save_custom"
+    ) as HTMLButtonElement;
+
+    initialize(): void {
+        this.buttons.forEach((button) => {
+            button.addEventListener("click", () => {
+                this.state.setData({
+                    doc_bg: button.value as DocumentBackground,
+                });
+            });
+        });
+
+        this.customSave.addEventListener("click", () => {
+            this.state.setData({ custom_bg: this.customInput.value });
+        });
+    }
+
+    private reset(): void {
+        this.buttons.forEach((button) => {
+            button.classList.remove("selected");
+        });
+
+        this.customContainer.classList.add("hidden");
+    }
+
+    update(newData: ExtensionData): void {
+        this.reset();
+
+        this.buttons.forEach((button) => {
+            if (button.value == newData.doc_bg) {
+                button.classList.add("selected");
+            }
+        });
+
+        if (newData.doc_bg == DocumentBackground.Custom) {
+            this.customContainer.classList.remove("hidden");
+        }
+    }
 }
 
-class BorderManager {
-    private showBorderCheckbox = document.querySelector("#show_border");
+class BorderManager extends StateSubscriber {
+    private showBorderCheckbox = document.querySelector(
+        "#show_border"
+    ) as HTMLInputElement;
+
+    initialize(): void {
+        this.showBorderCheckbox.addEventListener("click", () => {
+            this.state.setData({
+                show_border: this.showBorderCheckbox.checked,
+            });
+        });
+    }
+
+    update(newData: ExtensionData): void {
+        this.showBorderCheckbox.checked = newData.show_border;
+    }
 }
 
-class ButtonManager {
-    private showButtonCheckbox = document.querySelector("#show_button");
-    private raiseButtonCheckbox = document.querySelector("#raise_button");
+class ButtonManager extends StateSubscriber {
+    private showButtonCheckbox = document.querySelector(
+        "#show_button"
+    ) as HTMLInputElement;
+    private raiseButtonCheckbox = document.querySelector(
+        "#raise_button"
+    ) as HTMLInputElement;
+
+    initialize() {
+        this.showButtonCheckbox.addEventListener("click", () => {
+            const extensionData = this.state.getData();
+            this.state.setData({
+                button_options: {
+                    ...extensionData.button_options,
+                    show: this.showButtonCheckbox.checked,
+                },
+            });
+        });
+
+        this.raiseButtonCheckbox.addEventListener("click", () => {
+            const extensionData = this.state.getData();
+            this.state.setData({
+                button_options: {
+                    ...extensionData.button_options,
+                    raised: this.raiseButtonCheckbox.checked,
+                },
+            });
+        });
+    }
+
+    update(newData: ExtensionData): void {
+        this.showButtonCheckbox.checked = newData.button_options.show;
+
+        this.raiseButtonCheckbox.disabled = !newData.button_options.show;
+        this.raiseButtonCheckbox.checked = newData.button_options.raised;
+    }
+}
+
+class TipManager {
+    private tipButton = document.querySelector("#tip_button") as HTMLDivElement;
+    private tipContainer = document.querySelector(
+        "#tip_container"
+    ) as HTMLDivElement;
+
+    initialize() {
+        this.tipButton.addEventListener("mouseenter", () => {
+            const timeoutHandle = setTimeout(() => {
+                this.tipContainer.classList.remove("hidden");
+            }, 250);
+
+            this.tipButton.addEventListener("mouseleave", () => {
+                clearTimeout(timeoutHandle);
+            });
+        });
+
+        this.tipContainer.addEventListener("mouseleave", () => {
+            this.tipContainer.classList.add("hidden");
+        });
+    }
 }
 
 class DonateManager {
-    private tipButton = document.querySelector("#tip_button");
-    private tipContainer = document.querySelector("#tip_container");
     private donateButton = document.querySelector("#donate");
 }
 
+class InvertManager extends StateSubscriber {
+    private invertedCheckbox = document.querySelector(
+        "#document_inverted"
+    ) as HTMLInputElement;
+    private grayscaleCheckbox = document.querySelector(
+        "#document_inverted_grayscale"
+    ) as HTMLInputElement;
+    private blackCheckbox = document.querySelector(
+        "#document_inverted_black"
+    ) as HTMLInputElement;
+
+    initialize(): void {
+        this.invertedCheckbox.addEventListener("click", () => {
+            const extensionData = this.state.getData();
+            this.state.setData({
+                invert: {
+                    ...extensionData.invert,
+                    invert: this.invertedCheckbox.checked,
+                },
+            });
+        });
+
+        this.grayscaleCheckbox.addEventListener("click", () => {
+            const extensionData = this.state.getData();
+            this.state.setData({
+                invert: {
+                    ...extensionData.invert,
+                    grayscale: this.grayscaleCheckbox.checked,
+                },
+            });
+        });
+
+        this.blackCheckbox.addEventListener("click", () => {
+            const extensionData = this.state.getData();
+            this.state.setData({
+                invert: {
+                    ...extensionData.invert,
+                    // For sanity, also set grayscale to true in case user
+                    // clicks black without first enabling grayscale
+                    grayscale: true,
+                    black: this.blackCheckbox.checked,
+                },
+            });
+        });
+    }
+
+    update(newData: ExtensionData): void {
+        this.grayscaleCheckbox.disabled = !newData.invert.invert;
+        this.blackCheckbox.disabled = !newData.invert.invert;
+    }
+}
+
 class VersionManager {
-    private versionElement = document.querySelector("#version");
+    private versionElement = document.querySelector(
+        "#version"
+    ) as HTMLParagraphElement;
 
     initialize() {
-        if (!this.versionElement) {
-            throw new Error("VersionManager missing elements");
-        }
-
         this.versionElement.textContent = `v${VERSION}`;
     }
 }
@@ -213,19 +377,35 @@ class Popup {
 
     private operationModesManager: OperationModeManager =
         new OperationModeManager(this.state);
+    private buttonManager: ButtonManager = new ButtonManager(this.state);
+    private invertManager: InvertManager = new InvertManager(this.state);
+
     private darkModeManager: DarkModeManager = new DarkModeManager();
+
+    private tipManager: TipManager = new TipManager();
+
     private spectrumManager: SpectrumManager = new SpectrumManager();
     private documentBackgroundManager: DocumentBackgroundManager =
-        new DocumentBackgroundManager();
-    private borderManager: BorderManager = new BorderManager();
-    private buttonManager: ButtonManager = new ButtonManager();
+        new DocumentBackgroundManager(this.state);
+    private borderManager: BorderManager = new BorderManager(this.state);
     private donateManager: DonateManager = new DonateManager();
     private versionManager: VersionManager = new VersionManager();
 
-    initialize() {
+    async initialize() {
         Logger.debug("Hello from DocsAfterDark Popup!");
 
+        // Set the state's data in case any initialize functions need to
+        // access it (ideally state is consumed during update function)
+        const extensionData = await getExtensionData();
+        this.state.setData(extensionData);
+
         this.operationModesManager.initialize();
+        this.tipManager.initialize();
+        this.buttonManager.initialize();
+        this.documentBackgroundManager.initialize();
+        this.invertManager.initialize();
+        this.versionManager.initialize();
+        this.borderManager.initialize();
 
         this.state.updateSubscribers();
     }
