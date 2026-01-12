@@ -8,7 +8,14 @@ const documentBackgrounds: Record<DocumentBackground, string> = {
     custom: "",
 };
 
-// NOTE: revisions-sprite1 has been renamed with an underscore (_)
+const themeClasses = {
+    dark: "dark",
+    light: "light",
+    normal: "normal",
+    midnight: "midnight",
+};
+
+// NOTE: revisions-sprite1 has been renamed with an underscore (_).
 
 const replacements = {
     checkmark: "checkmark.secondary.png",
@@ -49,4 +56,5 @@ export {
     documentBorder,
     buttonPosition,
     updateLink,
+    themeClasses,
 };

@@ -4,6 +4,7 @@ import {
     documentBorder,
     documentInvert,
     replacements,
+    themeClasses,
     updateLink,
 } from "./values";
 import { Logger } from "./logger";
@@ -30,7 +31,6 @@ const browser = getBrowserNamespace();
 const CURRENT_VERSION = browser.runtime.getManifest().version;
 
 const REPLACEMENTS_PATH = "assets/replacements/";
-const CSS_PATH = "assets/css/";
 const ELEMENT_ID_PREFIX = "DocsAfterDark_";
 const STYLE_PROPERTY_PREFIX = "--DocsAfterDark_";
 
@@ -40,19 +40,6 @@ function getElementId(id: string): string {
 
 function removeElement(id: string) {
     document.querySelector(`#${getElementId(id)}`)?.remove();
-}
-
-function appendStylesheet(filename: string) {
-    const id = getElementId(filename);
-
-    if (document.querySelector(`#${id}`)) return;
-
-    const link = document.createElement("link");
-    link.id = id;
-    link.rel = "stylesheet";
-    link.href = browser.runtime.getURL(CSS_PATH + filename);
-
-    document.body.appendChild(link);
 }
 
 /**
@@ -161,7 +148,7 @@ class DocsAfterDark {
     };
 
     private handleStorageUpdate: StorageListener = (changes) => {
-        // Logger.debug("Update via storage:", changes);
+        Logger.debug("Update via storage:", changes);
 
         //////////
         // MODE //
@@ -287,14 +274,22 @@ class DocsAfterDark {
         ]);
     }
 
+    // NOTE: When this function is called, the extension will be in DarkMode
+    //       operation.
+
     private updateDarkMode() {
         if (this.extensionData.dark_mode.variant === DarkModeOperation.Normal) {
-            // TODO: Apply normal dark mode
+            document.documentElement.classList.add(
+                themeClasses.dark,
+                themeClasses.normal
+            );
         } else if (
             this.extensionData.dark_mode.variant === DarkModeOperation.Eclipse
         ) {
-            // Instead of injecting another stylesheet change the HTML element
-            // classes to control themeing
+            document.documentElement.classList.add(
+                themeClasses.dark,
+                themeClasses.midnight
+            );
         } else {
             throw new Error(
                 "Unknown dark mode operation: " +
@@ -307,7 +302,10 @@ class DocsAfterDark {
         if (
             this.extensionData.light_mode.variant === LightModeOperation.Normal
         ) {
-            // TODO: Apply normal light mode
+            document.documentElement.classList.add(
+                themeClasses.light,
+                themeClasses.normal
+            );
         } else {
             throw new Error(
                 "Unknown light mode operation: " +
@@ -332,6 +330,8 @@ class DocsAfterDark {
     }
 
     private updateMode(): boolean {
+        this.resetMode();
+
         if (this.extensionData.mode === ExtensionOperation.DarkMode) {
             this.updateDarkMode();
         } else if (this.extensionData.mode === ExtensionOperation.LightMode) {
@@ -346,6 +346,12 @@ class DocsAfterDark {
         }
 
         return true;
+    }
+
+    private resetMode(): void {
+        document.documentElement.classList.remove(
+            ...Object.values(themeClasses)
+        );
     }
 
     private updateDocumentBackground() {
@@ -365,14 +371,17 @@ class DocsAfterDark {
     private updateDocumentInvert() {
         const invertOptions: InvertOptions = this.extensionData.invert;
 
-        if (invertOptions.grayscale && invertOptions.black) {
-            setStyleProperty("documentInvert", documentInvert.invert);
+        if (!invertOptions.invert) {
+            setStyleProperty("documentInvert", documentInvert.off);
+            return;
+        }
+
+        if (invertOptions.black) {
+            setStyleProperty("documentInvert", documentInvert.black);
         } else if (invertOptions.grayscale) {
             setStyleProperty("documentInvert", documentInvert.grayscale);
-        } else if (invertOptions.black) {
-            setStyleProperty("documentInvert", documentInvert.black);
         } else {
-            setStyleProperty("documentInvert", documentInvert.off);
+            setStyleProperty("documentInvert", documentInvert.invert);
         }
     }
 
@@ -405,7 +414,7 @@ class DocsAfterDark {
         }
     }
 
-    private showUpdateNotification() {
+    showUpdateNotification() {
         const notificationElement = document.createElement("div");
         notificationElement.id = getElementId("updateNotification");
 

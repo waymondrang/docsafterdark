@@ -9,6 +9,7 @@
         "eslint": "^9.39.2",
         "globals": "^16.5.0",
         "prettier": "^3.7.4",
+        "sass": "^1.97.2",
         "ts-loader": "^9.5.4",
         "typescript": "^5.9.3",
         "typescript-eslint": "^8.52.0",
@@ -26,9 +27,9 @@
     },
     "homepage": "https://docsafterdark.com/",
     "scripts": {
-        "build": "webpack",
+        "build": "webpack && sass src/scss/index.scss test/index.bundle.css",
         "check": "prettier --check . && eslint src && web-ext lint",
-        "dev": "concurrently --names 'webpack,web-ext' --prefix-colors 'green,magenta' 'webpack --watch' 'web-ext run --source-dir ./test/'",
+        "dev": "concurrently --names 'webpack,web-ext,sass' --prefix-colors 'green,magenta,red' 'webpack --watch' 'web-ext run --source-dir ./test/ --keep-profile-changes' 'sass --watch src/scss/index.scss test/index.bundle.css'",
         "format": "prettier --write ."
     }
 }

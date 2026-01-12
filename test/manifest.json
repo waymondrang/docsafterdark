@@ -8,7 +8,7 @@
         {
             "matches": ["<all_urls>"],
             "js": ["word.bundle.js"],
-            "css": ["assets/css/default.css"]
+            "css": ["index.bundle.css"]
         }
     ],
     "action": {
@@ -18,7 +18,7 @@
     "web_accessible_resources": [
         {
             "resources": [
-                "assets/css/*.css",
+                "*.css",
                 "assets/replacements/*.png",
                 "assets/replacements/*.svg"
             ],

@@ -2465,17 +2465,17 @@ img.docs-generativeai-onboarding-dialog-image,
 }
 
 .kix-canvas-tile-content rect[fill="rgba(255,255,255,1)"] {
-    fill: var(--docsafterdark_document_background) !important;
+    fill: var(--DocsAfterDark_documentBackground) !important;
 }
 
 #contents > div {
     background-color: transparent;
-    background: var(--docsafterdark_document_background);
+    background: var(--DocsAfterDark_documentBackground);
 }
 
 .kix-canvas-tile-content[style*="background-color: rgb(255, 255, 255)"],
 .kix-appview-editor {
-    background-color: var(--docsafterdark_document_background) !important;
+    background-color: var(--DocsAfterDark_documentBackground) !important;
 }
 
 /************************/
@@ -2484,11 +2484,11 @@ img.docs-generativeai-onboarding-dialog-image,
 
 .kix-appview-editor canvas,
 .kix-cursor {
-    filter: var(--docsafterdark_document_invert);
+    filter: var(--DocsAfterDark_documentInvert);
 }
 
 /* DOCUMENT BORDER SHOULD BE CONTROLLABLE IN ANY MODE */
 
 .kix-page-paginated {
-    outline: var(--docsafterdark_document_border);
+    outline: var(--DocsAfterDark_documentBorder);
 }
