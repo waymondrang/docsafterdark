@@ -1,6 +1,7 @@
 import {
     buttonPosition,
-    documentBackgrounds,
+    defaultExtensionData,
+    documentBackgroundStyles,
     documentBorder,
     documentInvert,
     replacements,
@@ -14,9 +15,9 @@ import {
     ExtensionOperation,
     LightModeOperation,
     type AccentColorOptions,
+    type ExtensionData,
     type InvertOptions,
     type MessageListener,
-    type StorageData,
     type StorageListener,
 } from "./types";
 import {
@@ -54,31 +55,7 @@ function setStyleProperty(property: string, value: string) {
 }
 
 class DocsAfterDark {
-    private extensionData: StorageData = {
-        mode: ExtensionOperation.DarkMode,
-        dark_mode: { variant: DarkModeOperation.Normal },
-        light_mode: { variant: LightModeOperation.Normal },
-
-        doc_bg: DocumentBackground.Dark,
-        custom_bg: "",
-
-        accent_color: { hue: 88 },
-        invert: {
-            invert: true,
-            grayscale: true,
-            black: true,
-        },
-        button_options: {
-            show: true,
-            raised: false,
-        },
-
-        show_border: true,
-
-        version: {
-            last_version: "",
-        },
-    };
+    private extensionData: ExtensionData = defaultExtensionData;
 
     async initialize(): Promise<void> {
         Logger.debug("Hello from DocsAfterDark!");
@@ -257,8 +234,8 @@ class DocsAfterDark {
         await setStorageBatch(this.extensionData);
     }
 
-    private getExtensionData(): Promise<Partial<StorageData>> {
-        return getStorage<Partial<StorageData>>([
+    private getExtensionData(): Promise<Partial<ExtensionData>> {
+        return getStorage<Partial<ExtensionData>>([
             "mode",
             "dark_mode",
             "light_mode",
@@ -284,7 +261,7 @@ class DocsAfterDark {
                 themeClasses.normal
             );
         } else if (
-            this.extensionData.dark_mode.variant === DarkModeOperation.Eclipse
+            this.extensionData.dark_mode.variant === DarkModeOperation.Midnight
         ) {
             document.documentElement.classList.add(
                 themeClasses.dark,
@@ -363,7 +340,7 @@ class DocsAfterDark {
         } else {
             setStyleProperty(
                 "documentBackground",
-                documentBackgrounds[this.extensionData.doc_bg]
+                documentBackgroundStyles[this.extensionData.doc_bg]
             );
         }
     }

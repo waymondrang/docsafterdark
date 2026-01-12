@@ -1,11 +1,26 @@
-import { type DocumentBackground } from "./types";
+import {
+    DarkModeOperation,
+    ExtensionOperation,
+    LightModeOperation,
+    DocumentBackground,
+    type ExtensionData,
+} from "./types";
 
-const documentBackgrounds: Record<DocumentBackground, string> = {
+const documentBackgroundStyles: Record<DocumentBackground, string> = {
     default: "#ffffff",
     shade: "var(--secondary-background-color)",
     dark: "var(--root-background-color)",
     black: "#000000",
     custom: "",
+};
+
+const documentBackgroundDescriptions = {
+    default: "The default, white background.",
+    shade: "A light shade of gray. Black text is still readable.",
+    // A special, dark gray. This background is unaffected by the invert option.
+    dark: "A dark gray. Black text will become hard to read and color changes may be be required.",
+    black: "A complet ely black background.",
+    custom: "Any valid CSS declaration for the background property may be used here.",
 };
 
 const themeClasses = {
@@ -47,14 +62,42 @@ const buttonPosition = {
     raised: "74px",
 };
 
+const defaultExtensionData: ExtensionData = {
+    mode: ExtensionOperation.DarkMode,
+    dark_mode: { variant: DarkModeOperation.Normal },
+    light_mode: { variant: LightModeOperation.Normal },
+
+    doc_bg: DocumentBackground.Dark,
+    custom_bg: "",
+
+    accent_color: { hue: 88 },
+    invert: {
+        invert: true,
+        grayscale: true,
+        black: true,
+    },
+    button_options: {
+        show: true,
+        raised: false,
+    },
+
+    show_border: true,
+
+    version: {
+        last_version: "",
+    },
+};
+
 const updateLink = "https://github.com/waymondrang/docsafterdark/releases";
 
 export {
     replacements,
-    documentBackgrounds,
+    documentBackgroundStyles,
+    documentBackgroundDescriptions,
     documentInvert,
     documentBorder,
     buttonPosition,
     updateLink,
     themeClasses,
+    defaultExtensionData,
 };

@@ -69,6 +69,24 @@ function isVersionNewer(curr: string, target: string) {
 }
 
 /**
+ * Send message payload to active tabs in current window
+ */
+async function messageTabs<T>(message: T): Promise<void> {
+    const browser = getBrowserNamespace();
+
+    const tabs = await browser.tabs.query({
+        active: true,
+        currentWindow: true,
+    });
+
+    await Promise.all(
+        tabs
+            .filter((tab) => tab.id !== undefined)
+            .map((tab) => browser.tabs.sendMessage<T>(tab.id!, message))
+    );
+}
+
+/**
  * Sets a storage object with a new value
  */
 function setStorage(key: string, value: unknown): Promise<void> {
@@ -134,4 +152,5 @@ export {
     registerMessageListener,
     hasMessageListener,
     removeMessageListener,
+    messageTabs,
 };

@@ -17,7 +17,7 @@ enum ExtensionOperation {
 
 enum DarkModeOperation {
     Normal = 0,
-    Eclipse = 1,
+    Midnight = 1,
 }
 
 enum LightModeOperation {
@@ -67,7 +67,7 @@ interface VersionInfo {
 // STORAGE SCHEMA //
 ////////////////////
 
-type StorageData = {
+type ExtensionData = {
     mode: ExtensionOperation;
     dark_mode: DarkModeOptions;
     // NOTE: Currently there is no light mode operation, the light_mode field
@@ -104,7 +104,7 @@ type StorageChanges = {
     // Use ?: over Partial<StorageChanges> because the changes will always
     // be partial, so having StorageChanges without optional fields would
     // be meaningless.
-    [K in keyof StorageData]?: StorageChange<StorageData[K]>;
+    [K in keyof ExtensionData]?: StorageChange<ExtensionData[K]>;
 };
 
 type StorageListener = (
@@ -129,6 +129,16 @@ interface ListenerFunctions<T> {
     hasListener(listener: T): boolean;
 }
 
+interface QueryInfo {
+    active?: boolean;
+    currentWindow?: boolean;
+}
+
+interface Tab {
+    active: boolean;
+    id?: number;
+}
+
 // Reference: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/
 interface BrowserAPI {
     storage: {
@@ -144,6 +154,11 @@ interface BrowserAPI {
         getURL(path: string): string;
         onMessage: ListenerFunctions<MessageListener>;
     };
+    tabs: {
+        query(queryInfo: QueryInfo): Promise<Tab[]>;
+        // Reference: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/tabs/sendMessage
+        sendMessage<T>(tabId: number, message: T): Promise<unknown>;
+    };
 }
 
 export {
@@ -151,7 +166,7 @@ export {
     DarkModeOperation,
     LightModeOperation,
     DocumentBackground,
-    type StorageData,
+    type ExtensionData,
     type DarkModeOptions,
     type LightModeOptions,
     type InvertOptions,
@@ -163,4 +178,5 @@ export {
     type StorageChanges,
     type StorageListener,
     type MessageListener,
+    type MessagePayload,
 };

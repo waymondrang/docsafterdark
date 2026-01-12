@@ -4,6 +4,7 @@ module.exports = {
     mode: "production",
     entry: {
         word: "./src/word.ts",
+        popup: "./src/popup.ts",
     },
     module: {
         rules: [

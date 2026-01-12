@@ -6,7 +6,7 @@
     "author": "Raymond Wang",
     "content_scripts": [
         {
-            "matches": ["<all_urls>"],
+            "matches": ["*://docs.google.com/document/*"],
             "js": ["word.bundle.js"],
             "css": ["index.bundle.css"]
         }
