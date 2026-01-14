@@ -20,12 +20,12 @@
     --tertiary-text-color: #999999;
     --disabled-text: #666666;
 
-    --accent-color: hsl(var(--docsafterdark-accent-hue), 25%, 50%);
-    --accent-hover-color: hsla(var(--docsafterdark-accent-hue), 25%, 50%, 0.5);
-    --dark-accent-color: hsl(var(--docsafterdark-accent-hue), 25%, 25%);
-    --light-accent-color: hsla(var(--docsafterdark-accent-hue), 25%, 60%, 0.1);
+    --accent-color: hsl(var(--DocsAfterDark_accentHue), 25%, 50%);
+    --accent-hover-color: hsla(var(--DocsAfterDark_accentHue), 25%, 50%, 0.5);
+    --dark-accent-color: hsl(var(--DocsAfterDark_accentHue), 25%, 25%);
+    --light-accent-color: hsla(var(--DocsAfterDark_accentHue), 25%, 60%, 0.1);
     --light-accent-hover-color: hsla(
-        var(--docsafterdark-accent-hue),
+        var(--DocsAfterDark_accentHue),
         25%,
         40%,
         0.2
