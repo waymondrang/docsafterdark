@@ -26,6 +26,7 @@ import {
     registerMessageListener,
     registerStorageListener,
     setStorageBatch,
+    setStyleProperty,
 } from "./util";
 
 const browser = getBrowserNamespace();
@@ -33,7 +34,6 @@ const CURRENT_VERSION = browser.runtime.getManifest().version;
 
 const REPLACEMENTS_PATH = "assets/replacements/";
 const ELEMENT_ID_PREFIX = "DocsAfterDark_";
-const STYLE_PROPERTY_PREFIX = "--DocsAfterDark_";
 
 function getElementId(id: string): string {
     return (ELEMENT_ID_PREFIX + id).replace(/\.| /g, "_");
@@ -41,17 +41,6 @@ function getElementId(id: string): string {
 
 function removeElement(id: string) {
     document.querySelector(`#${getElementId(id)}`)?.remove();
-}
-
-/**
- * Sets the CSS property onto the html element's style declaration
- * @param property Name of property without --DocsAfterDark_ prefix
- */
-function setStyleProperty(property: string, value: string) {
-    document.documentElement.style.setProperty(
-        STYLE_PROPERTY_PREFIX + property,
-        value
-    );
 }
 
 class DocsAfterDark {

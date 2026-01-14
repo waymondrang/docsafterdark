@@ -6,6 +6,8 @@ import {
     type ExtensionData,
 } from "./types";
 
+const STYLE_PROPERTY_PREFIX = "--DocsAfterDark_";
+
 const documentBackgroundStyles: Record<DocumentBackground, string> = {
     default: "#ffffff",
     shade: "var(--secondary-background-color)",
@@ -70,7 +72,10 @@ const defaultExtensionData: ExtensionData = {
     doc_bg: DocumentBackground.Dark,
     custom_bg: "",
 
+    // Matcha/sage green hue
     accent_color: { hue: 88 },
+    temp_accent_color: { hue: 88 },
+
     invert: {
         invert: true,
         grayscale: true,
@@ -91,6 +96,7 @@ const defaultExtensionData: ExtensionData = {
 const updateLink = "https://github.com/waymondrang/docsafterdark/releases";
 
 export {
+    STYLE_PROPERTY_PREFIX,
     replacements,
     documentBackgroundStyles,
     documentBackgroundDescriptions,

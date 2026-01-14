@@ -80,6 +80,7 @@ type ExtensionData = {
     show_border: boolean;
 
     accent_color: AccentColorOptions;
+    temp_accent_color: AccentColorOptions;
     button_options: ButtonOptions;
 
     version: VersionInfo;
@@ -139,12 +140,17 @@ interface Tab {
     id?: number;
 }
 
+interface CreateProperties {
+    url?: string;
+}
+
 // Reference: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/
 interface BrowserAPI {
     storage: {
         local: {
             set(data: Record<string, unknown>): Promise<void>;
-            get(keys: string[]): Promise<Record<string, unknown>>;
+            get(keys: string | string[]): Promise<Record<string, unknown>>;
+            remove(keys: string | string[]): Promise<void>;
         };
         onChanged: ListenerFunctions<StorageListener>;
     };
@@ -158,6 +164,7 @@ interface BrowserAPI {
         query(queryInfo: QueryInfo): Promise<Tab[]>;
         // Reference: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/tabs/sendMessage
         sendMessage<T>(tabId: number, message: T): Promise<unknown>;
+        create(properties: CreateProperties): void;
     };
 }
 

@@ -3,10 +3,16 @@ import {
     DarkModeOperation,
     DocumentBackground,
     ExtensionOperation,
-    type DarkModeOptions,
+    type AccentColorOptions,
     type ExtensionData,
 } from "./types";
-import { getBrowserNamespace, getExtensionData, setStorage } from "./util";
+import {
+    getBrowserNamespace,
+    getExtensionData,
+    messageTabs,
+    setStorage,
+    setStyleProperty,
+} from "./util";
 import { defaultExtensionData } from "./values";
 
 const browser = getBrowserNamespace();
@@ -43,7 +49,8 @@ class PopupState {
 
         // Update changed fields in storage
         for (const [key, value] of Object.entries(updates)) {
-            await setStorage(key, value);
+            // key is safe to cast to keyof ExtensionData
+            await setStorage(key as keyof ExtensionData, value);
         }
 
         this.updateSubscribers();
@@ -129,7 +136,8 @@ class OperationModeManager extends StateSubscriber {
     }
 }
 
-class DarkModeManager {
+// TODO: DarkModeManager should extend StateSubscriber
+class DarkModeManager extends StateSubscriber {
     private normalButton = document.querySelector(
         "#dark_mode_normal"
     ) as HTMLButtonElement;
@@ -138,26 +146,34 @@ class DarkModeManager {
     ) as HTMLButtonElement;
 
     initialize() {
-        this.normalButton.addEventListener("click", this.handleButtonClick);
-        this.midnightButton.addEventListener("click", this.handleButtonClick);
+        this.normalButton.addEventListener("click", this.buttonHandler);
+        this.midnightButton.addEventListener("click", this.buttonHandler);
     }
 
-    private handleButtonClick = (event: PointerEvent) => {
+    update(newData: ExtensionData): void {
         this.resetButtons();
 
-        const target = event.currentTarget as HTMLButtonElement;
-        target.classList.add("selected");
+        if (newData.dark_mode.variant == DarkModeOperation.Normal) {
+            this.normalButton.classList.add("selected");
+        } else if (newData.dark_mode.variant == DarkModeOperation.Midnight) {
+            this.midnightButton.classList.add("selected");
+        } else {
+            Logger.error("Unknown dark_mode variant option");
+        }
+    }
 
+    private buttonHandler = (event: PointerEvent) => {
+        const target = event.target as HTMLButtonElement;
         switch (target.value) {
             case "normal":
-                setStorage("dark_mode", {
-                    variant: DarkModeOperation.Normal,
-                } as DarkModeOptions);
+                this.state.setData({
+                    dark_mode: { variant: DarkModeOperation.Normal },
+                });
                 break;
             case "midnight":
-                setStorage("dark_mode", {
-                    variant: DarkModeOperation.Midnight,
-                } as DarkModeOptions);
+                this.state.setData({
+                    dark_mode: { variant: DarkModeOperation.Midnight },
+                });
                 break;
         }
     };
@@ -168,18 +184,135 @@ class DarkModeManager {
     }
 }
 
-class SpectrumManager {
-    private input = document.querySelector("#spectrum_input");
-    private save = document.querySelector("#spectrum_save");
-    private reset = document.querySelector("#spectrum_reset");
-    private bar = document.querySelector("#spectrum_bar");
-    private knob = document.querySelector("#spectrum_knob");
+class SpectrumManager extends StateSubscriber {
+    private input = document.querySelector(
+        "#spectrum_input"
+    ) as HTMLInputElement;
+    private save = document.querySelector(
+        "#spectrum_save"
+    ) as HTMLButtonElement;
+    private reset = document.querySelector(
+        "#spectrum_reset"
+    ) as HTMLButtonElement;
+    private bar = document.querySelector("#spectrum_bar") as HTMLDivElement;
+    private knob = document.querySelector("#spectrum_knob") as HTMLDivElement;
+
+    private isInputFocused: boolean = false;
+
+    private mouseDownPositionX = 0;
+    private knobOffset = 0;
+    private isKnobDragging = false;
+
+    // NOTE: We use the existence of the temp_accent_color storage item to
+    //       determine if the user is exploring accent colors. temp_accent_color
+    //       is only used for resuming the color exploration when the popup
+    //       is closed and reopened.
+
+    initialize(): void {
+        this.input.addEventListener("input", () => {
+            if (!this.input.value) {
+                return;
+            }
+
+            // Clamp input value
+            const hue = Math.min(
+                Math.max(Number.parseInt(this.input.value), 0),
+                360
+            );
+            this.input.value = hue.toString();
+
+            this.state.setData({ temp_accent_color: { hue: hue } });
+        });
+
+        this.input.addEventListener("focus", () => {
+            this.isInputFocused = true;
+        });
+
+        this.input.addEventListener("blur", () => {
+            this.isInputFocused = false;
+        });
+
+        this.reset.addEventListener("click", () => {
+            // TODO: Consider removing the reset/save buttons
+        });
+
+        this.bar.addEventListener("mousedown", (ev) => {
+            if (this.isKnobDragging) return;
+
+            this.isKnobDragging = true;
+
+            this.handleKnobDrag(ev);
+
+            document.addEventListener("mousemove", this.handleKnobDrag);
+            document.addEventListener("mouseup", () => {
+                document.removeEventListener("mousemove", this.handleKnobDrag);
+
+                this.knobOffset = parseFloat(this.knob.style.left);
+                this.isKnobDragging = false;
+            });
+        });
+    }
+
+    update(newData: ExtensionData): void {
+        if (!this.isInputFocused) {
+            this.input.value = newData.temp_accent_color.hue.toString();
+        }
+
+        if (!this.isKnobDragging) {
+            this.updateKnob(newData.temp_accent_color.hue);
+        }
+    }
+
+    private handleKnobDrag = (ev: MouseEvent) => {
+        this.knobOffset = Math.max(
+            Math.min(
+                ev.clientX -
+                    this.bar.getBoundingClientRect().left -
+                    this.knob.offsetWidth / 2,
+                this.bar.offsetWidth - this.knob.offsetWidth
+            ),
+            0
+        );
+
+        const ratio =
+            this.knobOffset / (this.bar.offsetWidth - this.knob.offsetWidth);
+        const hue = Math.min(Math.max(Math.round(ratio * 360), 0), 360);
+
+        // Set knob position (using left offset style)
+        this.knob.style.left = this.knobOffset + "px";
+
+        // Set background color (CSS hue range is [0, 360])
+        this.knob.style.backgroundColor = `hsl(${hue}, 100%, 50%)`;
+
+        this.state.setData({ temp_accent_color: { hue: hue } });
+    };
+
+    private updateKnob(hue: number) {
+        const hueFraction = hue / 360;
+        this.knobOffset =
+            hueFraction * (this.bar.offsetWidth - this.knob.offsetWidth);
+
+        this.knob.style.left = this.knobOffset + "px";
+        // Set background color (CSS hue range is [0, 360])
+        this.knob.style.backgroundColor = `hsl(${hue}, 100%, 50%)`;
+    }
+
+    private handleTempColor(color: AccentColorOptions) {
+        messageTabs({
+            type: "accentColor",
+            color: color,
+        });
+
+        setStyleProperty("accentHue", color.hue.toString());
+        setStorage("temp_accent_color", color);
+    }
 }
 
 class DocumentBackgroundManager extends StateSubscriber {
     private buttons = document.querySelectorAll(
         "#document_bg_buttons button"
     ) as NodeListOf<HTMLButtonElement>;
+
     private customContainer = document.querySelector(
         "#document_bg_custom_container"
     ) as HTMLDivElement;
@@ -255,20 +388,18 @@ class ButtonManager extends StateSubscriber {
 
     initialize() {
         this.showButtonCheckbox.addEventListener("click", () => {
-            const extensionData = this.state.getData();
             this.state.setData({
                 button_options: {
-                    ...extensionData.button_options,
+                    ...this.state.getData().button_options,
                     show: this.showButtonCheckbox.checked,
                 },
             });
         });
 
         this.raiseButtonCheckbox.addEventListener("click", () => {
-            const extensionData = this.state.getData();
             this.state.setData({
                 button_options: {
-                    ...extensionData.button_options,
+                    ...this.state.getData().button_options,
                     raised: this.raiseButtonCheckbox.checked,
                 },
             });
@@ -307,7 +438,17 @@ class TipManager {
 }
 
 class DonateManager {
-    private donateButton = document.querySelector("#donate");
+    private donateButton = document.querySelector(
+        "#donate"
+    ) as HTMLButtonElement;
+
+    initialize() {
+        this.donateButton.addEventListener("click", function () {
+            browser.tabs.create({
+                url: "https://www.buymeacoffee.com/waymondrang",
+            });
+        });
+    }
 }
 
 class InvertManager extends StateSubscriber {
@@ -372,6 +513,14 @@ class VersionManager {
     }
 }
 
+class StyleManager extends StateSubscriber {
+    initialize(): void {}
+
+    update(newData: ExtensionData): void {
+        setStyleProperty("accentHue", newData.temp_accent_color.hue.toString());
+    }
+}
+
 class Popup {
     private state: PopupState = new PopupState();
 
@@ -380,32 +529,37 @@ class Popup {
     private buttonManager: ButtonManager = new ButtonManager(this.state);
     private invertManager: InvertManager = new InvertManager(this.state);
 
-    private darkModeManager: DarkModeManager = new DarkModeManager();
+    private darkModeManager: DarkModeManager = new DarkModeManager(this.state);
 
     private tipManager: TipManager = new TipManager();
 
-    private spectrumManager: SpectrumManager = new SpectrumManager();
+    private spectrumManager: SpectrumManager = new SpectrumManager(this.state);
     private documentBackgroundManager: DocumentBackgroundManager =
         new DocumentBackgroundManager(this.state);
     private borderManager: BorderManager = new BorderManager(this.state);
     private donateManager: DonateManager = new DonateManager();
     private versionManager: VersionManager = new VersionManager();
+    private styleManager: StyleManager = new StyleManager(this.state);
 
     async initialize() {
         Logger.debug("Hello from DocsAfterDark Popup!");
 
         // Set the state's data in case any initialize functions need to
-        // access it (ideally state is consumed during update function)
+        // access it (ideally state is consumed during update function).
         const extensionData = await getExtensionData();
         this.state.setData(extensionData);
 
         this.operationModesManager.initialize();
+        this.darkModeManager.initialize();
         this.tipManager.initialize();
         this.buttonManager.initialize();
         this.documentBackgroundManager.initialize();
         this.invertManager.initialize();
         this.versionManager.initialize();
         this.borderManager.initialize();
+        this.donateManager.initialize();
+        this.spectrumManager.initialize();
+        this.styleManager.initialize();
 
         this.state.updateSubscribers();
     }

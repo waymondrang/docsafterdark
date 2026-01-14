@@ -4,6 +4,7 @@ import type {
     MessageListener,
     StorageListener,
 } from "./types";
+import { STYLE_PROPERTY_PREFIX } from "./values";
 
 declare const browser: BrowserAPI;
 declare const chrome: BrowserAPI;
@@ -26,6 +27,17 @@ function getBrowserNamespace(): BrowserAPI {
     }
 
     return namespace;
+}
+
+/**
+ * Sets the CSS property onto the html element's style declaration
+ * @param property Name of property without --DocsAfterDark_ prefix
+ */
+function setStyleProperty(property: string, value: string) {
+    document.documentElement.style.setProperty(
+        STYLE_PROPERTY_PREFIX + property,
+        value
+    );
 }
 
 /**
@@ -91,10 +103,13 @@ async function messageTabs<T>(message: T): Promise<void> {
     );
 }
 
+// TODO: Can combine setStorage with setStorageBatch and use
+//       Partial<ExtensionData> as input type.
+
 /**
- * Sets a storage object with a new value
+ * Sets a storage item with a new value
  */
-function setStorage(key: string, value: unknown): Promise<void> {
+function setStorage(key: keyof ExtensionData, value: unknown): Promise<void> {
     return getBrowserNamespace().storage.local.set({
         [key]: value,
     }) as Promise<void>;
@@ -105,9 +120,9 @@ function setStorageBatch(data: Record<string, unknown>) {
 }
 
 /**
- * Gets storage objects with the given key(s)
+ * Gets storage items with the given key(s)
  */
-function getStorage<T>(keys: string[]): Promise<T> {
+function getStorage<T>(keys: (keyof ExtensionData)[]): Promise<T> {
     return new Promise((resolve, reject) => {
         const browser = getBrowserNamespace();
 
@@ -118,6 +133,13 @@ function getStorage<T>(keys: string[]): Promise<T> {
             () => reject(browser.runtime.lastError)
         );
     });
+}
+
+/**
+ * Deletes storage items by key(s)
+ */
+function deleteStorage(keys: (keyof ExtensionData)[]): Promise<void> {
+    return getBrowserNamespace().storage.local.remove(keys) as Promise<void>;
 }
 
 function registerStorageListener(listener: StorageListener) {
@@ -164,10 +186,12 @@ function getExtensionData(): Promise<Partial<ExtensionData>> {
 
 export {
     getBrowserNamespace,
+    setStyleProperty,
     isVersionNewer,
     setStorage,
     setStorageBatch,
     getStorage,
+    deleteStorage,
     registerStorageListener,
     hasStorageListener,
     removeStorageListener,
