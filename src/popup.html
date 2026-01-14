@@ -10,15 +10,13 @@
     </head>
 
     <body>
-        <div id="main">
+        <main>
             <header>
                 <h1>DocsAfterDark Options</h1>
-                <div id="tip_button">
+                <div id="tipButton">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        height="24px"
                         viewBox="0 -960 960 960"
-                        width="24px"
                         fill="#fefefe"
                     >
                         <path
@@ -28,9 +26,9 @@
                 </div>
             </header>
 
-            <div id="tip_container" class="hidden">
-                <div id="tip">
-                    <div>
+            <div id="tipContainer" class="hidden">
+                <div class="content">
+                    <div class="icon">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             height="24px"
@@ -42,7 +40,7 @@
                             />
                         </svg>
                     </div>
-                    <div>
+                    <div class="message">
                         <p>
                             All options will auto-save, with the exception of
                             Accent Color. Document invert assumes the background
@@ -52,185 +50,163 @@
                 </div>
             </div>
 
-            <div class="option_section">
-                <p class="section_label">Mode Toggle</p>
-                <div id="modes" class="button_row">
-                    <button id="mode_dark" value="dark" class="accent_button">
-                        Dark
-                    </button>
-                    <button id="mode_light" value="light" class="accent_button">
-                        Light
-                    </button>
-                    <button id="mode_off" value="off" class="accent_button">
-                        Off
-                    </button>
+            <div class="section">
+                <p class="sectionLabel">Mode Toggle</p>
+                <div class="buttonRow">
+                    <button id="modeDark" value="dark">Dark</button>
+                    <button id="modeLight" value="light">Light</button>
+                    <button id="modeOff" value="off">Off</button>
                 </div>
             </div>
 
-            <div class="option_section">
-                <p class="section_label">Dark Mode Variant</p>
-                <div id="dark_mode_variants" class="button_row">
-                    <button id="dark_mode_normal" value="normal">Normal</button>
-                    <button id="dark_mode_midnight" value="midnight">
+            <div class="section">
+                <p class="sectionLabel">Dark Mode Variant</p>
+                <div class="buttonRow">
+                    <button id="darkModeNormal" value="normal">Normal</button>
+                    <button id="darkModeMidnight" value="midnight">
                         Midnight
                     </button>
                 </div>
             </div>
 
-            <div id="document_bg_section">
-                <p class="section_label">
+            <div class="section">
+                <p class="sectionLabel">
                     Document Background<span class="__firefox_hidden"
                         >&nbsp;(May Be Unstable)</span
                     >
                 </p>
-                <div id="document_bg_buttons" class="button_row">
-                    <button id="document_bg_default" value="default">
-                        Default
-                    </button>
-                    <button id="document_bg_shade" value="shade">Shade</button>
-                    <button id="document_bg_dark" value="dark">Blend</button>
-                    <button id="document_bg_black" value="black">Black</button>
-                    <button id="document_bg_custom" value="custom">
-                        Custom
-                    </button>
+                <div class="sectionControls">
+                    <div class="buttonRow fullWidth">
+                        <button id="documentBGDefault" value="default">
+                            Default
+                        </button>
+                        <button id="documentBGShade" value="shade">
+                            Shade
+                        </button>
+                        <button id="documentBGDark" value="dark">Blend</button>
+                        <button id="documentBGBlack" value="black">
+                            Black
+                        </button>
+                        <button id="documentBGCustom" value="custom">
+                            Custom
+                        </button>
+                    </div>
+
+                    <div id="documentBGCustomContainer" class="flexRow">
+                        <input
+                            class="expand"
+                            id="documentBGCustomInput"
+                            placeholder="Custom Color/CSS"
+                        />
+                        <button
+                            id="documentBGCustomSave"
+                            class="rounded accented"
+                        >
+                            Save
+                        </button>
+                    </div>
                 </div>
-                <div
-                    id="document_bg_custom_container"
-                    class="option_row hidden"
-                >
-                    <input
-                        id="document_bg_custom_input"
-                        placeholder="Custom Color/CSS"
-                    />
-                    <button id="document_bg_save_custom">Save</button>
-                </div>
-                <!-- <p id="document_bg_description"></p> -->
             </div>
 
-            <div class="option_section">
-                <p class="section_label">Document Options</p>
-                <div class="option_container">
-                    <div class="option_row">
-                        <label
-                            class="checkbox_container"
-                            for="document_inverted"
+            <div class="section">
+                <p class="sectionLabel">Document Options</p>
+                <div class="sectionControls">
+                    <div class="checkboxRow">
+                        <label for="documentInverted"
                             >Invert
                             <input
                                 type="checkbox"
-                                id="document_inverted"
-                                name="document_inverted"
+                                id="documentInverted"
+                                name="documentInverted"
                             />
-                            <span class="checkbox_checkmark"></span>
+                            <div class="checkbox"></div>
                         </label>
 
-                        <label
-                            class="checkbox_container"
-                            for="document_inverted_grayscale"
+                        <label for="documentGrayscale"
                             >Grayscale
                             <input
                                 type="checkbox"
-                                id="document_inverted_grayscale"
-                                name="document_inverted_grayscale"
+                                id="documentGrayscale"
+                                name="documentGrayscale"
                             />
-                            <span class="checkbox_checkmark"></span>
+                            <div class="checkbox"></div>
                         </label>
 
-                        <label
-                            class="checkbox_container"
-                            for="document_inverted_black"
+                        <label for="documentBlack"
                             >Black
                             <input
                                 type="checkbox"
-                                id="document_inverted_black"
-                                name="document_inverted_black"
+                                id="documentBlack"
+                                name="documentBlack"
                             />
-                            <span class="checkbox_checkmark"></span>
+                            <div class="checkbox"></div>
                         </label>
                     </div>
-                    <div class="option_row">
-                        <label class="checkbox_container" for="show_border"
+                    <div class="checkboxRow">
+                        <label for="documentBorder"
                             >Show Border
                             <input
                                 type="checkbox"
-                                id="show_border"
-                                name="show_border"
+                                id="documentBorder"
+                                name="documentBorder"
                             />
-                            <span class="checkbox_checkmark"></span>
+                            <div class="checkbox"></div>
                         </label>
                     </div>
                 </div>
             </div>
 
-            <div class="option_section">
-                <p class="section_label">Toggle Button Options</p>
-                <div class="option_row">
-                    <label class="checkbox_container" for="show_button"
+            <div class="section">
+                <p class="sectionLabel">Toggle Button Options</p>
+                <div class="flexRow">
+                    <label for="showButton"
                         >Show Button
                         <input
                             type="checkbox"
-                            id="show_button"
-                            name="show_button"
+                            id="showButton"
+                            name="showButton"
                         />
-                        <span class="checkbox_checkmark"></span>
+                        <div class="checkbox"></div>
                     </label>
 
-                    <label class="checkbox_container" for="raise_button"
+                    <label for="raiseButton"
                         >Raise Button
                         <input
                             type="checkbox"
-                            id="raise_button"
-                            name="raise_button"
+                            id="raiseButton"
+                            name="raiseButton"
                         />
-                        <span class="checkbox_checkmark"></span>
+                        <div class="checkbox"></div>
                     </label>
                 </div>
             </div>
 
-            <div class="option_section">
-                <p class="section_label">Accent Color</p>
-                <div id="spectrum_container">
-                    <div id="spectrum_bar">
-                        <div id="spectrum_knob"></div>
+            <div class="section">
+                <p class="sectionLabel">Accent Color</p>
+                <div id="spectrum">
+                    <div id="spectrumBar">
+                        <div id="spectrumKnob"></div>
                     </div>
+
                     <input
-                        id="spectrum_input"
+                        id="spectrumInput"
                         type="number"
                         min="0"
                         max="360"
+                        placeholder="0"
                         maxlength="3"
                     />
                 </div>
-
-                <button id="spectrum_save">Save</button>
-                <button id="spectrum_reset" disabled>Reset</button>
             </div>
 
-            <!-- <div class="option_section" id="debug_section">
-        <p class="section_label">Debug</p>
-        <div class="option_container">
-          <div class="option_row">
-            <input id="debug_storage_key" placeholder="Storage Key" />
-            <button id="debug_storage_key_clear">Clear</button>
-          </div>
-          <div class="option_bordered">
-            <div class="option_row">
-              <input id="debug_kv_key" placeholder="Key" />
-              <input id="debug_kv_value" placeholder="Value" />
-            </div>
             <hr />
-            <input id="debug_key_value" placeholder="Value" />
-          </div>
-          <button id="debug_save">Save</button>
-          <button id="debug_clear">Clear Storage</button>
-        </div>
-      </div> -->
 
-            <hr />
             <footer>
                 <p id="version"></p>
-                <a id="donate">Donate</a>
+                <button id="donate" class="rounded accented">Donate</button>
             </footer>
-        </div>
+        </main>
+
         <script src="popup.bundle.js"></script>
     </body>
 </html>

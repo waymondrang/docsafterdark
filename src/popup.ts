@@ -7,9 +7,11 @@ import {
     type ExtensionData,
 } from "./types";
 import {
+    addClassToParent,
     getBrowserNamespace,
     getExtensionData,
     messageTabs,
+    removeClassFromParent,
     setStorage,
     setStyleProperty,
 } from "./util";
@@ -17,12 +19,6 @@ import { defaultExtensionData } from "./values";
 
 const browser = getBrowserNamespace();
 const VERSION = browser.runtime.getManifest().version;
-
-// NOTE: The UI should prefer user responsiveness over correctness, meaning the
-//       state of the UI should update before the underlying storage updates.
-//       For example, in ModesManager, the selected class is immediately added
-//       to the button element instead of updating the button in response to
-//       a storage update.
 
 // NOTE: Managers that will update based on changes that happen to the global
 //       state (coupled logic between managers) should implement the
@@ -75,7 +71,7 @@ abstract class StateSubscriber {
 
 class OperationModeManager extends StateSubscriber {
     private modeButtons = document.querySelectorAll(
-        "#modes button"
+        "#modeDark, #modeLight, #modeOff"
     ) as NodeListOf<HTMLButtonElement>;
 
     initialize() {
@@ -139,10 +135,10 @@ class OperationModeManager extends StateSubscriber {
 // TODO: DarkModeManager should extend StateSubscriber
 class DarkModeManager extends StateSubscriber {
     private normalButton = document.querySelector(
-        "#dark_mode_normal"
+        "#darkModeNormal"
     ) as HTMLButtonElement;
     private midnightButton = document.querySelector(
-        "#dark_mode_midnight"
+        "#darkModeMidnight"
     ) as HTMLButtonElement;
 
     initialize() {
@@ -186,20 +182,13 @@ class DarkModeManager extends StateSubscriber {
 
 class SpectrumManager extends StateSubscriber {
     private input = document.querySelector(
-        "#spectrum_input"
+        "#spectrumInput"
     ) as HTMLInputElement;
-    private save = document.querySelector(
-        "#spectrum_save"
-    ) as HTMLButtonElement;
-    private reset = document.querySelector(
-        "#spectrum_reset"
-    ) as HTMLButtonElement;
-    private bar = document.querySelector("#spectrum_bar") as HTMLDivElement;
-    private knob = document.querySelector("#spectrum_knob") as HTMLDivElement;
+    private bar = document.querySelector("#spectrumBar") as HTMLDivElement;
+    private knob = document.querySelector("#spectrumKnob") as HTMLDivElement;
 
     private isInputFocused: boolean = false;
 
-    private mouseDownPositionX = 0;
     private knobOffset = 0;
     private isKnobDragging = false;
 
@@ -230,10 +219,6 @@ class SpectrumManager extends StateSubscriber {
 
         this.input.addEventListener("blur", () => {
             this.isInputFocused = false;
-        });
-
-        this.reset.addEventListener("click", () => {
-            // TODO: Consider removing the reset/save buttons
         });
 
         this.bar.addEventListener("mousedown", (ev) => {
@@ -310,18 +295,18 @@ class SpectrumManager extends StateSubscriber {
 
 class DocumentBackgroundManager extends StateSubscriber {
     private buttons = document.querySelectorAll(
-        "#document_bg_buttons button"
+        "#documentBGDefault, #documentBGShade, #documentBGDark, #documentBGBlack, #documentBGCustom"
     ) as NodeListOf<HTMLButtonElement>;
 
-    private customContainer = document.querySelector(
-        "#document_bg_custom_container"
-    ) as HTMLDivElement;
     private customInput = document.querySelector(
-        "#document_bg_custom_input"
+        "#documentBGCustomInput"
     ) as HTMLInputElement;
     private customSave = document.querySelector(
-        "#document_bg_save_custom"
+        "#documentBGCustomSave"
     ) as HTMLButtonElement;
+    private customContainer = document.querySelector(
+        "#documentBGCustomContainer"
+    ) as HTMLDivElement;
 
     initialize(): void {
         this.buttons.forEach((button) => {
@@ -362,7 +347,7 @@ class DocumentBackgroundManager extends StateSubscriber {
 
 class BorderManager extends StateSubscriber {
     private showBorderCheckbox = document.querySelector(
-        "#show_border"
+        "#documentBorder"
     ) as HTMLInputElement;
 
     initialize(): void {
@@ -380,10 +365,10 @@ class BorderManager extends StateSubscriber {
 
 class ButtonManager extends StateSubscriber {
     private showButtonCheckbox = document.querySelector(
-        "#show_button"
+        "#showButton"
     ) as HTMLInputElement;
     private raiseButtonCheckbox = document.querySelector(
-        "#raise_button"
+        "#raiseButton"
     ) as HTMLInputElement;
 
     initialize() {
@@ -410,14 +395,21 @@ class ButtonManager extends StateSubscriber {
         this.showButtonCheckbox.checked = newData.button_options.show;
 
         this.raiseButtonCheckbox.disabled = !newData.button_options.show;
+
+        if (newData.button_options.show) {
+            removeClassFromParent(this.raiseButtonCheckbox, "disabled");
+        } else {
+            addClassToParent(this.raiseButtonCheckbox, "disabled");
+        }
+
         this.raiseButtonCheckbox.checked = newData.button_options.raised;
     }
 }
 
 class TipManager {
-    private tipButton = document.querySelector("#tip_button") as HTMLDivElement;
+    private tipButton = document.querySelector("#tipButton") as HTMLDivElement;
     private tipContainer = document.querySelector(
-        "#tip_container"
+        "#tipContainer"
     ) as HTMLDivElement;
 
     initialize() {
@@ -453,13 +445,13 @@ class DonateManager {
 
 class InvertManager extends StateSubscriber {
     private invertedCheckbox = document.querySelector(
-        "#document_inverted"
+        "#documentInverted"
     ) as HTMLInputElement;
     private grayscaleCheckbox = document.querySelector(
-        "#document_inverted_grayscale"
+        "#documentGrayscale"
     ) as HTMLInputElement;
     private blackCheckbox = document.querySelector(
-        "#document_inverted_black"
+        "#documentBlack"
     ) as HTMLInputElement;
 
     initialize(): void {
@@ -498,8 +490,25 @@ class InvertManager extends StateSubscriber {
     }
 
     update(newData: ExtensionData): void {
+        this.invertedCheckbox.checked = newData.invert.invert;
+        this.grayscaleCheckbox.checked = newData.invert.grayscale;
+        this.blackCheckbox.checked = newData.invert.black;
+
         this.grayscaleCheckbox.disabled = !newData.invert.invert;
-        this.blackCheckbox.disabled = !newData.invert.invert;
+        this.blackCheckbox.disabled =
+            !newData.invert.invert || !newData.invert.grayscale;
+
+        if (newData.invert.invert) {
+            removeClassFromParent(this.grayscaleCheckbox, "disabled");
+        } else {
+            addClassToParent(this.grayscaleCheckbox, "disabled");
+        }
+
+        if (!newData.invert.invert || !newData.invert.grayscale) {
+            addClassToParent(this.blackCheckbox, "disabled");
+        } else {
+            removeClassFromParent(this.blackCheckbox, "disabled");
+        }
     }
 }
 

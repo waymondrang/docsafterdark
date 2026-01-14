@@ -184,6 +184,25 @@ function getExtensionData(): Promise<Partial<ExtensionData>> {
     ]);
 }
 
+function addClassToParent(element: HTMLElement, ...classes: string[]): void {
+    if (!element.parentElement) {
+        return;
+    }
+
+    element.parentElement.classList.add(...classes);
+}
+
+function removeClassFromParent(
+    element: HTMLElement,
+    ...classes: string[]
+): void {
+    if (!element.parentElement) {
+        return;
+    }
+
+    element.parentElement.classList.remove(...classes);
+}
+
 export {
     getBrowserNamespace,
     setStyleProperty,
@@ -200,4 +219,6 @@ export {
     removeMessageListener,
     messageTabs,
     getExtensionData,
+    addClassToParent,
+    removeClassFromParent,
 };
