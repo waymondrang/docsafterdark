@@ -4,7 +4,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 module.exports = {
     mode: "production",
     entry: {
-        word: "./src/word.ts",
+        word: "./src/docs.ts",
         popup: "./src/popup.ts",
     },
     module: {
@@ -21,7 +21,7 @@ module.exports = {
     },
     output: {
         filename: "[name].bundle.js",
-        path: path.resolve(__dirname, "test"),
+        path: path.resolve(__dirname, "build"),
     },
     plugins: [
         new CopyWebpackPlugin({
@@ -31,8 +31,8 @@ module.exports = {
                     to: "popup.html",
                 },
                 {
-                    from: "src/popup.css",
-                    to: "popup.css",
+                    from: "src/manifest.json",
+                    to: "manifest.json",
                 },
             ],
         }),

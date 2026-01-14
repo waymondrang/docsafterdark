@@ -7,8 +7,8 @@
     "content_scripts": [
         {
             "matches": ["*://docs.google.com/document/*"],
-            "js": ["word.js"],
-            "css": ["assets/css/default.css"]
+            "js": ["docs.bundle.js"],
+            "css": ["docs.bundle.css"]
         }
     ],
     "action": {
