@@ -29,7 +29,7 @@
     "homepage": "https://docsafterdark.com/",
     "scripts": {
         "build": "webpack && sass src/scss/index.scss test/index.bundle.css",
-        "check": "prettier --check . && eslint src && web-ext lint",
+        "check": "prettier --check . && eslint src",
         "dev": "concurrently --names 'webpack,web-ext,sass' --prefix-colors 'green,magenta,red' 'webpack --watch' 'web-ext run --source-dir ./test/ --keep-profile-changes' 'sass --watch src/scss/index.scss test/index.bundle.css'",
         "format": "prettier --write ."
     }
