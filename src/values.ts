@@ -74,7 +74,6 @@ const defaultExtensionData: ExtensionData = {
 
     // Matcha/sage green hue
     accent_color: { hue: 88 },
-    temp_accent_color: { hue: 88 },
 
     invert: {
         invert: true,

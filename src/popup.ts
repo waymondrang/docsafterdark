@@ -3,7 +3,7 @@ import {
     DarkModeOperation,
     DocumentBackground,
     ExtensionOperation,
-    type AccentColorOptions,
+    type MessagePayload,
     type ExtensionData,
 } from "./types";
 import {
@@ -48,6 +48,18 @@ class PopupState {
             // key is safe to cast to keyof ExtensionData
             await setStorage(key as keyof ExtensionData, value);
         }
+
+        this.updateSubscribers();
+    }
+
+    cautiouslySetLocalData(updates: Partial<ExtensionData>) {
+        Logger.debug("Cautiously updating data locally: ", updates);
+
+        this.extensionData = { ...this.extensionData, ...updates };
+
+        // NOTE: This will skip saving the fields into storage, meaning changes
+        //       will NOT persist! You must handle any changes that must be
+        //       persisted using setData().
 
         this.updateSubscribers();
     }
@@ -210,7 +222,7 @@ class SpectrumManager extends StateSubscriber {
             );
             this.input.value = hue.toString();
 
-            this.state.setData({ temp_accent_color: { hue: hue } });
+            this.state.setData({ accent_color: { hue: hue } });
         });
 
         this.input.addEventListener("focus", () => {
@@ -226,25 +238,33 @@ class SpectrumManager extends StateSubscriber {
 
             this.isKnobDragging = true;
 
+            // Position knob to mouse position
             this.handleKnobDrag(ev);
 
-            document.addEventListener("mousemove", this.handleKnobDrag);
-            document.addEventListener("mouseup", () => {
+            const handleMouseUp = () => {
                 document.removeEventListener("mousemove", this.handleKnobDrag);
+                document.removeEventListener("mouseup", handleMouseUp);
 
                 this.knobOffset = parseFloat(this.knob.style.left);
                 this.isKnobDragging = false;
-            });
+
+                this.state.setData({
+                    accent_color: this.state.getData().accent_color,
+                });
+            };
+
+            document.addEventListener("mousemove", this.handleKnobDrag);
+            document.addEventListener("mouseup", handleMouseUp);
         });
     }
 
     update(newData: ExtensionData): void {
         if (!this.isInputFocused) {
-            this.input.value = newData.temp_accent_color.hue.toString();
+            this.input.value = newData.accent_color.hue.toString();
         }
 
         if (!this.isKnobDragging) {
-            this.updateKnob(newData.temp_accent_color.hue);
+            this.updateKnob(newData.accent_color.hue);
         }
     }
 
@@ -269,7 +289,11 @@ class SpectrumManager extends StateSubscriber {
         // Set background color (CSS hue range is [0, 360])
         this.knob.style.backgroundColor = `hsl(${hue}, 100%, 50%)`;
 
-        this.state.setData({ temp_accent_color: { hue: hue } });
+        this.state.cautiouslySetLocalData({ accent_color: { hue: hue } });
+        messageTabs<MessagePayload>({
+            type: "setAccentColor",
+            color: { hue: hue },
+        });
     };
 
     private updateKnob(hue: number) {
@@ -280,16 +304,6 @@ class SpectrumManager extends StateSubscriber {
         this.knob.style.left = this.knobOffset + "px";
         // Set background color (CSS hue range is [0, 360])
         this.knob.style.backgroundColor = `hsl(${hue}, 100%, 50%)`;
-    }
-
-    private handleTempColor(color: AccentColorOptions) {
-        messageTabs({
-            type: "accentColor",
-            color: color,
-        });
-
-        setStyleProperty("accentHue", color.hue.toString());
-        setStorage("temp_accent_color", color);
     }
 }
 
@@ -526,7 +540,7 @@ class StyleManager extends StateSubscriber {
     initialize(): void {}
 
     update(newData: ExtensionData): void {
-        setStyleProperty("accentHue", newData.temp_accent_color.hue.toString());
+        setStyleProperty("accentHue", newData.accent_color.hue.toString());
     }
 }
 

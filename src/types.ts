@@ -80,7 +80,6 @@ type ExtensionData = {
     show_border: boolean;
 
     accent_color: AccentColorOptions;
-    temp_accent_color: AccentColorOptions;
     button_options: ButtonOptions;
 
     version: VersionInfo;
