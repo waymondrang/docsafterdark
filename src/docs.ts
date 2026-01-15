@@ -360,12 +360,23 @@ class DocsAfterDark {
     }
 
     showUpdateNotification() {
+        // Remove existing updateNotification, if exists
+        removeElement("updateNotification");
+
         const notificationElement = document.createElement("div");
         notificationElement.id = getElementId("updateNotification");
 
         const containerElement = document.createElement("div");
         containerElement.classList.add("container");
         notificationElement.appendChild(containerElement);
+
+        ///////////////////////
+        // MESSAGE CONTAINER //
+        ///////////////////////
+
+        const messageElement = document.createElement("div");
+        messageElement.classList.add("message");
+        containerElement.appendChild(messageElement);
 
         const textElement = document.createElement("p");
         if (
@@ -381,6 +392,7 @@ class DocsAfterDark {
                 CURRENT_VERSION +
                 ". Read release notes on ";
         }
+        messageElement.appendChild(textElement);
 
         const linkElement = document.createElement("a");
         linkElement.href = updateLink;
@@ -390,14 +402,41 @@ class DocsAfterDark {
         textElement.appendChild(linkElement);
         textElement.appendChild(document.createTextNode("."));
 
+        ////////////////////////////
+        // CLOSE BUTTON CONTAINER //
+        ////////////////////////////
+
+        const closeElement = document.createElement("div");
+        closeElement.classList.add("close");
+        containerElement.appendChild(closeElement);
+
         const closeButton = document.createElement("button");
-        closeButton.textContent = "Close";
+        closeButton.id = "closeButton";
         closeButton.onclick = function () {
             notificationElement.remove();
         };
+        closeElement.appendChild(closeButton);
 
-        textElement.appendChild(closeButton);
-        containerElement.appendChild(textElement);
+        const svg = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "svg"
+        );
+        svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+        svg.setAttribute("height", "24px");
+        svg.setAttribute("viewBox", "0 -960 960 960");
+        svg.setAttribute("width", "24px");
+        svg.setAttribute("fill", "#e3e3e3");
+        const path = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "path"
+        );
+        path.setAttribute(
+            "d",
+            "m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"
+        );
+        svg.appendChild(path);
+        closeButton.appendChild(svg);
+
         document.body.prepend(notificationElement);
     }
 

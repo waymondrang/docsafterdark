@@ -1,68 +1,88 @@
 #DocsAfterDark_switch {
     position: fixed;
     left: 24px;
-    bottom: 24px;
-    bottom: var(--DocsAfterDark_switchPosition);
+    bottom: var(--DocsAfterDark_switchPosition, 24px);
+
+    color: #cecece;
+
+    padding: 2px 8px;
+
     border: 0.0625rem solid #7f7f7f28;
     border-radius: 999px;
+
     background-color: #ffffff0a;
-    color: #cecece;
-    padding: 2px 8px;
+
     z-index: 2500000000;
 }
 
 #DocsAfterDark_updateNotification {
     position: fixed;
-    top: 12px;
+    top: 1rem;
     left: 0;
     right: 0;
-    color: var(--secondary-text-color, #f2f2f2);
-    padding: 12px;
-    text-align: center;
-    z-index: 2500000000;
+
     width: fit-content;
     margin: 0 auto;
+    padding: 1rem;
+
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--secondary-text-color, #f2f2f2);
+
+    z-index: 999999999;
 
     p {
         margin: 0;
+        padding: 0;
     }
 
-    div {
+    .container {
         display: flex;
-        align-items: center;
 
         border: 1px solid var(--primary-border-color, #4d4d4d);
         background-color: var(--primary-background-color, #212121);
-        padding: 6px 12px;
-        border-radius: 8px;
-        box-shadow:
-            0 14px 28px rgba(0, 0, 0, 0.25),
-            0 10px 10px rgba(0, 0, 0, 0.22);
-        font-size: 14px;
-        font-family: Arial, Helvetica, sans-serif;
+        border-radius: 0.5rem;
+        overflow: hidden;
+
+        box-shadow: 0 14px 28px rgba(0, 0, 0, 0.5);
 
         box-sizing: border-box;
+
+        .message {
+            flex: 1;
+            padding: 0.5rem 0.75rem;
+        }
+
+        .close {
+            border-left: 1px solid var(--primary-border-color);
+
+            button {
+                height: 100%;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                color: var(--button-text-color);
+
+                background-color: var(--accent-color);
+                border: none;
+
+                cursor: pointer;
+
+                svg {
+                    fill: var(--primary-text-color);
+                }
+
+                &:hover {
+                    background-color: var(--accent-hover-color, #595959);
+                }
+            }
+        }
     }
 
     a {
-        color: var(--accent-color, #64b5f6);
+        color: var(--accent-color);
         text-decoration: underline;
-    }
-
-    button {
-        height: 24px;
-        padding: 0 6px;
-
-        background-color: var(--accent-color, #4d4d4d);
-        border-radius: 4px;
-        color: var(--button-text-color, #64b5f6);
-        border: none;
-        cursor: pointer;
-        margin-left: 12px;
-        font-size: inherit;
-    }
-
-    button:hover {
-        background-color: var(--accent-hover-color, #595959);
     }
 }
