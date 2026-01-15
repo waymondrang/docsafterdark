@@ -31,8 +31,13 @@
 
     --button-text-color: #fff;
 
-    --accent-color: #1e88e5;
-    --accent-hover-color: #2196f3;
-    --light-accent-color: #1e88e51a;
-    --light-accent-hover-color: #1e88e51e;
+    --accent-color: hsl(var(--DocsAfterDark_accentHue), 40%, 60%);
+    --light-accent-color: hsla(var(--DocsAfterDark_accentHue), 40%, 70%, 0.1);
+    --light-accent-hover-color: hsla(
+        var(--DocsAfterDark_accentHue),
+        60%,
+        60%,
+        0.2
+    );
+    --accent-hover-color: hsla(var(--DocsAfterDark_accentHue), 60%, 80%, 1);
 }
