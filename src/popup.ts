@@ -2,7 +2,7 @@ import { Logger } from "./logger";
 import {
     DarkModeOperation,
     DocumentBackground,
-    ExtensionOperation,
+    ExtensionMode,
     type MessagePayload,
     type ExtensionData,
 } from "./types";
@@ -103,11 +103,11 @@ class ModeComponent extends StateSubscriber {
 
                 switch (target.value) {
                     case "off":
-                        this.state.setData({ mode: ExtensionOperation.Off });
+                        this.state.setData({ mode: ExtensionMode.Off });
                         break;
                     case "dark":
                         this.state.setData({
-                            mode: ExtensionOperation.DarkMode,
+                            mode: ExtensionMode.Dark,
                             doc_bg: DocumentBackground.Blend,
                             invert: {
                                 ...this.state.getData().invert,
@@ -117,7 +117,7 @@ class ModeComponent extends StateSubscriber {
                         break;
                     case "light":
                         this.state.setData({
-                            mode: ExtensionOperation.LightMode,
+                            mode: ExtensionMode.Light,
                             doc_bg: DocumentBackground.Default,
                             invert: {
                                 ...this.state.getData().invert,
@@ -135,12 +135,10 @@ class ModeComponent extends StateSubscriber {
 
         this.modeButtons.forEach((button) => {
             if (
-                (button.value == "off" &&
-                    newData.mode == ExtensionOperation.Off) ||
+                (button.value == "off" && newData.mode == ExtensionMode.Off) ||
                 (button.value == "dark" &&
-                    newData.mode == ExtensionOperation.DarkMode) ||
-                (button.value == "light" &&
-                    newData.mode == ExtensionOperation.LightMode)
+                    newData.mode == ExtensionMode.Dark) ||
+                (button.value == "light" && newData.mode == ExtensionMode.Light)
             ) {
                 button.classList.add("selected");
             }
@@ -357,7 +355,7 @@ class DocumentBackgroundComponent extends StateSubscriber {
                 } else if (value != DocumentBackground.Custom) {
                     update.invert = {
                         ...data.invert,
-                        invert: data.mode == ExtensionOperation.DarkMode,
+                        invert: data.mode == ExtensionMode.Dark,
                     };
                 }
 

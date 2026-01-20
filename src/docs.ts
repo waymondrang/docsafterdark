@@ -13,7 +13,7 @@ import { Logger } from "./logger";
 import {
     DarkModeOperation,
     DocumentBackground,
-    ExtensionOperation,
+    ExtensionMode,
     LightModeOperation,
     type AccentColorOptions,
     type ExtensionData,
@@ -267,7 +267,7 @@ class DocsAfterDark {
     private updateMode(): boolean {
         this.resetMode();
 
-        if (this.extensionData.mode === ExtensionOperation.Off) {
+        if (this.extensionData.mode === ExtensionMode.Off) {
             this.removeExtension();
             return false;
         }
@@ -275,9 +275,9 @@ class DocsAfterDark {
         addClassToHTML(enabledClass);
         insertStylesheet(getAssetURL("docs.bundle.css"), "stylesheet");
 
-        if (this.extensionData.mode === ExtensionOperation.DarkMode) {
+        if (this.extensionData.mode === ExtensionMode.Dark) {
             this.updateDarkMode();
-        } else if (this.extensionData.mode === ExtensionOperation.LightMode) {
+        } else if (this.extensionData.mode === ExtensionMode.Light) {
             this.updateLightMode();
         } else {
             throw new Error(

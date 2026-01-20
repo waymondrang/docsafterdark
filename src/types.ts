@@ -9,10 +9,10 @@
 // ENUMS //
 ///////////
 
-enum ExtensionOperation {
+enum ExtensionMode {
     Off = 0,
-    LightMode = 1,
-    DarkMode = 2,
+    Light = 1,
+    Dark = 2,
 }
 
 enum DarkModeOperation {
@@ -69,7 +69,7 @@ interface VersionInfo {
 ////////////////////
 
 type ExtensionData = {
-    mode: ExtensionOperation;
+    mode: ExtensionMode;
     dark_mode: DarkModeOptions;
     // NOTE: Currently there is no light mode operation, the light_mode field
     //       only exists to provide consistency with the other mode fields.
@@ -169,7 +169,7 @@ interface BrowserAPI {
 }
 
 export {
-    ExtensionOperation,
+    ExtensionMode,
     DarkModeOperation,
     LightModeOperation,
     DocumentBackground,

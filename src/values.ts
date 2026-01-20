@@ -1,6 +1,6 @@
 import {
     DarkModeOperation,
-    ExtensionOperation,
+    ExtensionMode,
     LightModeOperation,
     DocumentBackground,
     type ExtensionData,
@@ -68,7 +68,7 @@ const buttonPosition = {
 };
 
 const defaultExtensionData: ExtensionData = {
-    mode: ExtensionOperation.DarkMode,
+    mode: ExtensionMode.Dark,
     dark_mode: { variant: DarkModeOperation.Normal },
     light_mode: { variant: LightModeOperation.Normal },
 
