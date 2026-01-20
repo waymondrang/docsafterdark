@@ -27,7 +27,8 @@ enum LightModeOperation {
 enum DocumentBackground {
     Default = "default",
     Shade = "shade",
-    Dark = "dark",
+    // "dark" is used in storage, "blend" is what the user selects
+    Blend = "dark",
     Black = "black",
     Custom = "custom",
 }

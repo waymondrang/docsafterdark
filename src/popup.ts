@@ -108,11 +108,21 @@ class ModeComponent extends StateSubscriber {
                     case "dark":
                         this.state.setData({
                             mode: ExtensionOperation.DarkMode,
+                            doc_bg: DocumentBackground.Blend,
+                            invert: {
+                                ...this.state.getData().invert,
+                                invert: true,
+                            },
                         });
                         break;
                     case "light":
                         this.state.setData({
                             mode: ExtensionOperation.LightMode,
+                            doc_bg: DocumentBackground.Default,
+                            invert: {
+                                ...this.state.getData().invert,
+                                invert: false,
+                            },
                         });
                         break;
                 }
@@ -324,9 +334,34 @@ class DocumentBackgroundComponent extends StateSubscriber {
     initialize(): void {
         this.buttons.forEach((button) => {
             button.addEventListener("click", () => {
-                this.state.setData({
-                    doc_bg: button.value as DocumentBackground,
-                });
+                const data = this.state.getData();
+                const value = button.value as DocumentBackground;
+                const update: Partial<ExtensionData> = {
+                    doc_bg: value,
+                };
+
+                // If background is default (white), always turn invert off
+                // If background is black, always turn invert on
+                // If background is anything else, invert based on theme
+
+                if (value == DocumentBackground.Default) {
+                    update.invert = {
+                        ...data.invert,
+                        invert: false,
+                    };
+                } else if (value == DocumentBackground.Black) {
+                    update.invert = {
+                        ...data.invert,
+                        invert: true,
+                    };
+                } else if (value != DocumentBackground.Custom) {
+                    update.invert = {
+                        ...data.invert,
+                        invert: data.mode == ExtensionOperation.DarkMode,
+                    };
+                }
+
+                this.state.setData(update);
             });
         });
 

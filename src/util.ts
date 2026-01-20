@@ -276,5 +276,5 @@ export {
     getElementId,
     removeElement,
     insertStylesheet,
-    getAssetURL
+    getAssetURL,
 };

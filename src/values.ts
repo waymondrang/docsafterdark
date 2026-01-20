@@ -72,7 +72,7 @@ const defaultExtensionData: ExtensionData = {
     dark_mode: { variant: DarkModeOperation.Normal },
     light_mode: { variant: LightModeOperation.Normal },
 
-    doc_bg: DocumentBackground.Dark,
+    doc_bg: DocumentBackground.Blend,
     custom_bg: "",
 
     // Matcha/sage green hue
