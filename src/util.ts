@@ -4,7 +4,7 @@ import type {
     MessageListener,
     StorageListener,
 } from "./types";
-import { STYLE_PROPERTY_PREFIX } from "./values";
+import { SELECTOR_PREFIX, STYLE_PROPERTY_PREFIX } from "./values";
 
 declare const browser: BrowserAPI;
 declare const chrome: BrowserAPI;
@@ -203,6 +203,55 @@ function removeClassFromParent(
     element.parentElement.classList.remove(...classes);
 }
 
+function addClassToHTML(...classes: string[]): void {
+    document.documentElement.classList.add(
+        ...classes.map((c) => SELECTOR_PREFIX + c)
+    );
+}
+
+function removeClassFromHTML(...classes: string[]): void {
+    document.documentElement.classList.remove(
+        ...classes.map((c) => SELECTOR_PREFIX + c)
+    );
+}
+
+function isOnHomepage(): boolean {
+    return document.querySelector(".docs-homescreen-gb-container") != null;
+}
+
+function getElementId(id: string): string {
+    return (SELECTOR_PREFIX + id).replace(/\.| /g, "_");
+}
+
+function removeElement(id: string) {
+    document.querySelector(`#${getElementId(id)}`)?.remove();
+}
+
+/**
+ * Inserts a stylesheet link element using non-prefixed id into the document
+ * head. Remove using removeElement()
+ */
+function insertStylesheet(path: string, id: string): void {
+    const elementId = getElementId(id);
+
+    // Only one stylesheet should be inserted
+    if (document.getElementById(elementId)) {
+        return;
+    }
+
+    const link = document.createElement("link");
+    link.id = elementId;
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = getAssetURL(path);
+
+    document.head.appendChild(link);
+}
+
+function getAssetURL(path: string): string {
+    return getBrowserNamespace().runtime.getURL(path);
+}
+
 export {
     getBrowserNamespace,
     setStyleProperty,
@@ -221,4 +270,11 @@ export {
     getExtensionData,
     addClassToParent,
     removeClassFromParent,
+    addClassToHTML,
+    removeClassFromHTML,
+    isOnHomepage,
+    getElementId,
+    removeElement,
+    insertStylesheet,
+    getAssetURL
 };

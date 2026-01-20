@@ -4,6 +4,7 @@ import {
     documentBackgroundStyles,
     documentBorder,
     documentInvert,
+    enabledClass,
     replacements,
     themeClasses,
     updateLink,
@@ -21,10 +22,17 @@ import {
     type StorageListener,
 } from "./types";
 import {
+    addClassToHTML,
+    getAssetURL,
     getBrowserNamespace,
+    getElementId,
     getExtensionData,
+    insertStylesheet,
+    isOnHomepage,
     registerMessageListener,
     registerStorageListener,
+    removeClassFromHTML,
+    removeElement,
     setStorageBatch,
     setStyleProperty,
 } from "./util";
@@ -33,15 +41,6 @@ const browser = getBrowserNamespace();
 const CURRENT_VERSION = browser.runtime.getManifest().version;
 
 const REPLACEMENTS_PATH = "assets/replacements/";
-const ELEMENT_ID_PREFIX = "DocsAfterDark_";
-
-function getElementId(id: string): string {
-    return (ELEMENT_ID_PREFIX + id).replace(/\.| /g, "_");
-}
-
-function removeElement(id: string) {
-    document.querySelector(`#${getElementId(id)}`)?.remove();
-}
 
 class DocsAfterDark {
     private extensionData: ExtensionData = defaultExtensionData;
@@ -224,17 +223,11 @@ class DocsAfterDark {
 
     private updateDarkMode() {
         if (this.extensionData.dark_mode.variant === DarkModeOperation.Normal) {
-            document.documentElement.classList.add(
-                themeClasses.dark,
-                themeClasses.normal
-            );
+            addClassToHTML(themeClasses.dark, themeClasses.normal);
         } else if (
             this.extensionData.dark_mode.variant === DarkModeOperation.Midnight
         ) {
-            document.documentElement.classList.add(
-                themeClasses.dark,
-                themeClasses.midnight
-            );
+            addClassToHTML(themeClasses.dark, themeClasses.midnight);
         } else {
             throw new Error(
                 "Unknown dark mode operation: " +
@@ -247,10 +240,7 @@ class DocsAfterDark {
         if (
             this.extensionData.light_mode.variant === LightModeOperation.Normal
         ) {
-            document.documentElement.classList.add(
-                themeClasses.light,
-                themeClasses.normal
-            );
+            addClassToHTML(themeClasses.light, themeClasses.normal);
         } else {
             throw new Error(
                 "Unknown light mode operation: " +
@@ -277,13 +267,18 @@ class DocsAfterDark {
     private updateMode(): boolean {
         this.resetMode();
 
+        if (this.extensionData.mode === ExtensionOperation.Off) {
+            this.removeExtension();
+            return false;
+        }
+
+        addClassToHTML(enabledClass);
+        insertStylesheet(getAssetURL("docs.bundle.css"), "stylesheet");
+
         if (this.extensionData.mode === ExtensionOperation.DarkMode) {
             this.updateDarkMode();
         } else if (this.extensionData.mode === ExtensionOperation.LightMode) {
             this.updateLightMode();
-        } else if (this.extensionData.mode === ExtensionOperation.Off) {
-            this.removeExtension();
-            return false;
         } else {
             throw new Error(
                 "Unknown extension operation: " + this.extensionData.mode
@@ -294,9 +289,7 @@ class DocsAfterDark {
     }
 
     private resetMode(): void {
-        document.documentElement.classList.remove(
-            ...Object.values(themeClasses)
-        );
+        removeClassFromHTML(...Object.values(themeClasses));
     }
 
     private updateDocumentBackground() {
@@ -444,7 +437,7 @@ class DocsAfterDark {
         for (const [key, value] of Object.entries(replacements)) {
             setStyleProperty(
                 key,
-                "url(" + browser.runtime.getURL(REPLACEMENTS_PATH + value) + ")"
+                "url(" + getAssetURL(REPLACEMENTS_PATH + value) + ")"
             );
         }
     }
@@ -458,7 +451,8 @@ class DocsAfterDark {
     }
 
     private removeExtension() {
-        removeElement("docs.css");
+        removeClassFromHTML(enabledClass);
+        removeElement("stylesheet");
         removeElement("button");
     }
 }
@@ -468,6 +462,11 @@ class DocsAfterDark {
 /////////////////
 
 (async () => {
+    if (isOnHomepage()) {
+        Logger.debug("On Google Docs homepage, will not enable DocsAfterDark.");
+        return;
+    }
+
     const extension = new DocsAfterDark();
     extension.initialize();
 })();

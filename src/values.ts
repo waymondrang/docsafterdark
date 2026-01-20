@@ -7,6 +7,7 @@ import {
 } from "./types";
 
 const STYLE_PROPERTY_PREFIX = "--DocsAfterDark_";
+const SELECTOR_PREFIX = "DocsAfterDark_";
 
 const documentBackgroundStyles: Record<DocumentBackground, string> = {
     default: "#ffffff",
@@ -31,6 +32,8 @@ const themeClasses = {
     normal: "normal",
     midnight: "midnight",
 };
+
+const enabledClass = "enabled";
 
 // NOTE: revisions-sprite1 has been renamed with an underscore (_).
 
@@ -96,6 +99,7 @@ const updateLink = "https://github.com/waymondrang/docsafterdark/releases";
 
 export {
     STYLE_PROPERTY_PREFIX,
+    SELECTOR_PREFIX,
     replacements,
     documentBackgroundStyles,
     documentBackgroundDescriptions,
@@ -104,5 +108,6 @@ export {
     buttonPosition,
     updateLink,
     themeClasses,
+    enabledClass,
     defaultExtensionData,
 };
