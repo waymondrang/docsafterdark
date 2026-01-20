@@ -37,8 +37,8 @@ import {
     setStyleProperty,
 } from "./util";
 
-const browser = getBrowserNamespace();
-const CURRENT_VERSION = browser.runtime.getManifest().version;
+const browser_ns = getBrowserNamespace();
+const CURRENT_VERSION = browser_ns.runtime.getManifest().version;
 
 const REPLACEMENTS_PATH = "assets/replacements/";
 

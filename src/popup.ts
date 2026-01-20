@@ -17,8 +17,8 @@ import {
 } from "./util";
 import { defaultExtensionData } from "./values";
 
-const browser = getBrowserNamespace();
-const VERSION = browser.runtime.getManifest().version;
+const browser_ns = getBrowserNamespace();
+const VERSION = browser_ns.runtime.getManifest().version;
 
 // NOTE: Components that will update based on changes that happen to the global
 //       state (coupled logic between managers) should implement the
