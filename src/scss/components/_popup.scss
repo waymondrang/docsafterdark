@@ -64,12 +64,18 @@ main {
     padding: 0.5rem;
 }
 
-button {
-    background-color: transparent;
+button,
+.button {
     color: var(--primary-text-color);
-    border: none;
+    text-decoration: none;
+
     padding: 0.25rem 0.5rem;
+
+    border: none;
+    background-color: transparent;
+
     cursor: pointer;
+
     transition:
         opacity 0.1s ease-out,
         background-color 0.1s ease-out;
@@ -290,6 +296,7 @@ footer {
         );
 
         border-radius: 0.25rem;
+        cursor: pointer;
 
         #spectrumKnob {
             position: relative;
@@ -384,4 +391,13 @@ div.checkbox {
 
 .hidden {
     display: none;
+}
+
+#github {
+    padding: 0.25rem;
+
+    svg {
+        display: block;
+        height: 1rem;
+    }
 }

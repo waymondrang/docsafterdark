@@ -475,20 +475,6 @@ class TipComponent {
     }
 }
 
-class DonateComponent {
-    private donateButton = document.querySelector(
-        "#donate"
-    ) as HTMLButtonElement;
-
-    initialize() {
-        this.donateButton.addEventListener("click", function () {
-            browser.tabs.create({
-                url: "https://www.buymeacoffee.com/waymondrang",
-            });
-        });
-    }
-}
-
 class InvertComponent extends StateSubscriber {
     private invertedCheckbox = document.querySelector(
         "#documentInverted"
@@ -585,7 +571,6 @@ class Popup extends PopupState {
     private borderComponent: BorderComponent = new BorderComponent(this);
     private buttonComponent: ButtonComponent = new ButtonComponent(this);
     private tipComponent: TipComponent = new TipComponent();
-    private donateComponent: DonateComponent = new DonateComponent();
     private invertComponent: InvertComponent = new InvertComponent(this);
     private versionComponent: VersionComponent = new VersionComponent();
 
@@ -606,7 +591,6 @@ class Popup extends PopupState {
         this.borderComponent.initialize();
         this.buttonComponent.initialize();
         this.tipComponent.initialize();
-        this.donateComponent.initialize();
         this.invertComponent.initialize();
         this.versionComponent.initialize();
         this.styleManager.initialize();
