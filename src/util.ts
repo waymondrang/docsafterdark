@@ -8,8 +8,7 @@ import { SELECTOR_PREFIX, STYLE_PROPERTY_PREFIX } from "./values";
 
 declare const browser: BrowserAPI;
 declare const chrome: BrowserAPI;
-
-// TODO: Clean up namespacing as some functions use browser const.
+const browser_ns = getBrowserNamespace();
 
 /**
  * Returns the global namespace object used to access Web APIs
@@ -89,9 +88,7 @@ function isVersionNewer(curr: string, target: string) {
  * Send message payload to active tabs in current window
  */
 async function messageTabs<T>(message: T): Promise<void> {
-    const browser = getBrowserNamespace();
-
-    const tabs = await browser.tabs.query({
+    const tabs = await browser_ns.tabs.query({
         active: true,
         currentWindow: true,
     });
@@ -99,7 +96,7 @@ async function messageTabs<T>(message: T): Promise<void> {
     await Promise.all(
         tabs
             .filter((tab) => tab.id !== undefined)
-            .map((tab) => browser.tabs.sendMessage<T>(tab.id!, message))
+            .map((tab) => browser_ns.tabs.sendMessage<T>(tab.id!, message))
     );
 }
 
@@ -110,13 +107,13 @@ async function messageTabs<T>(message: T): Promise<void> {
  * Sets a storage item with a new value
  */
 function setStorage(key: keyof ExtensionData, value: unknown): Promise<void> {
-    return getBrowserNamespace().storage.local.set({
+    return browser_ns.storage.local.set({
         [key]: value,
     }) as Promise<void>;
 }
 
 function setStorageBatch(data: Record<string, unknown>) {
-    return getBrowserNamespace().storage.local.set(data) as Promise<void>;
+    return browser_ns.storage.local.set(data) as Promise<void>;
 }
 
 /**
@@ -124,13 +121,11 @@ function setStorageBatch(data: Record<string, unknown>) {
  */
 function getStorage<T>(keys: (keyof ExtensionData)[]): Promise<T> {
     return new Promise((resolve, reject) => {
-        const browser = getBrowserNamespace();
-
-        browser.storage.local.get(keys).then(
+        browser_ns.storage.local.get(keys).then(
             (result) => {
                 resolve(result as T);
             },
-            () => reject(browser.runtime.lastError)
+            () => reject(browser_ns.runtime.lastError)
         );
     });
 }
@@ -139,32 +134,32 @@ function getStorage<T>(keys: (keyof ExtensionData)[]): Promise<T> {
  * Deletes storage items by key(s)
  */
 function deleteStorage(keys: (keyof ExtensionData)[]): Promise<void> {
-    return getBrowserNamespace().storage.local.remove(keys) as Promise<void>;
+    return browser_ns.storage.local.remove(keys) as Promise<void>;
 }
 
 function registerStorageListener(listener: StorageListener) {
-    browser.storage.onChanged.addListener(listener);
+    browser_ns.storage.onChanged.addListener(listener);
 }
 
 function hasStorageListener(listener: StorageListener) {
-    return browser.storage.onChanged.hasListener(listener);
+    return browser_ns.storage.onChanged.hasListener(listener);
 }
 
 function removeStorageListener(listener: StorageListener) {
-    browser.storage.onChanged.removeListener(listener);
+    browser_ns.storage.onChanged.removeListener(listener);
 }
 
 // Reference: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/runtime/onMessage
 function registerMessageListener(listener: MessageListener) {
-    browser.runtime.onMessage.addListener(listener);
+    browser_ns.runtime.onMessage.addListener(listener);
 }
 
 function hasMessageListener(listener: MessageListener) {
-    browser.runtime.onMessage.hasListener(listener);
+    browser_ns.runtime.onMessage.hasListener(listener);
 }
 
 function removeMessageListener(listener: MessageListener) {
-    browser.runtime.onMessage.removeListener(listener);
+    browser_ns.runtime.onMessage.removeListener(listener);
 }
 
 function getExtensionData(): Promise<Partial<ExtensionData>> {
@@ -249,7 +244,7 @@ function insertStylesheet(path: string, id: string): void {
 }
 
 function getAssetURL(path: string): string {
-    return getBrowserNamespace().runtime.getURL(path);
+    return browser_ns.runtime.getURL(path);
 }
 
 export {
