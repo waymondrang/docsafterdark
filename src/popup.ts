@@ -20,9 +20,9 @@ import { defaultExtensionData } from "./values";
 const browser = getBrowserNamespace();
 const VERSION = browser.runtime.getManifest().version;
 
-// NOTE: Managers that will update based on changes that happen to the global
+// NOTE: Components that will update based on changes that happen to the global
 //       state (coupled logic between managers) should implement the
-//       SubscribedManager abstract class.
+//       StateSubscriber abstract class.
 
 class PopupState {
     // extensionData must not be directly mutated
@@ -81,7 +81,7 @@ abstract class StateSubscriber {
     abstract update(newData: ExtensionData): void;
 }
 
-class OperationModeManager extends StateSubscriber {
+class ModeComponent extends StateSubscriber {
     private modeButtons = document.querySelectorAll(
         "#modeDark, #modeLight, #modeOff"
     ) as NodeListOf<HTMLButtonElement>;
@@ -144,8 +144,7 @@ class OperationModeManager extends StateSubscriber {
     }
 }
 
-// TODO: DarkModeManager should extend StateSubscriber
-class DarkModeManager extends StateSubscriber {
+class DarkModeComponent extends StateSubscriber {
     private normalButton = document.querySelector(
         "#darkModeNormal"
     ) as HTMLButtonElement;
@@ -192,7 +191,7 @@ class DarkModeManager extends StateSubscriber {
     }
 }
 
-class SpectrumManager extends StateSubscriber {
+class SpectrumComponent extends StateSubscriber {
     private input = document.querySelector(
         "#spectrumInput"
     ) as HTMLInputElement;
@@ -307,7 +306,7 @@ class SpectrumManager extends StateSubscriber {
     }
 }
 
-class DocumentBackgroundManager extends StateSubscriber {
+class DocumentBackgroundComponent extends StateSubscriber {
     private buttons = document.querySelectorAll(
         "#documentBGDefault, #documentBGShade, #documentBGDark, #documentBGBlack, #documentBGCustom"
     ) as NodeListOf<HTMLButtonElement>;
@@ -359,7 +358,7 @@ class DocumentBackgroundManager extends StateSubscriber {
     }
 }
 
-class BorderManager extends StateSubscriber {
+class BorderComponent extends StateSubscriber {
     private showBorderCheckbox = document.querySelector(
         "#documentBorder"
     ) as HTMLInputElement;
@@ -377,7 +376,7 @@ class BorderManager extends StateSubscriber {
     }
 }
 
-class ButtonManager extends StateSubscriber {
+class ButtonComponent extends StateSubscriber {
     private showButtonCheckbox = document.querySelector(
         "#showButton"
     ) as HTMLInputElement;
@@ -420,7 +419,7 @@ class ButtonManager extends StateSubscriber {
     }
 }
 
-class TipManager {
+class TipComponent {
     private tipButton = document.querySelector("#tipButton") as HTMLDivElement;
     private tipContainer = document.querySelector(
         "#tipContainer"
@@ -443,7 +442,7 @@ class TipManager {
     }
 }
 
-class DonateManager {
+class DonateComponent {
     private donateButton = document.querySelector(
         "#donate"
     ) as HTMLButtonElement;
@@ -457,7 +456,7 @@ class DonateManager {
     }
 }
 
-class InvertManager extends StateSubscriber {
+class InvertComponent extends StateSubscriber {
     private invertedCheckbox = document.querySelector(
         "#documentInverted"
     ) as HTMLInputElement;
@@ -526,7 +525,7 @@ class InvertManager extends StateSubscriber {
     }
 }
 
-class VersionManager {
+class VersionComponent {
     private versionElement = document.querySelector(
         "#version"
     ) as HTMLParagraphElement;
@@ -544,25 +543,20 @@ class StyleManager extends StateSubscriber {
     }
 }
 
-class Popup {
-    private state: PopupState = new PopupState();
+class Popup extends PopupState {
+    private modeComponent: ModeComponent = new ModeComponent(this);
+    private darkModeComponent: DarkModeComponent = new DarkModeComponent(this);
+    private spectrumComponent: SpectrumComponent = new SpectrumComponent(this);
+    private documentBackgroundComponent: DocumentBackgroundComponent =
+        new DocumentBackgroundComponent(this);
+    private borderComponent: BorderComponent = new BorderComponent(this);
+    private buttonComponent: ButtonComponent = new ButtonComponent(this);
+    private tipComponent: TipComponent = new TipComponent();
+    private donateComponent: DonateComponent = new DonateComponent();
+    private invertComponent: InvertComponent = new InvertComponent(this);
+    private versionComponent: VersionComponent = new VersionComponent();
 
-    private operationModesManager: OperationModeManager =
-        new OperationModeManager(this.state);
-    private buttonManager: ButtonManager = new ButtonManager(this.state);
-    private invertManager: InvertManager = new InvertManager(this.state);
-
-    private darkModeManager: DarkModeManager = new DarkModeManager(this.state);
-
-    private tipManager: TipManager = new TipManager();
-
-    private spectrumManager: SpectrumManager = new SpectrumManager(this.state);
-    private documentBackgroundManager: DocumentBackgroundManager =
-        new DocumentBackgroundManager(this.state);
-    private borderManager: BorderManager = new BorderManager(this.state);
-    private donateManager: DonateManager = new DonateManager();
-    private versionManager: VersionManager = new VersionManager();
-    private styleManager: StyleManager = new StyleManager(this.state);
+    private styleManager: StyleManager = new StyleManager(this);
 
     async initialize() {
         Logger.debug("Hello from DocsAfterDark Popup!");
@@ -570,21 +564,21 @@ class Popup {
         // Set the state's data in case any initialize functions need to
         // access it (ideally state is consumed during update function).
         const extensionData = await getExtensionData();
-        this.state.setData(extensionData);
+        this.setData(extensionData);
 
-        this.operationModesManager.initialize();
-        this.darkModeManager.initialize();
-        this.tipManager.initialize();
-        this.buttonManager.initialize();
-        this.documentBackgroundManager.initialize();
-        this.invertManager.initialize();
-        this.versionManager.initialize();
-        this.borderManager.initialize();
-        this.donateManager.initialize();
-        this.spectrumManager.initialize();
+        this.modeComponent.initialize();
+        this.darkModeComponent.initialize();
+        this.spectrumComponent.initialize();
+        this.documentBackgroundComponent.initialize();
+        this.borderComponent.initialize();
+        this.buttonComponent.initialize();
+        this.tipComponent.initialize();
+        this.donateComponent.initialize();
+        this.invertComponent.initialize();
+        this.versionComponent.initialize();
         this.styleManager.initialize();
 
-        this.state.updateSubscribers();
+        this.updateSubscribers();
     }
 }
 
