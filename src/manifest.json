@@ -17,12 +17,7 @@
     },
     "web_accessible_resources": [
         {
-            "resources": [
-                "docs.bundle.css",
-                "assets/css/*.css",
-                "assets/replacements/*.png",
-                "assets/replacements/*.svg"
-            ],
+            "resources": ["docs.bundle.css"],
             "matches": ["*://docs.google.com/*"]
         }
     ],
@@ -31,5 +26,13 @@
         "48": "assets/icons/docsafterdark_48.png",
         "128": "assets/icons/docsafterdark_128.png"
     },
-    "permissions": ["storage", "activeTab"]
+    "permissions": ["storage", "activeTab"],
+    "browser_specific_settings": {
+        "gecko": {
+            "data_collection_permissions": {
+                "required": ["none"]
+            },
+            "id": "{e8ffc3db-2875-4c7f-af38-d03e7f7f8ab9}"
+        }
+    }
 }

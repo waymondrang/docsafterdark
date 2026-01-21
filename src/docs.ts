@@ -275,7 +275,7 @@ class DocsAfterDark {
         }
 
         addClassToHTML(enabledClass);
-        insertStylesheet(getAssetURL("docs.bundle.css"), "stylesheet");
+        insertStylesheet("docs.bundle.css", "stylesheet");
 
         if (this.extensionData.mode === ExtensionMode.Dark) {
             this.updateDarkMode();
