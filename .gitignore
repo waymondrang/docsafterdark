@@ -147,3 +147,6 @@ vite.config.ts.timestamp-*
 
 test/
 build/
+release/
+
+.DS_Store

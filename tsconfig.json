@@ -31,6 +31,7 @@
         // "noUnusedParameters": true,
         // "noFallthroughCasesInSwitch": true,
         // "noPropertyAccessFromIndexSignature": true,
+        "allowSyntheticDefaultImports": true,
 
         // Recommended Options
         "strict": true,
@@ -40,5 +41,6 @@
         "noUncheckedSideEffectImports": true,
         "moduleDetection": "force",
         "skipLibCheck": true
-    }
+    },
+    "include": ["src/**/*"]
 }

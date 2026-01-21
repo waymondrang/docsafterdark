@@ -2,8 +2,11 @@
     "name": "docsafterdark",
     "version": "2.0.0",
     "description": "Beyond dark mode for Google Docs",
+    "type": "module",
     "devDependencies": {
         "@eslint/js": "^9.39.2",
+        "@types/archiver": "^7.0.0",
+        "@types/node": "^25.0.9",
         "archiver": "^7.0.1",
         "concurrently": "^9.2.1",
         "copy-webpack-plugin": "^13.0.1",
@@ -12,6 +15,7 @@
         "prettier": "^3.7.4",
         "sass": "^1.97.2",
         "ts-loader": "^9.5.4",
+        "ts-node": "^10.9.2",
         "typescript": "^5.9.3",
         "typescript-eslint": "^8.52.0",
         "web-ext": "^9.2.0",
@@ -28,7 +32,7 @@
     },
     "homepage": "https://docsafterdark.com/",
     "scripts": {
-        "build": "webpack && sass src/scss/docs.scss build/docs.bundle.css && sass src/scss/frame.scss build/frame.bundle.css && sass src/scss/global.scss build/global.bundle.css",
+        "build": "webpack && sass src/scss/docs.scss build/docs.bundle.css && sass src/scss/frame.scss build/frame.bundle.css && sass src/scss/global.scss build/global.bundle.css && web-ext lint --source-dir=build && ts-node package.ts",
         "check": "prettier --check . && eslint src",
         "dev": "concurrently --names 'webpack,web-ext,sass,sass,sass' --prefix-colors 'green,magenta,red,blue,yellow' 'webpack --watch' 'web-ext run --source-dir build/ --keep-profile-changes' 'sass --watch src/scss/docs.scss build/docs.bundle.css' 'sass --watch src/scss/frame.scss build/frame.bundle.css' 'sass --watch src/scss/global.scss build/global.bundle.css'",
         "format": "prettier --write ."
