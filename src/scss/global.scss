@@ -1,3 +1,5 @@
+@use "base/root";
+
 #DocsAfterDark_switch {
     position: fixed;
     left: 24px;
@@ -71,7 +73,7 @@
                 cursor: pointer;
 
                 svg {
-                    fill: var(--primary-text-color);
+                    fill: var(--primary-background-color);
                 }
 
                 &:hover {

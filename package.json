@@ -28,9 +28,9 @@
     },
     "homepage": "https://docsafterdark.com/",
     "scripts": {
-        "build": "webpack && sass src/scss/docs.scss build/docs.bundle.css && sass src/scss/frame.scss build/frame.bundle.css",
+        "build": "webpack && sass src/scss/docs.scss build/docs.bundle.css && sass src/scss/frame.scss build/frame.bundle.css && sass src/scss/global.scss build/global.bundle.css",
         "check": "prettier --check . && eslint src",
-        "dev": "concurrently --names 'webpack,web-ext,sass,sass' --prefix-colors 'green,magenta,red,blue' 'webpack --watch' 'web-ext run --source-dir build/ --keep-profile-changes' 'sass --watch src/scss/docs.scss build/docs.bundle.css' 'sass --watch src/scss/frame.scss build/frame.bundle.css'",
+        "dev": "concurrently --names 'webpack,web-ext,sass,sass,sass' --prefix-colors 'green,magenta,red,blue,yellow' 'webpack --watch' 'web-ext run --source-dir build/ --keep-profile-changes' 'sass --watch src/scss/docs.scss build/docs.bundle.css' 'sass --watch src/scss/frame.scss build/frame.bundle.css' 'sass --watch src/scss/global.scss build/global.bundle.css'",
         "format": "prettier --write ."
     }
 }

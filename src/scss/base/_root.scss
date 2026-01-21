@@ -31,6 +31,9 @@
 
     --button-text-color: #fff;
 
+    // Set default accentHue in CSS
+    --DocsAfterDark_accentHue: 88;
+
     --accent-color: hsl(var(--DocsAfterDark_accentHue), 40%, 60%);
     --light-accent-color: hsla(var(--DocsAfterDark_accentHue), 40%, 70%, 0.1);
     --light-accent-hover-color: hsla(

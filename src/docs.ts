@@ -83,6 +83,7 @@ class DocsAfterDark {
             this.extensionData.show_border = data.show_border;
         }
 
+        // Uncomment to always show the update notification
         if (data.version !== undefined) {
             this.extensionData.version = data.version;
         }
@@ -250,12 +251,13 @@ class DocsAfterDark {
     }
 
     private updateExtension() {
+        // Always update version, regardless of extension mode
+        this.updateVersion();
+
         // Do not continue update if extension is off
         if (!this.updateMode()) {
             return;
         }
-
-        this.updateVersion();
 
         this.updateDocumentBackground();
         this.updateDocumentInvert();

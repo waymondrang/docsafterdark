@@ -21,7 +21,7 @@ const browser_ns = getBrowserNamespace();
 const VERSION = browser_ns.runtime.getManifest().version;
 
 // NOTE: Components that will update based on changes that happen to the global
-//       state (coupled logic between managers) should implement the
+//       state (coupled logic between components) should implement the
 //       StateSubscriber abstract class.
 
 class PopupState {
