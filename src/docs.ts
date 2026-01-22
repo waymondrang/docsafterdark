@@ -422,13 +422,13 @@ class DocsAfterDark {
         containerElement.appendChild(messageElement);
 
         const textElement = document.createElement("p");
-        if (
-            this.extensionData.version == null &&
-            this.extensionData.updates == null
-        ) {
-            // If updates is not null, then not new install
+
+        // extensionData.version will never be null, so the old condition does
+        // not work.
+
+        if (this.extensionData.version.last_version == "") {
             textElement.textContent =
-                "Thank you for installing DocsAfterDark! You can read release notes on ";
+                "Thank you for installing DocsAfterDark! Read release notes on ";
         } else {
             textElement.textContent =
                 "DocsAfterDark has been updated to version " +

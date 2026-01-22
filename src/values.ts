@@ -83,6 +83,7 @@ const defaultExtensionData: ExtensionData = {
         grayscale: true,
         black: false,
     },
+
     button_options: {
         show: true,
         raised: false,
@@ -97,6 +98,9 @@ const defaultExtensionData: ExtensionData = {
 
 const updateLink = "https://github.com/waymondrang/docsafterdark/releases";
 
+// Planned for the future...
+const guideLink = "https://docsafterdark.com/guide";
+
 export {
     STYLE_PROPERTY_PREFIX,
     SELECTOR_PREFIX,
@@ -107,6 +111,7 @@ export {
     documentBorder,
     buttonPosition,
     updateLink,
+    guideLink,
     themeClasses,
     enabledClass,
     defaultExtensionData,
