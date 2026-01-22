@@ -34,10 +34,11 @@ points to the `test/` directory.
 - [x] Move from CSS to SCSS and compile all stylesheets into a single one
 - [x] Control themeing with HTML element classes instead of inserting/removing
       link elements
-- [ ] Move from JavaScript to TypeScript
+- [x] Move from JavaScript to TypeScript
     - [x] Refactor from global-state procedural code to class-encapsulated state
           management
     - [x] Define StorageData type interface for type-safe storage operations
     - [x] Abstract browser APIs behind utility functions
     - [x] Rewrite word.js in TypeScript
-    - [ ] Rewrite popup.js in TypeScript
+    - [x] Rewrite popup.js in TypeScript
+- [ ] Update README

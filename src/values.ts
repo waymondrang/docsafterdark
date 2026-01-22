@@ -81,7 +81,7 @@ const defaultExtensionData: ExtensionData = {
     invert: {
         invert: true,
         grayscale: true,
-        black: true,
+        black: false,
     },
     button_options: {
         show: true,
