@@ -25,6 +25,7 @@ import {
     addClassToHTML,
     getAssetURL,
     getBrowserNamespace,
+    getElement,
     getElementId,
     getExtensionData,
     insertStylesheet,
@@ -44,6 +45,7 @@ const REPLACEMENTS_PATH = "assets/replacements/";
 
 class DocsAfterDark {
     private extensionData: ExtensionData = defaultExtensionData;
+    private isTempDisabled: boolean = false;
 
     async initialize(): Promise<void> {
         Logger.debug("Hello from DocsAfterDark!");
@@ -220,7 +222,7 @@ class DocsAfterDark {
     };
 
     // NOTE: When this function is called, the extension will be in DarkMode
-    //       operation.
+    //       operation. Vice versa for updateLightMode().
 
     private updateDarkMode() {
         if (this.extensionData.dark_mode.variant === DarkModeOperation.Normal) {
@@ -273,6 +275,8 @@ class DocsAfterDark {
             this.removeExtension();
             return false;
         }
+
+        this.isTempDisabled = false;
 
         addClassToHTML(enabledClass);
         insertStylesheet("docs.bundle.css", "stylesheet");
@@ -340,17 +344,61 @@ class DocsAfterDark {
         );
     }
 
+    private buttonCallback(event: MouseEvent) {
+        // The button will temporarily set the extension to be off (unload
+        // the stylesheet).
+
+        const button = event.currentTarget as HTMLButtonElement;
+
+        if (this.isTempDisabled) {
+            insertStylesheet("docs.bundle.css", "stylesheet");
+            button.classList.remove("enabled");
+        } else {
+            removeElement("stylesheet");
+            button.classList.add("enabled");
+        }
+
+        this.isTempDisabled = !this.isTempDisabled;
+    }
+
+    private createButton(): HTMLButtonElement {
+        const existingButton = getElement("button");
+        if (existingButton) {
+            return existingButton as HTMLButtonElement;
+        }
+
+        const button = document.createElement("button");
+        button.id = getElementId("button");
+        button.onclick = (event) => this.buttonCallback(event);
+
+        const buttonFill = document.createElement("div");
+        buttonFill.classList.add("fill");
+        button.appendChild(buttonFill);
+
+        document.body.prepend(button);
+
+        return button;
+    }
+
     private updateButton() {
         if (this.extensionData.button_options.show) {
-            // TODO: Check if button is inserted
+            const button = this.createButton();
 
             if (this.extensionData.button_options.raised) {
                 setStyleProperty("buttonPosition", buttonPosition.raised);
             } else {
                 setStyleProperty("buttonPosition", buttonPosition.normal);
             }
+
+            // NOTE: We do not need to add "enabled" here because that is
+            //       triggered by a button click, not an update. isTempDisabled
+            //       is independent from the extensionData state.
+
+            if (!this.isTempDisabled) {
+                button.classList.remove("enabled");
+            }
         } else {
-            // TODO: Remove button
+            removeElement("button");
         }
     }
 

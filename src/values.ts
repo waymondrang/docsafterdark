@@ -63,8 +63,8 @@ const documentBorder = {
 };
 
 const buttonPosition = {
-    normal: "24px",
-    raised: "74px",
+    normal: "1.5rem",
+    raised: "4.5rem",
 };
 
 const defaultExtensionData: ExtensionData = {

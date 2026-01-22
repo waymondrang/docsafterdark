@@ -222,6 +222,14 @@ function removeElement(id: string) {
     document.querySelector(`#${getElementId(id)}`)?.remove();
 }
 
+function getElement(id: string): HTMLElement | null {
+    return document.querySelector(`#${getElementId(id)}`);
+}
+
+function hasElement(id: string): boolean {
+    return document.querySelector(`#${getElementId(id)}`) != null;
+}
+
 /**
  * Inserts a stylesheet link element using non-prefixed id into the document
  * head. Remove using removeElement()
@@ -270,6 +278,8 @@ export {
     isOnHomepage,
     getElementId,
     removeElement,
+    hasElement,
+    getElement,
     insertStylesheet,
     getAssetURL,
 };
