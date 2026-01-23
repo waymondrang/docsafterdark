@@ -68,7 +68,7 @@ npm run firefox
 
 Launches a temporary Firefox instance with the extension installed. The extension automatically reloads when files in `build/` change.
 
-> **Note:** The Firefox profile is temporary and will not persist logins between sessions.
+> **Note:** The Firefox profile is temporary and will not persist logins (on docs.google.com, for example) between sessions.
 
 ### Building
 
