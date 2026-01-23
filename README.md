@@ -6,23 +6,23 @@ A free and open-source browser extension for customizing the appearance of Googl
 
 ## Features
 
-- Modern, sleek **dark mode**
-- Colorful **light mode**
-- Customizable **accent color**
-- Quick **toggle button**
-- Accessible **settings popup**
+- Modern, sleek dark mode
+- Colorful light mode
+- Customizable accent color
+- Quick toggle button
+- Accessible settings popup
 
 ### Customization
 
 - Choose between Normal and Midnight dark mode variants
-- Change the highlight **accent color hue** for both dark and light mode
-- Set the **document background** (may be unstable on Chromium-based browsers)
+- Change the highlight accent color hue for both dark and light mode
+- Set the document background (may be unstable on Chromium-based browsers)
     - **Default** - white
     - **Shade** - tinted in light mode
     - **Blend** - transparent
     - **Black** - #000000
     - **Custom** - specify your own CSS value
-- Display document content in dark mode with **invert options** (may invert images)
+- Display document content in dark mode with invert options (may invert images)
 - Remove the document border for a seamless workspace
 - Disable or move the toggle button
 
