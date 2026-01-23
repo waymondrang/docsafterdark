@@ -1,0 +1,42 @@
+name: continuous integration
+
+on:
+    push:
+        branches:
+            - main
+    pull_request:
+        branches:
+            - main
+        # run when activity on any pull request occurs
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    check-and-build:
+        name: check and build
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: checkout repository and submodules
+              uses: actions/checkout@v5
+
+            - name: setup node.js
+              uses: actions/setup-node@v5
+              with:
+                  node-version: 24
+
+            - name: print versions
+              run: |
+                  node -v
+                  npm -v
+
+            - name: install dependencies
+              run: npm ci
+
+            - name: run format check
+              run: npm run check
+
+            - name: run validation build
+              run: npm run build

@@ -1,0 +1,43 @@
+html.DocsAfterDark_dark.DocsAfterDark_midnight {
+    --primary-text-color: #ffffff;
+    --secondary-text-color: #f2f2f2;
+    --tertiary-text-color: #e6e6e6;
+    --disabled-text: #666666;
+
+    --root-background-color: #000000;
+    --primary-background-color: #0d0d0d;
+    --secondary-background-color: #1a1a1a;
+    --tertiary-background-color: #262626;
+    --quaternary-background-color: #333333;
+    --background-color-5: #404040;
+
+    --menu-background: var(--secondary-background-color);
+    --hover-background-color: #ffffff1a;
+    --secondary-hover-background-color: #ffffff1e;
+
+    --solid-hover-background-color: #404040;
+    --secondary-solid-hover-background-color: #4d4d4d;
+
+    --primary-border-color: #4d4d4d;
+    --secondary-border-color: #404040;
+    --lighter-border-color: #808080;
+    --hover-border-color: #595959;
+
+    --input-border-color: #666666;
+    --input-hover-border-color: #808080;
+    --input-background-color: var(
+        --tertiary-background-color
+    ); /* CURRENTLY USED FOR CALENDAR INPUT */
+
+    --button-text-color: #fff;
+
+    --accent-color: hsl(var(--DocsAfterDark_accentHue), 40%, 60%);
+    --light-accent-color: hsla(var(--DocsAfterDark_accentHue), 40%, 70%, 0.1);
+    --light-accent-hover-color: hsla(
+        var(--DocsAfterDark_accentHue),
+        60%,
+        60%,
+        0.2
+    );
+    --accent-hover-color: hsla(var(--DocsAfterDark_accentHue), 60%, 80%, 1);
+}

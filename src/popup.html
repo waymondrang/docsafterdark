@@ -1,169 +1,252 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="popup.css" />
-    <link rel="stylesheet" href="special.css" />
-    <title>DocsAfterDark Settings</title>
-  </head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="frame.bundle.css" />
+        <title>DocsAfterDark Options</title>
+    </head>
 
-  <body>
-    <div id="main">
-      <header>
-        <h1>DocsAfterDark Options</h1>
-        <div id="tip_button">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#fefefe">
-            <path
-              d="M478-240q21 0 35.5-14.5T528-290q0-21-14.5-35.5T478-340q-21 0-35.5 14.5T428-290q0 21 14.5 35.5T478-240Zm-36-154h74q0-33 7.5-52t42.5-52q26-26 41-49.5t15-56.5q0-56-41-86t-97-30q-57 0-92.5 30T342-618l66 26q5-18 22.5-39t53.5-21q32 0 48 17.5t16 38.5q0 20-12 37.5T506-526q-44 39-54 59t-10 73Zm38 314q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
-          </svg>
-        </div>
-      </header>
+    <body>
+        <main>
+            <header>
+                <h1>DocsAfterDark Options</h1>
+                <div id="tipButton">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 -960 960 960"
+                        fill="#fefefe"
+                    >
+                        <path
+                            d="M478-240q21 0 35.5-14.5T528-290q0-21-14.5-35.5T478-340q-21 0-35.5 14.5T428-290q0 21 14.5 35.5T478-240Zm-36-154h74q0-33 7.5-52t42.5-52q26-26 41-49.5t15-56.5q0-56-41-86t-97-30q-57 0-92.5 30T342-618l66 26q5-18 22.5-39t53.5-21q32 0 48 17.5t16 38.5q0 20-12 37.5T506-526q-44 39-54 59t-10 73Zm38 314q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"
+                        />
+                    </svg>
+                </div>
+            </header>
 
-      <div id="tip_container" class="hidden">
-        <div id="tip">
-          <div>
-            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px">
-              <path
-                d="M240-400h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM480-80 373-240H160q-33 0-56.5-23.5T80-320v-480q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H587L480-80Zm0-144 64-96h256v-480H160v480h256l64 96Zm0-336Z" />
-            </svg>
-          </div>
-          <div>
-            <p>
-              All options will auto-save, with the exception of Accent Color. Document invert assumes the background is white.
-            </p>
-          </div>
-        </div>
-      </div>
-
-        <div class="option_section">
-          <p class="section_label">Mode Toggle</p>
-          <div id="modes" class="button_row">
-            <button id="mode_dark" value="dark" class="accent_button">Dark</button>
-            <button id="mode_light" value="light" class="accent_button">Light</button>
-            <button id="mode_off" value="off" class="accent_button">Off</button>
-          </div>
-        </div>
-
-      <div class="option_section">
-        <p class="section_label">Dark Mode Variant</p>
-        <div id="dark_mode_variants" class="button_row">
-          <button id="dark_mode_normal">Normal</button>
-          <button id="dark_mode_eclipse">Midnight</button>
-        </div>
-      </div>
-
-      <div id="document_bg_section">
-        <p class="section_label">
-          Document Background<span class="__firefox_hidden">&nbsp;(May Be Unstable)</span>
-        </p>
-        <div id="document_bg_buttons" class="button_row">
-          <button id="document_bg_default" value="default">
-            Default
-          </button>
-          <button id="document_bg_shade" value="shade">
-            Shade
-          </button>
-          <button id="document_bg_dark" value="dark">
-            Blend
-          </button>
-          <button id="document_bg_black" value="black">
-            Black
-          </button>
-          <button id="document_bg_custom" value="custom">
-            Custom
-          </button>
-        </div>
-        <div id="document_bg_custom_container" class="option_row hidden">
-          <input id="document_bg_custom_input" placeholder="Custom Color/CSS" />
-          <button id="document_bg_save_custom">Save</button>
-        </div>
-        <!-- <p id="document_bg_description"></p> -->
-      </div>
-
-      <div class="option_section">
-        <p class="section_label">Document Options</p>
-        <div class="option_container">
-          <div class="option_row">
-            <label class="checkbox_container" for="document_inverted">Invert
-              <input type="checkbox" id="document_inverted" name="document_inverted">
-              <span class="checkbox_checkmark"></span>
-            </label>
-      
-            <label class="checkbox_container" for="document_inverted_grayscale">Grayscale
-              <input type="checkbox" id="document_inverted_grayscale" name="document_inverted_grayscale">
-              <span class="checkbox_checkmark"></span>
-            </label>
-      
-            <label class="checkbox_container" for="document_inverted_black">Black
-              <input type="checkbox" id="document_inverted_black" name="document_inverted_black">
-              <span class="checkbox_checkmark"></span>
-            </label>
-          </div>
-          <div class="option_row">
-            <label class="checkbox_container" for="show_border">Show Border
-              <input type="checkbox" id="show_border" name="show_border">
-              <span class="checkbox_checkmark"></span>
-            </label>
-          </div>
-        </div>
-      </div>
-
-      <div class="option_section">
-        <p class="section_label">Toggle Button Options</p>
-        <div class="option_row">
-          <label class="checkbox_container" for="show_button">Show Button
-            <input type="checkbox" id="show_button" name="show_button" >
-            <span class="checkbox_checkmark"></span>
-          </label>
-
-          <label class="checkbox_container" for="raise_button">Raise Button
-            <input type="checkbox" id="raise_button" name="raise_button" >
-            <span class="checkbox_checkmark"></span>
-          </label>
-        </div>
-      </div>
-
-      <div class="option_section">
-        <p class="section_label">Accent Color</p>
-        <div id="spectrum_container">
-          <div id="spectrum_bar">
-            <div id="spectrum_knob"></div>
-          </div>
-          <input id="spectrum_input" type="number" min="0" max="360" maxlength="3" />
-        </div>
-      
-        <button id="spectrum_save">Save</button>
-        <button id="spectrum_reset" disabled>Reset</button>
-      </div>
-
-      <!-- <div class="option_section" id="debug_section">
-        <p class="section_label">Debug</p>
-        <div class="option_container">
-          <div class="option_row">
-            <input id="debug_storage_key" placeholder="Storage Key" />
-            <button id="debug_storage_key_clear">Clear</button>
-          </div>
-          <div class="option_bordered">
-            <div class="option_row">
-              <input id="debug_kv_key" placeholder="Key" />
-              <input id="debug_kv_value" placeholder="Value" />
+            <div id="tipContainer" class="hidden">
+                <div class="content">
+                    <div class="icon">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="24px"
+                            viewBox="0 -960 960 960"
+                            width="24px"
+                        >
+                            <path
+                                d="M240-400h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM480-80 373-240H160q-33 0-56.5-23.5T80-320v-480q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H587L480-80Zm0-144 64-96h256v-480H160v480h256l64 96Zm0-336Z"
+                            />
+                        </svg>
+                    </div>
+                    <div class="message">
+                        <p>
+                            All options will auto-save when changed. Also, note
+                            that document invert assumes the background is
+                            white.
+                        </p>
+                    </div>
+                </div>
             </div>
-            <hr />
-            <input id="debug_key_value" placeholder="Value" />
-          </div>
-          <button id="debug_save">Save</button>
-          <button id="debug_clear">Clear Storage</button>
-        </div>
-      </div> -->
 
-      <hr />
-      <footer>
-        <p id="version"></p>
-        <a id="donate">Donate</a>
-      </footer>
-    </div>
-    <script src="popup.js"></script>
-  </body>
+            <div class="section">
+                <p class="sectionLabel">Global Toggle</p>
+                <div class="buttonRow">
+                    <button id="modeDark" value="dark">Dark</button>
+                    <button id="modeLight" value="light">Light</button>
+                    <button id="modeOff" value="off">Off</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <p class="sectionLabel">Dark Mode Variant</p>
+                <div class="buttonRow">
+                    <button id="darkModeNormal" value="normal">Normal</button>
+                    <button id="darkModeMidnight" value="midnight">
+                        Midnight
+                    </button>
+                </div>
+            </div>
+
+            <div class="section">
+                <p class="sectionLabel">
+                    Document Background
+                    <span class="lighter">(May Be Unstable)</span>
+                </p>
+                <div class="sectionControls">
+                    <div class="buttonRow fullWidth">
+                        <button id="documentBGDefault" value="default">
+                            Default
+                        </button>
+
+                        <button id="documentBGShade" value="shade">
+                            Shade
+                        </button>
+
+                        <button id="documentBGDark" value="dark">Blend</button>
+
+                        <button id="documentBGBlack" value="black">
+                            Black
+                        </button>
+
+                        <button id="documentBGCustom" value="custom">
+                            Custom
+                        </button>
+                    </div>
+
+                    <div id="documentBGCustomContainer" class="flexRow">
+                        <input
+                            class="expand"
+                            id="documentBGCustomInput"
+                            placeholder="Custom Color/CSS"
+                        />
+                        <button
+                            id="documentBGCustomSave"
+                            class="rounded accented"
+                        >
+                            Save
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <p class="sectionLabel">Document Controls</p>
+                <div class="sectionControls">
+                    <div class="checkboxRow">
+                        <label class="checkboxButton" for="documentInverted">
+                            <input
+                                type="checkbox"
+                                id="documentInverted"
+                                name="documentInverted"
+                            />
+
+                            <div class="checkbox"></div>
+                            <div class="content">Invert</div>
+                        </label>
+
+                        <label class="checkboxButton" for="documentGrayscale">
+                            <input
+                                type="checkbox"
+                                id="documentGrayscale"
+                                name="documentGrayscale"
+                            />
+
+                            <div class="checkbox"></div>
+                            <div class="content">Grayscale</div>
+                        </label>
+
+                        <label class="checkboxButton" for="documentBlack">
+                            <input
+                                type="checkbox"
+                                id="documentBlack"
+                                name="documentBlack"
+                            />
+
+                            <div class="checkbox"></div>
+                            <div class="content">Black</div>
+                        </label>
+                    </div>
+                    <div class="checkboxRow">
+                        <label class="checkboxButton" for="documentBorder">
+                            <input
+                                type="checkbox"
+                                id="documentBorder"
+                                name="documentBorder"
+                            />
+
+                            <div class="checkbox"></div>
+                            <div class="content">Show Border</div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <p class="sectionLabel">Toggle Button</p>
+                <div class="checkboxRow">
+                    <label class="checkboxButton" for="showButton">
+                        <input
+                            type="checkbox"
+                            id="showButton"
+                            name="showButton"
+                        />
+
+                        <div class="checkbox"></div>
+                        <div class="content">Show</div>
+                    </label>
+
+                    <label class="checkboxButton" for="raiseButton">
+                        <input
+                            type="checkbox"
+                            id="raiseButton"
+                            name="raiseButton"
+                        />
+
+                        <div class="checkbox"></div>
+                        <div class="content">Raise</div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="section">
+                <p class="sectionLabel">Accent Color</p>
+                <div id="spectrum">
+                    <div id="spectrumBar">
+                        <div id="spectrumKnob"></div>
+                    </div>
+
+                    <input
+                        id="spectrumInput"
+                        type="number"
+                        min="0"
+                        max="360"
+                        placeholder="0"
+                        maxlength="3"
+                    />
+                </div>
+            </div>
+
+            <hr />
+
+            <footer>
+                <p id="version"></p>
+
+                <div class="flexRow">
+                    <a
+                        id="donate"
+                        class="button rounded accented"
+                        href="https://www.buymeacoffee.com/waymondrang"
+                        >Donate</a
+                    >
+
+                    <a
+                        id="github"
+                        class="button rounded accented"
+                        href="https://github.com/waymondrang/docsafterdark"
+                    >
+                        <svg
+                            viewBox="0 0 98 96"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <g clip-path="url(#clip0_730_27136)">
+                                <path
+                                    d="M41.4395 69.3848C28.8066 67.8535 19.9062 58.7617 19.9062 46.9902C19.9062 42.2051 21.6289 37.0371 24.5 33.5918C23.2559 30.4336 23.4473 23.7344 24.8828 20.959C28.7109 20.4805 33.8789 22.4902 36.9414 25.2656C40.5781 24.1172 44.4062 23.543 49.0957 23.543C53.7852 23.543 57.6133 24.1172 61.0586 25.1699C64.0254 22.4902 69.2891 20.4805 73.1172 20.959C74.457 23.543 74.6484 30.2422 73.4043 33.4961C76.4668 37.1328 78.0937 42.0137 78.0937 46.9902C78.0937 58.7617 69.1934 67.6621 56.3691 69.2891C59.623 71.3945 61.8242 75.9883 61.8242 81.252L61.8242 91.2051C61.8242 94.0762 64.2168 95.7031 67.0879 94.5547C84.4102 87.9512 98 70.6289 98 49.1914C98 22.1074 75.9883 6.69539e-07 48.9043 4.309e-07C21.8203 1.92261e-07 -1.9479e-07 22.1074 -4.3343e-07 49.1914C-6.20631e-07 70.4375 13.4941 88.0469 31.6777 94.6504C34.2617 95.6074 36.75 93.8848 36.75 91.3008L36.75 83.6445C35.4102 84.2188 33.6875 84.6016 32.1562 84.6016C25.8398 84.6016 22.1074 81.1563 19.4277 74.7441C18.375 72.1602 17.2266 70.6289 15.0254 70.3418C13.877 70.2461 13.4941 69.7676 13.4941 69.1934C13.4941 68.0449 15.4082 67.1836 17.3223 67.1836C20.0977 67.1836 22.4902 68.9063 24.9785 72.4473C26.8926 75.2227 28.9023 76.4668 31.2949 76.4668C33.6875 76.4668 35.2187 75.6055 37.4199 73.4043C39.0469 71.7773 40.291 70.3418 41.4395 69.3848Z"
+                                    fill="white"
+                                />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_730_27136">
+                                    <rect width="98" height="96" fill="white" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </a>
+                </div>
+            </footer>
+        </main>
+
+        <script src="popup.bundle.js"></script>
+    </body>
 </html>

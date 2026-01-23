@@ -1,34 +1,38 @@
 {
-  "manifest_version": 3,
-  "name": "DocsAfterDark",
-  "version": "1.1.1",
-  "description": "Beyond dark mode for Google Docs",
-  "author": "Raymond Wang",
-  "content_scripts": [
-    {
-      "matches": ["*://docs.google.com/document/*"],
-      "js": ["word.js"],
-      "css": ["assets/css/default.css"]
+    "manifest_version": 3,
+    "name": "DocsAfterDark",
+    "version": "2.0.0",
+    "description": "Beyond dark mode for Google Docs",
+    "author": "Raymond Wang",
+    "content_scripts": [
+        {
+            "matches": ["*://docs.google.com/document/*"],
+            "js": ["docs.bundle.js"],
+            "css": ["global.bundle.css"]
+        }
+    ],
+    "action": {
+        "default_title": "DocsAfterDark Options",
+        "default_popup": "popup.html"
+    },
+    "web_accessible_resources": [
+        {
+            "resources": ["docs.bundle.css"],
+            "matches": ["*://docs.google.com/*"]
+        }
+    ],
+    "icons": {
+        "16": "assets/icons/docsafterdark_16.png",
+        "48": "assets/icons/docsafterdark_48.png",
+        "128": "assets/icons/docsafterdark_128.png"
+    },
+    "permissions": ["storage", "activeTab"],
+    "browser_specific_settings": {
+        "gecko": {
+            "data_collection_permissions": {
+                "required": ["none"]
+            },
+            "id": "{e8ffc3db-2875-4c7f-af38-d03e7f7f8ab9}"
+        }
     }
-  ],
-  "action": {
-    "default_title": "DocsAfterDark Options",
-    "default_popup": "popup.html"
-  },
-  "web_accessible_resources": [
-    {
-      "resources": [
-        "assets/css/*.css",
-        "assets/replacements/*.png",
-        "assets/replacements/*.svg"
-      ],
-      "matches": ["*://docs.google.com/*"]
-    }
-  ],
-  "icons": {
-    "16": "assets/icons/docsafterdark_16.png",
-    "48": "assets/icons/docsafterdark_48.png",
-    "128": "assets/icons/docsafterdark_128.png"
-  },
-  "permissions": ["storage", "activeTab"]
 }
