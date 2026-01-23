@@ -50,7 +50,7 @@
             </div>
 
             <div class="section">
-                <p class="sectionLabel">Mode Toggle</p>
+                <p class="sectionLabel">Global Toggle</p>
                 <div class="buttonRow">
                     <button id="modeDark" value="dark">Dark</button>
                     <button id="modeLight" value="light">Light</button>
@@ -78,13 +78,17 @@
                         <button id="documentBGDefault" value="default">
                             Default
                         </button>
+
                         <button id="documentBGShade" value="shade">
                             Shade
                         </button>
+
                         <button id="documentBGDark" value="dark">Blend</button>
+
                         <button id="documentBGBlack" value="black">
                             Black
                         </button>
+
                         <button id="documentBGCustom" value="custom">
                             Custom
                         </button>
@@ -107,74 +111,80 @@
             </div>
 
             <div class="section">
-                <p class="sectionLabel">Document Options</p>
+                <p class="sectionLabel">Document Controls</p>
                 <div class="sectionControls">
                     <div class="checkboxRow">
-                        <label for="documentInverted"
-                            >Invert
+                        <label class="checkboxButton" for="documentInverted">
                             <input
                                 type="checkbox"
                                 id="documentInverted"
                                 name="documentInverted"
                             />
+
                             <div class="checkbox"></div>
+                            <div class="content">Invert</div>
                         </label>
 
-                        <label for="documentGrayscale"
-                            >Grayscale
+                        <label class="checkboxButton" for="documentGrayscale">
                             <input
                                 type="checkbox"
                                 id="documentGrayscale"
                                 name="documentGrayscale"
                             />
+
                             <div class="checkbox"></div>
+                            <div class="content">Grayscale</div>
                         </label>
 
-                        <label for="documentBlack"
-                            >Black
+                        <label class="checkboxButton" for="documentBlack">
                             <input
                                 type="checkbox"
                                 id="documentBlack"
                                 name="documentBlack"
                             />
+
                             <div class="checkbox"></div>
+                            <div class="content">Black</div>
                         </label>
                     </div>
                     <div class="checkboxRow">
-                        <label for="documentBorder"
-                            >Show Border
+                        <label class="checkboxButton" for="documentBorder">
                             <input
                                 type="checkbox"
                                 id="documentBorder"
                                 name="documentBorder"
                             />
+
                             <div class="checkbox"></div>
+                            <div class="content">Show Border</div>
                         </label>
                     </div>
                 </div>
             </div>
 
             <div class="section">
-                <p class="sectionLabel">Toggle Button Options</p>
-                <div class="flexRow">
-                    <label for="showButton"
-                        >Show Button
+                <p class="sectionLabel">Toggle Button</p>
+                <div class="checkboxRow">
+                    <label class="checkboxButton" for="showButton">
                         <input
                             type="checkbox"
                             id="showButton"
                             name="showButton"
                         />
+
                         <div class="checkbox"></div>
+                        <div class="content">Show</div>
                     </label>
 
-                    <label for="raiseButton"
-                        >Raise Button
+                    <label class="checkboxButton" for="raiseButton">
                         <input
                             type="checkbox"
                             id="raiseButton"
                             name="raiseButton"
                         />
+
                         <div class="checkbox"></div>
+                        <div class="content">Raise</div>
                     </label>
                 </div>
             </div>
