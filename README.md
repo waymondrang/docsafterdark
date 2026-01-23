@@ -1,44 +1,89 @@
-# DocsAfterDark Rework
+# DocsAfterDark
 
-Currently DocsAfterDark is going through a major refactoring/rewrite.
+[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/pihphjfnfjmdbhakhjifipfdgbpenobg?color=%23262626%20)](https://chrome.google.com/webstore/detail/docsafterdark/pihphjfnfjmdbhakhjifipfdgbpenobg) [![Mozilla Add-on](https://img.shields.io/amo/v/docsafterdark?color=%23262626%20)](https://addons.mozilla.org/en-US/firefox/addon/docsafterdark/)
+
+A free and open-source browser extension for customizing the appearance of Google Docs.
+
+## Features
+
+- Modern, sleek **dark mode**
+- Colorful **light mode**
+- Customizable **accent color**
+- Quick **toggle button**
+- Accessible **settings popup**
+
+### Customization
+
+- Choose between Normal and Midnight dark mode variants
+- Change the highlight **accent color hue** for both dark and light mode
+- Set the **document background** (may be unstable on Chromium-based browsers)
+    - **Default** - white
+    - **Shade** - tinted in light mode
+    - **Blend** - transparent
+    - **Black** - #000000
+    - **Custom** - specify your own CSS value
+- Display document content in dark mode with **invert options** (may invert images)
+- Remove the document border for a seamless workspace
+- Disable or move the toggle button
+
+### Quick toggle button
+
+If enabled, click the button in the bottom-left corner of the screen to instantly enable/disable the extension for the current document. If it blocks other elements (like the word count widget), enable "Raise Button" in settings or hide it completely. Pressing this button only temporarily enables/disables the extension; to properly turn the extension off, use the settings popup.
+
+## Installation
+
+Install from the [Chrome Web Store](https://chrome.google.com/webstore/detail/docsafterdark/pihphjfnfjmdbhakhjifipfdgbpenobg) or [Firefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/docsafterdark/).
 
 ## Development
 
-### Requirements
+### Prerequisites
 
-- `npm`
-- Firefox
+- Node.js
+- npm
+- Firefox (optional, for hot-reload testing)
 
-### Installation
+### Setup
 
-Install dependencies with `npm`:
+**Install dependencies**
 
 ```sh
 npm install
 ```
 
-### Running
+### Run
 
-Run and debug the extension using the `dev` script:
+**Build and watch**
 
 ```sh
 npm run dev
 ```
 
-Currently the bundled JavaScript file is written to `test/word.bundle.js`, which
-also contains the test `manifest.json`. web-ext in `npm run dev` currently
-points to the `test/` directory.
+Changes to `src/` will automatically rebuild to `build/`. Changes to `webpack.config.cjs` require restarting the dev script.
 
-## Todo
+**Firefox with hot-reload**
 
-- [x] Move from CSS to SCSS and compile all stylesheets into a single one
-- [x] Control themeing with HTML element classes instead of inserting/removing
-      link elements
-- [x] Move from JavaScript to TypeScript
-    - [x] Refactor from global-state procedural code to class-encapsulated state
-          management
-    - [x] Define StorageData type interface for type-safe storage operations
-    - [x] Abstract browser APIs behind utility functions
-    - [x] Rewrite word.js in TypeScript
-    - [x] Rewrite popup.js in TypeScript
-- [ ] Update README
+```sh
+npm run firefox
+```
+
+Launches a temporary Firefox instance with the extension installed. The extension automatically reloads when files in `build/` change.
+
+> **Note:** The Firefox profile is temporary and will not persist logins between sessions.
+
+### Building
+
+**Build and package**
+
+```sh
+npm run build
+```
+
+This creates optimized bundles in `build/` and packages the extension as a `.zip` file in `release/`. The packaging process is handled by `package.ts` and reads the version from `src/manifest.json`.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit issues or pull requests.
+
+## License
+
+This project is open-source and available under the [MIT License](LICENSE).
