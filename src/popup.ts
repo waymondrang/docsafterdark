@@ -207,11 +207,6 @@ class SpectrumComponent extends StateSubscriber {
     private knobOffset = 0;
     private isKnobDragging = false;
 
-    // NOTE: We use the existence of the temp_accent_color storage item to
-    //       determine if the user is exploring accent colors. temp_accent_color
-    //       is only used for resuming the color exploration when the popup
-    //       is closed and reopened.
-
     initialize(): void {
         this.input.addEventListener("input", () => {
             if (!this.input.value) {
@@ -554,7 +549,7 @@ class Popup extends PopupState {
     private styleManager: StyleManager = new StyleManager(this);
 
     async initialize() {
-        Logger.debug("Hello from DocsAfterDark Popup!");
+        Logger.info("Hello from DocsAfterDark!");
 
         // Set the state's data in case any initialize functions need to
         // access it (ideally state is consumed during update function).

@@ -47,10 +47,9 @@ const REPLACEMENTS_PATH = "assets/replacements/";
 class DocsAfterDark {
     private extensionData: ExtensionData = defaultExtensionData;
     private isTempDisabled: boolean = false;
-    private isDocumentMetricsVisible: boolean = false;
 
     async initialize(): Promise<void> {
-        Logger.debug("Hello from DocsAfterDark!");
+        Logger.info("Hello from DocsAfterDark!");
 
         const data = await getExtensionData();
 
