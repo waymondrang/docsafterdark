@@ -64,7 +64,7 @@ const documentBorder = {
 
 const buttonPosition = {
     normal: "1.5rem",
-    raised: "4.5rem",
+    raised: "4.75rem",
 };
 
 const defaultExtensionData: ExtensionData = {
@@ -86,7 +86,6 @@ const defaultExtensionData: ExtensionData = {
 
     button_options: {
         show: true,
-        raised: false,
     },
 
     show_border: true,

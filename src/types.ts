@@ -57,7 +57,6 @@ interface AccentColorOptions {
 
 interface ButtonOptions {
     show: boolean;
-    raised: boolean;
 }
 
 interface VersionInfo {

@@ -17,7 +17,8 @@
 
     opacity: 0.5;
 
-    z-index: 999999999;
+    // Set z-index so it shows up behind metric widget menu
+    z-index: 999;
 
     transition: all 1s cubic-bezier(0, 1, 0, 1);
 
