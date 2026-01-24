@@ -128,8 +128,7 @@
     .javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--disabled
 ),
 .javascriptMaterialdesignGm3WizTextFieldOutlined-text-field:not(
-        .javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--disabled
-    ):not(
+        .javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--disabled,
         .javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--focused
     ):hover {
     --gm3-floating-label-label-text-color: var(--primary-text-color);
@@ -146,8 +145,7 @@
 }
 
 .javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--outlined:not(
-        .javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--disabled
-    ):not(
+        .javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--disabled,
         .javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--focused
     ):hover {
     --gm3-notched-outline-border-color: var(--input-hover-border-color);
@@ -229,7 +227,7 @@ input#docs-findandreplacedialog-input,
 .javascriptMaterialdesignGm3WizTextFieldOutlined-text-field:not(.javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--disabled).javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--focused .javascriptMaterialdesignGm3WizTextFieldOutlined-text-field__input,
 .docs-checkupdialog-content-container,
 .baseCopyDocDialogTitleText,
-.javascriptMaterialdesignGm3WizTextFieldOutlined-text-field:not(.javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--disabled):not(.javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--focused):hover .javascriptMaterialdesignGm3WizTextFieldOutlined-text-field__input,
+.javascriptMaterialdesignGm3WizTextFieldOutlined-text-field:not(.javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--disabled, .javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--focused):hover .javascriptMaterialdesignGm3WizTextFieldOutlined-text-field__input,
 .docs-save-indicator-popup-subtitle,
 .docs-grille-gm3 .docs-ui-toast,
 .pageSetupDialogSectionTitle,
@@ -237,7 +235,7 @@ input#docs-findandreplacedialog-input,
 .javascriptMaterialdesignGm3WizMenuSurface-menu-surface,
 /* .javascriptMaterialdesignGm3WizButtonFilledTonal-button__label, */
 .appsElementsColorPicker-color-picker__swatches-label,
-.javascriptMaterialdesignGm3WizTabsPrimary-tab:not(.javascriptMaterialdesignGm3WizTabsPrimary-tab--active):not(:disabled):hover .javascriptMaterialdesignGm3WizTabsPrimary-tab__text-label,
+.javascriptMaterialdesignGm3WizTabsPrimary-tab:not(.javascriptMaterialdesignGm3WizTabsPrimary-tab--active, :disabled):hover .javascriptMaterialdesignGm3WizTabsPrimary-tab__text-label,
 .javascriptMaterialdesignGm3WizSelectOutlinedEl .mdc-select__option .mdc-list-item__content, .javascriptMaterialdesignGm3WizSelectOutlinedEl .mdc-select__option .mdc-list-item__primary-text,
 .ita-hwt-candidate-hover,
 .ita-hwt-candidate,
@@ -281,7 +279,7 @@ textarea.docs-search-bar-input.goog-textarea,
 .kix-watermark-text-input-container input,
 .docs-sidebar-toggle-tabs .jfk-button.docs-sidebar-toggle-tab-inactive:hover,
 .javascriptMaterialdesignGm3WizTextFieldFilled-text-field:not(.javascriptMaterialdesignGm3WizTextFieldFilled-text-field--disabled) .javascriptMaterialdesignGm3WizTextFieldFilled-text-field__input,
-.javascriptMaterialdesignGm3WizTextFieldFilled-text-field:not(.javascriptMaterialdesignGm3WizTextFieldFilled-text-field--disabled):not(.javascriptMaterialdesignGm3WizTextFieldFilled-text-field--focused):hover .javascriptMaterialdesignGm3WizTextFieldFilled-text-field__input,
+.javascriptMaterialdesignGm3WizTextFieldFilled-text-field:not(.javascriptMaterialdesignGm3WizTextFieldFilled-text-field--disabled, .javascriptMaterialdesignGm3WizTextFieldFilled-text-field--focused):hover .javascriptMaterialdesignGm3WizTextFieldFilled-text-field__input,
 .docs-gm .kix-bookmark-bubble,
 .pageOrientationDialogHeading,
 .bordersShadingDialogSection,
@@ -368,8 +366,8 @@ textarea.docs-search-bar-input.goog-textarea,
 .docs-gm .docs-revisions-tile-descriptor, .docs-gm .docs-revisions-tile-text-box~.docs-revisions-tile-descriptor,
 .docs-grille-version-history.docs-revisions-filter-selector .docs-material-gm-select-caption, .docs-grille-version-history.docs-revisions-filter-selector .goog-menuitem-content,
 .javascriptMaterialdesignGm3WizIconButtonStandard-icon-button,
-.javascriptMaterialdesignGm3WizTabsPrimary-tab:not(.javascriptMaterialdesignGm3WizTabsPrimary-tab--active):not(:disabled) .javascriptMaterialdesignGm3WizTabsPrimary-tab__text-label,
-.javascriptMaterialdesignGm3WizSelectOutlinedEl:not(.mdc-select--disabled):not(.mdc-select--focused):hover .mdc-floating-label--float-above,
+.javascriptMaterialdesignGm3WizTabsPrimary-tab:not(.javascriptMaterialdesignGm3WizTabsPrimary-tab--active, :disabled) .javascriptMaterialdesignGm3WizTabsPrimary-tab__text-label,
+.javascriptMaterialdesignGm3WizSelectOutlinedEl:not(.mdc-select--disabled, .mdc-select--focused):hover .mdc-floating-label--float-above,
 .ita-hwt-jfk-standard,
 .ita-hwt-jfk-standard.ita-hwt-jfk-hover,
 .kix-spellcheck-with-explanation-bubble .kix-spellcheck-with-explanation-bubble-explanation-text,
@@ -449,7 +447,7 @@ textarea.docs-search-bar-input.goog-textarea,
     .docos-comments-pe
     .docos-streamdocoview-authorname-timestamp
     .docos-streamdocoview-timestamp,
-.docs-grille-gm3 .docos-input-contenteditable:empty:before,
+.docs-grille-gm3 .docos-input-contenteditable:empty::before,
 .docs-grille-gm3 .docos-anchoredreplyview .docos-action-text,
 .docs-grille-gm3
     .docos-anchoredreplyview-header
@@ -583,7 +581,7 @@ a:link,
 .docs-sidebar-toggle-tabs .jfk-button.docs-sidebar-toggle-tab-active,
 .kix-watermark-remove-button.docs-material-button-hairline-default.docs-material-button, .kix-watermark-remove-button.docs-material-button-hairline-default.docs-material-button.docs-material-button-focused,
 .apps-navigationwidget-item-selected,
-.outlines-widget .outlines-widget-chaptered .location-indicator-highlight.navigation-item [class*=navigation-item-level-], .outlines-widget .outlines-widget-chaptered .location-indicator-highlight.navigation-item [class*=navigation-item-level-].goog-button-hover,
+.outlines-widget .outlines-widget-chaptered .location-indicator-highlight.navigation-item [class*="navigation-item-level-"], .outlines-widget .outlines-widget-chaptered .location-indicator-highlight.navigation-item [class*="navigation-item-level-"].goog-button-hover,
 .docos-streampane-tabbar .docs-tabbar-tab.docs-tabbar-tab-selected .docs-tabbar-tablabel,
 .docs-grille-gm3 #titlebar-mode-indicator-container .docs-material-button-content,
 .smart-canvas-date-picker-bubble-gm3 .docs-material-button-text-default .docs-material-button-content,
@@ -673,7 +671,7 @@ body.docs-hub,
 body,
 .outlines-widget-chaptered .kix-outlines-widget-header-contents,
 .docs-ruler-background-inner,
-#kix-vertical-ruler:before {
+#kix-vertical-ruler::before {
     background-color: var(--root-background-color);
 }
 
@@ -1273,7 +1271,7 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
 .docs-sidebar-tile-header-cursor:hover,
 .docs-contentembedding-sidebar .docs-contentembedding-sidebar-tile:focus,
 .docs-contentembedding-sidebar .docs-contentembedding-sidebar-tile:hover,
-.goog-date-picker-date:hover:before,
+.goog-date-picker-date:hover::before,
 .goog-date-picker-button:hover,
 .smart-canvas-date-details-bubble-pattern-picker-button:focus,
 .smart-canvas-date-details-bubble-pattern-picker-button:hover,
@@ -1286,10 +1284,10 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
 .docs-customcolorpalette-add-custom-color-button:hover,
 .javascriptMaterialdesignGm3WizSelectOutlinedEl
     .mdc-list-item:not(.mdc-list-item--disabled)
-    .mdc-list-item__ripple:after,
+    .mdc-list-item__ripple::after,
 .javascriptMaterialdesignGm3WizSelectOutlinedEl
     .mdc-list-item:not(.mdc-list-item--disabled)
-    .mdc-list-item__ripple:before,
+    .mdc-list-item__ripple::before,
 .appsElementsSidekickPromptInput:hover,
 .apps-navigationwidget-item-hover,
 .apps-shortcutshelpcontentimpl-ac-renderer .ac-active,
@@ -1455,7 +1453,7 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
 
 .docs-gm3-filled-button,
 .outlines-widget-chaptered .location-indicator-highlight .navigation-item-vertical-line-middle,
-.docos-streampane-tabbar .docs-tabbar-tab.docs-tabbar-tab-selected .docs-tabbar-tablabel:after,
+.docos-streampane-tabbar .docs-tabbar-tab.docs-tabbar-tab-selected .docs-tabbar-tablabel::after,
 .docs-grille-gm3.docos.docs-gm .jfk-button.jfk-button-action,
 .docs-gm .docs-material-bubble .jfk-button-action, .docs-gm .modal-dialog .goog-buttonset-action, .docs-gm .modal-dialog .jfk-button-action,
 .docs-grille-gm3.docos.docs-gm .jfk-button.jfk-button-action.jfk-button-hover,
@@ -1480,8 +1478,8 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
 .docs-material-gm-labeled-checkbox-active
     .docs-material-gm-labeled-checkbox-checked
     + .docs-material-gm-labeled-checkbox-circle,
-.smart-canvas-date-picker-bubble .goog-date-picker-selected:before,
-.smart-canvas-date-picker-bubble .goog-date-picker-selected:hover:before,
+.smart-canvas-date-picker-bubble .goog-date-picker-selected::before,
+.smart-canvas-date-picker-bubble .goog-date-picker-selected:hover::before,
 div.docs-material-gm-checkbox-checked,
 div.docs-material-gm-checkbox-undetermined,
 span.docs-material-gm-checkbox-checked,
@@ -1497,12 +1495,12 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
 .docos-ssd-content
     .docos-ssd-radio-button-group
     .jfk-radiobutton-checked.jfk-radiobutton
-    .jfk-radiobutton-radio:after,
+    .jfk-radiobutton-radio::after,
 .docs-gm-promo.jfk-bubble.docs-promo-bubble,
 .docs-grille-gm3
     #docs-titlebar-share-client-button
-    .scb-show-notification:after,
-.docs-grille-gm3 #scb-quick-actions-menu-button .scb-show-notification:after,
+    .scb-show-notification::after,
+.docs-grille-gm3 #scb-quick-actions-menu-button .scb-show-notification::after,
 .scb-sqa-access-requests-count {
     background-color: var(--accent-color);
 }
@@ -1700,8 +1698,8 @@ textarea.docs-search-bar-input.goog-textarea,
 /* BACKGROUND: NONE */
 /********************/
 
-.appsElementsSidekickPromptLibraryScrollButtonContainer:after,
-.appsElementsSidekickPromptLibraryScrollButtonContainer:before,
+.appsElementsSidekickPromptLibraryScrollButtonContainer::after,
+.appsElementsSidekickPromptLibraryScrollButtonContainer::before,
 .docs-material
     .docos-comments-pe#docs-docos-commentsbutton.jfk-button.jfk-button-checked,
 .docs-grille-gm3.docs-gm
@@ -1909,14 +1907,14 @@ span.docs-material-gm-checkbox-focused,
 .docos-ssd-content
     .docos-ssd-radio-button-group
     .jfk-radiobutton-checked.jfk-radiobutton
-    .jfk-radiobutton-radio:after,
+    .jfk-radiobutton-radio::after,
 .docos-ssd-content
     .docos-ssd-radio-button-group
     .jfk-radiobutton-checked
     .jfk-radiobutton-radio,
 .docs-checkupdialog-suggestion-button-focused.jfk-button,
-.goog-date-picker-today:before,
-.goog-date-picker-today:hover:before,
+.goog-date-picker-today::before,
+.goog-date-picker-today:hover::before,
 .ita-cp-search.ita-cp-focus,
 .docos.docs-gm .docs-material-gm-checkbox.docs-material-gm-checkbox-checked,
 .docos.docs-gm .docs-material-gm-checkbox.docs-material-gm-checkbox-focused,
@@ -2027,7 +2025,7 @@ span.docs-material-gm-checkbox-focused,
 .kix-watermark-remove-button-container,
 .apps-shortcutshelpcontentimpl-tearoff-link-container,
 .scb-sqa-menuitem.scb-sqa-menuseparator,
-.companion-app-switcher-add-on-container:before,
+.companion-app-switcher-add-on-container::before,
 .companion-app-switcher-separator {
     border-top-color: var(--primary-border-color);
 }
@@ -2117,7 +2115,7 @@ span.docs-material-gm-checkbox-focused,
 
 .docs-sidebar-toggle-tabs
     .jfk-button.docs-sidebar-toggle-tab-active
-    > div:after {
+    > div::after {
     border-top-color: var(--accent-color);
 }
 
@@ -2180,7 +2178,7 @@ span.docs-material-gm-checkbox-focused,
 .companion-collapser-button.app-switcher-button-checked
     .app-switcher-button-icon-background,
 .docs-gm .docs-ui-toast,
-.javascriptMaterialdesignGm3WizElevation-elevation:before,
+.javascriptMaterialdesignGm3WizElevation-elevation::before,
 .ita-hwt-ime-st,
 .docs-bubble,
 .apps-search-popup-menu,
@@ -2202,8 +2200,8 @@ span.docs-material-gm-checkbox-focused,
 .miniChapterSwitcherChapterList.goog-menu.goog-menu-vertical.miniChapterSwitcherChapterListViewContainer,
 .docs-grille-gm3 .docs-chat-message-tooltip-container {
     box-shadow:
-        0 14px 28px rgba(0, 0, 0, 0.25),
-        0 10px 10px rgba(0, 0, 0, 0.2);
+        0 14px 28px rgb(0 0 0 / 25%),
+        0 10px 10px rgb(0 0 0 / 20%);
 }
 
 .docs-explore-searchbar-labelinput,
@@ -2221,7 +2219,7 @@ span.docs-material-gm-checkbox-focused,
 }
 
 .docs-gm .docs-chat-edit-container.docs-chat-shadow {
-    box-shadow: 0 -2px 6px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 -2px 6px 2px rgb(0 0 0 / 20%);
 }
 
 /*********/
@@ -2314,7 +2312,7 @@ img.docs-generativeai-onboarding-dialog-image,
 /* MEDIA QUERIES */
 /*****************/
 
-@media screen and (max-width: 1600px) {
+@media screen and (width <= 1600px) {
     .docs-grille-gm3
         #docs-omnibox-toolbar.assisted-actions
         .docs-omnibox-input {
@@ -2432,8 +2430,7 @@ img.docs-generativeai-onboarding-dialog-image,
 }
 
 #contents > div {
-    background-color: transparent;
-    background: var(--DocsAfterDark_documentBackground);
+    background-color: var(--DocsAfterDark_documentBackground);
 }
 
 .kix-canvas-tile-content[style*="background-color: rgb(255, 255, 255)"],

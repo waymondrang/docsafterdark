@@ -1,19 +1,15 @@
 html.DocsAfterDark_light.DocsAfterDark_normal {
-    --primary-text-color: #000000;
+    --primary-text-color: #000;
     --secondary-text-color: #1a1a1a;
-    --tertiary-text-color: #333333;
-    --disabled-text: #666666;
+    --tertiary-text-color: #333;
+    --disabled-text: #666;
 
-    --root-background-color: hsl(var(--DocsAfterDark_accentHue), 20%, 95%);
-    --primary-background-color: hsl(var(--DocsAfterDark_accentHue), 20%, 97.5%);
-    --secondary-background-color: hsl(var(--DocsAfterDark_accentHue), 25%, 90%);
-    --tertiary-background-color: hsl(var(--DocsAfterDark_accentHue), 30%, 85%);
-    --quaternary-background-color: hsl(
-        var(--DocsAfterDark_accentHue),
-        35%,
-        80%
-    );
-    --background-color-5: hsl(var(--DocsAfterDark_accentHue), 40%, 75%);
+    --root-background-color: hsl(var(--DocsAfterDark_accentHue) 20% 95%);
+    --primary-background-color: hsl(var(--DocsAfterDark_accentHue) 20% 97.5%);
+    --secondary-background-color: hsl(var(--DocsAfterDark_accentHue) 25% 90%);
+    --tertiary-background-color: hsl(var(--DocsAfterDark_accentHue) 30% 85%);
+    --quaternary-background-color: hsl(var(--DocsAfterDark_accentHue) 35% 80%);
+    --background-color-5: hsl(var(--DocsAfterDark_accentHue) 40% 75%);
 
     --menu-background: var(--primary-background-color);
     --hover-background-color: #0000001a;
@@ -23,20 +19,17 @@ html.DocsAfterDark_light.DocsAfterDark_normal {
         --secondary-background-color
     ); /* CURRENTLY USED FOR CALENDAR INPUT */
 
-    --primary-border-color: #cccccc;
+    --primary-border-color: #ccc;
     --secondary-border-color: #404040;
     --lighter-border-color: #808080;
     --hover-border-color: #595959;
 
-    --accent-color: hsl(var(--DocsAfterDark_accentHue), 25%, 50%);
-    --light-accent-color: hsla(var(--DocsAfterDark_accentHue), 25%, 60%, 0.1);
-    --light-accent-hover-color: hsla(
-        var(--DocsAfterDark_accentHue),
-        25%,
-        40%,
-        0.2
+    --accent-color: hsl(var(--DocsAfterDark_accentHue) 25% 50%);
+    --light-accent-color: hsl(var(--DocsAfterDark_accentHue) 25% 60% / 10%);
+    --light-accent-hover-color: hsl(
+        var(--DocsAfterDark_accentHue) 25% 40% / 20%
     );
-    --accent-hover-color: hsla(var(--DocsAfterDark_accentHue), 25%, 60%, 1);
+    --accent-hover-color: hsl(var(--DocsAfterDark_accentHue) 25% 60% / 100%);
 
     //////////////////
     // DECLARATIONS //

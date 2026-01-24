@@ -73,7 +73,7 @@ const defaultExtensionData: ExtensionData = {
     light_mode: { variant: LightModeOperation.Normal },
 
     doc_bg: DocumentBackground.Blend,
-    custom_bg: "",
+    custom_bg: "beige",
 
     // Matcha/sage green hue
     accent_color: { hue: 88 },

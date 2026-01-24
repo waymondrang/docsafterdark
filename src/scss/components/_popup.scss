@@ -135,23 +135,16 @@ input {
         cursor: not-allowed;
     }
 
-    // Chrome, Safari, Edge, Opera
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-    }
-
     // Firefox
     &[type="number"] {
-        -moz-appearance: textfield;
+        appearance: textfield;
     }
 }
 
 #tipContainer {
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
 
     width: 100%;
 
@@ -166,8 +159,8 @@ input {
         border: 1px solid var(--primary-border-color);
 
         box-shadow:
-            0 14px 28px rgba(0, 0, 0, 0.25),
-            0 10px 10px rgba(0, 0, 0, 0.2);
+            0 14px 28px rgb(0 0 0 / 25%),
+            0 10px 10px rgb(0 0 0 / 20%);
 
         padding: 0.75rem;
         border-radius: 0.5rem;
@@ -206,7 +199,7 @@ input {
 
     .sectionLabel {
         color: var(--tertiary-text-color);
-        margin: 0px;
+        margin: 0;
         margin-bottom: 0.5rem;
     }
 
@@ -310,7 +303,7 @@ input {
 
             transition: background-color 0.1s ease-out;
 
-            &:after {
+            &::after {
                 content: "";
                 position: absolute;
 
@@ -325,8 +318,6 @@ input {
                 border: solid var(--primary-text-color);
                 border-width: 0 4px 4px 0;
 
-                -webkit-transform: rotate(45deg);
-                -ms-transform: rotate(45deg);
                 transform: rotate(45deg);
 
                 transition:
@@ -347,7 +338,7 @@ input {
                 & + .checkbox {
                     background-color: var(--accent-color);
 
-                    &:after {
+                    &::after {
                         top: 0.17rem;
                         opacity: 1;
                     }
