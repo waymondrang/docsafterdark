@@ -342,20 +342,22 @@ class DocumentBackgroundComponent extends StateSubscriber {
                 // If background is black, always turn invert on
                 // If background is anything else, invert based on theme
 
-                if (value == DocumentBackground.Default) {
+                if (
+                    value == DocumentBackground.Default ||
+                    value == DocumentBackground.Custom
+                ) {
                     update.invert = {
                         ...data.invert,
                         invert: false,
                     };
-                } else if (value == DocumentBackground.Black) {
+                } else if (
+                    value == DocumentBackground.Black ||
+                    (value == DocumentBackground.Blend &&
+                        data.mode == ExtensionMode.Dark)
+                ) {
                     update.invert = {
                         ...data.invert,
                         invert: true,
-                    };
-                } else if (value != DocumentBackground.Custom) {
-                    update.invert = {
-                        ...data.invert,
-                        invert: data.mode == ExtensionMode.Dark,
                     };
                 }
 
@@ -388,6 +390,8 @@ class DocumentBackgroundComponent extends StateSubscriber {
         if (newData.doc_bg == DocumentBackground.Custom) {
             this.customContainer.classList.remove("hidden");
         }
+
+        this.customInput.value = newData.custom_bg;
     }
 }
 

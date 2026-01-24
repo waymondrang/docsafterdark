@@ -14,6 +14,8 @@
         "globals": "^16.5.0",
         "prettier": "^3.7.4",
         "sass": "^1.97.2",
+        "stylelint": "^17.0.0",
+        "stylelint-config-standard-scss": "^17.0.0",
         "ts-loader": "^9.5.4",
         "ts-node": "^10.9.2",
         "typescript": "^5.9.3",
@@ -33,9 +35,10 @@
     "homepage": "https://docsafterdark.com/",
     "scripts": {
         "build": "webpack && sass src/scss/docs.scss build/docs.bundle.css && sass src/scss/frame.scss build/frame.bundle.css && sass src/scss/global.scss build/global.bundle.css && web-ext lint --source-dir=build && ts-node package.ts",
-        "check": "prettier --check . && eslint src",
+        "check": "prettier --check . && eslint src && stylelint '**/*.scss'",
         "dev": "concurrently --names 'webpack,sass,sass,sass' --prefix-colors 'magenta,red,blue,yellow' 'webpack --watch' 'sass --watch src/scss/docs.scss build/docs.bundle.css' 'sass --watch src/scss/frame.scss build/frame.bundle.css' 'sass --watch src/scss/global.scss build/global.bundle.css'",
         "firefox": "web-ext run --source-dir build/ --keep-profile-changes",
-        "format": "prettier --write ."
+        "fix:format": "prettier --write .",
+        "fix:style": "stylelint '**/*.scss' --fix"
     }
 }

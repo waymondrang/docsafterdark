@@ -1,12 +1,12 @@
 :root {
-    --primary-text-color: #ffffff;
+    --primary-text-color: #fff;
     --secondary-text-color: #f2f2f2;
     --tertiary-text-color: #e6e6e6;
-    --disabled-text: #666666;
+    --disabled-text: #666;
 
     --root-background-color: #1a1a1a;
     --primary-background-color: #262626;
-    --secondary-background-color: #333333;
+    --secondary-background-color: #333;
     --tertiary-background-color: #404040;
     --quaternary-background-color: #4d4d4d;
     --background-color-5: #595959;
@@ -23,7 +23,7 @@
     --lighter-border-color: #808080;
     --hover-border-color: #595959;
 
-    --input-border-color: #666666;
+    --input-border-color: #666;
     --input-hover-border-color: #808080;
     --input-background-color: var(
         --tertiary-background-color
@@ -34,13 +34,10 @@
     // Set default accentHue in CSS
     --DocsAfterDark_accentHue: 88;
 
-    --accent-color: hsl(var(--DocsAfterDark_accentHue), 40%, 60%);
-    --light-accent-color: hsla(var(--DocsAfterDark_accentHue), 40%, 70%, 0.1);
-    --light-accent-hover-color: hsla(
-        var(--DocsAfterDark_accentHue),
-        60%,
-        60%,
-        0.2
+    --accent-color: hsl(var(--DocsAfterDark_accentHue) 40% 60%);
+    --light-accent-color: hsl(var(--DocsAfterDark_accentHue) 40% 70% / 10%);
+    --light-accent-hover-color: hsl(
+        var(--DocsAfterDark_accentHue) 60% 60% / 20%
     );
-    --accent-hover-color: hsla(var(--DocsAfterDark_accentHue), 60%, 80%, 1);
+    --accent-hover-color: hsl(var(--DocsAfterDark_accentHue) 60% 80% / 100%);
 }
