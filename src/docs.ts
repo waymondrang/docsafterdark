@@ -29,12 +29,13 @@ import {
     getElementId,
     getExtensionData,
     insertStylesheet,
+    isElementVisible,
     isOnHomepage,
     registerMessageListener,
     registerStorageListener,
     removeClassFromHTML,
     removeElement,
-    setStorageBatch,
+    setStorage,
     setStyleProperty,
 } from "./util";
 
@@ -46,6 +47,7 @@ const REPLACEMENTS_PATH = "assets/replacements/";
 class DocsAfterDark {
     private extensionData: ExtensionData = defaultExtensionData;
     private isTempDisabled: boolean = false;
+    private isDocumentMetricsVisible: boolean = false;
 
     async initialize(): Promise<void> {
         Logger.debug("Hello from DocsAfterDark!");
@@ -98,10 +100,61 @@ class DocsAfterDark {
         this.updateExtension();
 
         // Save the storage data to persist the default settings
-        await setStorageBatch(this.extensionData);
+        await setStorage(this.extensionData);
 
         registerStorageListener(this.handleStorageUpdate);
         registerMessageListener(this.handleMessageUpdate);
+        this.registerMetricWidgetWatcher();
+    }
+
+    private raiseButton(raise: boolean) {
+        if (raise) {
+            setStyleProperty("buttonPosition", buttonPosition.raised);
+        } else {
+            setStyleProperty("buttonPosition", buttonPosition.normal);
+        }
+    }
+
+    private registerMetricWidgetWatcher() {
+        // NOTE: This assumes that the document metrics widget is always in
+        //       the DOM.
+
+        const metricsWidget = document.querySelector(
+            ".kix-documentmetrics-widget"
+        ) as HTMLDivElement;
+
+        if (metricsWidget == null) {
+            Logger.error("Document metrics widget not found!");
+            return;
+        }
+
+        let prevIsVisible = isElementVisible(metricsWidget);
+        this.raiseButton(prevIsVisible);
+
+        const attributesObserver = new MutationObserver(() => {
+            const metricsWidget = document.querySelector(
+                ".kix-documentmetrics-widget"
+            ) as HTMLDivElement;
+
+            if (metricsWidget == null) {
+                attributesObserver.disconnect();
+                Logger.error("Document metrics widget disappeared!");
+                return;
+            }
+
+            // NOTE: Google Docs uses 'display: none' to hide the widget
+            const isVisible = isElementVisible(metricsWidget);
+
+            if (isVisible != prevIsVisible) {
+                prevIsVisible = isVisible;
+                this.raiseButton(prevIsVisible);
+            }
+        });
+
+        attributesObserver.observe(metricsWidget, {
+            attributes: true,
+            attributeFilter: ["style", "class"],
+        });
     }
 
     private handleMessageUpdate: MessageListener = (message) => {
@@ -383,12 +436,6 @@ class DocsAfterDark {
     private updateButton() {
         if (this.extensionData.button_options.show) {
             const button = this.createButton();
-
-            if (this.extensionData.button_options.raised) {
-                setStyleProperty("buttonPosition", buttonPosition.raised);
-            } else {
-                setStyleProperty("buttonPosition", buttonPosition.normal);
-            }
 
             // NOTE: We do not need to add "enabled" here because that is
             //       triggered by a button click, not an update. isTempDisabled

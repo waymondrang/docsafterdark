@@ -43,11 +43,7 @@ class PopupState {
 
         this.extensionData = { ...this.extensionData, ...updates };
 
-        // Update changed fields in storage
-        for (const [key, value] of Object.entries(updates)) {
-            // key is safe to cast to keyof ExtensionData
-            await setStorage(key as keyof ExtensionData, value);
-        }
+        await setStorage(updates);
 
         this.updateSubscribers();
     }
@@ -417,25 +413,12 @@ class ButtonComponent extends StateSubscriber {
     private showButtonCheckbox = document.querySelector(
         "#showButton"
     ) as HTMLInputElement;
-    private raiseButtonCheckbox = document.querySelector(
-        "#raiseButton"
-    ) as HTMLInputElement;
 
     initialize() {
         this.showButtonCheckbox.addEventListener("click", () => {
             this.state.setData({
                 button_options: {
-                    ...this.state.getData().button_options,
                     show: this.showButtonCheckbox.checked,
-                },
-            });
-        });
-
-        this.raiseButtonCheckbox.addEventListener("click", () => {
-            this.state.setData({
-                button_options: {
-                    ...this.state.getData().button_options,
-                    raised: this.raiseButtonCheckbox.checked,
                 },
             });
         });
@@ -443,16 +426,6 @@ class ButtonComponent extends StateSubscriber {
 
     update(newData: ExtensionData): void {
         this.showButtonCheckbox.checked = newData.button_options.show;
-
-        this.raiseButtonCheckbox.disabled = !newData.button_options.show;
-
-        if (newData.button_options.show) {
-            removeClassFromParent(this.raiseButtonCheckbox, "disabled");
-        } else {
-            addClassToParent(this.raiseButtonCheckbox, "disabled");
-        }
-
-        this.raiseButtonCheckbox.checked = newData.button_options.raised;
     }
 }
 

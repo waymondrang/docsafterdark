@@ -100,20 +100,8 @@ async function messageTabs<T>(message: T): Promise<void> {
     );
 }
 
-// TODO: Can combine setStorage with setStorageBatch and use
-//       Partial<ExtensionData> as input type.
-
-/**
- * Sets a storage item with a new value
- */
-function setStorage(key: keyof ExtensionData, value: unknown): Promise<void> {
-    return browser_ns.storage.local.set({
-        [key]: value,
-    }) as Promise<void>;
-}
-
-function setStorageBatch(data: Record<string, unknown>) {
-    return browser_ns.storage.local.set(data) as Promise<void>;
+function setStorage(update: Partial<ExtensionData>) {
+    return browser_ns.storage.local.set(update) as Promise<void>;
 }
 
 /**
@@ -255,12 +243,16 @@ function getAssetURL(path: string): string {
     return browser_ns.runtime.getURL(path);
 }
 
+function isElementVisible(element: HTMLElement): boolean {
+    const style = window.getComputedStyle(element);
+    return style.display !== "none" && style.visibility !== "hidden";
+}
+
 export {
     getBrowserNamespace,
     setStyleProperty,
     isVersionNewer,
     setStorage,
-    setStorageBatch,
     getStorage,
     deleteStorage,
     registerStorageListener,
@@ -282,4 +274,5 @@ export {
     getElement,
     insertStylesheet,
     getAssetURL,
+    isElementVisible,
 };
