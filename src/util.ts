@@ -90,16 +90,20 @@ function isVersionNewer(curr: string, target: string) {
  * Send message payload to active tabs in current window
  */
 async function messageTabs<T>(message: T): Promise<void> {
-    const tabs = await browser_ns.tabs.query({
-        active: true,
-        currentWindow: true,
-    });
+    try {
+        const tabs = await browser_ns.tabs.query({
+            active: true,
+            currentWindow: true,
+        });
 
-    await Promise.all(
-        tabs
-            .filter((tab) => tab.id !== undefined)
-            .map((tab) => browser_ns.tabs.sendMessage<T>(tab.id!, message))
-    );
+        await Promise.all(
+            tabs
+                .filter((tab) => tab.id !== undefined)
+                .map((tab) => browser_ns.tabs.sendMessage<T>(tab.id!, message))
+        );
+    } catch (err: unknown) {
+        Logger.debug("Could not message tabs:", err);
+    }
 }
 
 function setStorage(update: Partial<ExtensionData>) {
