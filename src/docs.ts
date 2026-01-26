@@ -14,10 +14,10 @@ import {
     DarkModeOperation,
     DocumentBackground,
     ExtensionMode,
+    InvertMode,
     LightModeOperation,
     type AccentColorOptions,
     type ExtensionData,
-    type InvertOptions,
     type MessageListener,
     type StorageListener,
 } from "./types";
@@ -76,9 +76,15 @@ class DocsAfterDark {
         if (data.accent_color !== undefined) {
             this.extensionData.accent_color = data.accent_color;
         }
-        if (data.invert !== undefined) {
-            this.extensionData.invert = data.invert;
+
+        if (data.invert_enabled !== undefined) {
+            this.extensionData.invert_enabled = data.invert_enabled;
         }
+
+        if (data.invert_mode !== undefined) {
+            this.extensionData.invert_mode = data.invert_mode;
+        }
+
         if (data.button_options !== undefined) {
             this.extensionData.button_options = data.button_options;
         }
@@ -94,8 +100,9 @@ class DocsAfterDark {
 
         Logger.debug(this.extensionData);
 
-        // Set CSS replacement URLs
+        // Run functions that aren't dependent on extension data
         this.replaceStyleURLs();
+        this.registerMetricWidgetWatcher();
 
         this.updateExtension();
 
@@ -104,7 +111,6 @@ class DocsAfterDark {
 
         registerStorageListener(this.handleStorageUpdate);
         registerMessageListener(this.handleMessageUpdate);
-        this.registerMetricWidgetWatcher();
     }
 
     private raiseButton(raise: boolean) {
@@ -116,44 +122,59 @@ class DocsAfterDark {
     }
 
     private registerMetricWidgetWatcher() {
-        // NOTE: This assumes that the document metrics widget is always in
-        //       the DOM.
+        // NOTE: We cannot assume that the document metrics widget will always
+        //       exist in the DOM.
 
-        const metricsWidget = document.querySelector(
-            ".kix-documentmetrics-widget"
-        ) as HTMLDivElement;
+        let currMetricsWidget: HTMLDivElement | null;
+        let attributeObserver: MutationObserver | null;
+        let prevIsVisible: boolean = false;
 
-        if (metricsWidget == null) {
-            Logger.error("Document metrics widget not found!");
-            return;
-        }
+        const reset = () => {
+            if (attributeObserver != null) {
+                attributeObserver.disconnect();
+            }
 
-        let prevIsVisible = isElementVisible(metricsWidget);
-        this.raiseButton(prevIsVisible);
+            attributeObserver = null;
+            currMetricsWidget = null;
+        };
 
-        const attributesObserver = new MutationObserver(() => {
+        const handleMutation = () => {
             const metricsWidget = document.querySelector(
                 ".kix-documentmetrics-widget"
             ) as HTMLDivElement;
 
             if (metricsWidget == null) {
-                attributesObserver.disconnect();
-                Logger.error("Document metrics widget disappeared!");
+                reset();
                 return;
             }
 
-            // NOTE: Google Docs uses 'display: none' to hide the widget
             const isVisible = isElementVisible(metricsWidget);
 
-            if (isVisible != prevIsVisible) {
+            if (metricsWidget !== currMetricsWidget) {
+                reset();
+
+                currMetricsWidget = metricsWidget;
+
+                attributeObserver = new MutationObserver(handleMutation);
+                attributeObserver.observe(currMetricsWidget, {
+                    attributes: true,
+                    attributeFilter: ["style", "class"],
+                });
+            }
+
+            if (isVisible !== prevIsVisible) {
                 prevIsVisible = isVisible;
                 this.raiseButton(prevIsVisible);
             }
-        });
+        };
 
-        attributesObserver.observe(metricsWidget, {
-            attributes: true,
-            attributeFilter: ["style", "class"],
+        this.raiseButton(false);
+        handleMutation();
+
+        const elementObserver = new MutationObserver(handleMutation);
+        elementObserver.observe(document.documentElement, {
+            childList: true,
+            subtree: true,
         });
     }
 
@@ -232,10 +253,17 @@ class DocsAfterDark {
         ////////////
 
         if (
-            changes.invert !== undefined &&
-            changes.invert.newValue !== undefined
+            changes.invert_enabled !== undefined &&
+            changes.invert_enabled.newValue !== undefined
         ) {
-            this.extensionData.invert = changes.invert.newValue;
+            this.extensionData.invert_enabled = changes.invert_enabled.newValue;
+        }
+
+        if (
+            changes.invert_mode !== undefined &&
+            changes.invert_mode.newValue !== undefined
+        ) {
+            this.extensionData.invert_mode = changes.invert_mode.newValue;
         }
 
         //////////////////
@@ -366,19 +394,23 @@ class DocsAfterDark {
     }
 
     private updateDocumentInvert() {
-        const invertOptions: InvertOptions = this.extensionData.invert;
-
-        if (!invertOptions.invert) {
+        if (!this.extensionData.invert_enabled) {
             setStyleProperty("documentInvert", documentInvert.off);
             return;
         }
 
-        if (invertOptions.black) {
-            setStyleProperty("documentInvert", documentInvert.black);
-        } else if (invertOptions.grayscale) {
-            setStyleProperty("documentInvert", documentInvert.grayscale);
-        } else {
-            setStyleProperty("documentInvert", documentInvert.invert);
+        switch (this.extensionData.invert_mode) {
+            case InvertMode.Gray:
+                setStyleProperty("documentInvert", documentInvert.grayscale);
+                break;
+            case InvertMode.Black:
+                setStyleProperty("documentInvert", documentInvert.black);
+                break;
+            case InvertMode.Normal:
+                setStyleProperty("documentInvert", documentInvert.normal);
+                break;
+            default:
+                break;
         }
     }
 

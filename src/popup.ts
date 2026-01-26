@@ -5,13 +5,12 @@ import {
     ExtensionMode,
     type MessagePayload,
     type ExtensionData,
+    InvertMode,
 } from "./types";
 import {
-    addClassToParent,
     getBrowserNamespace,
     getExtensionData,
     messageTabs,
-    removeClassFromParent,
     setStorage,
     setStyleProperty,
 } from "./util";
@@ -77,6 +76,29 @@ abstract class StateSubscriber {
     abstract update(newData: ExtensionData): void;
 }
 
+class toggleCategoryComponent {
+    private category: HTMLDivElement;
+    private header: HTMLDivElement;
+
+    constructor(categoryId: string) {
+        const category = document.getElementById(categoryId);
+        if (category == null) {
+            throw new Error(`Category with id "${categoryId}" not found`);
+        }
+
+        this.category = category as HTMLDivElement;
+        this.header = category.querySelector(
+            ".categoryHeader"
+        ) as HTMLDivElement;
+    }
+
+    initialize() {
+        this.header.addEventListener("click", () => {
+            this.category.classList.toggle("expanded");
+        });
+    }
+}
+
 class ModeComponent extends StateSubscriber {
     private modeButtons = document.querySelectorAll(
         "#modeDark, #modeLight, #modeOff"
@@ -105,20 +127,14 @@ class ModeComponent extends StateSubscriber {
                         this.state.setData({
                             mode: ExtensionMode.Dark,
                             doc_bg: DocumentBackground.Blend,
-                            invert: {
-                                ...this.state.getData().invert,
-                                invert: true,
-                            },
+                            invert_enabled: true,
                         });
                         break;
                     case "light":
                         this.state.setData({
                             mode: ExtensionMode.Light,
                             doc_bg: DocumentBackground.Default,
-                            invert: {
-                                ...this.state.getData().invert,
-                                invert: false,
-                            },
+                            invert_enabled: false,
                         });
                         break;
                 }
@@ -149,6 +165,9 @@ class ModeComponent extends StateSubscriber {
 }
 
 class DarkModeComponent extends StateSubscriber {
+    private section = document.querySelector(
+        "#darkModeVariant"
+    ) as HTMLDivElement;
     private normalButton = document.querySelector(
         "#darkModeNormal"
     ) as HTMLButtonElement;
@@ -162,7 +181,11 @@ class DarkModeComponent extends StateSubscriber {
     }
 
     update(newData: ExtensionData): void {
-        this.resetButtons();
+        this.resetAppearance();
+
+        if (newData.mode != ExtensionMode.Dark) {
+            this.section.classList.add("hidden");
+        }
 
         if (newData.dark_mode.variant == DarkModeOperation.Normal) {
             this.normalButton.classList.add("selected");
@@ -189,7 +212,8 @@ class DarkModeComponent extends StateSubscriber {
         }
     };
 
-    private resetButtons() {
+    private resetAppearance() {
+        this.section.classList.remove("hidden");
         this.normalButton.classList.remove("selected");
         this.midnightButton.classList.remove("selected");
     }
@@ -342,19 +366,13 @@ class DocumentBackgroundComponent extends StateSubscriber {
                     value == DocumentBackground.Default ||
                     value == DocumentBackground.Custom
                 ) {
-                    update.invert = {
-                        ...data.invert,
-                        invert: false,
-                    };
+                    update.invert_enabled = false;
                 } else if (
                     value == DocumentBackground.Black ||
                     (value == DocumentBackground.Blend &&
                         data.mode == ExtensionMode.Dark)
                 ) {
-                    update.invert = {
-                        ...data.invert,
-                        invert: true,
-                    };
+                    update.invert_enabled = true;
                 }
 
                 this.state.setData(update);
@@ -454,70 +472,85 @@ class TipComponent {
 
 class InvertComponent extends StateSubscriber {
     private invertedCheckbox = document.querySelector(
-        "#documentInverted"
+        "#documentInvert"
     ) as HTMLInputElement;
-    private grayscaleCheckbox = document.querySelector(
-        "#documentGrayscale"
-    ) as HTMLInputElement;
-    private blackCheckbox = document.querySelector(
-        "#documentBlack"
-    ) as HTMLInputElement;
+    private optionsContainer = document.querySelector(
+        "#invertOptions"
+    ) as HTMLDivElement;
+    private grayButton = document.querySelector(
+        "#documentInvertGray"
+    ) as HTMLButtonElement;
+    private blackButton = document.querySelector(
+        "#documentInvertBlack"
+    ) as HTMLButtonElement;
+
+    private advancedOptionsContainer = document.querySelector(
+        "#advancedInvertOptions"
+    ) as HTMLDivElement;
+    private normalButton = document.querySelector(
+        "#documentInvertNormal"
+    ) as HTMLButtonElement;
 
     initialize(): void {
         this.invertedCheckbox.addEventListener("click", () => {
-            const extensionData = this.state.getData();
             this.state.setData({
-                invert: {
-                    ...extensionData.invert,
-                    invert: this.invertedCheckbox.checked,
-                },
+                invert_enabled: this.invertedCheckbox.checked,
             });
         });
 
-        this.grayscaleCheckbox.addEventListener("click", () => {
-            const extensionData = this.state.getData();
+        this.grayButton.addEventListener("click", () => {
             this.state.setData({
-                invert: {
-                    ...extensionData.invert,
-                    grayscale: this.grayscaleCheckbox.checked,
-                },
+                invert_mode: InvertMode.Gray,
             });
         });
 
-        this.blackCheckbox.addEventListener("click", () => {
-            const extensionData = this.state.getData();
+        this.blackButton.addEventListener("click", () => {
             this.state.setData({
-                invert: {
-                    ...extensionData.invert,
-                    // For sanity, also set grayscale to true in case user
-                    // clicks black without first enabling grayscale
-                    grayscale: true,
-                    black: this.blackCheckbox.checked,
-                },
+                invert_mode: InvertMode.Black,
+            });
+        });
+
+        this.normalButton.addEventListener("click", () => {
+            this.state.setData({
+                invert_mode: InvertMode.Normal,
             });
         });
     }
 
     update(newData: ExtensionData): void {
-        this.invertedCheckbox.checked = newData.invert.invert;
-        this.grayscaleCheckbox.checked = newData.invert.grayscale;
-        this.blackCheckbox.checked = newData.invert.black;
+        this.resetAppearance();
+        this.invertedCheckbox.checked = newData.invert_enabled;
 
-        this.grayscaleCheckbox.disabled = !newData.invert.invert;
-        this.blackCheckbox.disabled =
-            !newData.invert.invert || !newData.invert.grayscale;
-
-        if (newData.invert.invert) {
-            removeClassFromParent(this.grayscaleCheckbox, "disabled");
-        } else {
-            addClassToParent(this.grayscaleCheckbox, "disabled");
+        if (!newData.invert_enabled) {
+            this.optionsContainer.classList.add("disabled");
+            this.advancedOptionsContainer.classList.add("disabled");
         }
 
-        if (!newData.invert.invert || !newData.invert.grayscale) {
-            addClassToParent(this.blackCheckbox, "disabled");
-        } else {
-            removeClassFromParent(this.blackCheckbox, "disabled");
+        this.grayButton.disabled = !newData.invert_enabled;
+        this.blackButton.disabled = !newData.invert_enabled;
+        this.normalButton.disabled = !newData.invert_enabled;
+
+        switch (newData.invert_mode) {
+            case InvertMode.Gray:
+                this.grayButton.classList.add("selected");
+                break;
+            case InvertMode.Black:
+                this.blackButton.classList.add("selected");
+                break;
+            case InvertMode.Normal:
+                this.normalButton.classList.add("selected");
+                break;
+            default:
+                break;
         }
+    }
+
+    resetAppearance(): void {
+        this.optionsContainer.classList.remove("disabled");
+        this.advancedOptionsContainer.classList.remove("disabled");
+        this.grayButton.classList.remove("selected");
+        this.blackButton.classList.remove("selected");
+        this.normalButton.classList.remove("selected");
     }
 }
 
@@ -553,6 +586,9 @@ class Popup extends PopupState {
 
     private styleManager: StyleManager = new StyleManager(this);
 
+    private advancedCategoryComponent: toggleCategoryComponent =
+        new toggleCategoryComponent("advancedCategory");
+
     async initialize() {
         Logger.debug("Hello from DocsAfterDark Popup!");
 
@@ -571,6 +607,7 @@ class Popup extends PopupState {
         this.invertComponent.initialize();
         this.versionComponent.initialize();
         this.styleManager.initialize();
+        this.advancedCategoryComponent.initialize();
 
         this.updateSubscribers();
     }
