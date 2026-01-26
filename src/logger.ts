@@ -5,7 +5,9 @@
 const LOG_LEVELS = { DEBUG: 0, INFO: 1, WARN: 2, ERROR: 3, OFF: 4 };
 
 class Logger {
-    static currentLevel = LOG_LEVELS.DEBUG;
+    static currentLevel = __IS_PRODUCTION__
+        ? LOG_LEVELS.INFO
+        : LOG_LEVELS.DEBUG;
     static prefixName = "DocsAfterDark";
 
     static setName(name: string) {
