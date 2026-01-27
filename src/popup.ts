@@ -470,6 +470,9 @@ class InvertComponent extends StateSubscriber {
     private blackButton = document.querySelector(
         "#documentInvertBlack"
     ) as HTMLButtonElement;
+    private preserveColorsButton = document.querySelector(
+        "#documentInvertPreserveColors"
+    ) as HTMLButtonElement;
     private offButton = document.querySelector(
         "#documentInvertOff"
     ) as HTMLButtonElement;
@@ -500,6 +503,13 @@ class InvertComponent extends StateSubscriber {
             });
         });
 
+        this.preserveColorsButton.addEventListener("click", () => {
+            this.state.setData({
+                invert_mode: InvertMode.Preserve_colors,
+                invert_enabled: true,
+            });
+        });
+
         this.normalButton.addEventListener("click", () => {
             this.state.setData({
                 invert_mode: InvertMode.Normal,
@@ -523,6 +533,9 @@ class InvertComponent extends StateSubscriber {
             case InvertMode.Black:
                 this.blackButton.classList.add("selected");
                 break;
+            case InvertMode.Preserve_colors:
+                this.preserveColorsButton.classList.add("selected");
+                break;
             case InvertMode.Normal:
                 this.normalButton.classList.add("selected");
                 break;
@@ -534,6 +547,7 @@ class InvertComponent extends StateSubscriber {
     resetAppearance(): void {
         this.grayButton.classList.remove("selected");
         this.blackButton.classList.remove("selected");
+        this.preserveColorsButton.classList.remove("selected");
         this.normalButton.classList.remove("selected");
         this.offButton.classList.remove("selected");
     }
