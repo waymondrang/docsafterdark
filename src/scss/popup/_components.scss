@@ -32,7 +32,9 @@ footer {
     align-items: center;
 
     #version {
+        font-weight: 500;
         color: var(--tertiary-text-color);
+
         margin: 0;
     }
 }

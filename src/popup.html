@@ -179,38 +179,32 @@
                         </div>
 
                         <div class="section">
-                            <h3 class="sectionTitle">Appearance</h3>
+                            <h3 class="sectionTitle">Invert</h3>
 
                             <div class="sectionContent">
-                                <div class="flexRow vCenter spaceBetween">
-                                    <label
-                                        class="checkboxButton"
-                                        for="documentInvert"
-                                    >
-                                        <input
-                                            type="checkbox"
-                                            id="documentInvert"
-                                            name="documentInvert"
-                                        />
+                                <div
+                                    id="invertOptions"
+                                    class="buttonRow fullWidth"
+                                >
+                                    <button id="documentInvertGray">
+                                        <span>Gray</span>
+                                    </button>
 
-                                        <div class="checkbox"></div>
-                                        <div class="content">Invert</div>
-                                    </label>
+                                    <button id="documentInvertBlack">
+                                        <span>Black</span>
+                                    </button>
 
-                                    <div
-                                        id="invertOptions"
-                                        class="buttonRow fullWidth"
-                                    >
-                                        <button id="documentInvertGray">
-                                            <span>Gray</span>
-                                        </button>
-
-                                        <button id="documentInvertBlack">
-                                            <span>Black</span>
-                                        </button>
-                                    </div>
+                                    <button id="documentInvertOff">
+                                        <span>Off</span>
+                                    </button>
                                 </div>
+                            </div>
+                        </div>
 
+                        <div class="section">
+                            <h3 class="sectionTitle">Border</h3>
+
+                            <div class="sectionContent">
                                 <div class="checkboxRow">
                                     <label
                                         class="checkboxButton"
@@ -224,7 +218,7 @@
 
                                         <div class="checkbox"></div>
                                         <div class="content">
-                                            <span>Show Border</span>
+                                            <span>Show</span>
                                         </div>
                                     </label>
                                 </div>
@@ -308,7 +302,7 @@
             <hr />
 
             <footer>
-                <p id="version"></p>
+                <span id="version">v0.0.0</span>
 
                 <div class="flexRow gap">
                     <a

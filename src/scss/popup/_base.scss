@@ -54,6 +54,9 @@ body {
 
 button,
 .button {
+    position: relative;
+    overflow: hidden;
+
     font-size: 1rem;
     font-family: inherit;
     color: var(--primary-text-color);
@@ -69,12 +72,31 @@ button,
 
     cursor: pointer;
 
+    // Animate background when .selected
+    &::before {
+        content: "";
+        position: absolute;
+
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 0;
+
+        background-color: var(--accent-color);
+
+        transition: height 0.2s cubic-bezier(0.2, 0.8, 0.2, 0.8);
+
+        z-index: -1;
+    }
+
     &:hover:not(:disabled, .selected) {
         background-color: var(--hover-background-color);
     }
 
     &.selected {
-        background-color: var(--accent-color);
+        &::before {
+            height: 100%;
+        }
     }
 
     &:disabled {
