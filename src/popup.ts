@@ -464,6 +464,10 @@ class TipComponent {
 }
 
 class InvertComponent extends StateSubscriber {
+    private section = document.querySelector(
+        "#documentInvertSection"
+    ) as HTMLDivElement;
+
     private grayButton = document.querySelector(
         "#documentInvertGray"
     ) as HTMLButtonElement;
@@ -472,11 +476,6 @@ class InvertComponent extends StateSubscriber {
     ) as HTMLButtonElement;
     private offButton = document.querySelector(
         "#documentInvertOff"
-    ) as HTMLButtonElement;
-
-    // In advanced settings category
-    private normalButton = document.querySelector(
-        "#documentInvertNormal"
     ) as HTMLButtonElement;
 
     initialize(): void {
@@ -499,16 +498,18 @@ class InvertComponent extends StateSubscriber {
                 invert_enabled: true,
             });
         });
-
-        this.normalButton.addEventListener("click", () => {
-            this.state.setData({
-                invert_mode: InvertMode.Normal,
-                invert_enabled: true,
-            });
-        });
     }
 
     update(newData: ExtensionData): void {
+        const isDarkMode = newData.mode === ExtensionMode.Dark;
+
+        // Show invert options only in dark mode
+        if (isDarkMode) {
+            this.section.classList.remove("hidden");
+        } else {
+            this.section.classList.add("hidden");
+        }
+
         this.resetAppearance();
 
         if (!newData.invert_enabled) {
@@ -524,7 +525,7 @@ class InvertComponent extends StateSubscriber {
                 this.blackButton.classList.add("selected");
                 break;
             case InvertMode.Normal:
-                this.normalButton.classList.add("selected");
+                this.offButton.classList.add("selected");
                 break;
             default:
                 break;
@@ -534,7 +535,6 @@ class InvertComponent extends StateSubscriber {
     resetAppearance(): void {
         this.grayButton.classList.remove("selected");
         this.blackButton.classList.remove("selected");
-        this.normalButton.classList.remove("selected");
         this.offButton.classList.remove("selected");
     }
 }
