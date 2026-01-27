@@ -69,7 +69,7 @@ button,
 
     cursor: pointer;
 
-    &:hover:not(:disabled) {
+    &:hover:not(:disabled, .selected) {
         background-color: var(--hover-background-color);
     }
 
