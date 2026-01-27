@@ -1,9 +1,10 @@
 import { Logger } from "./logger";
-import type {
-    BrowserAPI,
-    ExtensionData,
-    MessageListener,
-    StorageListener,
+import {
+    InvertMode,
+    type BrowserAPI,
+    type ExtensionData,
+    type MessageListener,
+    type StorageListener,
 } from "./types";
 import { SELECTOR_PREFIX, STYLE_PROPERTY_PREFIX } from "./values";
 
@@ -112,7 +113,7 @@ function setStorage(update: Partial<ExtensionData>) {
 /**
  * Gets storage items with the given key(s)
  */
-function getStorage<T>(keys: (keyof ExtensionData)[]): Promise<T> {
+function getStorage<T>(...keys: (keyof ExtensionData)[]): Promise<T> {
     return new Promise((resolve, reject) => {
         browser_ns.storage.local.get(keys).then(
             (result) => {
@@ -126,7 +127,7 @@ function getStorage<T>(keys: (keyof ExtensionData)[]): Promise<T> {
 /**
  * Deletes storage items by key(s)
  */
-function deleteStorage(keys: (keyof ExtensionData)[]): Promise<void> {
+function deleteStorage(...keys: (keyof ExtensionData)[]): Promise<void> {
     return browser_ns.storage.local.remove(keys) as Promise<void>;
 }
 
@@ -155,21 +156,28 @@ function removeMessageListener(listener: MessageListener) {
     browser_ns.runtime.onMessage.removeListener(listener);
 }
 
-function getExtensionData(): Promise<Partial<ExtensionData>> {
-    return getStorage<Partial<ExtensionData>>([
+async function getExtensionData(): Promise<ExtensionData> {
+    let data = await getStorage<ExtensionData>(
         "mode",
         "dark_mode",
         "light_mode",
         "doc_bg",
         "custom_bg",
-        "invert",
         "show_border",
         "accent_color",
         "button_options",
+        "invert_enabled",
+        "invert_mode",
         "version",
-        "updates", // Deprecated, kept for backwards capacity
-        "raise_button", // Deprecated, kept for backwards capacity
-    ]);
+        // Deprecated
+        "invert"
+    );
+
+    data = updateExtensionData(data);
+
+    Logger.debug(data);
+
+    return data;
 }
 
 function addClassToParent(element: HTMLElement, ...classes: string[]): void {
@@ -253,6 +261,26 @@ function isElementVisible(element: HTMLElement): boolean {
     return style.display !== "none" && style.visibility !== "hidden";
 }
 
+function updateExtensionData(data: ExtensionData): ExtensionData {
+    if (data.invert != undefined) {
+        data.invert_enabled = data.invert.invert;
+
+        if (data.invert.black) {
+            data.invert_mode = InvertMode.Black;
+        } else {
+            // If was previously using normal invert mode, convert to grayscale
+            data.invert_mode = InvertMode.Gray;
+        }
+
+        deleteStorage("invert");
+        delete data.invert;
+
+        Logger.debug("Converted and deleted deprecated invert field");
+    }
+
+    return data;
+}
+
 export {
     getBrowserNamespace,
     setStyleProperty,
@@ -280,4 +308,5 @@ export {
     insertStylesheet,
     getAssetURL,
     isElementVisible,
+    updateExtensionData,
 };

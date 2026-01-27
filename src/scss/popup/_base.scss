@@ -1,0 +1,125 @@
+// via: https://gwfh.mranftl.com/fonts/google-sans?subsets=latin
+
+/* google-sans-regular - latin */
+@font-face {
+    font-display: swap;
+    font-family: "Google Sans";
+    font-style: normal;
+    font-weight: 400;
+    src:
+        url("assets/fonts/google-sans-v67-latin-regular.woff2") format("woff2"),
+        url("assets/fonts/google-sans-v67-latin-regular.ttf") format("truetype");
+}
+
+/* google-sans-500 - latin */
+@font-face {
+    font-display: swap;
+    font-family: "Google Sans";
+    font-style: normal;
+    font-weight: 500;
+    src:
+        url("assets/fonts/google-sans-v67-latin-500.woff2") format("woff2"),
+        url("assets/fonts/google-sans-v67-latin-500.ttf") format("truetype");
+}
+
+* {
+    box-sizing: border-box;
+    user-select: none;
+}
+
+html,
+body {
+    font-family:
+        "Google Sans",
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Oxygen,
+        Ubuntu,
+        Cantarell,
+        "Open Sans",
+        "Helvetica Neue",
+        sans-serif;
+    font-size: 14px;
+}
+
+body {
+    color: var(--primary-text-color);
+    background-color: var(--root-background-color);
+
+    width: fit-content;
+}
+
+button,
+.button {
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--primary-text-color);
+    text-decoration: none;
+
+    padding: 0.25rem 0.5rem;
+
+    border: none;
+
+    background-color: transparent;
+
+    transition: all 1s cubic-bezier(0, 1, 0, 1);
+
+    cursor: pointer;
+
+    &:hover:not(:disabled, .selected) {
+        background-color: var(--hover-background-color);
+    }
+
+    &.selected {
+        background-color: var(--accent-color);
+    }
+
+    &:disabled {
+        opacity: 0.1;
+        cursor: not-allowed;
+    }
+
+    &.rounded {
+        border-radius: 0.5rem;
+    }
+
+    &.accented {
+        background-color: var(--secondary-background-color);
+
+        &:hover:not(:disabled) {
+            background-color: var(--accent-color);
+        }
+    }
+}
+
+label {
+    font-family: inherit;
+    cursor: pointer;
+    user-select: none;
+}
+
+input {
+    font-size: 1rem;
+    font-family: inherit;
+    background-color: var(--primary-background-color);
+    color: var(--primary-text-color);
+
+    padding: 0.25rem 0.5rem;
+    box-sizing: border-box;
+
+    border: 1px solid var(--primary-border-color);
+    border-radius: 0.25rem;
+
+    &:disabled {
+        opacity: 0.25;
+        cursor: not-allowed;
+    }
+
+    // Firefox
+    &[type="number"] {
+        appearance: textfield;
+    }
+}

@@ -33,6 +33,12 @@ enum DocumentBackground {
     Custom = "custom",
 }
 
+enum InvertMode {
+    Normal = 0,
+    Gray = 1,
+    Black = 2,
+}
+
 ////////////////////
 // STORAGE FIELDS //
 ////////////////////
@@ -43,12 +49,6 @@ interface DarkModeOptions {
 
 interface LightModeOptions {
     variant: LightModeOperation;
-}
-
-interface InvertOptions {
-    invert: boolean;
-    grayscale: boolean;
-    black: boolean;
 }
 
 interface AccentColorOptions {
@@ -63,6 +63,13 @@ interface VersionInfo {
     last_version: string;
 }
 
+// Deprecated
+interface InvertOptions {
+    invert: boolean;
+    grayscale: boolean;
+    black: boolean;
+}
+
 ////////////////////
 // STORAGE SCHEMA //
 ////////////////////
@@ -70,13 +77,14 @@ interface VersionInfo {
 type ExtensionData = {
     mode: ExtensionMode;
     dark_mode: DarkModeOptions;
-    // NOTE: Currently there is no light mode operation, the light_mode field
-    //       only exists to provide consistency with the other mode fields.
     light_mode: LightModeOptions;
 
     doc_bg: DocumentBackground;
     custom_bg: string;
-    invert: InvertOptions;
+
+    invert_enabled: boolean;
+    invert_mode: InvertMode;
+
     show_border: boolean;
 
     accent_color: AccentColorOptions;
@@ -84,10 +92,12 @@ type ExtensionData = {
 
     version: VersionInfo;
 
-    // Deprecated fields (kept for backwards compatibility)
-    // Very very few, if any, users will still use these fields.
-    updates?: unknown;
-    raise_button?: boolean;
+    // Deprecated fields
+
+    // NOTE: We need to keep the invert field because we want to keep user
+    //       preferences when updating to future versions.
+
+    invert?: InvertOptions;
 };
 
 ///////////////////////////
@@ -172,6 +182,7 @@ export {
     DarkModeOperation,
     LightModeOperation,
     DocumentBackground,
+    InvertMode,
     type ExtensionData,
     type DarkModeOptions,
     type LightModeOptions,

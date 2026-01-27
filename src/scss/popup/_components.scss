@@ -1,0 +1,374 @@
+main {
+    padding: 0.5rem;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+
+    margin-bottom: 0.75rem;
+
+    #tipButton {
+        // Expand the hover area of button
+        padding: 0.25rem;
+        margin: -0.25rem;
+
+        opacity: 0.5;
+        transition: opacity 0.05s ease-out;
+
+        cursor: help;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    #version {
+        color: var(--tertiary-text-color);
+        margin: 0;
+    }
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--primary-border-color);
+    margin: 0.5rem 0;
+}
+
+.scrollContent {
+    // Avoid the scrollbar covering content
+    margin: 0 -0.5rem;
+    padding: 0 0.5rem;
+
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+#tipContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+
+    padding: 0.5rem;
+
+    box-sizing: border-box;
+
+    .content {
+        display: flex;
+        flex-direction: row;
+        align-items: start;
+
+        color: var(--primary-text-color);
+        font-size: 1rem;
+
+        padding: 0.5rem;
+
+        background-color: var(--primary-background-color);
+        border: 1px solid var(--primary-border-color);
+        border-radius: 0.5rem;
+
+        box-shadow:
+            0 14px 28px rgb(0 0 0 / 25%),
+            0 10px 10px rgb(0 0 0 / 20%);
+
+        .message {
+            flex: 1;
+
+            p {
+                margin: 0;
+                padding: 0;
+
+                line-height: 1.25;
+            }
+        }
+
+        .icon {
+            margin-right: 0.5rem;
+
+            svg {
+                fill: var(--accent-color);
+            }
+        }
+    }
+}
+
+.category {
+    .categoryHeader {
+        width: fit-content;
+
+        margin: 0;
+        margin-bottom: 0.5rem;
+
+        .categoryTitle {
+            margin: 0;
+        }
+    }
+
+    &.toggleCategory {
+        .categoryTitle {
+            margin-right: 0.25rem;
+        }
+
+        .upArrow,
+        .downArrow {
+            opacity: 0.5;
+        }
+
+        .upArrow,
+        .categoryContent {
+            display: none;
+        }
+
+        .downArrow {
+            display: block;
+        }
+
+        .categoryContent {
+            padding-left: 1rem;
+
+            border-left: 0.25rem solid var(--primary-border-color);
+        }
+
+        &.expanded {
+            .upArrow,
+            .categoryContent {
+                display: block;
+            }
+
+            .downArrow {
+                display: none;
+            }
+        }
+    }
+}
+
+#advancedCategory {
+    .categoryHeader {
+        opacity: 0.25;
+
+        cursor: pointer;
+
+        transition: all 1s cubic-bezier(0, 1, 0, 1);
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    &.expanded {
+        .categoryHeader {
+            opacity: 1;
+        }
+    }
+}
+
+.section {
+    margin-bottom: 1rem;
+
+    .sectionTitle {
+        color: var(--tertiary-text-color);
+
+        margin: 0;
+        margin-bottom: 0.5rem;
+    }
+
+    .sectionContent {
+        > *:not(:last-child) {
+            margin-bottom: 0.5rem;
+        }
+    }
+}
+
+.buttonRow {
+    display: flex;
+    flex-direction: row;
+
+    width: fit-content;
+    max-width: 100%;
+
+    border: 1px solid var(--primary-border-color);
+    border-radius: 0.25rem;
+
+    overflow: hidden;
+
+    transition: opacity 1s cubic-bezier(0, 1, 0, 1);
+
+    button {
+        &:not(.selected) {
+            color: var(--tertiary-text-color);
+        }
+    }
+
+    &.disabled {
+        button {
+            &:disabled {
+                // Do not change if container is disabled already
+                opacity: 1;
+            }
+        }
+    }
+}
+
+.checkboxRow {
+    > * {
+        display: inline-block;
+
+        &:not(:last-child) {
+            margin-right: 0.5rem;
+        }
+    }
+}
+
+.checkboxButton {
+    display: inline-flex;
+
+    border-radius: 0.5rem;
+
+    overflow: hidden;
+
+    color: var(--primary-text-color);
+
+    cursor: pointer;
+    transition: opacity 0.75s cubic-bezier(0, 1, 0, 1);
+
+    &:not(.disabled):hover {
+        .checkbox {
+            background-color: var(--tertiary-background-color);
+        }
+    }
+
+    .checkbox {
+        position: relative;
+
+        height: 1.5rem;
+        width: 1.5rem;
+
+        border-radius: 0.5rem;
+
+        background-color: var(--secondary-background-color);
+
+        transition: background-color 0.1s ease-out;
+
+        &::after {
+            content: "";
+            position: absolute;
+
+            opacity: 0;
+
+            left: 0.475rem;
+            top: 0.5rem;
+
+            height: 0.6rem;
+            width: 0.3rem;
+
+            border: solid var(--primary-text-color);
+            border-width: 0 3px 3px 0;
+
+            transform: rotate(45deg);
+
+            transition:
+                top 1s cubic-bezier(0, 1, 0, 1),
+                opacity 0.5s cubic-bezier(0, 1, 0, 1);
+        }
+    }
+
+    input[type="checkbox"] {
+        position: absolute;
+
+        height: 0;
+        width: 0;
+
+        opacity: 0;
+
+        &:checked {
+            & + .checkbox {
+                background-color: var(--accent-color);
+
+                &::after {
+                    top: 0.225rem;
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    .content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        padding: 0 0.5rem;
+    }
+}
+
+#spectrum {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    #spectrumBar {
+        display: flex;
+        align-items: center;
+
+        height: 1.25rem;
+        width: 100%;
+
+        margin-right: 0.5rem;
+
+        background: linear-gradient(
+            to right,
+            red,
+            yellow,
+            lime,
+            aqua,
+            blue,
+            magenta,
+            red
+        );
+
+        border-radius: 0.25rem;
+        cursor: pointer;
+
+        #spectrumKnob {
+            position: relative;
+
+            height: 1.75rem;
+            width: 1.75rem;
+
+            border-radius: 50%;
+            background-color: transparent;
+            border: 0.25rem solid #fff;
+        }
+    }
+
+    #spectrumInput {
+        width: 3rem;
+    }
+}
+
+#donate {
+    opacity: 0.75;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+#github {
+    padding: 0.25rem;
+
+    svg {
+        display: block;
+        height: 1.25rem;
+    }
+}

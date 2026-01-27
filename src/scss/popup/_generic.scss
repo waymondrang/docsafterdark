@@ -1,0 +1,33 @@
+.hidden {
+    display: none !important;
+}
+
+.disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+}
+
+.flexRow {
+    display: flex;
+    flex-direction: row;
+
+    &.gap {
+        gap: 0.5rem;
+    }
+
+    &.vCenter {
+        align-items: center;
+    }
+
+    &.hCenter {
+        justify-content: center;
+    }
+
+    &.spaceBetween {
+        justify-content: space-between;
+    }
+
+    .expand {
+        flex: 1;
+    }
+}

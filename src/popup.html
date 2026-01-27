@@ -4,22 +4,26 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
         <link rel="stylesheet" href="frame.bundle.css" />
-        <title>DocsAfterDark Options</title>
+
+        <title>DocsAfterDark Settings</title>
     </head>
 
     <body>
         <main>
             <header>
-                <h1>DocsAfterDark Options</h1>
+                <h1>DocsAfterDark Settings</h1>
                 <div id="tipButton">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
+                        height="20px"
                         viewBox="0 -960 960 960"
-                        fill="#fefefe"
+                        width="20px"
+                        fill="#e3e3e3"
                     >
                         <path
-                            d="M478-240q21 0 35.5-14.5T528-290q0-21-14.5-35.5T478-340q-21 0-35.5 14.5T428-290q0 21 14.5 35.5T478-240Zm-36-154h74q0-33 7.5-52t42.5-52q26-26 41-49.5t15-56.5q0-56-41-86t-97-30q-57 0-92.5 30T342-618l66 26q5-18 22.5-39t53.5-21q32 0 48 17.5t16 38.5q0 20-12 37.5T506-526q-44 39-54 59t-10 73Zm38 314q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z"
+                            d="M480-240q20 0 34-14t14-34q0-20-14-34t-34-14q-20 0-34 14t-14 34q0 20 14 34t34 14Zm-36-153h73q0-37 6.5-52.5T555-485q35-34 48.5-58t13.5-53q0-55-37.5-89.5T484-720q-51 0-88.5 27T343-620l65 27q9-28 28.5-43.5T482-652q28 0 46 16t18 42q0 23-15.5 41T496-518q-35 32-43.5 52.5T444-393Zm36 297q-79 0-149-30t-122.5-82.5Q156-261 126-331T96-480q0-80 30-149.5t82.5-122Q261-804 331-834t149-30q80 0 149.5 30t122 82.5Q804-699 834-629.5T864-480q0 79-30 149t-82.5 122.5Q699-156 629.5-126T480-96Z"
                         />
                     </svg>
                 </div>
@@ -30,12 +34,13 @@
                     <div class="icon">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
-                            height="24px"
+                            height="20px"
                             viewBox="0 -960 960 960"
-                            width="24px"
+                            width="20px"
+                            fill="#e3e3e3"
                         >
                             <path
-                                d="M240-400h320v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM480-80 373-240H160q-33 0-56.5-23.5T80-320v-480q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H587L480-80Zm0-144 64-96h256v-480H160v480h256l64 96Zm0-336Z"
+                                d="M407.74-240Q378-240 357-261.15 336-282.3 336-312v-67q-57-37.3-88.5-95.65Q216-533 216-600q0-110.31 76.78-187.16 76.78-76.84 187-76.84T667-787.16q77 76.85 77 187.16 0 66.82-31.5 125.41T624-379v67q0 29.7-21.18 50.85Q581.65-240 551.91-240H407.74ZM408-96q-20.4 0-34.2-13.8Q360-123.6 360-144v-24h240v24q0 20.4-13.8 34.2Q572.4-96 552-96H408Z"
                             />
                         </svg>
                     </div>
@@ -49,150 +54,254 @@
                 </div>
             </div>
 
-            <div class="section">
-                <p class="sectionLabel">Global Toggle</p>
-                <div class="buttonRow">
-                    <button id="modeDark" value="dark">Dark</button>
-                    <button id="modeLight" value="light">Light</button>
-                    <button id="modeOff" value="off">Off</button>
+            <div class="scrollContent">
+                <div class="category">
+                    <div class="categoryContent">
+                        <div class="section">
+                            <h3 class="sectionTitle">Global Toggle</h3>
+
+                            <div class="sectionContent">
+                                <div class="buttonRow">
+                                    <button id="modeDark" value="dark">
+                                        Dark
+                                    </button>
+                                    <button id="modeLight" value="light">
+                                        Light
+                                    </button>
+                                    <button id="modeOff" value="off">
+                                        Off
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="darkModeVariant" class="section">
+                            <h3 class="sectionTitle">Theme Variant</h3>
+
+                            <div class="sectionContent">
+                                <div class="buttonRow">
+                                    <button id="darkModeNormal" value="normal">
+                                        Normal
+                                    </button>
+                                    <button
+                                        id="darkModeMidnight"
+                                        value="midnight"
+                                    >
+                                        Midnight
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="categoryContent">
+                            <div class="section">
+                                <h3 class="sectionTitle">Accent Color</h3>
+
+                                <div class="sectionContent">
+                                    <div id="spectrum">
+                                        <div id="spectrumBar">
+                                            <div id="spectrumKnob"></div>
+                                        </div>
+
+                                        <input
+                                            id="spectrumInput"
+                                            type="number"
+                                            min="0"
+                                            max="360"
+                                            placeholder="0"
+                                            maxlength="3"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="section">
-                <p class="sectionLabel">Dark Mode Variant</p>
-                <div class="buttonRow">
-                    <button id="darkModeNormal" value="normal">Normal</button>
-                    <button id="darkModeMidnight" value="midnight">
-                        Midnight
-                    </button>
-                </div>
-            </div>
-
-            <div class="section">
-                <p class="sectionLabel">
-                    Document Background
-                    <span class="lighter">(May Be Unstable)</span>
-                </p>
-                <div class="sectionControls">
-                    <div class="buttonRow fullWidth">
-                        <button id="documentBGDefault" value="default">
-                            Default
-                        </button>
-
-                        <button id="documentBGShade" value="shade">
-                            Shade
-                        </button>
-
-                        <button id="documentBGDark" value="dark">Blend</button>
-
-                        <button id="documentBGBlack" value="black">
-                            Black
-                        </button>
-
-                        <button id="documentBGCustom" value="custom">
-                            Custom
-                        </button>
+                <div class="category">
+                    <div class="categoryHeader">
+                        <h2 class="categoryTitle">Document</h2>
                     </div>
 
-                    <div id="documentBGCustomContainer" class="flexRow">
-                        <input
-                            class="expand"
-                            id="documentBGCustomInput"
-                            placeholder="Custom Color/CSS"
-                        />
-                        <button
-                            id="documentBGCustomSave"
-                            class="rounded accented"
+                    <div class="categoryContent">
+                        <div class="section">
+                            <h3 class="sectionTitle hoverTip">
+                                Background
+                                <span class="lighter">(unstable)</span>
+                            </h3>
+
+                            <div class="sectionContent">
+                                <div class="buttonRow fullWidth">
+                                    <button
+                                        id="documentBGDefault"
+                                        value="default"
+                                    >
+                                        <span>Default</span>
+                                    </button>
+
+                                    <button id="documentBGShade" value="shade">
+                                        <span>Shade</span>
+                                    </button>
+
+                                    <button id="documentBGDark" value="dark">
+                                        <span>Blend</span>
+                                    </button>
+
+                                    <button id="documentBGBlack" value="black">
+                                        <span>Black</span>
+                                    </button>
+
+                                    <button
+                                        id="documentBGCustom"
+                                        value="custom"
+                                    >
+                                        <span>Custom</span>
+                                    </button>
+                                </div>
+
+                                <div
+                                    id="documentBGCustomContainer"
+                                    class="flexRow gap"
+                                >
+                                    <input
+                                        class="expand"
+                                        id="documentBGCustomInput"
+                                        placeholder="Custom Color/CSS"
+                                    />
+                                    <button
+                                        id="documentBGCustomSave"
+                                        class="rounded accented"
+                                    >
+                                        Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <h3 class="sectionTitle">Appearance</h3>
+
+                            <div class="sectionContent">
+                                <div class="flexRow vCenter spaceBetween">
+                                    <label
+                                        class="checkboxButton"
+                                        for="documentInvert"
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            id="documentInvert"
+                                            name="documentInvert"
+                                        />
+
+                                        <div class="checkbox"></div>
+                                        <div class="content">Invert</div>
+                                    </label>
+
+                                    <div
+                                        id="invertOptions"
+                                        class="buttonRow fullWidth"
+                                    >
+                                        <button id="documentInvertGray">
+                                            <span>Gray</span>
+                                        </button>
+
+                                        <button id="documentInvertBlack">
+                                            <span>Black</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="checkboxRow">
+                                    <label
+                                        class="checkboxButton"
+                                        for="documentBorder"
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            id="documentBorder"
+                                            name="documentBorder"
+                                        />
+
+                                        <div class="checkbox"></div>
+                                        <div class="content">
+                                            <span>Show Border</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="advancedCategory" class="category toggleCategory">
+                    <div class="categoryHeader flexRow vCenter">
+                        <h2 class="categoryTitle">Advanced</h2>
+
+                        <svg
+                            class="upArrow"
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="20px"
+                            viewBox="0 -960 960 960"
+                            width="20px"
+                            fill="#e3e3e3"
                         >
-                            Save
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section">
-                <p class="sectionLabel">Document Controls</p>
-                <div class="sectionControls">
-                    <div class="checkboxRow">
-                        <label class="checkboxButton" for="documentInverted">
-                            <input
-                                type="checkbox"
-                                id="documentInverted"
-                                name="documentInverted"
+                            <path
+                                d="M480-525 291-336l-51-51 240-240 240 240-51 51-189-189Z"
                             />
+                        </svg>
 
-                            <div class="checkbox"></div>
-                            <div class="content">Invert</div>
-                        </label>
-
-                        <label class="checkboxButton" for="documentGrayscale">
-                            <input
-                                type="checkbox"
-                                id="documentGrayscale"
-                                name="documentGrayscale"
+                        <svg
+                            class="downArrow"
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="20px"
+                            viewBox="0 -960 960 960"
+                            width="20px"
+                            fill="#e3e3e3"
+                        >
+                            <path
+                                d="M480-333 240-573l51-51 189 189 189-189 51 51-240 240Z"
                             />
-
-                            <div class="checkbox"></div>
-                            <div class="content">Grayscale</div>
-                        </label>
-
-                        <label class="checkboxButton" for="documentBlack">
-                            <input
-                                type="checkbox"
-                                id="documentBlack"
-                                name="documentBlack"
-                            />
-
-                            <div class="checkbox"></div>
-                            <div class="content">Black</div>
-                        </label>
-                    </div>
-                    <div class="checkboxRow">
-                        <label class="checkboxButton" for="documentBorder">
-                            <input
-                                type="checkbox"
-                                id="documentBorder"
-                                name="documentBorder"
-                            />
-
-                            <div class="checkbox"></div>
-                            <div class="content">Show Border</div>
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section">
-                <p class="sectionLabel">Toggle Button</p>
-                <div class="checkboxRow">
-                    <label class="checkboxButton" for="showButton">
-                        <input
-                            type="checkbox"
-                            id="showButton"
-                            name="showButton"
-                        />
-
-                        <div class="checkbox"></div>
-                        <div class="content">Show</div>
-                    </label>
-                </div>
-            </div>
-
-            <div class="section">
-                <p class="sectionLabel">Accent Color</p>
-                <div id="spectrum">
-                    <div id="spectrumBar">
-                        <div id="spectrumKnob"></div>
+                        </svg>
                     </div>
 
-                    <input
-                        id="spectrumInput"
-                        type="number"
-                        min="0"
-                        max="360"
-                        placeholder="0"
-                        maxlength="3"
-                    />
+                    <div class="categoryContent">
+                        <div class="section">
+                            <h3 class="sectionTitle">Toggle Button</h3>
+                            <div class="sectionContent">
+                                <div class="checkboxRow">
+                                    <label
+                                        class="checkboxButton"
+                                        for="showButton"
+                                    >
+                                        <input
+                                            type="checkbox"
+                                            id="showButton"
+                                            name="showButton"
+                                        />
+
+                                        <div class="checkbox"></div>
+                                        <div class="content">
+                                            <span>Show</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="section">
+                            <h3 class="sectionTitle">Invert</h3>
+                            <div class="sectionContent">
+                                <div
+                                    id="advancedInvertOptions"
+                                    class="buttonRow fullWidth"
+                                >
+                                    <button id="documentInvertNormal">
+                                        <span>Normal</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -201,7 +310,7 @@
             <footer>
                 <p id="version"></p>
 
-                <div class="flexRow">
+                <div class="flexRow gap">
                     <a
                         id="donate"
                         class="button rounded accented"

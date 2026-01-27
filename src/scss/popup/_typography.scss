@@ -1,0 +1,28 @@
+h1 {
+    font-size: 1.25em;
+    font-weight: 550;
+    letter-spacing: -0.025rem;
+    color: var(--primary-text-color);
+
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    font-size: 1.25rem;
+    font-weight: 500;
+
+    margin: 0;
+    margin-bottom: 0.375rem;
+}
+
+h3 {
+    font-size: 1rem;
+    font-weight: 450;
+}
+
+span {
+    &.lighter {
+        opacity: 0.5;
+    }
+}

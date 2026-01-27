@@ -4,6 +4,7 @@ import {
     LightModeOperation,
     DocumentBackground,
     type ExtensionData,
+    InvertMode,
 } from "./types";
 
 const STYLE_PROPERTY_PREFIX = "--DocsAfterDark_";
@@ -51,7 +52,7 @@ const replacements = {
 };
 
 const documentInvert = {
-    invert: "invert(1)",
+    normal: "invert(1)",
     grayscale: "invert(1) contrast(79.5%) grayscale(100%)",
     black: "invert(1) grayscale(100%)",
     off: "none",
@@ -69,20 +70,18 @@ const buttonPosition = {
 
 const defaultExtensionData: ExtensionData = {
     mode: ExtensionMode.Dark,
+
     dark_mode: { variant: DarkModeOperation.Normal },
     light_mode: { variant: LightModeOperation.Normal },
 
     doc_bg: DocumentBackground.Blend,
     custom_bg: "beige",
 
-    // Matcha/sage green hue
-    accent_color: { hue: 88 },
+    // Dark blue
+    accent_color: { hue: 225 },
 
-    invert: {
-        invert: true,
-        grayscale: true,
-        black: false,
-    },
+    invert_enabled: true,
+    invert_mode: InvertMode.Gray,
 
     button_options: {
         show: true,
