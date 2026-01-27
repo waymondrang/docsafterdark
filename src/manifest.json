@@ -12,7 +12,7 @@
         }
     ],
     "action": {
-        "default_title": "DocsAfterDark Options",
+        "default_title": "DocsAfterDark Settings",
         "default_popup": "popup.html"
     },
     "web_accessible_resources": [

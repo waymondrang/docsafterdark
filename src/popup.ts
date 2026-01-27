@@ -358,16 +358,14 @@ class DocumentBackgroundComponent extends StateSubscriber {
                 // If background is anything else, invert based on theme
 
                 if (
-                    value == DocumentBackground.Default ||
-                    value == DocumentBackground.Custom
-                ) {
-                    update.invert_enabled = false;
-                } else if (
                     value == DocumentBackground.Black ||
-                    (value == DocumentBackground.Blend &&
+                    ((value == DocumentBackground.Blend ||
+                        value == DocumentBackground.Shade) &&
                         data.mode == ExtensionMode.Dark)
                 ) {
                     update.invert_enabled = true;
+                } else {
+                    update.invert_enabled = false;
                 }
 
                 this.state.setData(update);
@@ -466,64 +464,57 @@ class TipComponent {
 }
 
 class InvertComponent extends StateSubscriber {
-    private invertedCheckbox = document.querySelector(
-        "#documentInvert"
-    ) as HTMLInputElement;
-    private optionsContainer = document.querySelector(
-        "#invertOptions"
-    ) as HTMLDivElement;
     private grayButton = document.querySelector(
         "#documentInvertGray"
     ) as HTMLButtonElement;
     private blackButton = document.querySelector(
         "#documentInvertBlack"
     ) as HTMLButtonElement;
+    private offButton = document.querySelector(
+        "#documentInvertOff"
+    ) as HTMLButtonElement;
 
-    private advancedOptionsContainer = document.querySelector(
-        "#advancedInvertOptions"
-    ) as HTMLDivElement;
+    // In advanced settings category
     private normalButton = document.querySelector(
         "#documentInvertNormal"
     ) as HTMLButtonElement;
 
     initialize(): void {
-        this.invertedCheckbox.addEventListener("click", () => {
+        this.offButton.addEventListener("click", () => {
             this.state.setData({
-                invert_enabled: this.invertedCheckbox.checked,
+                invert_enabled: false,
             });
         });
 
         this.grayButton.addEventListener("click", () => {
             this.state.setData({
                 invert_mode: InvertMode.Gray,
+                invert_enabled: true,
             });
         });
 
         this.blackButton.addEventListener("click", () => {
             this.state.setData({
                 invert_mode: InvertMode.Black,
+                invert_enabled: true,
             });
         });
 
         this.normalButton.addEventListener("click", () => {
             this.state.setData({
                 invert_mode: InvertMode.Normal,
+                invert_enabled: true,
             });
         });
     }
 
     update(newData: ExtensionData): void {
         this.resetAppearance();
-        this.invertedCheckbox.checked = newData.invert_enabled;
 
         if (!newData.invert_enabled) {
-            this.optionsContainer.classList.add("disabled");
-            this.advancedOptionsContainer.classList.add("disabled");
+            this.offButton.classList.add("selected");
+            return;
         }
-
-        this.grayButton.disabled = !newData.invert_enabled;
-        this.blackButton.disabled = !newData.invert_enabled;
-        this.normalButton.disabled = !newData.invert_enabled;
 
         switch (newData.invert_mode) {
             case InvertMode.Gray:
@@ -541,11 +532,10 @@ class InvertComponent extends StateSubscriber {
     }
 
     resetAppearance(): void {
-        this.optionsContainer.classList.remove("disabled");
-        this.advancedOptionsContainer.classList.remove("disabled");
         this.grayButton.classList.remove("selected");
         this.blackButton.classList.remove("selected");
         this.normalButton.classList.remove("selected");
+        this.offButton.classList.remove("selected");
     }
 }
 
