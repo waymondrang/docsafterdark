@@ -28,7 +28,7 @@ A free and open-source browser extension for customizing the appearance of Googl
 
 ### Quick toggle button
 
-If enabled, click the button in the bottom-left corner of the screen to instantly enable/disable the extension for the current document. 
+If enabled, click the button in the bottom-left corner of the screen to instantly enable/disable the extension for the current document.
 
 If it blocks other elements (like the word count widget), enable "Raise Button" in settings or hide it completely. Pressing this button only temporarily enables/disables the extension; to properly turn the extension off, use the settings popup.
 
