@@ -1,90 +1,5 @@
-// via: https://gwfh.mranftl.com/fonts/google-sans?subsets=latin
-
-/* google-sans-regular - latin */
-@font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: "Google Sans";
-    font-style: normal;
-    font-weight: 400;
-    src:
-        url("assets/fonts/google-sans-v67-latin-regular.woff2") format("woff2"),
-        /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-            url("assets/fonts/google-sans-v67-latin-regular.ttf")
-            format("truetype"); /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
-}
-
-/* google-sans-500 - latin */
-@font-face {
-    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-    font-family: "Google Sans";
-    font-style: normal;
-    font-weight: 500;
-    src:
-        url("assets/fonts/google-sans-v67-latin-500.woff2") format("woff2"),
-        /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-            url("assets/fonts/google-sans-v67-latin-500.ttf") format("truetype"); /* Chrome 4+, Firefox 3.5+, IE 9+, Safari 3.1+, iOS 4.2+, Android Browser 2.2+ */
-}
-
-* {
-    box-sizing: border-box;
-    user-select: none;
-}
-
-html,
-body {
-    font-family:
-        "Google Sans",
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Oxygen,
-        Ubuntu,
-        Cantarell,
-        "Open Sans",
-        "Helvetica Neue",
-        sans-serif;
-    font-size: 14px;
-}
-
-body {
-    color: var(--primary-text-color);
-    background-color: var(--root-background-color);
-
-    width: fit-content;
-}
-
-.scrollContent {
-    // Avoid the scrollbar covering content
-    margin: 0 -0.5rem;
-    padding: 0 0.5rem;
-
-    max-height: 500px;
-    overflow-y: scroll;
-}
-
-h1 {
-    font-size: 1.25em;
-    font-weight: 600;
-    letter-spacing: -0.01rem;
-    color: var(--primary-text-color);
-
-    margin: 0;
-    padding: 0;
-}
-
-h2 {
-    font-size: 1.25rem;
-    font-weight: 500;
-
-    margin: 0;
-    margin-bottom: 0.375rem;
-}
-
-h3 {
-    font-size: 1rem;
-    font-weight: 500;
+main {
+    padding: 0.5rem;
 }
 
 header {
@@ -96,15 +11,12 @@ header {
     margin-bottom: 0.75rem;
 
     #tipButton {
-        width: 1.75rem;
-        height: 1.75rem;
-
-        // expand the hover area of button
+        // Expand the hover area of button
         padding: 0.25rem;
         margin: -0.25rem;
 
         opacity: 0.5;
-        transition: opacity 0.1s ease-out;
+        transition: opacity 0.05s ease-out;
 
         cursor: help;
 
@@ -118,6 +30,11 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    #version {
+        color: var(--tertiary-text-color);
+        margin: 0;
+    }
 }
 
 hr {
@@ -126,86 +43,13 @@ hr {
     margin: 0.5rem 0;
 }
 
-main {
-    padding: 0.5rem;
-}
+.scrollContent {
+    // Avoid the scrollbar covering content
+    margin: 0 -0.5rem;
+    padding: 0 0.5rem;
 
-span {
-    &.lighter {
-        opacity: 0.5;
-    }
-}
-
-button,
-.button {
-    font-size: 1rem;
-    font-family: inherit;
-    color: var(--primary-text-color);
-    text-decoration: none;
-
-    padding: 0.25rem 0.5rem;
-
-    border: none;
-
-    background-color: transparent;
-
-    transition: all 1s cubic-bezier(0, 1, 0, 1);
-
-    cursor: pointer;
-
-    &:hover {
-        background-color: var(--hover-background-color);
-    }
-
-    &.selected {
-        background-color: var(--accent-color);
-    }
-
-    &:disabled {
-        opacity: 0.1;
-        cursor: not-allowed;
-    }
-
-    &.rounded {
-        border-radius: 0.5rem;
-    }
-
-    &.accented {
-        background-color: var(--secondary-background-color);
-
-        &:hover {
-            background-color: var(--accent-color);
-        }
-    }
-}
-
-label {
-    font-family: inherit;
-    cursor: pointer;
-    user-select: none;
-}
-
-input {
-    font-size: 1rem;
-    font-family: inherit;
-    background-color: var(--primary-background-color);
-    color: var(--primary-text-color);
-
-    padding: 0.25rem 0.5rem;
-    box-sizing: border-box;
-
-    border: 1px solid var(--primary-border-color);
-    border-radius: 0.25rem;
-
-    &:disabled {
-        opacity: 0.25;
-        cursor: not-allowed;
-    }
-
-    // Firefox
-    &[type="number"] {
-        appearance: textfield;
-    }
+    max-height: 500px;
+    overflow-y: scroll;
 }
 
 #tipContainer {
@@ -220,22 +64,22 @@ input {
     box-sizing: border-box;
 
     .content {
-        background-color: var(--primary-background-color);
-        color: var(--primary-text-color);
+        display: flex;
+        flex-direction: row;
+        align-items: start;
 
+        color: var(--primary-text-color);
+        font-size: 1rem;
+
+        padding: 0.5rem;
+
+        background-color: var(--primary-background-color);
         border: 1px solid var(--primary-border-color);
+        border-radius: 0.5rem;
 
         box-shadow:
             0 14px 28px rgb(0 0 0 / 25%),
             0 10px 10px rgb(0 0 0 / 20%);
-
-        padding: 0.75rem;
-        border-radius: 0.5rem;
-        font-size: 1rem;
-
-        display: flex;
-        flex-direction: row;
-        align-items: start;
 
         .message {
             flex: 1;
@@ -252,9 +96,6 @@ input {
             margin-right: 0.5rem;
 
             svg {
-                width: 1.25rem;
-                height: 1.25rem;
-
                 fill: var(--accent-color);
             }
         }
@@ -362,18 +203,6 @@ input {
 
     transition: opacity 1s cubic-bezier(0, 1, 0, 1);
 
-    &.multiSelect {
-        border-radius: 999px;
-
-        button {
-            border-radius: 0;
-
-            &:not(:last-child) {
-                border-right: 1px solid var(--primary-border-color);
-            }
-        }
-    }
-
     button {
         &:not(.selected) {
             color: var(--tertiary-text-color);
@@ -400,41 +229,22 @@ input {
     }
 }
 
-// Anything that has the disabled class
-.disabled {
-    opacity: 0.25;
-    cursor: not-allowed;
-}
-
 .checkboxButton {
-    // padding: 0.25rem 0.5rem;
     display: inline-flex;
 
-    // border: 1px solid var(--primary-border-color);
     border-radius: 0.5rem;
 
     overflow: hidden;
 
-    // background-color: var(--primary-background-color);
     color: var(--primary-text-color);
 
     cursor: pointer;
     transition: opacity 0.75s cubic-bezier(0, 1, 0, 1);
 
-    // > *:not(:last-child) {
-    //     border-right: 1px solid var(--primary-border-color);
-    // }
-
     &:not(.disabled):hover {
-        // background-color: var(--secondary-background-color);
-
         .checkbox {
             background-color: var(--tertiary-background-color);
         }
-
-        // .content {
-        //     background-color: var(--secondary-background-color);
-        // }
     }
 
     .checkbox {
@@ -488,10 +298,6 @@ input {
                     top: 0.225rem;
                     opacity: 1;
                 }
-
-                // & + .content {
-                //     background-color: var(--secondary-background-color);
-                // }
             }
         }
     }
@@ -502,40 +308,6 @@ input {
         justify-content: center;
 
         padding: 0 0.5rem;
-
-        // background-color: var(--primary-background-color);
-    }
-}
-
-.flexRow {
-    display: flex;
-    flex-direction: row;
-
-    &.gap {
-        gap: 0.5rem;
-    }
-
-    &.vCenter {
-        align-items: center;
-    }
-
-    &.hCenter {
-        justify-content: center;
-    }
-
-    &.spaceBetween {
-        justify-content: space-between;
-    }
-
-    .expand {
-        flex: 1;
-    }
-}
-
-footer {
-    #version {
-        color: var(--tertiary-text-color);
-        margin: 0;
     }
 }
 
@@ -582,10 +354,6 @@ footer {
     #spectrumInput {
         width: 3rem;
     }
-}
-
-.hidden {
-    display: none;
 }
 
 #donate {
