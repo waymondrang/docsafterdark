@@ -50,7 +50,7 @@ Install from the [Chrome Web Store](https://chrome.google.com/webstore/detail/do
 npm install
 ```
 
-### Run
+### Running
 
 **Build and watch**
 
@@ -69,6 +69,16 @@ npm run firefox
 Launches a temporary Firefox instance with the extension installed. The extension automatically reloads when files in `build/` change.
 
 > **Note:** The Firefox profile is temporary and will not persist logins (on docs.google.com, for example) between sessions.
+
+### Testing
+
+**Check formatting and lint**
+
+```sh
+npm run check
+```
+
+This is also performed using GitHub Action, pull requests must pass these checks before being merged.
 
 ### Building
 
