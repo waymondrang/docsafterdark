@@ -405,11 +405,8 @@ class DocsAfterDark {
             case InvertMode.Black:
                 setStyleProperty("documentInvert", documentInvert.black);
                 break;
-            case InvertMode.Preserve_colors:
-                setStyleProperty(
-                    "documentInvert",
-                    documentInvert.preserve_colors
-                );
+            case InvertMode.Colorful:
+                setStyleProperty("documentInvert", documentInvert.colorful);
                 break;
             case InvertMode.Normal:
                 setStyleProperty("documentInvert", documentInvert.normal);

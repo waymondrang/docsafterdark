@@ -128,6 +128,7 @@ class ModeComponent extends StateSubscriber {
                             mode: ExtensionMode.Dark,
                             doc_bg: DocumentBackground.Blend,
                             invert_enabled: true,
+                            invert_mode: defaultExtensionData.invert_mode,
                         });
                         break;
                     case "light":
@@ -470,8 +471,8 @@ class InvertComponent extends StateSubscriber {
     private blackButton = document.querySelector(
         "#documentInvertBlack"
     ) as HTMLButtonElement;
-    private preserveColorsButton = document.querySelector(
-        "#documentInvertPreserveColors"
+    private colorfulButton = document.querySelector(
+        "#documentInvertColorful"
     ) as HTMLButtonElement;
     private offButton = document.querySelector(
         "#documentInvertOff"
@@ -503,9 +504,9 @@ class InvertComponent extends StateSubscriber {
             });
         });
 
-        this.preserveColorsButton.addEventListener("click", () => {
+        this.colorfulButton.addEventListener("click", () => {
             this.state.setData({
-                invert_mode: InvertMode.Preserve_colors,
+                invert_mode: InvertMode.Colorful,
                 invert_enabled: true,
             });
         });
@@ -533,8 +534,8 @@ class InvertComponent extends StateSubscriber {
             case InvertMode.Black:
                 this.blackButton.classList.add("selected");
                 break;
-            case InvertMode.Preserve_colors:
-                this.preserveColorsButton.classList.add("selected");
+            case InvertMode.Colorful:
+                this.colorfulButton.classList.add("selected");
                 break;
             case InvertMode.Normal:
                 this.normalButton.classList.add("selected");
@@ -547,7 +548,7 @@ class InvertComponent extends StateSubscriber {
     resetAppearance(): void {
         this.grayButton.classList.remove("selected");
         this.blackButton.classList.remove("selected");
-        this.preserveColorsButton.classList.remove("selected");
+        this.colorfulButton.classList.remove("selected");
         this.normalButton.classList.remove("selected");
         this.offButton.classList.remove("selected");
     }

@@ -55,7 +55,7 @@ const documentInvert = {
     normal: "invert(1)",
     grayscale: "invert(1) contrast(79.5%) grayscale(100%)",
     black: "invert(1) grayscale(100%)",
-    preserve_colors: "invert(1) hue-rotate(180deg)",
+    colorful: "invert(1) hue-rotate(180deg)",
     off: "none",
 };
 
@@ -82,7 +82,7 @@ const defaultExtensionData: ExtensionData = {
     accent_color: { hue: 225 },
 
     invert_enabled: true,
-    invert_mode: InvertMode.Preserve_colors,
+    invert_mode: InvertMode.Colorful,
 
     button_options: {
         show: true,

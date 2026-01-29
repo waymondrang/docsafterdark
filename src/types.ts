@@ -37,7 +37,7 @@ enum InvertMode {
     Normal = 0,
     Gray = 1,
     Black = 2,
-    Preserve_colors = 3,
+    Colorful = 3,
 }
 
 ////////////////////

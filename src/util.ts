@@ -6,7 +6,11 @@ import {
     type MessageListener,
     type StorageListener,
 } from "./types";
-import { SELECTOR_PREFIX, STYLE_PROPERTY_PREFIX } from "./values";
+import {
+    defaultExtensionData,
+    SELECTOR_PREFIX,
+    STYLE_PROPERTY_PREFIX,
+} from "./values";
 
 declare const browser: BrowserAPI;
 declare const chrome: BrowserAPI;
@@ -268,8 +272,8 @@ function updateExtensionData(data: ExtensionData): ExtensionData {
         if (data.invert.black) {
             data.invert_mode = InvertMode.Black;
         } else {
-            // If was previously using normal invert mode, convert to grayscale
-            data.invert_mode = InvertMode.Gray;
+            // If was previously using normal invert mode, convert to default
+            data.invert_mode = defaultExtensionData.invert_mode;
         }
 
         deleteStorage("invert");
