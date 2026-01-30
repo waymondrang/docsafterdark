@@ -1,5 +1,8 @@
 main {
+    position: relative;
+
     padding: 0.5rem;
+    padding-bottom: 3rem;
 }
 
 header {
@@ -27,9 +30,20 @@ header {
 }
 
 footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    padding: 0.625rem 1rem;
+
+    background-color: var(--root-background-color);
+
+    border-top: 1px solid var(--primary-border-color);
 
     #version {
         font-weight: 500;
@@ -45,25 +59,18 @@ hr {
     margin: 0.5rem 0;
 }
 
-.scrollContent {
-    // Avoid the scrollbar covering content
-    margin: 0 -0.5rem;
-    padding: 0 0.5rem;
-
-    max-height: 500px;
-    overflow-y: scroll;
-}
-
 #tipContainer {
     position: absolute;
     top: 0;
     left: 0;
+    right: 0;
 
     width: 100%;
 
-    padding: 0.5rem;
-
+    padding: 0.25rem;
     box-sizing: border-box;
+
+    z-index: 999;
 
     .content {
         display: flex;
@@ -72,6 +79,7 @@ hr {
 
         color: var(--primary-text-color);
         font-size: 1rem;
+        font-weight: 400;
 
         padding: 0.5rem;
 

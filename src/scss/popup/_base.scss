@@ -48,8 +48,6 @@ body {
 body {
     color: var(--primary-text-color);
     background-color: var(--root-background-color);
-
-    width: fit-content;
 }
 
 button,
@@ -140,7 +138,18 @@ input {
         cursor: not-allowed;
     }
 
-    // Firefox
+    ////////////////////
+    // INPUT SPINNERS //
+    ////////////////////
+
+    // For Chrome, Safari, Edge, Opera
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        appearance: none;
+        margin: 0;
+    }
+
+    // For Firefox and General
     &[type="number"] {
         appearance: textfield;
     }
