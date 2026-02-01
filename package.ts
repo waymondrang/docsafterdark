@@ -11,6 +11,7 @@ const CONFIG = {
     manifestPath: "build/manifest.json",
     buildDir: "build",
     releaseDir: "release",
+    ignoreFiles: ["**/.DS_Store"],
 };
 
 /////////////
@@ -184,7 +185,21 @@ async function packageExtension(force: boolean = false): Promise<void> {
             });
 
             archive.pipe(output);
-            archive.directory(buildDir, false);
+            archive.directory(buildDir, false, (entry) => {
+                // Check if file is ignored
+                for (const pattern of CONFIG.ignoreFiles) {
+                    const glob = pattern
+                        .replace(/\*\*/g, ".*")
+                        .replace(/\*/g, "[^/]*");
+                    const regex = new RegExp(glob);
+
+                    if (regex.test(entry.name)) {
+                        return false;
+                    }
+                }
+
+                return entry;
+            });
             archive.finalize();
         });
 
