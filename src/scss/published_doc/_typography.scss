@@ -1,0 +1,24 @@
+#contents .doc-content {
+    ////////////////////////
+    // PRIMARY TEXT COLOR //
+    ////////////////////////
+
+    p,
+    li,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: var(--primary-text-color);
+    }
+
+    // TODO: Add logic to calculate color from .cX classes and invert if black
+
+    @for $i from 0 through 99 {
+        .c#{$i} {
+            color: var(--docsafterdark-pub-c#{$i}, inherit);
+        }
+    }
+}
