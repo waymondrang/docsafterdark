@@ -2,11 +2,14 @@ const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const webpack = require("webpack");
 const { execSync } = require("child_process");
+const fs = require("fs");
 
 module.exports = (env, argv) => {
     let commitHash = execSync("git rev-parse HEAD", {
         encoding: "utf8",
     }).trim();
+
+    const packageJSON = JSON.parse(fs.readFileSync("package.json", "utf8"));
 
     return {
         mode: "production",
@@ -46,6 +49,11 @@ module.exports = (env, argv) => {
                     {
                         from: "src/manifest.json",
                         to: "manifest.json",
+                        transform(content, path) {
+                            const manifest = JSON.parse(content.toString());
+                            manifest.version = packageJSON.version;
+                            return JSON.stringify(manifest, null, 2);
+                        },
                     },
                     {
                         from: "src/assets",

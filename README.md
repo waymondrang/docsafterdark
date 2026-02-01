@@ -92,6 +92,10 @@ npm run build
 
 This creates optimized bundles in `build/` and packages the extension as a `.zip` file in `release/`. The packaging process is handled by `package.ts` and reads the version from `src/manifest.json`.
 
+**Note on versioning**
+
+The version number in `package.json` is copied to the extension's `manifest.json` when the extension is built.
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit issues or pull requests.

@@ -8,7 +8,7 @@ import archiver from "archiver";
 
 const CONFIG = {
     extensionName: "DocsAfterDark",
-    manifestPath: "src/manifest.json",
+    manifestPath: "build/manifest.json",
     buildDir: "build",
     releaseDir: "release",
 };
