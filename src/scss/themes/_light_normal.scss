@@ -17,7 +17,7 @@ html.DocsAfterDark_light.DocsAfterDark_normal {
 
     --input-background-color: var(
         --secondary-background-color
-    ); /* CURRENTLY USED FOR CALENDAR INPUT */
+    ); // CURRENTLY USED FOR CALENDAR INPUT
 
     --primary-border-color: #ccc;
     --secondary-border-color: #404040;
@@ -39,9 +39,9 @@ html.DocsAfterDark_light.DocsAfterDark_normal {
         border-color: transparent;
     }
 
-    /*******************/
-    /* GRAYSCALE ICONS */
-    /*******************/
+    /////////////////////
+    // GRAYSCALE ICONS //
+    /////////////////////
 
     .docs-grille-gm3 .docs-material .docs-icon-img,
     .docs-icons-cleanup .docs-material .docs-icon-img,
