@@ -234,22 +234,10 @@ async function packageExtension(
 
 const args = process.argv.slice(2);
 const withForce = args.includes("--force") || args.includes("-f");
-const onlyPackageCheck = args.includes("--check") || args.includes("-c");
+
+// NOTE: Passing args from npm run build -- only works if package.ts is the
+//       last command in the script.
 
 const manifest = getManifest();
-const version = manifest.version;
-
-if (onlyPackageCheck) {
-    const zipFilePath = getZipFilePath(version);
-
-    if (existsSync(zipFilePath)) {
-        Logger.warn(
-            `Package already exists: ${zipFilePath}. Use --force flag to overwrite existing package.`
-        );
-        process.exit(1);
-    }
-
-    process.exit(0);
-}
 
 packageExtension(manifest, withForce);
