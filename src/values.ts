@@ -13,7 +13,10 @@ const SELECTOR_PREFIX = "DocsAfterDark_";
 const links = {
     github: "https://github.com/waymondrang/docsafterdark",
     donate: "https://www.buymeacoffee.com/waymondrang",
-    update: "https://github.com/waymondrang/docsafterdark/releases",
+    releases: "https://github.com/waymondrang/docsafterdark/releases",
+    release: (version: string) => {
+        return `https://github.com/waymondrang/docsafterdark/releases/tag/v${version}`;
+    },
     guide: "https://docsafterdark.com/guide",
 };
 
