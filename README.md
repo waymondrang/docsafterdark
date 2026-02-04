@@ -21,7 +21,7 @@ A free and open-source browser extension for customizing the appearance of Googl
 
 If enabled, click the button in the bottom-left corner of the screen to instantly enable/disable the extension for the current document.
 
-If it blocks other elements (like the word count widget), enable "Raise Button" in settings or hide it completely. Pressing this button only temporarily enables/disables the extension; to properly turn the extension off, use the settings popup.
+Pressing this button only temporarily enables/disables the extension; to properly turn the extension off, use the settings popup. You can hide this toggle button in the settings popup.
 
 ## Installation
 
@@ -61,7 +61,7 @@ npm run firefox
 
 Launches a temporary Firefox instance with the extension installed. The extension automatically reloads when files in `build/` change.
 
-> **Note:** The Firefox profile is temporary and will not persist logins (on docs.google.com, for example) between sessions.
+> **Note:** The Firefox profile is temporary and will not persist logins (e.g. docs.google.com) between sessions.
 
 ### Testing
 
@@ -71,7 +71,7 @@ Launches a temporary Firefox instance with the extension installed. The extensio
 npm run check
 ```
 
-This is also performed as a GitHub Action workflow. Pull requests must pass these checks before being merged.
+This script is also run as a GitHub Action workflow. Pull requests must pass these checks before being merged.
 
 ### Building
 
