@@ -519,7 +519,7 @@ class DocsAfterDark {
         messageElement.appendChild(textElement);
 
         const linkElement = document.createElement("a");
-        linkElement.href = links.update;
+        linkElement.href = links.release(CURRENT_VERSION); // Link to specific release via tag
         linkElement.target = "_blank";
         linkElement.textContent = "GitHub";
 
