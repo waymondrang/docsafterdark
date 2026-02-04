@@ -10,6 +10,13 @@ import {
 const STYLE_PROPERTY_PREFIX = "--DocsAfterDark_";
 const SELECTOR_PREFIX = "DocsAfterDark_";
 
+const links = {
+    github: "https://github.com/waymondrang/docsafterdark",
+    donate: "https://www.buymeacoffee.com/waymondrang",
+    update: "https://github.com/waymondrang/docsafterdark/releases",
+    guide: "https://docsafterdark.com/guide",
+};
+
 const documentBackgroundStyles: Record<DocumentBackground, string> = {
     default: "#ffffff",
     shade: "var(--secondary-background-color)",
@@ -18,7 +25,7 @@ const documentBackgroundStyles: Record<DocumentBackground, string> = {
     custom: "",
 };
 
-const documentBackgroundDescriptions = {
+const documentBackgroundDescriptions: Record<DocumentBackground, string> = {
     default: "The default, white background.",
     shade: "A light shade of gray. Black text is still readable.",
     // A special, dark gray. This background is unaffected by the invert option.
@@ -95,11 +102,6 @@ const defaultExtensionData: ExtensionData = {
     },
 };
 
-const updateLink = "https://github.com/waymondrang/docsafterdark/releases";
-
-// Planned for the future...
-const guideLink = "https://docsafterdark.com/guide";
-
 export {
     STYLE_PROPERTY_PREFIX,
     SELECTOR_PREFIX,
@@ -109,9 +111,8 @@ export {
     documentInvert,
     documentBorder,
     buttonPosition,
-    updateLink,
-    guideLink,
     themeClasses,
     enabledClass,
     defaultExtensionData,
+    links,
 };

@@ -5,9 +5,9 @@ import {
     documentBorder,
     documentInvert,
     enabledClass,
+    links,
     replacements,
     themeClasses,
-    updateLink,
 } from "./values";
 import { Logger } from "./logger";
 import {
@@ -519,7 +519,7 @@ class DocsAfterDark {
         messageElement.appendChild(textElement);
 
         const linkElement = document.createElement("a");
-        linkElement.href = updateLink;
+        linkElement.href = links.update;
         linkElement.target = "_blank";
         linkElement.textContent = "GitHub";
 

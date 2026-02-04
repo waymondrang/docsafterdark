@@ -14,7 +14,7 @@ import {
     setStorage,
     setStyleProperty,
 } from "./util";
-import { defaultExtensionData } from "./values";
+import { defaultExtensionData, links } from "./values";
 
 const browser_ns = getBrowserNamespace();
 const VERSION = browser_ns.runtime.getManifest().version;
@@ -572,6 +572,29 @@ class StyleManager extends StateSubscriber {
     }
 }
 
+class LinkManager {
+    private githubLink = document.querySelector(
+        "#githubLink"
+    ) as HTMLButtonElement;
+    private donateLink = document.querySelector(
+        "#donateLink"
+    ) as HTMLButtonElement;
+
+    initialize(): void {
+        this.githubLink.addEventListener("click", () => {
+            browser_ns.tabs.create({
+                url: links.github,
+            });
+        });
+
+        this.donateLink.addEventListener("click", () => {
+            browser_ns.tabs.create({
+                url: links.donate,
+            });
+        });
+    }
+}
+
 class Popup extends PopupState {
     private modeComponent: ModeComponent = new ModeComponent(this);
     private darkModeComponent: DarkModeComponent = new DarkModeComponent(this);
@@ -585,6 +608,7 @@ class Popup extends PopupState {
     private versionComponent: VersionComponent = new VersionComponent();
 
     private styleManager: StyleManager = new StyleManager(this);
+    private linkManager: LinkManager = new LinkManager();
 
     private advancedCategoryComponent: toggleCategoryComponent =
         new toggleCategoryComponent("advancedCategory");
@@ -607,6 +631,7 @@ class Popup extends PopupState {
         this.invertComponent.initialize();
         this.versionComponent.initialize();
         this.styleManager.initialize();
+        this.linkManager.initialize();
         this.advancedCategoryComponent.initialize();
 
         this.updateSubscribers();

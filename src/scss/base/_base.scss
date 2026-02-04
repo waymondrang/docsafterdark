@@ -1,21 +1,22 @@
-/*************************/
-/* GM3 VARIABLE OVERRIDE */
-/*************************/
+///////////////////////////
+// GM3 VARIABLE OVERRIDE //
+///////////////////////////
 
 :root {
     --gm3-sys-color-on-surface: var(--primary-text-color);
     --gm3-sys-color-on-surface-variant: var(--secondary-text-color);
 
     --filled-button-text-color: var(--button-text-color);
+
+    // Filled button text color
+
     --gm3-button-filled-tonal-hover-label-text-color: var(
         --filled-button-text-color
-    ); /* FILLED BUTTON TEXT COLOR */
-    --gm3-button-filled-tonal-label-text-color: var(
-        --filled-button-text-color
-    ); /* FILLED BUTTON TEXT COLOR */
+    );
+    --gm3-button-filled-tonal-label-text-color: var(--filled-button-text-color);
     --gm3-button-filled-tonal-pressed-label-text-color: var(
         --filled-button-text-color
-    ); /* FILLED BUTTON TEXT COLOR */
+    );
 
     --gm3-button-filled-container-color: var(--accent-color);
     --gm3-button-filled-label-text-color: var(--button-text-color);
@@ -41,7 +42,7 @@
     --gm3-text-field-filled-container-color: var(--tertiary-background-color);
     --gm3-text-field-outlined-focus-indicator-outline-color: var(
         --accent-color
-    ); /* EMOJI SEARCH OUTLINE */
+    ); // EMOJI SEARCH OUTLINE
     --gm3-text-field-outlined-focus-label-text-color: var(--accent-color);
     --gm3-text-field-outlined-caret-color: var(--accent-color);
     --gm3-text-field-outlined-hover-outline-color: var(
@@ -167,18 +168,18 @@
     );
 }
 
-/********************************/
-/* COLOR: ROOT BACKGROUND COLOR */
-/********************************/
+//////////////////////////////////
+// COLOR: ROOT BACKGROUND COLOR //
+//////////////////////////////////
 
 .docs-grille-gm3 .docs-title-input,
 .docs-title-input {
     color: var(--root-background-color);
 }
 
-/*****************************/
-/* COLOR: PRIMARY TEXT COLOR */
-/*****************************/
+///////////////////////////////
+// COLOR: PRIMARY TEXT COLOR //
+///////////////////////////////
 
 body,
 input,
@@ -233,7 +234,7 @@ input#docs-findandreplacedialog-input,
 .pageSetupDialogSectionTitle,
 .javascriptMaterialdesignGm3WizSelectOutlinedEl:not(.mdc-select--disabled) .mdc-select__selected-text,
 .javascriptMaterialdesignGm3WizMenuSurface-menu-surface,
-/* .javascriptMaterialdesignGm3WizButtonFilledTonal-button__label, */
+// .javascriptMaterialdesignGm3WizButtonFilledTonal-button__label,
 .appsElementsColorPicker-color-picker__swatches-label,
 .javascriptMaterialdesignGm3WizTabsPrimary-tab:not(.javascriptMaterialdesignGm3WizTabsPrimary-tab--active, :disabled):hover .javascriptMaterialdesignGm3WizTabsPrimary-tab__text-label,
 .javascriptMaterialdesignGm3WizSelectOutlinedEl .mdc-select__option .mdc-list-item__content, .javascriptMaterialdesignGm3WizSelectOutlinedEl .mdc-select__option .mdc-list-item__primary-text,
@@ -336,15 +337,15 @@ textarea.docs-search-bar-input.goog-textarea,
     color: var(--primary-text-color) !important;
 }
 
-/*******************************/
-/* COLOR: SECONDARY TEXT COLOR */
-/*******************************/
+/////////////////////////////////
+// COLOR: SECONDARY TEXT COLOR //
+/////////////////////////////////
 
 .docs-generativeai-onboarding-dialog-text,
 .docs-generativeai-onboarding-dialog-subtext,
 .outlines-widget-chaptered .navigation-widget-header,
 .chapter-item .goog-control, .chapter-label-content,
-.docs-gm .docs-menubar .goog-control /* menu bar text, not sure if secondary or primary */,
+.docs-gm .docs-menubar .goog-control, // Menu bar text (not sure if secondary or primary)
 .docs-gm .goog-menuitem .docs-display-density-toolbar-menuitem-description, .docs-gm .goog-menuitem .docs-toolbar-mode-switcher-menu-description, .docs-gm .goog-menuitem .punch-qanda-presenter-view-menu-item-description,
 .docs-explore-dictionaryentry-sensefamily-morphunits,
 .docs-explore-dictionaryentry-sense-antonym-prefix, .docs-explore-dictionaryentry-sense-synonym-prefix,
@@ -423,9 +424,9 @@ textarea.docs-search-bar-input.goog-textarea,
     color: var(--secondary-text-color) !important;
 }
 
-/******************************/
-/* COLOR: TERTIARY TEXT COLOR */
-/******************************/
+////////////////////////////////
+// COLOR: TERTIARY TEXT COLOR //
+////////////////////////////////
 
 .docs-gm .goog-menuitem-accel,
 .docs-gm .goog-menuitem-disabled .goog-menuitem-accel,
@@ -504,13 +505,13 @@ input::placeholder {
     color: var(--tertiary-text-color) !important;
 }
 
-/****************************/
-/* COLOR: BUTTON TEXT COLOR */
-/****************************/
+//////////////////////////////
+// COLOR: BUTTON TEXT COLOR //
+//////////////////////////////
 
-/******************************/
-/* COLOR: DISABLED TEXT COLOR */
-/******************************/
+////////////////////////////////
+// COLOR: DISABLED TEXT COLOR //
+////////////////////////////////
 
 .javascriptMaterialdesignGm3WizButtonFilled-button:disabled
     .javascriptMaterialdesignGm3WizButtonFilled-button__label,
@@ -555,9 +556,9 @@ button:disabled,
     color: var(--disabled-text) !important;
 }
 
-/****************************/
-/* COLOR: ACCENT TEXT COLOR */
-/****************************/
+//////////////////////////////
+// COLOR: ACCENT TEXT COLOR //
+//////////////////////////////
 
 a:link,
 .docs-gm3-text-button,
@@ -597,7 +598,7 @@ a:link,
 .docsCommonGMDCDialogPointerLink,
 .docos-ssd-radio-button-group .jfk-radiobutton-checked .jfk-radiobutton-label label,
 .docs-material-button-text-default.docs-material-button,
-.docs-checkupdialog-suggestion-button.jfk-button-focused.jfk-button-hover, .docs-checkupdialog-suggestion-button.jfk-button-hover,   /* COULD USE SECONDARY ACCENT TEXT COLOR */
+.docs-checkupdialog-suggestion-button.jfk-button-focused.jfk-button-hover, .docs-checkupdialog-suggestion-button.jfk-button-hover, // COULD USE SECONDARY ACCENT TEXT COLOR
 .docs-grille-gm3 .docos-emoji-counter-button-user-involved .docos-emoji-counter-button-count,
 .kix-citations-create-view-recommended-mark,
 .kix-citations-create-view-attributes-subtitle,
@@ -615,9 +616,9 @@ a:link,
     color: var(--accent-color) !important;
 }
 
-/**********************************/
-/* COLOR: HOVER ACCENT TEXT COLOR */
-/**********************************/
+////////////////////////////////////
+// COLOR: HOVER ACCENT TEXT COLOR //
+////////////////////////////////////
 
 .outline-refresh.navigation-widget-unified-styling
     .location-indicator-highlight.navigation-item.goog-button-hover,
@@ -627,9 +628,9 @@ a:link,
     color: var(--accent-hover-color);
 }
 
-/*************************************/
-/* BACKGROUND: ROOT BACKGROUND COLOR */
-/*************************************/
+///////////////////////////////////////
+// BACKGROUND: ROOT BACKGROUND COLOR //
+///////////////////////////////////////
 
 html,
 body,
@@ -685,9 +686,9 @@ body,
     background-color: var(--root-background-color) !important;
 }
 
-/******************************************/
-/* BACKGROUND: SECONDARY BACKGROUND COLOR */
-/******************************************/
+////////////////////////////////////////////
+// BACKGROUND: SECONDARY BACKGROUND COLOR //
+////////////////////////////////////////////
 
 .docs-contentembedding-titlebar,
 .docs-contentembedding-sidebar,
@@ -695,7 +696,7 @@ body,
 .kixChaptersOnboardingPromoContent,
 .docs-image-generation-example-gallery-expand-button,
 .docs-gm .imageGenerationStylePresetsMenu.goog-menu,
-.dropdownEntityConfigurationDialogItemActiveDragItemComponent, /* COULD ALSO BE ROOT */
+.dropdownEntityConfigurationDialogItemActiveDragItemComponent, // Could also be root background color
 .docos-comments-pe .docos-anchoreddocoview-internal,
 .docs-grille-gm3 .docos-anchoreddocoview, .docs-grille-gm3 .docos-anchoreddocoview .docos-anchoredreplyview, .docs-grille-gm3 .docos-anchoreddocoview-input-pane,
 .docs-grille-gm3 .docos-anchoreddocoview .docos-show-less, .docs-grille-gm3 .docos-anchoreddocoview .docos-show-more, .docs-grille-gm3 .docos-replyview-first .docos-show-more,
@@ -751,7 +752,7 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
 .companion-collapser-button.app-switcher-button-checked .app-switcher-button-icon-background, .companion-theme-light .companion-collapser-button.app-switcher-button-checked .app-switcher-button-icon-background,
 .jfk-bubble,
 .docs-grille-gm3 .docs-ui-toast,
-/* .javascriptMaterialdesignGm3WizMenuSurface-menu-surface, */
+// .javascriptMaterialdesignGm3WizMenuSurface-menu-surface,
 .ita-hwt-ime,
 .ita-hwt-candidates,
 .docsContentLibrarySidebarContainer,
@@ -766,7 +767,7 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
 .docs-grille-gm3 #docs-align-palette .goog-toolbar-button, .docs-grille-gm3 .docs-main-toolbars .goog-toolbar-button, .docs-grille-gm3 .docs-main-toolbars .goog-toolbar-combo-button, .docs-grille-gm3 .docs-main-toolbars .goog-toolbar-menu-button, .docs-grille-gm3 .trix-palette .goog-toolbar-menu-button,
 .smart-canvas-date-picker-bubble,
 .goog-date-picker,
-/* .docs-gm .docs-linkbubble-bubble, .docs-gm .docs-multi-linkbubble-bubble, */
+// .docs-gm .docs-linkbubble-bubble, .docs-gm .docs-multi-linkbubble-bubble,
 .javascriptMaterialdesignGm3WizCardElevated-card,
 .docs-material-color-swatch-checkbox-background,
 .kix-watermark-sidebar,
@@ -790,9 +791,9 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
     background-color: var(--secondary-background-color) !important;
 }
 
-/*****************************************/
-/* BACKGROUND: TERTIARY BACKGROUND COLOR */
-/*****************************************/
+///////////////////////////////////////////
+// BACKGROUND: TERTIARY BACKGROUND COLOR //
+///////////////////////////////////////////
 
 .docs-grille-gm3.docs-gm #docs-toolbar-mode-switcher.suggest-mode,
 .nextChapterBottomFabView.docs-gm3-filled-button,
@@ -952,9 +953,9 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
     background-color: var(--tertiary-background-color);
 }
 
-/*******************************************/
-/* BACKGROUND: QUATERNARY BACKGROUND COLOR */
-/*******************************************/
+/////////////////////////////////////////////
+// BACKGROUND: QUATERNARY BACKGROUND COLOR //
+/////////////////////////////////////////////
 
 .chapter-item-label-and-buttons-container-selected:has(
     .chapter-item-buttons:focus-within,
@@ -1057,14 +1058,14 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
     background: var(--quaternary-background-color);
 }
 
-.docs-grille-gm3.docos.docs-gm.docos-comments-pe .docos-input-cancel.jfk-button-standard.jfk-button-active, .docs-grille-gm3.docos.docs-gm.docos-comments-pe .docos-input-cancel.jfk-button-standard.jfk-button-focused, .docs-grille-gm3.docos.docs-gm.docos-comments-pe .docos-input-cancel.jfk-button-standard.jfk-button-focused.jfk-button-hover, /* TECHNICALLY EVEN DARKER */
+.docs-grille-gm3.docos.docs-gm.docos-comments-pe .docos-input-cancel.jfk-button-standard.jfk-button-active, .docs-grille-gm3.docos.docs-gm.docos-comments-pe .docos-input-cancel.jfk-button-standard.jfk-button-focused, .docs-grille-gm3.docos.docs-gm.docos-comments-pe .docos-input-cancel.jfk-button-standard.jfk-button-focused.jfk-button-hover, // TECHNICALLY EVEN DARKER
 .docos-comments-pe .docos-streamdocoview:hover .docos-showrepliesbutton-collapsed-internal-container, .docos-comments-pe .docs-gm.docos-xeditor .docos-streamdocoview:hover, .docos-comments-pe .docs-gm.docos-xeditor .docos-streamdocoview:hover .docos-show-more {
     background-color: var(--quaternary-background-color);
 }
 
-/**********************************/
-/* BACKGROUND: BACKGROUND COLOR 5 */
-/**********************************/
+////////////////////////////////////
+// BACKGROUND: BACKGROUND COLOR 5 //
+////////////////////////////////////
 
 .docos-comments-pe
     .docos-streamdocoview:focus
@@ -1077,9 +1078,9 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
     background-color: var(--background-color-5);
 }
 
-/****************************************/
-/* BACKGROUND: PRIMARY BACKGROUND COLOR */
-/****************************************/
+//////////////////////////////////////////
+// BACKGROUND: PRIMARY BACKGROUND COLOR //
+//////////////////////////////////////////
 
 .docs-grille-gm3.docs-gm.docs-body-pageless #docs-toolbar-mode-switcher,
 .docs-grille-gm3 #docs-omnibox-toolbar.assisted-actions .docs-omnibox-input,
@@ -1102,7 +1103,7 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
 .aiBlockMenuBarBubblePrimaryButtonContainer,
 .docs-hover-embed-dark-perview-item-body,
 .aiBlockMenuBarBubbleSecondaryButtonContainer,
-.docs-grille-gm3 #docs-instant-bubble /* NOT EXACTLY WHITE, MIDWAY */,
+.docs-grille-gm3 #docs-instant-bubble, // NOT EXACTLY WHITE, MIDWAY
 .docs-material-gm-dialog,
 .smart-canvas-time-zone-selection-dialog-edit-field,
 .docs-bubble-material,
@@ -1185,9 +1186,9 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
     background-color: var(--primary-background-color) !important;
 }
 
-/**************************************/
-/* BACKGROUND: HOVER BACKGROUND COLOR */
-/**************************************/
+////////////////////////////////////////
+// BACKGROUND: HOVER BACKGROUND COLOR //
+////////////////////////////////////////
 
 .chapter-item-label-and-buttons-container:not(.chapter-item-label-and-buttons-container-selected):has(.chapter-item-buttons:focus-within,.chapterItemArrowContainer:focus-within,.chapterItemIconAddButton:focus-within,.chapterItemIconEditButton:focus-within), .chapter-item-nested .chapter-item-label-and-buttons-container:not(.chapter-item-label-and-buttons-container-selected), .navigation-widget-content:not(.chapter-item-dragged-within) .chapter-item-label-and-buttons-container:not(.chapter-item-label-and-buttons-container-selected):hover,
 .kix-outlines-widget-header-add-chapter-button:not(.kix-outlines-widget-header-add-chapter-button-disabled) .jfk-button:focus, .kix-outlines-widget-header-add-chapter-button:not(.kix-outlines-widget-header-add-chapter-button-disabled) .jfk-button:hover,
@@ -1212,7 +1213,7 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
 .docs-contentembedding-sidebar-zero-state .docs-contentembedding-sidebar-zero-state-button:focus, .docs-contentembedding-sidebar-zero-state .docs-contentembedding-sidebar-zero-state-button:hover,
 .chapter-item-label-and-buttons-container-selected .chapterItemIconAddButton:hover, .chapter-item-label-and-buttons-container-selected .chapterItemIconEditButton:hover,
 .chapter-item-label-and-buttons-container-selected .chapterItemIconAddButton:focus-within, .chapter-item-label-and-buttons-container-selected .chapterItemIconEditButton:focus-within,
-.docs-grille-gm3.docos.docs-gm .jfk-button.jfk-button-action.jfk-button-disabled, /* COMMENT DISABLED SAVE BUTTON */
+.docs-grille-gm3.docos.docs-gm .jfk-button.jfk-button-action.jfk-button-disabled, // COMMENT DISABLED SAVE BUTTON
 .docs-body-pageless .chapter-item-label-and-buttons-container:not(.chapter-item-label-and-buttons-container-selected):has(.chapter-item-buttons:focus-within,.chapterItemArrowContainer:focus-within,.chapterItemIconAddButton:focus-within,.chapterItemIconEditButton:focus-within), .docs-body-pageless .chapter-item-nested .chapter-item-label-and-buttons-container:not(.chapter-item-label-and-buttons-container-selected), .docs-body-pageless .navigation-widget-content:not(.chapter-item-dragged-within) .chapter-item-label-and-buttons-container:not(.chapter-item-label-and-buttons-container-selected):hover,
 .smart-canvas-date-details-bubble-time-disabled .smart-canvas-date-details-bubble-time-zone-edit-field, .smart-canvas-date-details-bubble-time-disabled .smart-canvas-time-selection-combo-box-container .goog-combo-button-input, .smart-canvas-date-details-bubble-time-zone-edit-field.smart-canvas-date-details-bubble-time-zone-edit-field-disabled,
 .kix-citations-source-list-item:focus, .kix-citations-source-list-item:hover,
@@ -1321,9 +1322,9 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
     background-color: var(--hover-background-color) !important;
 }
 
-/******************************************************************/
-/* BACKGROUND: SECONDARY HOVER BACKGROUND COLOR (FOCUSED, ACTIVE) */
-/******************************************************************/
+////////////////////////////////////////////////////////////////////
+// BACKGROUND: SECONDARY HOVER BACKGROUND COLOR (FOCUSED, ACTIVE) //
+////////////////////////////////////////////////////////////////////
 
 .chapter-item-label-and-buttons-container-selected
     .chapter-overflow-menu-button:hover,
@@ -1441,17 +1442,17 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
     background-color: var(--secondary-hover-background-color);
 }
 
-/************************************
-* BACKGROUND: MENU BACKGROUND COLOR *
-*************************************/
+///////////////////////////////////////
+// BACKGROUND: MENU BACKGROUND COLOR //
+///////////////////////////////////////
 
 .goog-menu {
     background: var(--menu-background);
 }
 
-/****************************/
-/* BACKGROUND: ACCENT COLOR */
-/****************************/
+//////////////////////////////
+// BACKGROUND: ACCENT COLOR //
+//////////////////////////////
 
 .docs-gm3-filled-button,
 .outlines-widget-chaptered .location-indicator-highlight .navigation-item-vertical-line-middle,
@@ -1464,9 +1465,9 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
 .docos-comments-pe .docos-xeditor .docos-streampane-zero-state-add-comment-button.docs-material-button,
 .docs-image-synthesis-sidebar .image-synthesis-creation-button.image-synthesis-begin-create,
 .docs-grille-version-history .docs-revisions-chromecover-titlebar-button-action, .docs-grille-version-history .docs-revisions-chromecover-titlebar-second-button-action,
-/* SHOULD REALLY BE SECONDARY ACCENT COLOR */
+// SHOULD REALLY BE SECONDARY ACCENT COLOR
 .docs-material-button-fill-primary.docs-material-button-hover.docs-material-button-focused,
-/* SHOULD REALLY BE TERTIARY ACCENT COLOR */
+// SHOULD REALLY BE TERTIARY ACCENT COLOR
 .docs-material-button-fill-primary.docs-material-button-focused, .docs-material-button-fill-primary.docs-material-button-focused.docs-material-button-no-focus-border,
 .docs-image-synthesis-sidebar .image-synthesis-creation-button.image-synthesis-begin-create:focus,
 .docos.docs-gm .docs-material-gm-checkbox.docs-material-gm-checkbox-checked, .docos.docs-gm .docs-material-gm-checkbox.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
@@ -1507,9 +1508,9 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
     background-color: var(--accent-color);
 }
 
-/**********************************/
-/* BACKGROUND: LIGHT ACCENT COLOR */
-/**********************************/
+////////////////////////////////////
+// BACKGROUND: LIGHT ACCENT COLOR //
+////////////////////////////////////
 
 .docs-gm .modal-dialog .jfk-button-standard.jfk-button-hover.jfk-button-focused,
 .docs-gm .modal-dialog button:hover:focus,
@@ -1546,9 +1547,9 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
     background-color: var(--light-accent-color);
 }
 
-/****************************************/
-/* BACKGROUND: LIGHT ACCENT HOVER COLOR */
-/****************************************/
+//////////////////////////////////////////
+// BACKGROUND: LIGHT ACCENT HOVER COLOR //
+//////////////////////////////////////////
 
 .docs-gm .modal-dialog .jfk-button-standard.jfk-button-hover,
 .docs-gm .modal-dialog button:hover,
@@ -1561,9 +1562,9 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
     background-color: var(--light-accent-hover-color);
 }
 
-/**********************************/
-/* BACKGROUND: ACCENT HOVER COLOR */
-/**********************************/
+////////////////////////////////////
+// BACKGROUND: ACCENT HOVER COLOR //
+////////////////////////////////////
 
 .docs-gm3-filled-button.docs-gm3-button-hover
     .docs-gm
@@ -1592,9 +1593,9 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
     background: var(--accent-hover-color);
 }
 
-/********************************************/
-/* BACKGROUND: SECONDARY ACCENT HOVER COLOR */
-/********************************************/
+//////////////////////////////////////////////
+// BACKGROUND: SECONDARY ACCENT HOVER COLOR //
+//////////////////////////////////////////////
 
 .docos-comments-pe
     .docos-xeditor
@@ -1608,9 +1609,9 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
     background: var(--secondary-accent-hover-color);
 }
 
-/************************************/
-/* BACKGROUND: PRIMARY BORDER COLOR */
-/************************************/
+//////////////////////////////////////
+// BACKGROUND: PRIMARY BORDER COLOR //
+//////////////////////////////////////
 
 .left-sidebar-resizer-ghost-line,
 .outlines-widget-chaptered
@@ -1621,7 +1622,7 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
 .outlines-widget-chaptered
     .navigation-item:not(.navigation-item:last-child)
     .navigation-item-vertical-line-bottom {
-    background: var(--primary-border-color); /* WHY DOES THIS EXIST? */
+    background: var(--primary-border-color); // WHY DOES THIS EXIST?
 }
 
 .docs-embedded-content-button-divider,
@@ -1629,9 +1630,9 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
     background-color: var(--primary-border-color);
 }
 
-/**************************************/
-/* BACKGROUND: INPUT BACKGROUND COLOR */
-/**************************************/
+////////////////////////////////////////
+// BACKGROUND: INPUT BACKGROUND COLOR //
+////////////////////////////////////////
 
 .smart-canvas-time-selection-combo-box-container .goog-combo-button-input,
 .smart-canvas-date-picker-bubble-time-zone-selection-button,
@@ -1640,9 +1641,9 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
     background: var(--input-background-color);
 }
 
-/***************************/
-/* BACKGROUND: TRANSPARENT */
-/***************************/
+/////////////////////////////
+// BACKGROUND: TRANSPARENT //
+/////////////////////////////
 
 .docs-sidebar-tile-header.docs-sidebar-tile-header-disabled,
 .docs-checkupdialog-overflow-menu .goog-menuitem.goog-menuitem-disabled,
@@ -1659,9 +1660,9 @@ textarea.docs-search-bar-input.goog-textarea,
     background-color: transparent;
 }
 
-/***************************/
-/* BACKGROUND: TRANSPARENT */
-/***************************/
+/////////////////////////////
+// BACKGROUND: TRANSPARENT //
+/////////////////////////////
 
 .docs-number-input-container input,
 .docsLinkSmartinsertlinkBubble,
@@ -1696,9 +1697,9 @@ textarea.docs-search-bar-input.goog-textarea,
     background-color: transparent;
 }
 
-/********************/
-/* BACKGROUND: NONE */
-/********************/
+//////////////////////
+// BACKGROUND: NONE //
+//////////////////////
 
 .appsElementsSidekickPromptLibraryScrollButtonContainer::after,
 .appsElementsSidekickPromptLibraryScrollButtonContainer::before,
@@ -1719,9 +1720,9 @@ textarea.docs-search-bar-input.goog-textarea,
     background: none;
 }
 
-/**************************************/
-/* BORDER COLOR: PRIMARY BORDER COLOR */
-/**************************************/
+////////////////////////////////////////
+// BORDER COLOR: PRIMARY BORDER COLOR //
+////////////////////////////////////////
 
 .docs-grille-gm3 .docs-main-toolbars .goog-toolbar-separator.goog-inline-block,
 .ita-cp-charpicker .goog-char-picker-grid,
@@ -1848,9 +1849,9 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
     outline-color: var(--primary-border-color);
 }
 
-/******************************************/
-/* BORDER COLOR: INPUT HOVER BORDER COLOR */
-/******************************************/
+////////////////////////////////////////////
+// BORDER COLOR: INPUT HOVER BORDER COLOR //
+////////////////////////////////////////////
 
 .javascriptMaterialdesignGm3WizCheckbox-checkbox__native-control:hover
     ~ .javascriptMaterialdesignGm3WizCheckbox-checkbox__background,
@@ -1858,18 +1859,18 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
     border-color: var(--input-hover-border-color);
 }
 
-/****************************************/
-/* BORDER COLOR: SECONDARY BORDER COLOR */
-/****************************************/
+//////////////////////////////////////////
+// BORDER COLOR: SECONDARY BORDER COLOR //
+//////////////////////////////////////////
 
 .javascriptMaterialdesignGm3WizCheckbox-checkbox__native-control:disabled
     ~ .javascriptMaterialdesignGm3WizCheckbox-checkbox__background {
     border-color: var(--secondary-border-color);
 }
 
-/******************************/
-/* BORDER COLOR: ACCENT COLOR */
-/******************************/
+////////////////////////////////
+// BORDER COLOR: ACCENT COLOR //
+////////////////////////////////
 
 .javascriptMaterialdesignGm3WizTabsPrimary-tab-indicator
     .javascriptMaterialdesignGm3WizTabsPrimary-tab-indicator__content--underline,
@@ -1953,9 +1954,9 @@ span.docs-material-gm-checkbox-focused,
     border-color: var(--accent-color) transparent;
 }
 
-/************************************/
-/* BORDER COLOR: LIGHT ACCENT COLOR */
-/************************************/
+//////////////////////////////////////
+// BORDER COLOR: LIGHT ACCENT COLOR //
+//////////////////////////////////////
 
 .docs-gm .modal-dialog .jfk-button-standard.jfk-button-hover,
 .docs-gm .modal-dialog button:hover,
@@ -1966,9 +1967,9 @@ span.docs-material-gm-checkbox-focused,
     border-color: var(--light-accent-color) !important;
 }
 
-/************************************/
-/* BORDER COLOR: HOVER BORDER COLOR */
-/************************************/
+//////////////////////////////////////
+// BORDER COLOR: HOVER BORDER COLOR //
+//////////////////////////////////////
 
 .docs-grille-version-history
     .docs-revisions-filter-selector.docs-material-gm-select-hover
@@ -1982,9 +1983,9 @@ span.docs-material-gm-checkbox-focused,
     border-color: var(--hover-border-color) !important;
 }
 
-/************************************/
-/* BORDER COLOR: INPUT BORDER COLOR */
-/************************************/
+//////////////////////////////////////
+// BORDER COLOR: INPUT BORDER COLOR //
+//////////////////////////////////////
 
 .javascriptMaterialdesignGm3WizCheckbox-checkbox__background,
 .kix-watermark-text-input-container input,
@@ -2006,9 +2007,9 @@ span.docs-material-gm-checkbox-focused,
     border-color: var(--input-border-color) !important;
 }
 
-/***************************************************/
-/* DIRECTIONAL BORDER COLORS: PRIMARY BORDER COLOR */
-/***************************************************/
+/////////////////////////////////////////////////////
+// DIRECTIONAL BORDER COLORS: PRIMARY BORDER COLOR //
+/////////////////////////////////////////////////////
 
 .apps-hoverable-menu-separator-container .apps-hoverable-menu-separator-bottom,
 .docs-vertical-ruler .docs-ruler-face-major-division,
@@ -2079,17 +2080,17 @@ span.docs-material-gm-checkbox-focused,
     border-left-color: var(--primary-border-color);
 }
 
-/*************************************************/
-/* DIRECTIONAL BORDER COLORS: HOVER BORDER COLOR */
-/*************************************************/
+///////////////////////////////////////////////////
+// DIRECTIONAL BORDER COLORS: HOVER BORDER COLOR //
+///////////////////////////////////////////////////
 
 .docs-number-input-container input:hover {
     border-bottom-color: var(--hover-border-color);
 }
 
-/****************************************************/
-/* DIRECTIONAL BORDER COLORS: ROOT BACKGROUND COLOR */
-/****************************************************/
+//////////////////////////////////////////////////////
+// DIRECTIONAL BORDER COLORS: ROOT BACKGROUND COLOR //
+//////////////////////////////////////////////////////
 
 #docs-chrome:not(.docs-hub-chrome) {
     border-bottom-color: var(--root-background-color);
@@ -2109,12 +2110,12 @@ span.docs-material-gm-checkbox-focused,
 
 .jfk-bubble-arrowleft .jfk-bubble-arrowimplbefore,
 .jfk-bubble-arrowright .jfk-bubble-arrowimplbefore {
-    border-color: transparent var(--root-background-color); /* TECHNICALLY DIRECTIONAL */
+    border-color: transparent var(--root-background-color); // TECHNICALLY DIRECTIONAL
 }
 
-/*************************************/
-/* DIRECTIONAL BORDERS: ACCENT COLOR */
-/*************************************/
+///////////////////////////////////////
+// DIRECTIONAL BORDERS: ACCENT COLOR //
+///////////////////////////////////////
 
 .docs-sidebar-toggle-tabs
     .jfk-button.docs-sidebar-toggle-tab-active
@@ -2136,9 +2137,9 @@ span.docs-material-gm-checkbox-focused,
     border-bottom-color: var(--accent-color);
 }
 
-/*******************************************/
-/* DIRECTIONAL BORDERS: INPUT BORDER COLOR */
-/*******************************************/
+/////////////////////////////////////////////
+// DIRECTIONAL BORDERS: INPUT BORDER COLOR //
+/////////////////////////////////////////////
 
 .smart-canvas-date-details-bubble-edit-field.smart-canvas-date-details-bubble-edit-field-gm3,
 .smart-canvas-date-details-bubble-time-zone-edit-field,
@@ -2146,9 +2147,9 @@ span.docs-material-gm-checkbox-focused,
     border-bottom-color: var(--input-border-color);
 }
 
-/********************/
-/* EXPLICIT BORDERS */
-/********************/
+//////////////////////
+// EXPLICIT BORDERS //
+//////////////////////
 
 .aiBlockPreviewBubble.unifiedPreviewBubbleRoot {
     border: 2px solid var(--accent-color);
@@ -2166,9 +2167,9 @@ span.docs-material-gm-checkbox-focused,
     border-bottom: 1px solid var(--primary-border-color);
 }
 
-/***************/
-/* BOX SHADOWS */
-/***************/
+/////////////////
+// BOX SHADOWS //
+/////////////////
 
 .docs-gm .goog-menu,
 .docs-gm .docs-offline-optinpromo.jfk-bubble,
@@ -2225,9 +2226,9 @@ span.docs-material-gm-checkbox-focused,
     box-shadow: 0 -2px 6px 2px rgb(0 0 0 / 20%);
 }
 
-/*********/
-/* FILLS */
-/*********/
+///////////
+// FILLS //
+///////////
 
 .chapter-item-label-and-buttons-container-selected
     .chapterDocoIndicatorViewIcon,
@@ -2271,9 +2272,9 @@ svg.kix-configure-dropdown-button-add-icon,
     fill: var(--accent-color);
 }
 
-/*****************/
-/* BORDER RADIUS */
-/*****************/
+///////////////////
+// BORDER RADIUS //
+///////////////////
 
 .docs-checkupdialog-content-container,
 .docs-gm .docs-save-indicator-popup.jfk-bubble,
@@ -2311,9 +2312,9 @@ img.docs-generativeai-onboarding-dialog-image,
     border-radius: 28px;
 }
 
-/*****************/
-/* MEDIA QUERIES */
-/*****************/
+///////////////////
+// MEDIA QUERIES //
+///////////////////
 
 @media screen and (width <= 1600px) {
     .docs-grille-gm3
@@ -2341,15 +2342,15 @@ img.docs-generativeai-onboarding-dialog-image,
     }
 }
 
-/*****************/
-/* MISCELLANEOUS */
-/*****************/
+///////////////////
+// MISCELLANEOUS //
+///////////////////
 
 .docs-chat-message-tip {
     border-left-color: var(--secondary-background-color) !important;
 }
 
-/* NEEDS TO BE AFTER ACCENT BACKGROUND COLOR */
+// NEEDS TO BE AFTER ACCENT BACKGROUND COLOR
 .docs-material-button-fill-primary.docs-material-button-disabled {
     background: var(--secondary-background-color);
 }
@@ -2362,7 +2363,7 @@ img.docs-generativeai-onboarding-dialog-image,
     background-color: var(--input-border-color);
 }
 
-/* STROKE (DOCUMENT DETAILS LOADING CIRCLE) */
+// STROKE (DOCUMENT DETAILS LOADING CIRCLE)
 
 .javascriptMaterialdesignGm3WizCircularProgress-circular-progress__track {
     stroke: var(--primary-background-color);
@@ -2372,7 +2373,7 @@ img.docs-generativeai-onboarding-dialog-image,
     stroke: var(--input-border-color);
 }
 
-/* DISABLE ELEVATION COLOR CHANGE */
+// DISABLE ELEVATION COLOR CHANGE
 
 .javascriptMaterialdesignGm3WizSelectOutlinedEl
     .mdc-select__menu
@@ -2380,26 +2381,26 @@ img.docs-generativeai-onboarding-dialog-image,
     opacity: 0;
 }
 
-/* DISABLE BACKGROUND IMAGE FOR HANDWRITTEN INPUT SPACEBAR */
+// DISABLE BACKGROUND IMAGE FOR HANDWRITTEN INPUT SPACEBAR
 
 .ita-hwt-jfk-standard,
 .ita-hwt-jfk-action {
     background-image: none;
 }
 
-/* TRANSPARENT BACKGROUND COLOR */
+// TRANSPARENT BACKGROUND COLOR
 
 .docsLinkSmartinsertlinkBubble {
     border: none;
 }
 
-/* REPLACE ICON (TURN OFF FOR THEMES) */
+// REPLACE ICON (TURN OFF FOR THEMES)
 
 .goog-option-selected {
     background-image: var(--checkmark);
 }
 
-/* POSSIBLY TEMPORARY SELECTORS ON ACCESS REQUEST PAGE */
+// POSSIBLY TEMPORARY SELECTORS ON ACCESS REQUEST PAGE
 
 .hA3Ymb {
     color: var(--primary-text-color);
@@ -2419,9 +2420,9 @@ img.docs-generativeai-onboarding-dialog-image,
     color: var(--tertiary-text-color);
 }
 
-/***********************/
-/* DOCUMENT BACKGROUND */
-/***********************/
+/////////////////////////
+// DOCUMENT BACKGROUND //
+/////////////////////////
 
 .kix-canvas-tile-content {
     background: transparent;
@@ -2441,16 +2442,16 @@ img.docs-generativeai-onboarding-dialog-image,
     background-color: var(--DocsAfterDark_documentBackground) !important;
 }
 
-/************************/
-/* CONTROLLED VARIABLES */
-/************************/
+//////////////////////////
+// CONTROLLED VARIABLES //
+//////////////////////////
 
 .kix-appview-editor canvas,
 .kix-cursor {
     filter: var(--DocsAfterDark_documentInvert);
 }
 
-/* DOCUMENT BORDER SHOULD BE CONTROLLABLE IN ANY MODE */
+// DOCUMENT BORDER SHOULD BE CONTROLLABLE IN ANY MODE
 
 .kix-page-paginated {
     outline: var(--DocsAfterDark_documentBorder);

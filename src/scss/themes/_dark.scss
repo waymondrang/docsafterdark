@@ -1,8 +1,4 @@
 html.DocsAfterDark_dark {
-    //////////////////
-    // DECLARATIONS //
-    //////////////////
-
     .docs-material .docs-icon-img::before,
     .docs-material .docs-icon-img,
     .ita-cp-lens,
@@ -51,11 +47,11 @@ html.DocsAfterDark_dark {
         .docs-material.goog-menu
         .goog-menuitem.goog-option-selected
         .goog-menuitem-checkbox {
-        /* GRAYSCALE TO TAKE AWAY COLOR */
+        // GRAYSCALE TO TAKE AWAY COLOR
         filter: brightness(2.6) grayscale(1);
     }
 
-    /* #61 */
+    // #61
     .kix-appview-editor.kix-format-painter-mode,
     .kix-format-painter-mode .kix-page {
         cursor:
