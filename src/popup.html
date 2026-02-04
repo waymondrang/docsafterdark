@@ -101,7 +101,6 @@
                                         min="0"
                                         max="360"
                                         placeholder="0"
-                                        maxlength="3"
                                     />
                                 </div>
                             </div>
@@ -203,10 +202,10 @@
                                         name="documentBorder"
                                     />
 
-                                    <div class="checkbox"></div>
-                                    <div class="content">
+                                    <span class="checkbox"></span>
+                                    <span class="content">
                                         <span>Show</span>
-                                    </div>
+                                    </span>
                                 </label>
                             </div>
                         </div>
@@ -257,10 +256,10 @@
                                         name="showButton"
                                     />
 
-                                    <div class="checkbox"></div>
-                                    <div class="content">
+                                    <span class="checkbox"></span>
+                                    <span class="content">
                                         <span>Show</span>
-                                    </div>
+                                    </span>
                                 </label>
                             </div>
                         </div>
@@ -286,18 +285,11 @@
                 <span id="version">v0.0.0</span>
 
                 <div class="flexRow gap">
-                    <a
-                        id="donate"
-                        class="button rounded accented"
-                        href="https://www.buymeacoffee.com/waymondrang"
-                        >Donate</a
-                    >
+                    <button id="donateLink" class="rounded accented">
+                        Donate
+                    </button>
 
-                    <a
-                        id="github"
-                        class="button rounded accented"
-                        href="https://github.com/waymondrang/docsafterdark"
-                    >
+                    <button id="githubLink" class="rounded accented">
                         <svg
                             viewBox="0 0 98 96"
                             fill="none"
@@ -315,7 +307,7 @@
                                 </clipPath>
                             </defs>
                         </svg>
-                    </a>
+                    </button>
                 </div>
             </footer>
         </main>
