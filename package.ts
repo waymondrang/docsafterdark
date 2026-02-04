@@ -80,6 +80,32 @@ class Logger {
     }
 }
 
+function getManifest(): Manifest {
+    const manifestPath = resolve(CONFIG.manifestPath);
+    if (!existsSync(manifestPath)) {
+        Logger.error(`Manifest file not found at: ${manifestPath}`);
+        process.exit(1);
+    }
+
+    const manifestContent = readFileSync(manifestPath, "utf-8");
+    const manifest = JSON.parse(manifestContent) as Manifest;
+
+    if (!manifest.version) {
+        Logger.error("Version not found in manifest.json");
+        process.exit(1);
+    }
+
+    return manifest;
+}
+
+function getZipFileName(version: string): string {
+    return `${CONFIG.extensionName}_${version}.zip`;
+}
+
+function getZipFilePath(version: string): string {
+    return join(resolve(CONFIG.releaseDir), getZipFileName(version));
+}
+
 ///////////////
 // PACKAGING //
 ///////////////
@@ -89,30 +115,23 @@ interface Manifest {
     [key: string]: unknown;
 }
 
-async function packageExtension(force: boolean = false): Promise<void> {
+async function packageExtension(
+    manifest: Manifest,
+    force: boolean = false
+): Promise<void> {
     try {
         ///////////////////
         // READ MANIFEST //
         ///////////////////
 
-        Logger.step("Reading manifest.json");
+        Logger.step("Processing manifest.json");
 
-        const manifestPath = resolve(CONFIG.manifestPath);
-        if (!existsSync(manifestPath)) {
-            Logger.error(`Manifest file not found at: ${manifestPath}`);
-            process.exit(1);
-        }
-
-        const manifestContent = readFileSync(manifestPath, "utf-8");
-        const manifest = JSON.parse(manifestContent) as Manifest;
         const version = manifest.version;
 
-        if (!version) {
-            Logger.error("Version not found in manifest.json");
-            process.exit(1);
-        }
+        const zipFilePath = getZipFilePath(version);
+        const zipFileName = getZipFileName(version);
 
-        Logger.info(`Found manifest version: ${version}`);
+        Logger.info(`Manifest version: ${version}`);
 
         ///////////////
         // BUILD DIR //
@@ -125,23 +144,22 @@ async function packageExtension(force: boolean = false): Promise<void> {
         }
 
         //////////////////////
-        // EXISTING RELEASE //
+        // EXISTING PACKAGE //
         //////////////////////
 
-        Logger.step("Checking for existing release");
+        // Sanity check, do not print step
 
-        const zipFileName = `${CONFIG.extensionName}_${version}.zip`;
-        const zipFilePath = join(resolve(CONFIG.releaseDir), zipFileName);
+        const packageExists = existsSync(zipFilePath);
 
-        if (existsSync(zipFilePath) && !force) {
+        if (packageExists && !force) {
             Logger.warn(
-                `Release already exists: ${zipFilePath}. Use --force flag to overwrite existing release.`
+                `Package already exists: ${zipFilePath}. Use --force flag to overwrite existing package.`
             );
             process.exit(2);
         }
 
-        if (existsSync(zipFilePath) && force) {
-            Logger.info(`Overwriting existing release: ${zipFilePath}`);
+        if (packageExists && force) {
+            Logger.info(`Overwriting existing package: ${zipFilePath}`);
         }
 
         //////////////
@@ -216,5 +234,22 @@ async function packageExtension(force: boolean = false): Promise<void> {
 
 const args = process.argv.slice(2);
 const withForce = args.includes("--force") || args.includes("-f");
+const onlyPackageCheck = args.includes("--check") || args.includes("-c");
 
-packageExtension(withForce);
+const manifest = getManifest();
+const version = manifest.version;
+
+if (onlyPackageCheck) {
+    const zipFilePath = getZipFilePath(version);
+
+    if (existsSync(zipFilePath)) {
+        Logger.warn(
+            `Package already exists: ${zipFilePath}. Use --force flag to overwrite existing package.`
+        );
+        process.exit(1);
+    }
+
+    process.exit(0);
+}
+
+packageExtension(manifest, withForce);
