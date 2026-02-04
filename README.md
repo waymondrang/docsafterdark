@@ -92,11 +92,11 @@ npm run build
 
 This creates optimized bundles in `build/` and packages the extension as a `.zip` file in `release/`. The packaging process is handled by `package.ts` and reads the version from `src/manifest.json`.
 
-The version number in `package.json` is copied to the extension's `manifest.json` when the extension is built.
+The version in `package.json` is copied to the extension's `manifest.json` when the extension is built.
 
 ## Versions and tag names
 
-The **version number** must follow the structure: `<MAJOR VER>.<MINOR VER>.<PATCH VER>`. 
+The **version** must follow the structure: `<MAJOR VER>.<MINOR VER>.<PATCH VER>`.
 
 The **tag name** for a release must follow the structure: `v<VERSION>`.
 
