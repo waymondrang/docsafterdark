@@ -37,6 +37,7 @@ import {
     removeElement,
     setStorage,
     setStyleProperty,
+    getDocumentID,
 } from "./util";
 
 const browser_ns = getBrowserNamespace();
@@ -55,6 +56,9 @@ class DocsAfterDark {
 
         // Update extensionData with saved data (or use default values)
 
+        if (data.disabled_documents !== undefined) {
+            this.extensionData.disabled_documents = data.disabled_documents;
+        }
         if (data.mode !== undefined) {
             this.extensionData.mode = data.mode;
         }
@@ -183,6 +187,12 @@ class DocsAfterDark {
         if (message.type == "setAccentColor") {
             this.extensionData.accent_color =
                 message.color as AccentColorOptions;
+        }
+
+        if (message.type == "setDocumentEnabled") {
+            if (!message.enabled) {           
+                this.removeExtension();
+            }
         }
 
         this.updateExtension();
@@ -332,9 +342,18 @@ class DocsAfterDark {
         }
     }
 
-    private updateExtension() {
+    private async updateExtension() {
         // Always update version, regardless of extension mode
         this.updateVersion();
+
+        // Do not continue if this document is disabled
+        // We have to pull extensiondata for this again; this will cause a performance hit
+        // Currently this does not propagate On -> Off to other tabs
+        var newExtensionData = await getExtensionData();
+        if (newExtensionData.disabled_documents.indexOf(getDocumentID(window.location.href), 0) > -1) {
+            Logger.debug('updateExtension called but document is in disabled list');
+            return;
+        }
 
         // Do not continue update if extension is off
         if (!this.updateMode()) {

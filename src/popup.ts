@@ -9,6 +9,7 @@ import {
 } from "./types";
 import {
     getBrowserNamespace,
+    getDocumentID,
     getExtensionData,
     messageTabs,
     setStorage,
@@ -421,6 +422,71 @@ class BorderComponent extends StateSubscriber {
     }
 }
 
+class EnabledComponent extends StateSubscriber {
+    private enabledCheckbox = document.querySelector(
+        "#documentEnabled"
+    ) as HTMLInputElement;
+
+    private layout_elements = document.querySelectorAll(
+        '.category'
+    ) as NodeListOf<HTMLElement>;
+
+    private getActiveURL = async (): Promise<string> => {
+        const [tab] = await browser_ns.tabs.query({active: true, lastFocusedWindow: true});
+        return tab?.url ?? "";
+    }
+
+    initialize(): void {
+        this.enabledCheckbox.addEventListener("click", async () => {
+            var checked = this.enabledCheckbox.checked;            
+            var disabled_documents = this.state.getData().disabled_documents;
+            var document_id = getDocumentID(await this.getActiveURL());
+
+            if (checked) {
+                // enabled
+                const index = disabled_documents.indexOf(document_id, 0);
+                if (index > -1) disabled_documents.splice(index, 1);
+                messageTabs<MessagePayload>({
+                    type: "setDocumentEnabled",
+                    enabled: true,
+                });
+            } else {
+                // disabled
+                disabled_documents.push(document_id);
+                messageTabs<MessagePayload>({
+                    type: "setDocumentEnabled",
+                    enabled: false,
+                });
+            }
+
+            this.state.setData({disabled_documents: disabled_documents});
+        });
+    }
+
+    async update(newData: ExtensionData): Promise<void> {
+        var disabled_documents = newData.disabled_documents;
+        var document_id = getDocumentID(await this.getActiveURL());
+        
+        if (disabled_documents.indexOf(document_id, 0) > -1) {
+            // disabled
+            this.enabledCheckbox.checked = false;
+
+            this.layout_elements.forEach((el, i) => {
+                if(i==0) return;
+                el.classList.add('disabled');
+            })
+        } else {
+            // enabled
+            this.enabledCheckbox.checked = true;
+
+            this.layout_elements.forEach((el, i) => {
+                if(i==0) return;
+                el.classList.remove('disabled');
+            })
+        }
+    }
+}
+
 class ButtonComponent extends StateSubscriber {
     private showButtonCheckbox = document.querySelector(
         "#showButton"
@@ -596,6 +662,7 @@ class LinkManager {
 }
 
 class Popup extends PopupState {
+    private enabledComponent: EnabledComponent = new EnabledComponent(this);
     private modeComponent: ModeComponent = new ModeComponent(this);
     private darkModeComponent: DarkModeComponent = new DarkModeComponent(this);
     private spectrumComponent: SpectrumComponent = new SpectrumComponent(this);
@@ -621,6 +688,7 @@ class Popup extends PopupState {
         const extensionData = await getExtensionData();
         this.setData(extensionData);
 
+        this.enabledComponent.initialize();
         this.modeComponent.initialize();
         this.darkModeComponent.initialize();
         this.spectrumComponent.initialize();

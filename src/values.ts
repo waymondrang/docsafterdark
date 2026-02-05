@@ -96,6 +96,7 @@ const defaultExtensionData: ExtensionData = {
     },
 
     show_border: true,
+    disabled_documents: [],
 
     version: {
         last_version: "",
