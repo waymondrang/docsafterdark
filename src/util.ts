@@ -256,6 +256,29 @@ function insertStylesheet(path: string, id: string): void {
     document.head.appendChild(link);
 }
 
+function insertScript(path: string, id: string): void {
+    const elementId = getElementId(id);
+
+    if (document.getElementById(elementId)) {
+        return;
+    }
+
+    const script = document.createElement("script");
+    script.id = elementId;
+    script.src = getAssetURL(path);
+    script.onload = () => script.remove();
+
+    document.head.appendChild(script);
+}
+
+function insertEphemeralScript(path: string): void {
+    const script = document.createElement("script");
+    script.src = getAssetURL(path);
+    script.onload = () => script.remove();
+
+    document.head.appendChild(script);
+}
+
 function getAssetURL(path: string): string {
     return browser_ns.runtime.getURL(path);
 }
@@ -313,4 +336,6 @@ export {
     getAssetURL,
     isElementVisible,
     updateExtensionData,
+    insertScript,
+    insertEphemeralScript,
 };
