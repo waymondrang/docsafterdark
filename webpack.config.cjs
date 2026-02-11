@@ -14,6 +14,7 @@ const config = {
     entry: {
         docs: "./src/docs.ts",
         popup: "./src/popup.ts",
+        canvas: "./src/canvas.ts",
     },
     module: {
         rules: [
