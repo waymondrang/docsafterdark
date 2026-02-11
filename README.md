@@ -10,18 +10,18 @@ A free and open-source browser extension for customizing the appearance of Googl
     - Normal and midnight variants
 - Vibrant light mode
 - Customizable accent color
-- Adjustable document background (unstable)
+- Adjustable document background (unstable on Chromium browsers)
 - Colorful and grayscale document invert (may affect images)
 - Toggleable document border
-- Quick toggle button (removable)
 - Accessible settings popup
+- Quick toggle button (removable)
 - Non-destructive
 
 ### Quick toggle button
 
 If enabled, click the button in the bottom-left corner of the screen to instantly enable/disable the extension for the current document.
 
-Pressing this button only temporarily enables/disables the extension; to properly turn the extension off, use the settings popup. You can hide this toggle button in the settings popup.
+Pressing this button will only temporarily enable/disable the extension; to properly turn the extension off, use the settings popup. You can hide this toggle button in the settings popup as well.
 
 ## Installation
 
