@@ -28,6 +28,7 @@ import {
     getElement,
     getElementId,
     getExtensionData,
+    insertEphemeralScript,
     insertStylesheet,
     isElementVisible,
     isOnHomepage,
@@ -39,9 +40,9 @@ import {
     setStyleProperty,
 } from "./util";
 
-const browser_ns = getBrowserNamespace();
-const CURRENT_VERSION = browser_ns.runtime.getManifest().version;
+const browserNamespace = getBrowserNamespace();
 
+const CURRENT_VERSION = browserNamespace.runtime.getManifest().version;
 const REPLACEMENTS_PATH = "assets/replacements/";
 
 class DocsAfterDark {
@@ -110,6 +111,19 @@ class DocsAfterDark {
 
         registerStorageListener(this.handleStorageUpdate);
         registerMessageListener(this.handleMessageUpdate);
+    }
+
+    private updateCanvas() {
+        if (this.extensionData.mode == ExtensionMode.Dark) {
+            insertEphemeralScript("canvas.bundle.js");
+        } else {
+            this.restoreCanvas();
+        }
+    }
+
+    private restoreCanvas() {
+        Logger.debug("Restoring canvas rendering functions");
+        // TODO: Create and run canvas restoration script
     }
 
     private raiseButton(raise: boolean) {
@@ -333,8 +347,9 @@ class DocsAfterDark {
     }
 
     private updateExtension() {
-        // Always update version, regardless of extension mode
-        this.updateVersion();
+        // Always update
+        this.updateVersion(); // Always show update notification
+        this.updateCanvas(); // Always update canvas rendering
 
         // Do not continue update if extension is off
         if (!this.updateMode()) {
@@ -585,6 +600,7 @@ class DocsAfterDark {
         removeClassFromHTML(enabledClass);
         removeElement("stylesheet");
         removeElement("button");
+        this.restoreCanvas();
     }
 }
 
