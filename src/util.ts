@@ -168,6 +168,7 @@ async function getExtensionData(): Promise<ExtensionData> {
         "doc_bg",
         "custom_bg",
         "show_border",
+        "disabled_documents",
         "accent_color",
         "button_options",
         "invert_enabled",
@@ -213,6 +214,22 @@ function removeClassFromHTML(...classes: string[]): void {
     document.documentElement.classList.remove(
         ...classes.map((c) => SELECTOR_PREFIX + c)
     );
+}
+
+function getDocumentID(url: string) {
+    return url?.split('/document/d/')[1]?.split('/')[0] ?? url;
+}
+
+async function isDisabledDocument(url: string): Promise<boolean> {
+    var data = await getExtensionData();
+    var document_id = getDocumentID(url);
+    if (data.disabled_documents?.includes(document_id)) return true;
+    return false;
+}
+
+async function getActiveURL(): Promise<string> {
+    const [tab] = await browser_ns.tabs.query({active: true, lastFocusedWindow: true});
+    return tab?.url ?? "";
 }
 
 function isOnHomepage(): boolean {
@@ -305,6 +322,9 @@ export {
     addClassToHTML,
     removeClassFromHTML,
     isOnHomepage,
+    isDisabledDocument,
+    getActiveURL,
+    getDocumentID,
     getElementId,
     removeElement,
     hasElement,
