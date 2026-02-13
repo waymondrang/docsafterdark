@@ -5,9 +5,18 @@ const { execSync } = require("child_process");
 const fs = require("fs");
 
 module.exports = (env, argv) => {
-    let commitHash = execSync("git rev-parse HEAD", {
-        encoding: "utf8",
-    }).trim();
+    // commitHash will fallback to 'unknown' when missing git or git history
+    let commitHash = "";
+    try {
+        commitHash = execSync("git rev-parse HEAD", {
+            encoding: "utf8",
+        }).trim();
+    } catch (error) {
+        commitHash = "unknown";
+        console.warn(
+            "git commit not available, using 'unknown' as commit hash. do not use this version in production!"
+        );
+    }
 
     const packageJSON = JSON.parse(fs.readFileSync("package.json", "utf8"));
 

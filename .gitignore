@@ -148,5 +148,7 @@ vite.config.ts.timestamp-*
 test/
 build/
 release/
+artifacts/
+# artifacts/ is the web-ext output directory
 
 .DS_Store
