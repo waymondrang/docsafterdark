@@ -152,3 +152,4 @@ artifacts/
 # artifacts/ is the web-ext output directory
 
 .DS_Store
+todo
