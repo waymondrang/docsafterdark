@@ -1,0 +1,45 @@
+:root {
+    // gm3 dropdown
+    --gm3-dropdown-button-outlined-with-icon-disabled-icon-color: var(
+        --foreground-color-8
+    );
+
+    // gm3 select
+    --gm3-select-shared-text-field-disabled-input-text-color: var(
+        --foreground-color-8
+    );
+    --gm3-select-outlined-text-field-disabled-outline-color: var(
+        --border-color-8
+    );
+    --gm3-select-shared-text-field-disabled-trailing-icon-color: var(
+        --foreground-color-8
+    );
+    --gm3-select-shared-menu-list-item-selected-container-color: var(
+        --background-color-5
+    );
+
+    // gm3 notched
+    --gm3-notched-outline-border-color: var(--border-color-0);
+    --gm3-dropdown-button-outlined-disabled-outline-color: var(
+        --border-color-8
+    );
+
+    // gm3 button
+    --gm3-button-text-disabled-label-text-color: var(--foreground-color-8);
+
+    // gm3 sys
+    --gm3-sys-color-surface: var(--background-color-2);
+
+    --gm3-sys-color-on-surface: var(--foreground-color-0);
+    --gm3-sys-color-surface-bright: var(--background-color-2);
+    --gm3-sys-color-on-surface-variant: var(--foreground-color-1);
+
+    --gm3-sys-color-primary: var(--accent-color-0);
+    --gm3-sys-color-on-primary-fixed-variant: var(--accent-color-1);
+
+    --gm3-sys-color-secondary-container: var(--accent-color-0);
+    --gm3-sys-color-on-secondary-container: var(--foreground-color-1);
+
+    // gm3 menu
+    --gm3-menu-container-color: var(--background-color-2);
+}

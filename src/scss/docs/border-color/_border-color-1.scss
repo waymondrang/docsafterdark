@@ -1,0 +1,52 @@
+////////////////////////////////////////////
+// BORDER COLOR: INPUT HOVER BORDER COLOR //
+////////////////////////////////////////////
+
+.javascriptMaterialdesignGm3WizCheckbox-checkbox__native-control:hover
+    ~ .javascriptMaterialdesignGm3WizCheckbox-checkbox__background,
+.javascriptMaterialdesignGm3WizButtonOutlined-button:hover {
+    border-color: var(--border-color-1);
+}
+
+//////////////////////////////////////////
+// BORDER COLOR: SECONDARY BORDER COLOR //
+//////////////////////////////////////////
+
+.javascriptMaterialdesignGm3WizCheckbox-checkbox__native-control:disabled
+    ~ .javascriptMaterialdesignGm3WizCheckbox-checkbox__background {
+    border-color: var(--border-color-1);
+}
+
+.javascriptMaterialdesignGm3WizCheckbox-checkbox__background,
+.kix-watermark-text-input-container input,
+.docs-material-gm-select-outer-box,
+.kix-watermark-font-size-combo-box-container input,
+.kix-watermark-font-size-dec-button-container,
+.kix-watermark-font-size-inc-button-container,
+.kix-watermark-format-toolbar.goog-toolbar,
+.javascriptMaterialdesignGm3WizButtonOutlined-button,
+.kix-citations-search-input,
+.kix-citations-create-view-input,
+.docs-gm .docs-chat-edit-box {
+    border-color: var(--border-color-1);
+}
+
+.docs-gm .modal-dialog .jfk-button-standard,
+.docs-gm .modal-dialog button,
+.docs-material-button-hairline-primary.docs-material-button {
+    border-color: var(--border-color-1) !important;
+}
+
+////////////////////////
+// DIRECTIONAL BORDER //
+////////////////////////
+
+.smart-canvas-date-details-bubble-edit-field.smart-canvas-date-details-bubble-edit-field-gm3,
+.smart-canvas-date-details-bubble-time-zone-edit-field,
+.smart-canvas-time-selection-combo-box-container .goog-combo-button-input {
+    border-bottom-color: var(--border-color-1);
+}
+
+.docs-number-input-container input:hover {
+    border-bottom-color: var(--border-color-1);
+}

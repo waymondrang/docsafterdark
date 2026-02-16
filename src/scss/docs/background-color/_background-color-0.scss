@@ -1,0 +1,88 @@
+html,
+body,
+.navigation-widget-floating-navigation-button.navigation-widget,
+#docs-chrome:not(.docs-hub-chrome),
+#docs-editor,
+#docs-editor-container,
+#docs-header:not(.docs-hub-appbar) .docs-titlebar-buttons,
+.docs-grille-gm3 .docs-revisions-chromecover-content-color-default,
+.docs-image-synthesis-sidebar
+    .docs-image-synthesis-search-bar-input-transition
+    .goog-textarea,
+.appsDocsAiGenerativeaiImageGenerationTypePickerPicker
+    .docs-thumbnailcontrol-thumbnailcontainer,
+.imageGenerationStylePresetsSelect.docs-material-gm-select,
+.docs-body-pageless
+    .navigation-widget-floating-navigation-button.navigation-widget,
+.docs-body-pageless #docs-chrome.docs-material,
+.docs-body-pageless #docs-chrome.docs-material .docs-titlebar-buttons,
+.left-sidebar-container.navigation-widget-in-pageless-format
+    .outlines-widget-chaptered
+    .kix-outlines-widget-header-contents,
+.docs-body-pageless #docs-editor,
+.docs-body-pageless #docs-editor-container,
+body.docs-body-pageless,
+body.docs-hub,
+.docs-grille-gm3.docs-body-pageless
+    .docs-revisions-chromecover-content-color-default,
+.docs-body-pageless
+    .navigation-widget-floating-navigation-button.navigation-widget,
+.left-sidebar-container.navigation-widget-in-pageless-format {
+    background: var(--background-color-0);
+}
+
+.kix-appview-editor[style*="background-color: rgb(249, 251, 253);"] {
+    background: var(--background-color-0) !important;
+}
+
+body,
+.outlines-widget-chaptered .kix-outlines-widget-header-contents,
+.docs-ruler-background-inner,
+#kix-vertical-ruler::before {
+    background-color: var(--background-color-0);
+}
+
+.docs-vertical-ruler,
+.docs-horizontal-ruler,
+.docs-body-pageless #kix-horizontal-ruler-container .docs-horizontal-ruler,
+.docs-body-pageless
+    #kix-horizontal-ruler-container
+    .docs-ruler-background-inner,
+.docs-body-pageless .docs-vertical-ruler {
+    background-color: var(--background-color-0) !important;
+}
+
+///////////
+// COLOR //
+///////////
+
+.docs-grille-gm3 .docs-title-input,
+.docs-title-input,
+.pageSetupDialogUnsupportedPagesFeaturesWarning {
+    color: var(--background-color-0);
+}
+
+////////////////////////
+// DIRECTIONAL BORDER //
+////////////////////////
+
+#docs-chrome:not(.docs-hub-chrome) {
+    border-bottom-color: var(--background-color-0);
+}
+
+.docs-grille-gm3 #scb-quick-actions-menu-button.goog-flat-menu-button,
+.docs-grille-gm3 #scb-quick-actions-menu-button.goog-flat-menu-button-disabled,
+.docs-grille-gm3
+    #scb-quick-actions-menu-button.goog-flat-menu-button.goog-flat-menu-button-active,
+.docs-grille-gm3
+    #scb-quick-actions-menu-button.goog-flat-menu-button.goog-flat-menu-button-hover,
+.docs-grille-gm3
+    #scb-quick-actions-menu-button.goog-flat-menu-button.goog-flat-menu-button-hover:focus,
+.docs-grille-gm3 #scb-quick-actions-menu-button.goog-flat-menu-button:focus {
+    border-left-color: var(--background-color-0);
+}
+
+.jfk-bubble-arrowleft .jfk-bubble-arrowimplbefore,
+.jfk-bubble-arrowright .jfk-bubble-arrowimplbefore {
+    border-color: transparent var(--background-color-0); // TECHNICALLY DIRECTIONAL
+}

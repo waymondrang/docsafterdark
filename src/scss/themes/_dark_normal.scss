@@ -1,40 +1,135 @@
+@use "../base/functions" as *;
+
+// html.DocsAfterDark_dark.DocsAfterDark_normal {
+//     --foreground-color-0: #fff; // --foreground-color-0
+//     --foreground-color-1: #f2f2f2; // --foreground-color-1
+//     --foreground-color-2: #e6e6e6; // --foreground-color-2
+//     --foreground-color-5: #666; // --foreground-color-9
+
+//     --background-color-0: #1a1a1a; // --background-color-0
+//     --background-color-1: #262626; // --background-color-1
+//     --background-color-2: #333; // --background-color-2
+//     --background-color-3: #404040; // --background-color-3
+//     --background-color-4: #4d4d4d; // --background-color-4
+//     --background-color-5: #595959; // --background-color-5
+
+//     // --menu-background: var(--background-color-2);
+//     // --hover-background-color: #ffffff1a;
+//     // --secondary-hover-background-color: #ffffff1e;
+
+//     // --solid-hover-background-color: #404040; // --background-color-3
+//     // --secondary-solid-hover-background-color: #4d4d4d; // --background-color-4
+
+//     --border-color-0: #4d4d4d; // --border-color-4
+//     --border-color-1: #404040; // --border-color-3
+//     // --lighter-border-color: #808080; // --border-color-9
+//     // --hover-border-color: #595959; // --border-color-5
+
+//     // --input-border-color: #666; // --border-color-?
+//     // --input-hover-border-color: #808080; // --border-color-8
+//     // --input-background-color: var(
+//     //     --background-color-3
+//     // ); // CURRENTLY USED FOR CALENDAR INPUT
+
+//     // --button-text-color: #fff; // --foreground-color-0
+
+//     // --accent-color: hsl(var(--DocsAfterDark_accentHue) 40% 60%); // --accent-color-6
+//     // --light-accent-color: hsl(var(--DocsAfterDark_accentHue) 40% 70% / 10%); // --accent-color-7 (with opacity)
+//     // --light-accent-hover-color: hsl(
+//     //     var(--DocsAfterDark_accentHue) 60% 60% / 20%
+//     // ); // --accent-color-6 (with opacity)
+//     // --accent-hover-color: hsl(var(--DocsAfterDark_accentHue) 60% 80% / 100%); // --accent-color-8
+// }
+
+:root {
+    // Set default accentHue in CSS
+    --DocsAfterDark_accentHue: 225;
+}
+
+// NOTE: Dark colors should start with the darkest colors and end on the
+//       lightest. Light colors (e.g. background for dark and foreground for
+//       light) should start with the lightest and end on the darkest.
+
+$background-color-start: rgb(25 25 25);
+$background-color-end: rgb(75 75 75);
+
+$foreground-color-start: rgb(255 255 255);
+$foreground-color-end: rgb(100 100 100);
+
+$border-color-start: rgb(75 75 75);
+$border-color-end: rgb(50 50 50);
+
 html.DocsAfterDark_dark.DocsAfterDark_normal {
-    --primary-text-color: #fff;
-    --secondary-text-color: #f2f2f2;
-    --tertiary-text-color: #e6e6e6;
-    --disabled-text: #666;
+    //////////////////////
+    // BACKGROUND COLOR //
+    //////////////////////
 
-    --root-background-color: #1a1a1a;
-    --primary-background-color: #262626;
-    --secondary-background-color: #333;
-    --tertiary-background-color: #404040;
-    --quaternary-background-color: #4d4d4d;
-    --background-color-5: #595959;
-
-    --menu-background: var(--secondary-background-color);
-    --hover-background-color: #ffffff1a;
-    --secondary-hover-background-color: #ffffff1e;
-
-    --solid-hover-background-color: #404040;
-    --secondary-solid-hover-background-color: #4d4d4d;
-
-    --primary-border-color: #4d4d4d;
-    --secondary-border-color: #404040;
-    --lighter-border-color: #808080;
-    --hover-border-color: #595959;
-
-    --input-border-color: #666;
-    --input-hover-border-color: #808080;
-    --input-background-color: var(
-        --tertiary-background-color
-    ); // CURRENTLY USED FOR CALENDAR INPUT
-
-    --button-text-color: #fff;
-
-    --accent-color: hsl(var(--DocsAfterDark_accentHue) 40% 60%);
-    --light-accent-color: hsl(var(--DocsAfterDark_accentHue) 40% 70% / 10%);
-    --light-accent-hover-color: hsl(
-        var(--DocsAfterDark_accentHue) 60% 60% / 20%
+    @include generate-color-properties(
+        "background-color",
+        // color
+        $background-color-start,
+        $background-color-end,
+        // steps
+        10
     );
-    --accent-hover-color: hsl(var(--DocsAfterDark_accentHue) 60% 80% / 100%);
+
+    //////////////////////
+    // FOREGROUND COLOR //
+    //////////////////////
+
+    // foreground
+    @include generate-color-properties(
+        "foreground-color",
+        // color
+        $foreground-color-start,
+        $foreground-color-end,
+        // steps
+        10
+    );
+
+    //////////////////
+    // BORDER COLOR //
+    //////////////////
+
+    @include generate-color-properties(
+        "border-color",
+        // color
+        $border-color-start,
+        $border-color-end,
+        // steps
+        10
+    );
+
+    //////////////////
+    // ACCENT COLOR //
+    //////////////////
+
+    @include generate-hsl(
+        "accent-color",
+        "var(--DocsAfterDark_accentHue)",
+        // saturation
+        40,
+        60,
+        // lightness
+        40,
+        80,
+        // steps
+        10
+    );
+
+    /////////////////
+    // HOVER COLOR //
+    /////////////////
+
+    @include generate-color-properties-alpha(
+        "hover-color",
+        // color
+        $foreground-color-start,
+        $foreground-color-start,
+        // alpha
+        0.1,
+        1,
+        // steps
+        10
+    );
 }

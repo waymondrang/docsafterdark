@@ -1,0 +1,14 @@
+.docs-gm .modal-dialog .jfk-button-standard.jfk-button-disabled,
+.docs-gm .modal-dialog button[disabled],
+.docs-gm .docs-material-bubble .jfk-button-action.jfk-button-disabled,
+.docs-gm .modal-dialog .goog-buttonset-action[disabled],
+.docs-gm .modal-dialog .jfk-button-action.jfk-button-disabled {
+    color: var(--foreground-color-8);
+}
+
+.docs-gm .goog-menuitem-disabled,
+.docs-gm .goog-menuitem-disabled .goog-menuitem-content,
+.goog-menuitem-disabled .goog-menuitem-accel,
+.goog-menuitem-disabled .goog-menuitem-content {
+    color: var(--foreground-color-8) !important;
+}

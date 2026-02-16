@@ -1,0 +1,105 @@
+.chapter-item-label-and-buttons-container-selected:has(
+    .chapter-item-buttons:focus-within,
+    .chapterItemArrowContainer:focus-within,
+    .chapterItemIconAddButton:focus-within,
+    .chapterItemIconEditButton:focus-within
+),
+.chapter-item-nested .chapter-item-label-and-buttons-container-selected,
+.navigation-widget-content:not(.chapter-item-dragged-within)
+    .chapter-item-label-and-buttons-container-selected:hover:not(:focus-within),
+.chapter-item-dragged
+    .chapter-item-label-and-buttons-container.chapter-item-label-and-buttons-container-selected,
+.chapter-item-label-and-buttons-container-selected:active:not(:focus-within),
+.chapter-item-label-and-buttons-container-selected:focus,
+.chapter-item-label-and-buttons-container-selected:has(
+    .chapter-item-label:focus-within
+),
+.miniChapterSwitcherCore
+    .docs-material-gm-select-focused
+    .docs-material-gm-select-outer-box,
+.miniChapterSwitcherCore
+    .docs-material-gm-select-focused
+    .miniChapterSwitcherChapterIcon,
+.miniChapterSwitcherCore
+    .docs-material-gm-select-focused
+    .miniChapterSwitcherNavigationEntryPointIcon,
+.miniChapterSwitcherCore
+    .docs-material-gm-select-focused.docs-material-gm-select-open
+    .docs-material-gm-select-outer-box,
+.miniChapterSwitcherCore
+    .docs-material-gm-select-focused.docs-material-gm-select-open
+    .miniChapterSwitcherChapterIcon,
+.miniChapterSwitcherCore
+    .docs-material-gm-select-focused.docs-material-gm-select-open
+    .miniChapterSwitcherNavigationEntryPointIcon,
+.miniChapterSwitcherContainerView.breadcrumbSwitcherUiVariant
+    .miniChapterSwitcherCore
+    .miniChapterSwitcherView.docs-material-gm-select-active
+    .docs-material-gm-select-outer-box,
+.miniChapterSwitcherContainerView.breadcrumbSwitcherUiVariant
+    .miniChapterSwitcherCore
+    .miniChapterSwitcherView.docs-material-gm-select-active
+    .miniChapterSwitcherChapterIcon,
+.miniChapterSwitcherContainerView.breadcrumbSwitcherUiVariant
+    .miniChapterSwitcherCore
+    .miniChapterSwitcherView.docs-material-gm-select-active
+    .miniChapterSwitcherNavigationEntryPointIcon,
+.miniChapterSwitcherContainerView.breadcrumbSwitcherUiVariant
+    .miniChapterSwitcherCore
+    .miniChapterSwitcherView.docs-material-gm-select-active
+    .miniChapterSwitcherNavigationEntryPointMask,
+.miniChapterSwitcherContainerView.breadcrumbSwitcherUiVariant
+    .miniChapterSwitcherCore
+    .miniChapterSwitcherView.docs-material-gm-select-focused
+    .miniChapterSwitcherNavigationEntryPointMask,
+.miniChapterSwitcherContainerView.miniChapterSwitcherPageless.breadcrumbSwitcherUiVariant
+    .miniChapterSwitcherCore
+    .miniChapterSwitcherView.docs-material-gm-select-active
+    .docs-material-gm-select-outer-box,
+.miniChapterSwitcherContainerView.miniChapterSwitcherPageless.breadcrumbSwitcherUiVariant
+    .miniChapterSwitcherCore
+    .miniChapterSwitcherView.docs-material-gm-select-active
+    .miniChapterSwitcherChapterIcon,
+.miniChapterSwitcherContainerView.miniChapterSwitcherPageless.breadcrumbSwitcherUiVariant
+    .miniChapterSwitcherCore
+    .miniChapterSwitcherView.docs-material-gm-select-active
+    .miniChapterSwitcherNavigationEntryPointIcon,
+.miniChapterSwitcherContainerView.miniChapterSwitcherPageless.breadcrumbSwitcherUiVariant
+    .miniChapterSwitcherCore
+    .miniChapterSwitcherView.docs-material-gm-select-active
+    .miniChapterSwitcherNavigationEntryPointMask,
+.miniChapterSwitcherContainerView.miniChapterSwitcherPageless.breadcrumbSwitcherUiVariant
+    .miniChapterSwitcherCore
+    .miniChapterSwitcherView.docs-material-gm-select-focused
+    .miniChapterSwitcherNavigationEntryPointMask,
+.miniChapterSwitcherContainerView.miniChapterSwitcherPageless
+    .miniChapterSwitcherCore
+    .miniChapterSwitcherView.docs-material-gm-select-focused
+    .docs-material-gm-select-outer-box,
+.miniChapterSwitcherContainerView.miniChapterSwitcherPageless
+    .miniChapterSwitcherCore
+    .miniChapterSwitcherView.docs-material-gm-select-focused
+    .miniChapterSwitcherChapterIcon,
+.miniChapterSwitcherContainerView.miniChapterSwitcherPageless
+    .miniChapterSwitcherCore
+    .miniChapterSwitcherView.docs-material-gm-select-focused
+    .miniChapterSwitcherNavigationEntryPointIcon,
+.miniChapterSwitcherContainerView.miniChapterSwitcherPageless
+    .miniChapterSwitcherCore
+    .miniChapterSwitcherView.docs-material-gm-select-focused.docs-material-gm-select-open
+    .docs-material-gm-select-outer-box,
+.miniChapterSwitcherContainerView.miniChapterSwitcherPageless
+    .miniChapterSwitcherCore
+    .miniChapterSwitcherView.docs-material-gm-select-focused.docs-material-gm-select-open
+    .miniChapterSwitcherChapterIcon,
+.miniChapterSwitcherContainerView.miniChapterSwitcherPageless
+    .miniChapterSwitcherCore
+    .miniChapterSwitcherView.docs-material-gm-select-focused.docs-material-gm-select-open
+    .miniChapterSwitcherNavigationEntryPointIcon {
+    background: var(--background-color-4);
+}
+
+.docs-grille-gm3.docos.docs-gm.docos-comments-pe .docos-input-cancel.jfk-button-standard.jfk-button-active, .docs-grille-gm3.docos.docs-gm.docos-comments-pe .docos-input-cancel.jfk-button-standard.jfk-button-focused, .docs-grille-gm3.docos.docs-gm.docos-comments-pe .docos-input-cancel.jfk-button-standard.jfk-button-focused.jfk-button-hover, // TECHNICALLY EVEN DARKER
+.docos-comments-pe .docos-streamdocoview:hover .docos-showrepliesbutton-collapsed-internal-container, .docos-comments-pe .docs-gm.docos-xeditor .docos-streamdocoview:hover, .docos-comments-pe .docs-gm.docos-xeditor .docos-streamdocoview:hover .docos-show-more {
+    background-color: var(--background-color-4);
+}

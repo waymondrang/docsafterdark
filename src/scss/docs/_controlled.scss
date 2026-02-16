@@ -1,0 +1,21 @@
+.kix-canvas-tile-content rect[fill="rgba(255,255,255,1)"] {
+    fill: var(--DocsAfterDark_documentBackground) !important;
+}
+
+#contents > div {
+    background-color: var(--DocsAfterDark_documentBackground);
+}
+
+.kix-canvas-tile-content[style*="background-color: rgb(255, 255, 255)"],
+.kix-appview-editor {
+    background-color: var(--DocsAfterDark_documentBackground) !important;
+}
+
+.kix-appview-editor canvas,
+.kix-cursor {
+    filter: var(--DocsAfterDark_documentInvert);
+}
+
+.kix-page-paginated {
+    outline: var(--DocsAfterDark_documentBorder);
+}

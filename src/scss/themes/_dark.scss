@@ -1,6 +1,6 @@
 html.DocsAfterDark_dark {
     .docs-material .docs-icon-img::before,
-    .docs-material .docs-icon-img,
+    .docs-material .docs-icon-img:not(.docs-icon-warning-red40-20x20),
     .ita-cp-lens,
     .ita-cp-whole-pad .modal-dialog-title-close::after,
     .docs-dialog .modal-dialog-title-close::after,

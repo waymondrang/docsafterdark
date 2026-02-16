@@ -359,7 +359,7 @@ class DocsAfterDark {
         this.isTempDisabled = false;
 
         addClassToHTML(enabledClass);
-        insertStylesheet("docs.bundle.css", "stylesheet");
+        insertStylesheet("inject.bundle.css", "stylesheet");
 
         if (this.extensionData.mode === ExtensionMode.Dark) {
             this.updateDarkMode();
@@ -438,7 +438,7 @@ class DocsAfterDark {
         const button = event.currentTarget as HTMLButtonElement;
 
         if (this.isTempDisabled) {
-            insertStylesheet("docs.bundle.css", "stylesheet");
+            insertStylesheet("inject.bundle.css", "stylesheet");
             button.classList.remove("enabled");
         } else {
             removeElement("stylesheet");

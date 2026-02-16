@@ -59,6 +59,20 @@ $border-color-end: rgb(100 100 100);
         10
     );
 
+    /////////////////
+    // HOVER COLOR //
+    /////////////////
+
+    @include generate-color-properties-alpha(
+        "hover-color",
+        // reuse foreground start color
+        $foreground-color-start,
+        $foreground-color-start,
+        0.1,
+        1,
+        10
+    );
+
     //////////////////
     // ACCENT COLOR //
     //////////////////
