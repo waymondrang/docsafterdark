@@ -33,7 +33,7 @@
     background-color: transparent;
     border: none;
 
-    opacity: 0.5;
+    opacity: 0.75;
 
     // Z-index must be greater than all other elements
     z-index: 999999999;
@@ -48,7 +48,7 @@
 
         box-sizing: border-box;
 
-        background-color: var(--background-color-1);
+        background-color: var(--background-color-3);
         border: 1px solid var(--border-color-0);
 
         border-radius: 999px;
@@ -71,7 +71,7 @@
 
         &:hover {
             .fill {
-                background-color: var(--background-color-1);
+                background-color: var(--background-color-4);
                 border-color: var(--border-color-0);
             }
         }

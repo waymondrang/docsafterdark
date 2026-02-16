@@ -5,7 +5,9 @@ html.DocsAfterDark_dark {
     .ita-cp-whole-pad .modal-dialog-title-close::after,
     .docs-dialog .modal-dialog-title-close::after,
     .unifiedPreviewBubbleContent canvas,
-    .docs-ml-img::before {
+    .docs-ml-img::before,
+    .kix-equation-toolbar-icon,
+    .kix-equation-toolbar-palette-item {
         filter: invert(1);
     }
 

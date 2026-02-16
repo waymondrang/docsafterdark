@@ -9,6 +9,9 @@
 .docs-gm .goog-menuitem-disabled,
 .docs-gm .goog-menuitem-disabled .goog-menuitem-content,
 .goog-menuitem-disabled .goog-menuitem-accel,
-.goog-menuitem-disabled .goog-menuitem-content {
+.goog-menuitem-disabled .goog-menuitem-content,
+.docs-gm .goog-toolbar-button-disabled,
+.docs-gm .goog-toolbar-menu-button-disabled,
+.docs-gm .trix-palette .goog-palette-cell-disabled {
     color: var(--foreground-color-8) !important;
 }
