@@ -97,7 +97,11 @@
 .miniChapterSwitcherChapterItemTitle,
 .kix-header-footer-bubble-checkbox-label,
 .hiddenFeaturesBubbleTitle,
-.docs-material #docs-script-button-bar .jfk-button.jfk-button-hover {
+.docs-material #docs-script-button-bar .jfk-button.jfk-button-hover,
+.docs-ai-text-generator-bubble-usecase-menu-refine-ux-v2-enabled.docs-ai-text-generator-bubble-usecase-menu.goog-menu
+    .docs-ai-text-generator-bubble-refine-button-usecase-menuitem-text,
+.docs-ai-text-generator-bubble-free-form-input-textarea,
+.inlineFabBubbleContainerBodyText {
     color: var(--foreground-color-1);
 }
 

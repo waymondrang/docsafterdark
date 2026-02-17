@@ -1,21 +1,3 @@
-// TODO: The following rules should be some sort of background
-
-.outlines-widget-chaptered
-    .navigation-item
-    + .navigation-item
-    .navigation-item-vertical-line-top,
-.outlines-widget-chaptered .navigation-item-vertical-line-middle,
-.outlines-widget-chaptered
-    .navigation-item:not(.navigation-item:last-child)
-    .navigation-item-vertical-line-bottom {
-    background: var(--border-color-0); // WHY DOES THIS EXIST?
-}
-
-.docs-embedded-content-button-divider,
-.outlines-widget-chaptered .kix-outlines-widget-header-shadow {
-    background-color: var(--border-color-0);
-}
-
 .docs-grille-gm3 .docs-main-toolbars .goog-toolbar-separator.goog-inline-block,
 .ita-cp-charpicker .goog-char-picker-grid,
 .ita-cp-search,
@@ -32,7 +14,6 @@
 .docs-gm .kix-tablesidebar-control .goog-flat-menu-button,
 .docs-gm .modal-dialog .goog-flat-menu-button,
 .docs-gm .sketchy-shape-effects-shadow-tile .goog-flat-menu-button,
-.goog-palette-cell .docs-preview-palette-item,
 .docs-body-pageless .docs-contentembedding-sidebar,
 .docs-hub .docs-contentembedding-sidebar,
 .docs-body-pageless .kix-citations-sidebar,
@@ -82,7 +63,6 @@
 .appsElementsSidekickFooterBorder,
 .appsElementsSidekickScrollDelineation,
 .docs-ruler-contributed-dragger-container,
-.goog-palette-cell .docs-preview-palette-item,
 .docs-grille-gm3
     .docs-material
     .docs-presence-plus-widget-collabs
@@ -100,7 +80,15 @@
 .kix-header-footer-bubble.docs-bubble,
 .appsElementsPromptBoxRoot,
 .docs-gm .docs-findinput-container,
-.docs-gm .docs-gotoinput-container {
+.docs-gm .docs-gotoinput-container,
+.goog-palette-cell .docs-preview-palette-item,
+.javascriptMaterialdesignGm3WizCardOutlined-card:hover,
+.docs-minimizeddocoview-avatar,
+.docs-proofread-sidebar-header,
+.docs-proofread-sidebar-suggestion-common-actions,
+.docsAiTextGeneratorBubbleContainer.docsAiTextGeneratorBubbleContainer-refine-ux-v2-enabled.docsAiTextGeneratorBubbleContainer-show-preview
+    .docs-ai-text-generator-bubble-free-form-input-textarea:focus,
+.docsAiTextGeneratorBubbleContainer-button-outline {
     border-color: var(--border-color-0);
 }
 
@@ -110,7 +98,9 @@
     #fontSizeSelect.docs-font-size-inc-dec-combobox.goog-toolbar-combo-button,
 .docs-material-button-hairline-default.docs-material-button,
 div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; padding: 10px 125px; width: 300px;"],
-.kix-citations-primary-fill-button.docs-material-button-fill-primary.docs-material-button.docs-material-button-disabled {
+.kix-citations-primary-fill-button.docs-material-button-fill-primary.docs-material-button.docs-material-button-disabled,
+.docs-proofread-sidebar-filter-menu,
+.docs-proofread-sidebar-filter-menu-button {
     border-color: var(--border-color-0) !important;
 }
 
@@ -187,7 +177,9 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
 .apps-actiondatawidget-content-element,
 .docs-ml-header,
 .kix-citations-source-list-item,
-.docs-chat-title-bar {
+.docs-chat-title-bar,
+.docsAiTextGeneratorBubbleContainer.docsAiTextGeneratorBubbleContainer-refine-ux-v2-enabled.docsAiTextGeneratorBubbleContainer-show-preview
+    .kix-ai-text-generator-preview-view-body-container {
     border-bottom-color: var(--border-color-0);
 }
 
@@ -225,6 +217,30 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
     border-bottom: 1px solid var(--border-color-0);
 }
 
+////////////////
+// BACKGROUND //
+////////////////
+
+.outlines-widget-chaptered
+    .navigation-item
+    + .navigation-item
+    .navigation-item-vertical-line-top,
+.outlines-widget-chaptered .navigation-item-vertical-line-middle,
+.outlines-widget-chaptered
+    .navigation-item:not(.navigation-item:last-child)
+    .navigation-item-vertical-line-bottom,
+.docos-comments-pe .docos-anchoreddocoview-minimized,
+.docs-gm.docos-comments-pe .docos-anchoreddocoview.docos-minimized-view,
+.docs-gm.docos-comments-pe .docos-anchoreddocoview.docos-minimized-view:hover {
+    background: var(--border-color-0);
+}
+
+.docs-embedded-content-button-divider,
+.outlines-widget-chaptered .kix-outlines-widget-header-shadow,
+.javascriptMaterialdesignGm3WizListShared-divider {
+    background-color: var(--border-color-0);
+}
+
 //////////
 // MISC //
 //////////
@@ -253,6 +269,8 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
 
 .docs-gm .docs-gm-sidebar-icon-path,
 .kix-citations-add-source-button-icon-path,
-.kix-citations-flat-button-icon-path {
+.kix-citations-flat-button-icon-path,
+.docs-material-menu-button-flat-default-dropdown-icon,
+.docs-material-menu-button-raised-default-dropdown-icon {
     fill: var(--border-color-0);
 }

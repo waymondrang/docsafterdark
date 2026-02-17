@@ -17,7 +17,11 @@ div.docs-material-gm-checkbox-undetermined,
 span.docs-material-gm-checkbox-checked,
 span.docs-material-gm-checkbox-undetermined,
 div.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
-span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused {
+span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
+.docs-proofread-settings-menu-checkboxes-container
+    .docs-material-gm-labeled-checkbox
+    .docs-material-gm-labeled-checkbox-checked,
+.javascriptMaterialdesignGm3WizButtonFilled-button {
     background-color: var(--accent-color-0);
 }
 
@@ -34,7 +38,14 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused {
 .docs-gm .docs-material-bubble .jfk-button-action.jfk-button-focused,
 .docs-gm .modal-dialog .goog-buttonset-action:focus,
 .docs-gm .modal-dialog .jfk-button-action.jfk-button-focused,
-.docs-grille-gm3.docos.docs-gm .jfk-button.jfk-button-action {
+.docs-grille-gm3.docos.docs-gm .jfk-button.jfk-button-action,
+.docs-gm3-filled-button,
+.docs-gm3-filled-button.docs-gm3-button-focused,
+.docos-streampane-tabbar
+    .docs-tabbar-tab.docs-tabbar-tab-selected
+    .docs-tabbar-tablabel:after,
+.docsAiTextGeneratorBubbleContainer-button,
+.docs-gm3-tonal-button {
     background: var(--accent-color-0);
 }
 
@@ -47,7 +58,11 @@ span.docs-material-gm-checkbox-undetermined,
 div.docs-material-gm-checkbox-focused,
 span.docs-material-gm-checkbox-focused,
 div.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
-span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused {
+span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
+.docs-proofread-settings-menu-checkboxes-container
+    .docs-material-gm-labeled-checkbox
+    .docs-material-gm-labeled-checkbox-checked,
+.docsAiTextGeneratorBubbleContainer.docsAiTextGeneratorBubbleContainer-refine-ux-v2-enabled.docsAiTextGeneratorBubbleContainer-show-preview {
     border-color: var(--accent-color-0);
 }
 
@@ -55,6 +70,8 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused {
 .docs-material-button-hairline-default.docs-material-button-focused.docs-material-button-no-focus-border,
 .docs-material-button-hairline-primary.docs-material-button-focused,
 .docs-material-button-hairline-primary.docs-material-button-focused.docs-material-button-no-focus-border,
-.docs-gm .docos-input-textarea:focus {
+.docs-gm .docos-input-textarea:focus,
+.docs-gm .docos-streamdocoview-input-pane .docos-input-textarea:focus,
+.docs-title-input:focus {
     border-color: var(--accent-color-0) !important;
 }

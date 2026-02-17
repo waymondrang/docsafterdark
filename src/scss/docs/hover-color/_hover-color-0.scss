@@ -28,7 +28,9 @@
 .goog-toolbar.kix-citations-source-list-item-toolbar .goog-toolbar-button-hover:not(.goog-toolbar-menu-button-open), .goog-toolbar.kix-citations-source-list-item-toolbar .goog-toolbar-menu-button-hover:not(.goog-toolbar-menu-button-open),
 .kix-citations-bibliography-bubble .kix-citations-bibliography-bubble-option-close:active, .kix-citations-bibliography-bubble .kix-citations-bibliography-bubble-option-close:focus, .kix-citations-bibliography-bubble .kix-citations-bibliography-bubble-option-close:hover, .kix-citations-bibliography-bubble .kix-citations-bibliography-bubble-option-help:active, .kix-citations-bibliography-bubble .kix-citations-bibliography-bubble-option-help:focus, .kix-citations-bibliography-bubble .kix-citations-bibliography-bubble-option-help:hover, .kix-citations-bibliography-bubble.kix-citations-bibliography-bubble-feedback-enabled .kix-citations-bibliography-bubble-option-feedback:active, .kix-citations-bibliography-bubble.kix-citations-bibliography-bubble-feedback-enabled .kix-citations-bibliography-bubble-option-feedback:focus, .kix-citations-bibliography-bubble.kix-citations-bibliography-bubble-feedback-enabled .kix-citations-bibliography-bubble-option-feedback:hover,
 .kix-header-footer-bubble .kix-header-footer-bubble-menu-button.goog-flat-menu-button.goog-flat-menu-button-focused, .kix-header-footer-bubble .kix-header-footer-bubble-menu-button.goog-flat-menu-button.goog-flat-menu-button-hover, .kix-header-footer-bubble .kix-header-footer-bubble-menu-button.goog-flat-menu-button.goog-flat-menu-button-open,
-.miniChapterSwitcherChapterList.goog-menu.goog-menu-vertical.miniChapterSwitcherChapterListViewContainer .goog-menuitem.goog-menuitem-highlight {
+.miniChapterSwitcherChapterList.goog-menu.goog-menu-vertical.miniChapterSwitcherChapterListViewContainer .goog-menuitem.goog-menuitem-highlight,
+.appsElementsRichTextScoperCompactScoperMenuButton:hover,
+.docs-ai-text-generator-bubble-usecase-menu-refine-ux-v2-enabled.docs-ai-text-generator-bubble-usecase-menu.goog-menu .docs-ai-text-generator-bubble-free-form-input-textarea:hover {
     background: var(--hover-color-0);
 }
 
@@ -99,7 +101,6 @@
 .javascriptMaterialdesignGm3WizSelectOutlinedEl
     .mdc-list-item:not(.mdc-list-item--disabled)
     .mdc-list-item__ripple::before,
-.appsElementsSidekickPromptInput:hover,
 .apps-navigationwidget-item-hover,
 .apps-shortcutshelpcontentimpl-ac-renderer .ac-active,
 .companion-collapser-button.app-switcher-button-checked.app-switcher-button-hover
@@ -123,22 +124,17 @@
 .docs-grille-gm3
     .docs-material
     .docs-presence-plus-widget-overflow-button.goog-flat-menu-button-hover,
-.docs-grille-gm3 .instant-button:hover {
+.docs-grille-gm3 .instant-button:hover,
+.docs-gm .docs-material-gm-dialog .goog-flat-menu-button-hover,
+.docs-gm
+    .kix-smart-controls-button-sidebar-edit-view-formatting-controls
+    .goog-flat-menu-button-hover,
+.docs-gm .modal-dialog .goog-flat-menu-button-hover,
+.docs-gm .sketchy-shape-effects-shadow-tile .goog-flat-menu-button-hover {
     background-color: var(--hover-color-0);
 }
 
-.kix-drawing-bubble-edit-button.docs-material-button-hover {
+.kix-drawing-bubble-edit-button.docs-material-button-hover,
+.docs-proofread-sidebar-filter-menu .goog-menuitem-highlight {
     background-color: var(--hover-color-0) !important;
-}
-
-///////////////////
-// MEDIA QUERIES //
-///////////////////
-
-@media screen and (width <= 1600px) {
-    .docs-grille-gm3
-        #docs-omnibox-toolbar.assisted-actions
-        .docs-omnibox-input:hover {
-        background-color: var(--hover-color-0);
-    }
 }

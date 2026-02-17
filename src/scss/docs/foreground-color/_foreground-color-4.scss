@@ -40,6 +40,18 @@
     .navigation-item-level-7,
 .docs-gm .goog-menuitem-accel,
 .docs-gm .goog-menuitem-disabled .goog-menuitem-accel,
-.outlines-widget-chaptered .navigation-widget-header {
+.outlines-widget-chaptered .navigation-widget-header,
+.docs-material-gm-labeled-checkbox
+    .docs-material-gm-labeled-checkbox-description,
+.appsDocsUiMaterialWizCommonLabelledcomponentsSecondaryLabelText,
+.DocsSidebarComponentsLabelMediumOnSurfaceVariant {
     color: var(--foreground-color-4);
+}
+
+.docs-ai-text-generator-bubble-free-form-input-textarea::placeholder {
+    color: var(--foreground-color-4) !important;
+}
+
+.goog-palette-cell-selected .docs-preview-palette-item {
+    border-color: var(--foreground-color-4);
 }

@@ -1,3 +1,5 @@
+// also acceptable for solid hover
+
 .docs-grille-gm3.docs-gm #docs-toolbar-mode-switcher.suggest-mode,
 .nextChapterBottomFabView.docs-gm3-filled-button,
 .docs-grille-version-history .docs-revisions-tile-selected,
@@ -15,13 +17,6 @@
 .docos-comments-pe
     .docos-anchoreddocoview:hover
     .docos-anchoreddocoview-internal,
-.docos-comments-pe .docos-anchoreddocoview:hover .docos-replyview-reply-count,
-.docs-gm.docos.docos-comments-pe .docos-assigneeview.docos-assignee-other,
-.docs-grille-gm3 .docos-anchoreddocoview:hover,
-.docs-grille-gm3
-    .docos-anchoreddocoview:hover
-    .docos-anchoreddocoview-input-pane,
-.docs-grille-gm3 .docos-anchoreddocoview:hover .docos-anchoredreplyview,
 .docs-sidebar-toggle-tabs .jfk-button.docs-sidebar-toggle-tab-inactive:active,
 .docs-sidebar-toggle-tabs
     .jfk-button.docs-sidebar-toggle-tab-inactive:focus-visible,
@@ -76,7 +71,20 @@
 .miniChapterSwitcherContainerView.miniChapterSwitcherPageless.breadcrumbSwitcherUiVariant
     .miniChapterSwitcherCore
     .miniChapterSwitcherView.docs-material-gm-select-active.miniChapterSwitcherMultipleChapters
-    .miniChapterSwitcherNavigationEntryPointIcon {
+    .miniChapterSwitcherNavigationEntryPointIcon,
+.docos-comments-pe
+    .docos-anchoreddocoview:hover
+    .docos-anchoreddocoview-internal,
+.docos-comments-pe .docos-anchoreddocoview:hover .docos-replyview-reply-count,
+.docs-gm.docos.docos-comments-pe .docos-assigneeview.docos-assignee-other,
+.docs-grille-gm3 .docos-anchoreddocoview:hover,
+.docs-grille-gm3
+    .docos-anchoreddocoview:hover
+    .docos-anchoreddocoview-input-pane,
+.docs-grille-gm3 .docos-anchoreddocoview:hover .docos-anchoredreplyview,
+.appsKixCitationsSidebarTooltipContainer,
+.docs-ai-text-generator-bubble-usecase-menu-refine-ux-v2-enabled.docs-ai-text-generator-bubble-usecase-menu.goog-menu
+    .docs-ai-text-generator-bubble-free-form-input-textarea {
     background: var(--background-color-3);
 }
 
@@ -146,7 +154,15 @@
 .kix-citations-insert-bibliography-container,
 .kix-citations-search-result-view-attributes-bottom,
 .docs-material #docs-script-button-bar .jfk-button.jfk-button-active,
-.docs-material #docs-script-button-bar .jfk-button.jfk-button-checked {
+.docs-material #docs-script-button-bar .jfk-button.jfk-button-checked,
+.appsElementsSidekickUserMessageBubble,
+.javascriptMaterialdesignGm3WizCardFilled-card,
+.docsAiTextGeneratorBubbleTitleEditable
+    .docsAiTextGeneratorBubbleTitleText:hover,
+.docsAiTextGeneratorBubbleTitleEditing .docsAiTextGeneratorBubbleTitleText,
+.inlineFabBubbleContainer:not(.aiFabEnabled):active,
+.inlineFabBubbleContainer:not(.aiFabEnabled):focus,
+.inlineFabBubbleContainer:not(.aiFabEnabled):hover {
     background-color: var(--background-color-3);
 }
 

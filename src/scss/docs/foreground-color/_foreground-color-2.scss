@@ -40,7 +40,6 @@
 .appsElementsLinkInsertionCard,
 .aiBlockPreviewBubbleDisclaimer,
 .goog-char-picker-unicode,
-.appsElementsSidekickFeedDisclaimer,
 .appsElementsSidekickQuotaMessage,
 .javascriptMaterialdesignGm3WizList-list-item__secondary-text,
 .goog-menu
@@ -68,10 +67,17 @@
 .docs-material #docs-script-button-bar .jfk-button:focus,
 .docs-gm .docs-menubar .goog-control,
 .docs-material .goog-toolbar-button,
-.docs-material .goog-toolbar-menu-button {
+.docs-material .goog-toolbar-menu-button,
+.docs-proofread-sidebar-filter-content,
+.docsAiTextGeneratorBubbleTitleTextInput {
     color: var(--foreground-color-2);
 }
 
-input::placeholder {
+input::placeholder,
+textarea::placeholder {
     color: var(--foreground-color-2) !important;
+}
+
+.goog-palette-cell-hover .docs-preview-palette-item {
+    border-color: var(--foreground-color-2);
 }

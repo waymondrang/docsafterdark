@@ -2,56 +2,14 @@
 // TRANSPARENT BACKGROUND //
 ////////////////////////////
 
-.docs-sidebar-tile-header.docs-sidebar-tile-header-disabled,
-.docs-checkupdialog-overflow-menu .goog-menuitem.goog-menuitem-disabled,
-.docs-material .goog-toolbar-button,
-.docs-material .goog-toolbar-combo-button,
-.docs-material .goog-toolbar-menu-button,
-.docs-search-bar,
-textarea.docs-search-bar-input.goog-textarea,
-.javascriptMaterialdesignGm3WizElevation-elevation__overlay,
-.javascriptMaterialdesignGm3WizSelectOutlinedEl
-    .mdc-select__menu
-    .mdc-elevation-overlay,
-.docs-gm .docs-chat-edit-box {
-    background-color: transparent;
-}
-
-.kix-canvas-tile-content {
-    background: transparent;
-}
-
-.docs-number-input-container input,
-.docsLinkSmartinsertlinkBubble,
-.docs-gm.docs-grille-gm3.docos-comments-pe .docos-anchoreddocoview,
-input#docs-findandreplacedialog-replace-input,
-.docs-material-button-hairline-primary.docs-material-button,
-.ita-cp-hwt,
-.ita-cp-input,
-.docs-checkupdialog-suggestion-button.jfk-button,
+input,
 .docs-grille-gm3 .docos-input .docos-input-textarea,
 .docs-grille-gm3 .docos-input .docos-input-textarea:focus,
 .docs-grille-gm3 .docos-streamdocoview-input-pane .docos-input-textarea,
 .docs-grille-gm3
     .docos-streamdocoview-input-pane.docos-input
-    .docos-input-textarea:focus,
-.docs-material-button-hairline-default.docs-material-button,
-.docs-gm.docs-grille-gm3.docos-comments-pe .docos-anchoreddocoview {
+    .docos-input-textarea:focus {
     background: transparent;
-}
-
-.docs-sidebar-tile-header.docs-sidebar-tile-header-disabled,
-.docs-checkupdialog-overflow-menu .goog-menuitem.goog-menuitem-disabled,
-.docs-material .goog-toolbar-button,
-.docs-material .goog-toolbar-combo-button,
-.docs-material .goog-toolbar-menu-button,
-.docs-search-bar,
-textarea.docs-search-bar-input.goog-textarea,
-.javascriptMaterialdesignGm3WizElevation-elevation__overlay,
-.javascriptMaterialdesignGm3WizSelectOutlinedEl
-    .mdc-select__menu
-    .mdc-elevation-overlay {
-    background-color: transparent;
 }
 
 //////////////////////
@@ -112,7 +70,8 @@ textarea.docs-search-bar-input.goog-textarea,
 .docs-gm .docs-toolbar-more-bubble,
 .goog-toolbar.kix-citations-source-list-item-toolbar,
 .miniChapterSwitcherChapterList.goog-menu.goog-menu-vertical.miniChapterSwitcherChapterListViewContainer,
-.docs-grille-gm3 .docs-chat-message-tooltip-container {
+.docs-grille-gm3 .docs-chat-message-tooltip-container,
+.docs-omnibox-autocomplete .ac-renderer {
     box-shadow:
         0 14px 28px rgb(0 0 0 / 25%),
         0 10px 10px rgb(0 0 0 / 20%);
@@ -151,15 +110,15 @@ textarea.docs-search-bar-input.goog-textarea,
 .apps-shortcutshelpcontentimpl-ac-renderer,
 .docs-palette,
 .kix-documentmetrics-widget {
-    border-radius: 8px;
+    border-radius: 0.5rem;
 }
 
 .docs-palette-title-bar {
-    border-radius: 8px 8px 0 0;
+    border-radius: 0.5rem 0.5rem 0 0;
 }
 
 .docs-palette-body {
-    border-radius: 0 0 8px 8px;
+    border-radius: 0 0 0.5rem 0.5rem;
 }
 
 img.docs-generativeai-onboarding-dialog-image,
@@ -173,4 +132,31 @@ img.docs-generativeai-onboarding-dialog-image,
 
 .kix-equation-toolbar-palette-item {
     border-color: transparent;
+}
+
+/////////////////
+// MEDIA QUERY //
+/////////////////
+
+// NOTE: Media queries are here because we need to enforce their order!
+
+@media screen and (width <= 1600px) {
+    .docs-grille-gm3 #docs-omnibox-toolbar.assisted-actions .docs-omnibox-input,
+    .docs-grille-gm3.docs-body-pageless
+        #docs-omnibox-toolbar.assisted-actions
+        .docs-omnibox-input {
+        background-color: var(--background-color-2);
+    }
+
+    .docs-grille-gm3
+        #docs-omnibox-toolbar.assisted-actions
+        .docs-omnibox-input:hover {
+        background-color: var(--hover-color-0);
+    }
+
+    .docs-grille-gm3
+        #docs-omnibox-toolbar.assisted-actions
+        .docs-omnibox-input:focus-within {
+        background: var(--background-color-0);
+    }
 }

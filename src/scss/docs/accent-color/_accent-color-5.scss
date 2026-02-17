@@ -18,6 +18,12 @@ a:link,
 .docs-gm .modal-dialog .jfk-button-standard,
 .docs-gm .modal-dialog button,
 .docs-grille-gm3.docos.docs-gm.docos-comments-pe
-    .docos-input-cancel.jfk-button-standard.jfk-button {
+    .docos-input-cancel.jfk-button-standard.jfk-button,
+.docos-streampane-tabbar
+    .docs-tabbar-tab.docs-tabbar-tab-selected
+    .docs-tabbar-tablabel,
+.docos-comments-pe .docos-replyview-reply-count,
+.docs-proofread-sidebar-filter-selectall-menuitem .goog-menuitem-content,
+.docsAiTextGeneratorBubbleContainer-refine-button-text {
     color: var(--accent-color-5);
 }

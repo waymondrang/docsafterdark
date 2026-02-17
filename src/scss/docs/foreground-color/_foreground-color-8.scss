@@ -2,7 +2,10 @@
 .docs-gm .modal-dialog button[disabled],
 .docs-gm .docs-material-bubble .jfk-button-action.jfk-button-disabled,
 .docs-gm .modal-dialog .goog-buttonset-action[disabled],
-.docs-gm .modal-dialog .jfk-button-action.jfk-button-disabled {
+.docs-gm .modal-dialog .jfk-button-action.jfk-button-disabled,
+.docsAiTextGeneratorBubbleContainer
+    .kix-ai-text-generator-preview-view-disclaimer-text,
+.appsElementsSidekickFeedDisclaimer {
     color: var(--foreground-color-8);
 }
 

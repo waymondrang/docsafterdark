@@ -7,8 +7,6 @@
 .docs-gm .imageGenerationStylePresetsMenu.goog-menu,
 .dropdownEntityConfigurationDialogItemActiveDragItemComponent, // Could also be root background color
 .docos-comments-pe .docos-anchoreddocoview-internal,
-.docs-grille-gm3 .docos-anchoreddocoview, .docs-grille-gm3 .docos-anchoreddocoview .docos-anchoredreplyview, .docs-grille-gm3 .docos-anchoreddocoview-input-pane,
-.docs-grille-gm3 .docos-anchoreddocoview .docos-show-less, .docs-grille-gm3 .docos-anchoreddocoview .docos-show-more, .docs-grille-gm3 .docos-replyview-first .docos-show-more,
 .docs-alt-text-tile-description-text-field,
 .docs-alt-text-tile-title-input,
 .docs-material-hsv-color-picker-input,
@@ -28,14 +26,21 @@
 .miniChapterSwitcherContainerView.breadcrumbSwitcherUiVariant .miniChapterSwitcherNavigationEntryPointIcon,
 .appsElementsEmojipickerListAlternatepickerAlternateContainer,
 .docs-grille-gm3.docs-body-pageless #docs-align-palette, .docs-grille-gm3.docs-body-pageless #docs-align-palette .goog-toolbar-button, .docs-grille-gm3.docs-body-pageless .docs-main-toolbars .goog-toolbar-button, .docs-grille-gm3.docs-body-pageless .docs-main-toolbars .goog-toolbar-combo-button, .docs-grille-gm3.docs-body-pageless .docs-main-toolbars .goog-toolbar-menu-button, .docs-grille-gm3.docs-body-pageless .docs-toolbar-more-toolbar, .docs-grille-gm3.docs-body-pageless.docs-gm #docs-toolbar-wrapper,
-.docs-grille-gm3.docs-body-pageless .docos-anchoreddocoview, .docs-grille-gm3.docs-body-pageless .docos-anchoreddocoview .docos-anchoredreplyview, .docs-grille-gm3.docs-body-pageless .docos-anchoreddocoview-input-pane, .docs-grille-gm3.docs-body-pageless .docos-comments-pe .docos-anchoreddocoview .docos-replyview-reply-count, .docs-grille-gm3.docs-body-pageless .docos-comments-pe .docos-anchoreddocoview-internal,
 .docs-grille-gm3.docs-body-pageless .docos-emoji-reaction-doco-view-emojis .docs-material-button-flat-primary,
 .miniChapterSwitcherContainerView.miniChapterSwitcherPageless .miniChapterSwitcherCore .miniChapterSwitcherView.docs-material-gm-select .docs-material-gm-select-outer-box, .miniChapterSwitcherContainerView.miniChapterSwitcherPageless .miniChapterSwitcherCore .miniChapterSwitcherView.docs-material-gm-select .miniChapterSwitcherChapterIcon, .miniChapterSwitcherContainerView.miniChapterSwitcherPageless .miniChapterSwitcherCore .miniChapterSwitcherView.docs-material-gm-select .miniChapterSwitcherNavigationEntryPointIcon,
 .miniChapterSwitcherContainerView.miniChapterSwitcherPageless.breadcrumbSwitcherUiVariant .miniChapterSwitcherCore .miniChapterSwitcherView.docs-material-gm-select .miniChapterSwitcherNavigationEntryPointMask,
 .goog-toolbar.kix-citations-source-list-item-toolbar,
 .miniChapterSwitcherChapterList.goog-menu.goog-menu-vertical.miniChapterSwitcherChapterListViewContainer .goog-menuitem.goog-menuitem-active, .miniChapterSwitcherChapterList.goog-menu.goog-menu-vertical.miniChapterSwitcherChapterListViewContainer .goog-menuitem.goog-option-selected,
 .hiddenFeaturesBubbleContainer,
-.docs-gm .docs-material-bubble .jfk-button-action.jfk-button-disabled, .docs-gm .modal-dialog .goog-buttonset-action[disabled], .docs-gm .modal-dialog .jfk-button-action.jfk-button-disabled {
+.docs-gm .docs-material-bubble .jfk-button-action.jfk-button-disabled, .docs-gm .modal-dialog .goog-buttonset-action[disabled], .docs-gm .modal-dialog .jfk-button-action.jfk-button-disabled,
+.docs-grille-gm3.docs-body-pageless .docos-anchoreddocoview, .docs-grille-gm3.docs-body-pageless .docos-anchoreddocoview .docos-anchoredreplyview, .docs-grille-gm3.docs-body-pageless .docos-anchoreddocoview-input-pane, .docs-grille-gm3.docs-body-pageless .docos-comments-pe .docos-anchoreddocoview .docos-replyview-reply-count, .docs-grille-gm3.docs-body-pageless .docos-comments-pe .docos-anchoreddocoview-internal,
+.appsElementsGenerativeaiLoadingIndicatorSkeletonLineMask,
+.docs-body-pageless .docos .docos-comments-pe .docos-assigneeview, .docs-body-pageless .docos-comments-pe .docos-anchoreddocoview:hover .docos-anchoreddocoview-internal, .docs-body-pageless .docos-comments-pe .docos-anchoreddocoview:hover .docos-replyview-reply-count, .docs-grille-gm3.docs-body-pageless .docos-anchoreddocoview:hover, .docs-grille-gm3.docs-body-pageless .docos-anchoreddocoview:hover .docos-anchoreddocoview-input-pane, .docs-grille-gm3.docs-body-pageless .docos-anchoreddocoview:hover .docos-anchoredreplyview,
+.docos-comments-pe .docos-anchoreddocoview-internal,
+.docs-grille-gm3 .docos-anchoreddocoview, .docs-grille-gm3 .docos-anchoreddocoview .docos-anchoredreplyview, .docs-grille-gm3 .docos-anchoreddocoview-input-pane,
+.docs-omnibox-input.jfk-textinput,
+.docs-proofread-sidebar,
+.docsAiTextGeneratorBubbleContainer.docsAiTextGeneratorBubbleContainer-refine-ux-v2-enabled.docsAiTextGeneratorBubbleContainer-show-preview .docs-ai-text-generator-bubble-free-form-input-textarea {
     background: var(--background-color-2);
 }
 
@@ -45,7 +50,8 @@
 
 .docs-titlebar-buttons.docs-titlebar-buttons-view-mode[style]:not([style=""]),
 div#docs-chrome[style]:not([style=""]),
-div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; padding: 10px 125px; width: 300px;"] {
+div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; padding: 10px 125px; width: 300px;"],
+.docs-proofread-sidebar-filter-menu {
     background: var(--background-color-2) !important;
 }
 
@@ -66,7 +72,6 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
 .companion-collapser-button.app-switcher-button-checked .app-switcher-button-icon-background, .companion-theme-light .companion-collapser-button.app-switcher-button-checked .app-switcher-button-icon-background,
 .jfk-bubble,
 .docs-grille-gm3 .docs-ui-toast,
-// .javascriptMaterialdesignGm3WizMenuSurface-menu-surface,
 .ita-hwt-ime,
 .ita-hwt-candidates,
 .docsContentLibrarySidebarContainer,
@@ -91,7 +96,6 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
 .right-gutter-resizer-expansion-button,
 .docs-palette-body,
 .appsElementsSidekickZeroStateIconContainer,
-.appsElementsSidekickFooter,
 .docs-ruler-contributed-dragger-container,
 .docos-emoji-reaction-doco-view .docs-material-button-raised-default,
 .document-details-bubble-container,
@@ -100,26 +104,9 @@ div[style="background: #F0F6FF; border: 1px solid black; margin-top: 35px; paddi
     background-color: var(--background-color-2);
 }
 
-.docs-chat-message-body {
+.docs-chat-message-body,
+.docs-proofread-sidebar-filter-menu-button {
     background-color: var(--background-color-2) !important;
-}
-
-/////////////////
-// MEDIA QUERY //
-/////////////////
-
-@media screen and (width <= 1600px) {
-    .docs-grille-gm3
-        #docs-omnibox-toolbar.assisted-actions
-        .docs-omnibox-input {
-        background-color: var(--background-color-2);
-    }
-
-    .docs-grille-gm3.docs-body-pageless
-        #docs-omnibox-toolbar.assisted-actions
-        .docs-omnibox-input {
-        background-color: var(--background-color-2);
-    }
 }
 
 ////////////////////////
