@@ -12,6 +12,37 @@ input,
     background: transparent;
 }
 
+/////////////////////////
+// GRADIENT BACKGROUND //
+/////////////////////////
+
+.docsAiTextGeneratorBubbleContainer-button-first-open
+    .docsAiTextGeneratorBubbleContainer-body {
+    background: linear-gradient(
+        90deg,
+        var(--background-color-2),
+        var(--background-color-3)
+    );
+}
+
+.docsAiTextGeneratorBubbleContainer.docsAiTextGeneratorBubbleContainer-refine-ux-v2-enabled.docsAiTextGeneratorBubbleContainer-show-preview
+    .kix-ai-text-generator-preview-view-body-container.body-container-down-scrollable::after {
+    background: linear-gradient(
+        180deg,
+        hsl(0deg 0% 100% / 0%),
+        var(--background-color-2)
+    );
+}
+
+.docsAiTextGeneratorBubbleContainer.docsAiTextGeneratorBubbleContainer-refine-ux-v2-enabled.docsAiTextGeneratorBubbleContainer-show-preview
+    .kix-ai-text-generator-preview-view-body-container.body-container-scrolled::before {
+    background: linear-gradient(
+        0deg,
+        hsl(0deg 0% 100% / 0%),
+        var(--background-color-2)
+    );
+}
+
 //////////////////////
 //  NONE BACKGROUND //
 //////////////////////

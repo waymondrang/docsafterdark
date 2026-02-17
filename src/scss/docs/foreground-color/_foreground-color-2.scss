@@ -51,8 +51,6 @@
     .goog-menuitem-content
     .scb-sqa-visibility-summary,
 .docs-titlebar-badge,
-.outline-refresh.navigation-widget-unified-styling
-    .navigation-widget-empty-content,
 .docs-fontmenu .docs-fonts-section-header,
 .appsElementsEmojipickerListLabelRow,
 .docos-comments-pe .docos-streampane-all-filtered-out-message,
@@ -69,14 +67,17 @@
 .docs-material .goog-toolbar-button,
 .docs-material .goog-toolbar-menu-button,
 .docs-proofread-sidebar-filter-content,
-.docsAiTextGeneratorBubbleTitleTextInput {
+.docsAiTextGeneratorBubbleTitleTextInput,
+.docsAiTextGeneratorBubbleTitleContainer:not(
+        .docsAiTextGeneratorBubbleTitleEditable
+    )
+    .docsAiTextGeneratorBubbleTitleTextInput {
     color: var(--foreground-color-2);
 }
 
-input::placeholder,
-textarea::placeholder {
-    color: var(--foreground-color-2) !important;
-}
+// input::placeholder {
+//     color: var(--foreground-color-2) !important;
+// }
 
 .goog-palette-cell-hover .docs-preview-palette-item {
     border-color: var(--foreground-color-2);

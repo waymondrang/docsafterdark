@@ -5,7 +5,11 @@
 .docs-gm .modal-dialog .jfk-button-action.jfk-button-disabled,
 .docsAiTextGeneratorBubbleContainer
     .kix-ai-text-generator-preview-view-disclaimer-text,
-.appsElementsSidekickFeedDisclaimer {
+.appsElementsSidekickFeedDisclaimer,
+input::placeholder,
+textarea::placeholder,
+.outline-refresh.navigation-widget-unified-styling
+    .navigation-widget-empty-content {
     color: var(--foreground-color-8);
 }
 

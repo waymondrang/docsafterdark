@@ -88,7 +88,9 @@
 .docs-proofread-sidebar-suggestion-common-actions,
 .docsAiTextGeneratorBubbleContainer.docsAiTextGeneratorBubbleContainer-refine-ux-v2-enabled.docsAiTextGeneratorBubbleContainer-show-preview
     .docs-ai-text-generator-bubble-free-form-input-textarea:focus,
-.docsAiTextGeneratorBubbleContainer-button-outline {
+.docsAiTextGeneratorBubbleContainer-button-outline,
+.docsAiTextGeneratorBubbleContainer
+    .kix-ai-text-generator-preview-view-body-container.body-container-scrolled {
     border-color: var(--border-color-0);
 }
 

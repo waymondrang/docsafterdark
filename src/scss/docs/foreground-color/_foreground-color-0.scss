@@ -144,7 +144,8 @@ textarea.docs-search-bar-input.goog-textarea,
 .chapters-in-cslv .docs-grille-version-history .docs-revisions-authorwidget-hat,
 .docs-grille-gm3 .docs-chat-message-tooltip-content,
 .docs-proofread-sidebar-title-text,
-.docs-gm3-tonal-button {
+.docs-gm3-tonal-button,
+.docsAiTextGeneratorBubbleContainer.docsAiTextGeneratorBubbleContainer-refine-ux-v2-enabled:not(.docsAiTextGeneratorBubbleContainer-button-first-open) .kix-ai-text-generator-prompt-view-input {
     color: var(--foreground-color-0);
 }
 
