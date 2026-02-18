@@ -6,7 +6,8 @@
     background-color: var(--DocsAfterDark_documentBackground);
 }
 
-.kix-canvas-tile-content[style*="background-color: rgb(255, 255, 255)"] {
+.kix-canvas-tile-content[style*="background-color: rgb(255, 255, 255)"],
+.kix-appview-editor[style*="background-color: rgb(255, 255, 255)"] {
     background-color: var(--DocsAfterDark_documentBackground) !important;
 }
 
