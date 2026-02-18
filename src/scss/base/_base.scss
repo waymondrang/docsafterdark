@@ -74,3 +74,60 @@
 .goog-option-selected {
     background-image: var(--checkmark);
 }
+
+// POSSIBLY TEMPORARY SELECTORS ON ACCESS REQUEST PAGE
+
+.hA3Ymb {
+    color: var(--primary-text-color);
+}
+
+.JsJznb,
+.VY1pEb,
+.i5S8cc {
+    color: var(--secondary-text-color);
+}
+
+.Q0zAz {
+    fill: var(--secondary-text-color);
+}
+
+.BOpCwe {
+    color: var(--tertiary-text-color);
+}
+
+/////////////////////////
+// DOCUMENT BACKGROUND //
+/////////////////////////
+
+.kix-canvas-tile-content {
+    background: transparent;
+    background-size: contain;
+}
+
+.kix-canvas-tile-content rect[fill="rgba(255,255,255,1)"] {
+    fill: var(--DocsAfterDark_documentBackground) !important;
+}
+
+#contents > div {
+    background-color: var(--DocsAfterDark_documentBackground);
+}
+
+.kix-canvas-tile-content[style*="background-color: rgb(255, 255, 255)"],
+.kix-appview-editor {
+    background-color: var(--DocsAfterDark_documentBackground) !important;
+}
+
+//////////////////////////
+// CONTROLLED VARIABLES //
+//////////////////////////
+
+.kix-appview-editor canvas,
+.kix-cursor {
+    filter: var(--DocsAfterDark_documentInvert);
+}
+
+// DOCUMENT BORDER SHOULD BE CONTROLLABLE IN ANY MODE
+
+.kix-page-paginated {
+    outline: var(--DocsAfterDark_documentBorder);
+}
