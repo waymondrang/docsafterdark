@@ -17,7 +17,7 @@ html.DocsAfterDark_dark {
         #docs-omnibox-toolbar.assisted-actions
         .docs-omnibox-row-icon,
     .ita-cp-lens,
-    .ita-cp-whole-pad .modal-dialog-title-close:after,
+    .ita-cp-whole-pad .modal-dialog-title-close::after,
     .ita-cp-clear-img {
         filter: invert(1) grayscale(1);
     }

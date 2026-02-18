@@ -59,11 +59,7 @@
 .javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--outlined:not(
     .javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--disabled
 ),
-.javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--outlined:not(
-        .javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--disabled
-    ):not(
-        .javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--focused
-    ):hover {
+.javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--outlined:not(.javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--disabled, .javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--focused):hover {
     --gm3-notched-outline-border-color: transparent;
 }
 
