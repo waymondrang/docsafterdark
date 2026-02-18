@@ -46,8 +46,8 @@ body {
 }
 
 body {
-    color: var(--primary-text-color);
-    background-color: var(--root-background-color);
+    color: var(--foreground-color-0);
+    background-color: var(--background-color-0);
 }
 
 button,
@@ -57,7 +57,7 @@ button,
 
     font-size: 1rem;
     font-family: inherit;
-    color: var(--primary-text-color);
+    color: var(--foreground-color-0);
     text-decoration: none;
 
     padding: 0.25rem 0.5rem;
@@ -80,7 +80,7 @@ button,
         right: 0;
         height: 0;
 
-        background-color: var(--accent-color);
+        background-color: var(--accent-color-0);
 
         transition: height 0.2s cubic-bezier(0.2, 0.8, 0.2, 0.8);
 
@@ -88,7 +88,7 @@ button,
     }
 
     &:hover:not(:disabled, .selected) {
-        background-color: var(--hover-background-color);
+        background-color: var(--background-color-5);
     }
 
     &.selected {
@@ -107,10 +107,10 @@ button,
     }
 
     &.accented {
-        background-color: var(--secondary-background-color);
+        background-color: var(--background-color-2);
 
         &:hover:not(:disabled) {
-            background-color: var(--accent-color);
+            background-color: var(--accent-color-0);
         }
     }
 }
@@ -124,13 +124,13 @@ label {
 input {
     font-size: 1rem;
     font-family: inherit;
-    background-color: var(--primary-background-color);
-    color: var(--primary-text-color);
+    background-color: var(--background-color-1);
+    color: var(--foreground-color-0);
 
     padding: 0.25rem 0.5rem;
     box-sizing: border-box;
 
-    border: 1px solid var(--primary-border-color);
+    border: 1px solid var(--border-color-0);
     border-radius: 0.25rem;
 
     &:disabled {

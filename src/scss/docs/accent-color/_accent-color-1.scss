@@ -1,0 +1,24 @@
+// button hover
+
+.docs-grille-gm3.docos.docs-gm .jfk-button.jfk-button-action.jfk-button-hover,
+.docs-grille-gm3.docos
+    .jfk-button.jfk-button-action.jfk-button-focused.jfk-button-active,
+.docs-grille-gm3.docos.docs-gm .jfk-button.jfk-button-action.jfk-button-focused,
+.docs-grille-gm3.docos.docs-gm
+    .jfk-button.jfk-button-action.jfk-button-focused.jfk-button-hover,
+.docs-gm3-filled-button.docs-gm3-button-hover,
+.docsAiTextGeneratorBubbleContainer-button.docs-material-menu-button-flat-default-hover,
+.docsAiTextGeneratorBubbleContainer-button.jfk-button-hover,
+.docsAiTextGeneratorBubbleContainer-button.docs-material-menu-button-flat-default-active,
+.docsAiTextGeneratorBubbleContainer-button.jfk-button.jfk-button-active,
+.docsAiTextGeneratorBubbleContainer-button.jfk-button.jfk-button-checked,
+.docsAiTextGeneratorBubbleContainer-button:focus,
+.jfk-button-action:active,
+.docs-link-bubble-card-component.docs-link-bubble-sidekick-prompt-button-card-component:hover {
+    background: var(--accent-color-1);
+}
+
+.jfk-button-action.jfk-button-hover,
+.jfk-button-action:active {
+    border-color: var(--accent-color-1);
+}
