@@ -133,24 +133,24 @@
 
                 color: var(--button-text-color);
 
-                background-color: var(--border-color-0);
+                background-color: var(--accent-color-0);
                 border: none;
 
                 cursor: pointer;
 
                 svg {
-                    fill: var(--background-color-1);
+                    fill: var(--foreground-color-2);
                 }
 
                 &:hover {
-                    background-color: var(--accent-hover-color, #595959);
+                    background-color: var(--accent-color-1, #595959);
                 }
             }
         }
     }
 
     a {
-        color: var(--border-color-0);
+        color: var(--accent-color-5);
         text-decoration: underline;
     }
 }

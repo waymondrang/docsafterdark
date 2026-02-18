@@ -156,13 +156,13 @@
 .docs-material #docs-script-button-bar .jfk-button.jfk-button-active,
 .docs-material #docs-script-button-bar .jfk-button.jfk-button-checked,
 .appsElementsSidekickUserMessageBubble,
-.javascriptMaterialdesignGm3WizCardFilled-card,
 .docsAiTextGeneratorBubbleTitleEditable
     .docsAiTextGeneratorBubbleTitleText:hover,
 .docsAiTextGeneratorBubbleTitleEditing .docsAiTextGeneratorBubbleTitleText,
 .inlineFabBubbleContainer:not(.aiFabEnabled):active,
 .inlineFabBubbleContainer:not(.aiFabEnabled):focus,
-.inlineFabBubbleContainer:not(.aiFabEnabled):hover {
+.inlineFabBubbleContainer:not(.aiFabEnabled):hover,
+.javascriptMaterialdesignGm3WizListShared-list-item--selected {
     background-color: var(--background-color-3);
 }
 

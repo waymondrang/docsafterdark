@@ -28,17 +28,13 @@ body.docs-hub,
 .docs-body-pageless
     .navigation-widget-floating-navigation-button.navigation-widget,
 .left-sidebar-container.navigation-widget-in-pageless-format,
-.DocsSidebarComponentsSelectedTile,
 .docs-grille-gm3 #docs-omnibox-toolbar .docs-omnibox-input,
 .docs-ai-text-generator-bubble-usecase-menu-refine-ux-v2-enabled.docs-ai-text-generator-bubble-usecase-menu.goog-menu
     .docs-ai-text-generator-bubble-free-form-input-textarea:focus,
 .docsAiTextGeneratorBubbleContainer.docsAiTextGeneratorBubbleContainer-refine-ux-v2-enabled.docsAiTextGeneratorBubbleContainer-show-preview
-    .docs-ai-text-generator-bubble-free-form-input-textarea:focus {
+    .docs-ai-text-generator-bubble-free-form-input-textarea:focus,
+textarea {
     background: var(--background-color-0);
-}
-
-.kix-appview-editor[style*="background-color: rgb(249, 251, 253);"] {
-    background: var(--background-color-0) !important;
 }
 
 body,
@@ -46,7 +42,15 @@ body,
 .docs-ruler-background-inner,
 #kix-vertical-ruler::before,
 .javascriptMaterialdesignGm3WizElevationElevationOverlay,
-.docs-omnibox-autocomplete .ac-renderer {
+.docs-omnibox-autocomplete .ac-renderer,
+.javascriptMaterialdesignGm3WizListShared-list-item,
+.fontsListCssSelectedFontsListItem,
+.fontsListCssNoFontsFoundContainer,
+.fontsListCssLastSelectedFontsListItem,
+.appsElementsSidekickCard,
+.appsElementsPromptBoxRoot,
+.docsDictionarySidebarInputContainer,
+.docs-search-bar {
     background-color: var(--background-color-0);
 }
 
@@ -56,7 +60,8 @@ body,
 .docs-body-pageless
     #kix-horizontal-ruler-container
     .docs-ruler-background-inner,
-.docs-body-pageless .docs-vertical-ruler {
+.docs-body-pageless .docs-vertical-ruler,
+.kix-appview-editor {
     background-color: var(--background-color-0) !important;
 }
 

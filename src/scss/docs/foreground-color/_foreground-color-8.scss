@@ -9,7 +9,9 @@
 input::placeholder,
 textarea::placeholder,
 .outline-refresh.navigation-widget-unified-styling
-    .navigation-widget-empty-content {
+    .navigation-widget-empty-content,
+.label-input-label::placeholder,
+.docs-feedbackmenu-troubleshoot-item {
     color: var(--foreground-color-8);
 }
 

@@ -49,3 +49,24 @@
     // gm3 radio
     --gm3-radio-unselected-icon-color: var(--border-color-0);
 }
+
+.javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--outlined:not(
+        .javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--disabled
+    ).javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--focused {
+    --gm3-notched-outline-border-color: var(--background-color-0);
+}
+
+.javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--outlined:not(
+    .javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--disabled
+),
+.javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--outlined:not(
+        .javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--disabled
+    ):not(
+        .javascriptMaterialdesignGm3WizTextFieldOutlined-text-field--focused
+    ):hover {
+    --gm3-notched-outline-border-color: transparent;
+}
+
+.docs-bubble.appsElementsLinkPreview {
+    --ae-link-preview-thumbnail-border-color: var(--border-color-0);
+}

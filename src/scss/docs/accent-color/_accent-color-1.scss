@@ -13,7 +13,8 @@
 .docsAiTextGeneratorBubbleContainer-button.jfk-button.jfk-button-active,
 .docsAiTextGeneratorBubbleContainer-button.jfk-button.jfk-button-checked,
 .docsAiTextGeneratorBubbleContainer-button:focus,
-.jfk-button-action:active {
+.jfk-button-action:active,
+.docs-link-bubble-card-component.docs-link-bubble-sidekick-prompt-button-card-component:hover {
     background: var(--accent-color-1);
 }
 

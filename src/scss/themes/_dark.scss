@@ -1,18 +1,4 @@
 html.DocsAfterDark_dark {
-    // .docs-material .docs-icon-img::before,
-    // .docs-material .docs-icon-img,
-    // .ita-cp-lens,
-    // .ita-cp-whole-pad .modal-dialog-title-close::after,
-    // .docs-dialog .modal-dialog-title-close::after,
-    // .unifiedPreviewBubbleContent canvas,
-    // .docs-ml-img::before,
-    // .kix-equation-toolbar-icon,
-    // .kix-equation-toolbar-palette-item {
-    //     &:not(.docs-icon-warning-red40-20x20, .docs-icon-info-blue800) {
-    //         filter: invert(1);
-    //     }
-    // }
-
     .kix-equation-toolbar-icon,
     .kix-equation-toolbar-palette-item {
         filter: invert(1) hue-rotate(180deg);
@@ -29,7 +15,10 @@ html.DocsAfterDark_dark {
     .goog-menuitem-checkbox,
     .docs-grille-gm3
         #docs-omnibox-toolbar.assisted-actions
-        .docs-omnibox-row-icon {
+        .docs-omnibox-row-icon,
+    .ita-cp-lens,
+    .ita-cp-whole-pad .modal-dialog-title-close:after,
+    .ita-cp-clear-img {
         filter: invert(1) grayscale(1);
     }
 
@@ -38,49 +27,6 @@ html.DocsAfterDark_dark {
     .docs-material .docs-icon-add-20 {
         filter: none;
     }
-
-    // .apps-share-sprite,
-    // .docs-grille-gm3
-    //     #docs-align-palette
-    //     .goog-toolbar-button-checked
-    //     .docs-icon-img,
-    // .docs-grille-gm3
-    //     .docs-main-toolbars
-    //     .goog-toolbar-button-checked
-    //     .docs-icon-img,
-    // .docs-grille-gm3
-    //     .docs-main-toolbars
-    //     .goog-toolbar-button.goog-toolbar-button-checked
-    //     .docs-icon-img,
-    // .docs-grille-gm3.docs-gm
-    //     .clean-palette
-    //     .goog-palette-cell-selected
-    //     .docs-icon-img,
-    // .docs-grille-gm3.docs-gm
-    //     .trix-palette
-    //     .goog-palette-cell-selected
-    //     .docs-icon-img,
-    // .docs-material .docs-icon-imgm .baseCopyDocDialogUtilSvgIcon {
-    //     filter: invert(1) grayscale(1);
-    // }
-
-    // .ita-kd-img,
-    // .app-switcher-button-icon-container[style*="background-image: url(https://fonts.gstatic.com/s/i/googlematerialicons/add/v21/black-24dp/1x/gm_add_black_24dp.png)"],
-    // .docs-revisions-icon-img:before {
-    //     filter: invert(1) brightness(0.6);
-    // }
-
-    // .docs-grille-gm3 .docs-material .docs-icon-img,
-    // .docs-icons-cleanup .docs-material .docs-icon-img,
-    // .docs-grille-gm3 .docs-material .docs-icon-img::before,
-    // .docs-gm
-    //     .docs-material.goog-menu
-    //     .goog-menuitem.goog-option-selected
-    //     .goog-menuitem-checkbox {
-    //     &:not(.docs-icon-info-blue800) {
-    //         filter: brightness(2.6) grayscale(1);
-    //     }
-    // }
 
     // #61
     .kix-appview-editor.kix-format-painter-mode,

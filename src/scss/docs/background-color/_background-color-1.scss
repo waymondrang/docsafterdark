@@ -48,7 +48,8 @@
 .docs-grille-gm3 .docs-chat-message-tooltip-container,
 .kix-header-footer-bubble.docs-bubble,
 .docs-gm .modal-dialog .jfk-button-standard.jfk-button-disabled, .docs-gm .modal-dialog button[disabled],
-.docsAiTextGeneratorBubbleContainer.docsAiTextGeneratorBubbleContainer-refine-ux-v2-enabled:not(.docsAiTextGeneratorBubbleContainer-button-first-open) .docs-bubble-material-body.docsAiTextGeneratorBubbleContainer-body {
+.docsAiTextGeneratorBubbleContainer.docsAiTextGeneratorBubbleContainer-refine-ux-v2-enabled:not(.docsAiTextGeneratorBubbleContainer-button-first-open) .docs-bubble-material-body.docsAiTextGeneratorBubbleContainer-body,
+.ita-cp-hwt {
     background: var(--background-color-1);
 }
 
@@ -65,7 +66,6 @@
 .docs-alt-text-tile-advanced-options-container-expanded,
 .goog-char-picker-hovercard,
 .javascriptMaterialdesignGm3WizIconButtonOutlined-icon-button--on,
-.docs-omnibox-autocomplete .ac-renderer,
 .docs-omnibox-autocomplete .ac-active .docs-omnibox-fallback-divider,
 .appsElementsGenerativeAiChipRoot,
 .apps-shortcutshelpcontentimpl-search,
@@ -98,13 +98,14 @@
 .docs-material.docs-presence-plus-widget-overflow-menu
     .docs-presence-plus-collab-widget-color-block,
 .miniChapterSwitcherChapterList.goog-menu.goog-menu-vertical.miniChapterSwitcherChapterListViewContainer,
-.appsElementsPromptBoxRoot,
 .javascriptMaterialdesignGm3WizDatatable-data-table__row,
-.appsElementsSidekickCard,
-.appsElementsSidekickFooter,
-.javascriptMaterialdesignGm3WizListShared-list-item,
 .javascriptMaterialdesignGm3WizMenu-menu,
-.javascriptMaterialdesignGm3WizMenuSurface-menu-surface {
+.javascriptMaterialdesignGm3WizMenuSurface-menu-surface,
+.javascriptMaterialdesignGm3WizDialog-dialog--fullscreen
+    .javascriptMaterialdesignGm3WizDialog-dialog__surface,
+.javascriptMaterialdesignGm3WizDialog-dialog--fullscreen
+    .javascriptMaterialdesignGm3WizDialog-dialog__header,
+.javascriptMaterialdesignGm3WizCardFilled-card {
     background-color: var(--background-color-1);
 }
 

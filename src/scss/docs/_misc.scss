@@ -43,6 +43,16 @@ input,
     );
 }
 
+.docsAiBubbleLoadingViewShimmerPlaceholderAnimated {
+    background: linear-gradient(
+        135deg,
+        var(--background-color-2),
+        var(--background-color-4),
+        var(--background-color-2),
+        var(--background-color-4)
+    );
+}
+
 //////////////////////
 //  NONE BACKGROUND //
 //////////////////////

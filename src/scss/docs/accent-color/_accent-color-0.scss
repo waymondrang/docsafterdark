@@ -45,7 +45,9 @@ span.docs-material-gm-checkbox-checked.docs-material-gm-checkbox-focused,
     .docs-tabbar-tab.docs-tabbar-tab-selected
     .docs-tabbar-tablabel::after,
 .docsAiTextGeneratorBubbleContainer-button,
-.docs-gm3-tonal-button {
+.docs-gm3-tonal-button,
+.docs-link-bubble-card-component.docs-link-bubble-sidekick-prompt-button-card-component,
+.docs-link-bubble-card-component.docs-link-bubble-sidekick-prompt-button-card-component:focus {
     background: var(--accent-color-0);
 }
 
