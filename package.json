@@ -1,6 +1,6 @@
 {
     "name": "docsafterdark",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "description": "Beyond dark mode for Google Docs",
     "type": "module",
     "devDependencies": {
