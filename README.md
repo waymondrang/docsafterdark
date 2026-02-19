@@ -1,7 +1,7 @@
 # DocsAfterDark
 
 > [!IMPORTANT]
-> Google Docs's recent updates have been breaking several dark mode elements, including the menus. These issues have been addressed in the latest update, [v2.0.2](https://github.com/waymondrang/docsafterdark/releases/tag/v2.0.2), which is currently under review for both Chrome and Firefox.
+> Google Docs's recent updates have been breaking several dark mode elements, including the menus. These issues have been addressed in the latest update, [v2.0.2](https://github.com/waymondrang/docsafterdark/releases/tag/v2.0.2), which is currently under review for both Chrome and Firefox. For now, please set the extension to "light" or "off" mode to get notified when DocsAfterDark is updated!
 
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/pihphjfnfjmdbhakhjifipfdgbpenobg?color=%23262626%20)](https://chrome.google.com/webstore/detail/docsafterdark/pihphjfnfjmdbhakhjifipfdgbpenobg) [![Mozilla Add-on](https://img.shields.io/amo/v/docsafterdark?color=%23262626%20)](https://addons.mozilla.org/en-US/firefox/addon/docsafterdark/)
 
