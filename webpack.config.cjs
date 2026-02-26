@@ -1,23 +1,9 @@
 const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const webpack = require("webpack");
-const { execSync } = require("child_process");
 const fs = require("fs");
 
 module.exports = (env, argv) => {
-    // commitHash will fallback to 'unknown' when missing git or git history
-    let commitHash = "";
-    try {
-        commitHash = execSync("git rev-parse HEAD", {
-            encoding: "utf8",
-        }).trim();
-    } catch (error) {
-        commitHash = "unknown";
-        console.warn(
-            "git commit not available, using 'unknown' as commit hash. do not use this version in production!"
-        );
-    }
-
     const packageJSON = JSON.parse(fs.readFileSync("package.json", "utf8"));
 
     return {
@@ -46,8 +32,6 @@ module.exports = (env, argv) => {
             new webpack.DefinePlugin({
                 // See: https://webpack.js.org/configuration/mode/
                 __IS_PRODUCTION__: JSON.stringify(argv.mode === "production"),
-                __BUILD_DATE__: JSON.stringify(new Date().toISOString()),
-                __BUILD_COMMIT__: JSON.stringify(commitHash),
             }),
             new CopyWebpackPlugin({
                 patterns: [
