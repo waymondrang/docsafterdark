@@ -22,8 +22,8 @@ const links = {
 
 const documentBackgroundStyles: Record<DocumentBackground, string> = {
     default: "#ffffff",
-    shade: "var(--secondary-background-color)",
-    dark: "var(--root-background-color)",
+    shade: "var(--background-color-1)",
+    dark: "var(--background-color-0)",
     black: "#000000",
     custom: "",
 };
@@ -70,7 +70,7 @@ const documentInvert = {
 };
 
 const documentBorder = {
-    border: "1px solid var(--primary-border-color)",
+    border: "1px solid var(--border-color-0)",
     off: "none",
 };
 

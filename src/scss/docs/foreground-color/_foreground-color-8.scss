@@ -1,0 +1,26 @@
+.docs-gm .modal-dialog .jfk-button-standard.jfk-button-disabled,
+.docs-gm .modal-dialog button[disabled],
+.docs-gm .docs-material-bubble .jfk-button-action.jfk-button-disabled,
+.docs-gm .modal-dialog .goog-buttonset-action[disabled],
+.docs-gm .modal-dialog .jfk-button-action.jfk-button-disabled,
+.docsAiTextGeneratorBubbleContainer
+    .kix-ai-text-generator-preview-view-disclaimer-text,
+.appsElementsSidekickFeedDisclaimer,
+input::placeholder,
+textarea::placeholder,
+.outline-refresh.navigation-widget-unified-styling
+    .navigation-widget-empty-content,
+.label-input-label::placeholder,
+.docs-feedbackmenu-troubleshoot-item {
+    color: var(--foreground-color-8);
+}
+
+.docs-gm .goog-menuitem-disabled,
+.docs-gm .goog-menuitem-disabled .goog-menuitem-content,
+.goog-menuitem-disabled .goog-menuitem-accel,
+.goog-menuitem-disabled .goog-menuitem-content,
+.docs-gm .goog-toolbar-button-disabled,
+.docs-gm .goog-toolbar-menu-button-disabled,
+.docs-gm .trix-palette .goog-palette-cell-disabled {
+    color: var(--foreground-color-8) !important;
+}

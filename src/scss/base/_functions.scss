@@ -1,0 +1,68 @@
+@use "sass:color";
+@use "sass:math";
+
+@function blend-colors($color1, $color2, $percentage) {
+    $weight: math.div($percentage, 100%);
+
+    @return color.mix($color2, $color1, $weight * 100%);
+}
+
+@mixin generate-color-properties(
+    $prefix,
+    $color-start,
+    $color-end,
+    $steps,
+    $offset: 0
+) {
+    @for $i from 0 through $steps - 1 {
+        $percentage: math.div($i, $steps - 1) * 100%;
+        $color: blend-colors($color-start, $color-end, $percentage);
+
+        --#{$prefix}-#{$i + $offset}: #{$color};
+    }
+}
+
+@mixin generate-color-properties-alpha(
+    $prefix,
+    $color-start,
+    $color-end,
+    $alpha-start,
+    $alpha-end,
+    $steps,
+    $offset: 0
+) {
+    @for $i from 0 through $steps - 1 {
+        $percentage: math.div($i, $steps - 1);
+        $color: blend-colors($color-start, $color-end, $percentage * 100%);
+        $alpha: $alpha-start + ($alpha-end - $alpha-start) * $percentage;
+
+        --#{$prefix}-#{$i + $offset}: #{color.change($color, $alpha: $alpha)};
+    }
+}
+
+/* stylelint-disable scss/operator-no-newline-after */
+@mixin generate-hsl(
+    $prefix,
+    $hue,
+    $saturation-start,
+    $saturation-end,
+    $lightness-start,
+    $lightness-end,
+    $steps,
+    $offset: 0
+) {
+    @for $i from 0 through $steps - 1 {
+        $percentage: math.div($i, $steps - 1);
+        $saturation: $saturation-start +
+            ($saturation-end - $saturation-start) *
+            $percentage;
+        $lightness: $lightness-start +
+            ($lightness-end - $lightness-start) *
+            $percentage;
+
+        --#{$prefix}-#{$i + $offset}: hsl(
+            #{$hue} #{$saturation}% #{$lightness}%
+        );
+    }
+}
+/* stylelint-enable scss/operator-no-newline-after */

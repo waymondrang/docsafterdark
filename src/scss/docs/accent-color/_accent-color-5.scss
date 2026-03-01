@@ -1,0 +1,35 @@
+// for transparent buttons, text
+
+.outlines-widget
+    .outlines-widget-chaptered
+    .location-indicator-highlight.navigation-item
+    [class*="navigation-item-level-"],
+.outlines-widget
+    .outlines-widget-chaptered
+    .location-indicator-highlight.navigation-item
+    [class*="navigation-item-level-"].goog-button-hover,
+.outline-refresh.navigation-widget-unified-styling
+    .location-indicator-highlight.navigation-item.goog-button-hover,
+.outline-refresh.navigation-widget-unified-styling
+    .location-indicator-highlight.navigation-item.goog-button-hover
+    .navigation-item-level-0,
+a:link,
+.modal-dialog a,
+.docs-gm .modal-dialog .jfk-button-standard,
+.docs-gm .modal-dialog button,
+.docs-grille-gm3.docos.docs-gm.docos-comments-pe
+    .docos-input-cancel.jfk-button-standard.jfk-button,
+.docos-streampane-tabbar
+    .docs-tabbar-tab.docs-tabbar-tab-selected
+    .docs-tabbar-tablabel,
+.docos-comments-pe .docos-replyview-reply-count,
+.docs-proofread-sidebar-filter-selectall-menuitem .goog-menuitem-content,
+.docsAiTextGeneratorBubbleContainer-refine-button-text {
+    color: var(--accent-color-5);
+}
+
+.docs-feedbackmenu-troubleshoot-item span[style*="color: rgb(16, 115, 232)"],
+.docs-bubble a,
+.docs-bubble-link {
+    color: var(--accent-color-5) !important;
+}

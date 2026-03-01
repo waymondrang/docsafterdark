@@ -10,5 +10,6 @@ export default {
         "comment-empty-line-before": null,
         "custom-property-pattern": null, // consider renaming css properties
         // to kebab-case
+        "scss/dollar-variable-empty-line-before": null,
     },
 };

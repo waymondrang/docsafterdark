@@ -17,7 +17,7 @@
     },
     "web_accessible_resources": [
         {
-            "resources": ["docs.bundle.css"],
+            "resources": ["inject.bundle.css"],
             "matches": ["*://docs.google.com/*"]
         }
     ],

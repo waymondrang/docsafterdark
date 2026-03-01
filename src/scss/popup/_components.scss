@@ -41,13 +41,13 @@ footer {
 
     padding: 0.625rem 1rem;
 
-    background-color: var(--root-background-color);
+    background-color: var(--background-color-0);
 
-    border-top: 1px solid var(--primary-border-color);
+    border-top: 1px solid var(--border-color-0);
 
     #version {
         font-weight: 500;
-        color: var(--tertiary-text-color);
+        color: var(--foreground-color-2);
 
         margin: 0;
     }
@@ -55,7 +55,7 @@ footer {
 
 hr {
     border: 0;
-    border-top: 1px solid var(--primary-border-color);
+    border-top: 1px solid var(--border-color-0);
     margin: 0.5rem 0;
 }
 
@@ -77,14 +77,14 @@ hr {
         flex-direction: row;
         align-items: start;
 
-        color: var(--primary-text-color);
+        color: var(--foreground-color-0);
         font-size: 1rem;
         font-weight: 400;
 
         padding: 0.5rem;
 
-        background-color: var(--primary-background-color);
-        border: 1px solid var(--primary-border-color);
+        background-color: var(--background-color-1);
+        border: 1px solid var(--border-color-0);
         border-radius: 0.5rem;
 
         box-shadow:
@@ -106,7 +106,7 @@ hr {
             margin-right: 0.5rem;
 
             svg {
-                fill: var(--accent-color);
+                fill: var(--accent-color-0);
             }
         }
     }
@@ -146,7 +146,7 @@ hr {
         .categoryContent {
             padding-left: 1rem;
 
-            border-left: 0.25rem solid var(--primary-border-color);
+            border-left: 0.25rem solid var(--border-color-0);
         }
 
         &.expanded {
@@ -186,7 +186,7 @@ hr {
     margin-bottom: 1rem;
 
     .sectionTitle {
-        color: var(--tertiary-text-color);
+        color: var(--foreground-color-2);
 
         margin: 0;
         margin-bottom: 0.5rem;
@@ -206,7 +206,7 @@ hr {
     width: fit-content;
     max-width: 100%;
 
-    border: 1px solid var(--primary-border-color);
+    border: 1px solid var(--border-color-0);
     border-radius: 0.25rem;
 
     overflow: hidden;
@@ -215,7 +215,7 @@ hr {
 
     button {
         &:not(.selected) {
-            color: var(--tertiary-text-color);
+            color: var(--foreground-color-2);
         }
     }
 
@@ -246,14 +246,14 @@ hr {
 
     overflow: hidden;
 
-    color: var(--primary-text-color);
+    color: var(--foreground-color-0);
 
     cursor: pointer;
     transition: opacity 0.75s cubic-bezier(0, 1, 0, 1);
 
     &:not(.disabled):hover {
         .checkbox {
-            background-color: var(--tertiary-background-color);
+            background-color: var(--background-color-2);
         }
     }
 
@@ -265,7 +265,7 @@ hr {
 
         border-radius: 0.5rem;
 
-        background-color: var(--secondary-background-color);
+        background-color: var(--background-color-2);
 
         transition: background-color 0.1s ease-out;
 
@@ -281,7 +281,7 @@ hr {
             height: 0.6rem;
             width: 0.3rem;
 
-            border: solid var(--primary-text-color);
+            border: solid var(--foreground-color-0);
             border-width: 0 3px 3px 0;
 
             transform: rotate(45deg);
@@ -302,7 +302,7 @@ hr {
 
         &:checked {
             & + .checkbox {
-                background-color: var(--accent-color);
+                background-color: var(--accent-color-0);
 
                 &::after {
                     top: 0.225rem;

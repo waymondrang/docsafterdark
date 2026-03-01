@@ -1,0 +1,115 @@
+// focused, active
+
+.chapter-item-label-and-buttons-container-selected
+    .chapter-overflow-menu-button:hover,
+.chapter-item-label-and-buttons-container-selected
+    .chapterItemArrowContainer:hover,
+.docs-grille-gm3 .docs-menubar .goog-control:hover:active,
+.docs-grille-gm3.docs-menubar .goog-control-active,
+.docs-gm .goog-menuitem-active:hover:active,
+.chapter-overflow-menu-button:hover,
+.chapterItemArrowContainer:hover,
+.miniChapterSwitcherCore
+    .docs-material-gm-select-active
+    .docs-material-gm-select-outer-box,
+.miniChapterSwitcherCore
+    .docs-material-gm-select-active
+    .miniChapterSwitcherChapterIcon,
+.miniChapterSwitcherCore
+    .docs-material-gm-select-active
+    .miniChapterSwitcherNavigationEntryPointIcon,
+.miniChapterSwitcherCore
+    .docs-material-gm-select-active.docs-material-gm-select-open
+    .docs-material-gm-select-outer-box,
+.miniChapterSwitcherCore
+    .docs-material-gm-select-active.docs-material-gm-select-open
+    .miniChapterSwitcherChapterIcon,
+.miniChapterSwitcherCore
+    .docs-material-gm-select-active.docs-material-gm-select-open
+    .miniChapterSwitcherNavigationEntryPointIcon,
+.docs-floating-navigation-button-active
+    .docs-floating-navigation-button-outer-box,
+.docs-floating-navigation-button-focused
+    .docs-floating-navigation-button-outer-box,
+.navigation-widget-hat-close.goog-flat-button-active
+    .navigation-widget-hat-close-button-outer-box,
+.navigation-widget-hat-close.goog-flat-button-focused
+    .navigation-widget-hat-close-button-outer-box,
+.docs-sidebar-gm-titlebar-icon-button:focus,
+.kix-spellcheck-with-explanation-bubble-option:focus,
+.docs-grille-gm3.docs-gm
+    #docs-toolbar-mode-switcher.goog-toolbar-menu-button-active.suggest-mode,
+.docs-grille-gm3.docs-gm
+    #docs-toolbar-mode-switcher.goog-toolbar-menu-button-focused.suggest-mode,
+.docs-grille-gm3.docs-gm
+    #docs-toolbar-mode-switcher.goog-toolbar-menu-button-open.suggest-mode,
+.docs-grille-gm3
+    #titlebar-mode-indicator-container
+    > .docs-material-menu-button-flat-primary-focused,
+.docs-grille-gm3
+    .titlebar-request-access-button.docs-material-button.docs-material-button-focused,
+.docs-grille-gm3
+    .docs-material
+    #docs-docos-commentsbutton.jfk-button.jfk-button-active,
+.docs-grille-gm3
+    .docs-material
+    #docs-docos-commentsbutton.jfk-button.jfk-button-checked,
+.docs-grille-gm3
+    .docs-material
+    #docs-docos-commentsbutton.jfk-button.jfk-button-focused,
+.docs-grille-gm3 .docs-material #docs-docos-commentsbutton:focus,
+.docs-grille-gm3 .docs-material .docs-appbar-circle-button.jfk-button-active,
+.docs-grille-gm3 .docs-material .docs-appbar-circle-button.jfk-button-checked,
+#docs-revisions-appbarbutton.jfk-button-focused,
+.chapter-item-label-and-buttons-container-selected
+    .chapter-overflow-menu-button:focus-within,
+.chapter-item-label-and-buttons-container-selected
+    .chapterItemArrowContainer:focus-within,
+.docs-grille-gm3
+    #docs-titlebar-share-client-button
+    .jfk-button.jfk-button-hover:focus,
+.docs-grille-gm3
+    #scb-quick-actions-menu-button.goog-flat-menu-button.goog-flat-menu-button-hover:focus,
+.docs-grille-gm3 #docs-titlebar-share-client-button .jfk-button:focus,
+.docs-grille-gm3 #scb-quick-actions-menu-button.goog-flat-menu-button:focus,
+.chapter-overflow-menu-button:focus-within,
+.chapterItemArrowContainer:focus-within,
+.superfab-button-text-selection-highlight {
+    background: var(--hover-color-1);
+}
+
+.docs-grille-gm3 #docs-star.docs-titlebar-badge:active,
+.docs-grille-gm3 .docs-titlebar-badge:active,
+.docs-grille-gm3 .docs-titlebar-badge:focus,
+.docs-grille-gm3
+    .goog-control-active
+    .docs-titlebar-badge
+    .docs-save-indicator-icon,
+.docs-grille-gm3
+    .goog-control-focused
+    .docs-titlebar-badge
+    .docs-save-indicator-icon,
+.docs-gm .kix-spell-bubble-option:focus,
+.goog-date-picker-nextMonth:focus,
+.goog-date-picker-previousMonth:focus,
+.app-switcher-button-focused .app-switcher-button-icon-background,
+.app-switcher-button-focused.app-switcher-button-hover
+    .app-switcher-button-icon-background,
+.companion-theme-light
+    .app-switcher-button-hover
+    .app-switcher-button-icon-background,
+.companion-theme-light
+    .app-switcher-button-open
+    .app-switcher-button-icon-background,
+.companion-theme-light
+    .app-switcher-button-selected.app-switcher-button-hover
+    .app-switcher-button-icon-background,
+.companion-collapser-button.app-switcher-button-checked.app-switcher-button-focused
+    .app-switcher-button-icon-background,
+.companion-theme-light
+    .companion-collapser-button.app-switcher-button-checked.app-switcher-button-focused
+    .app-switcher-button-icon-background,
+.imageGenerationStylePresetsMenu
+    .imageGenerationStylePresetsMenuItem.goog-menuitem-active:hover:active {
+    background-color: var(--hover-color-1);
+}

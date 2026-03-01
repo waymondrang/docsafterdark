@@ -1,0 +1,8 @@
+.docs-gm .modal-dialog .jfk-button-standard.jfk-button-hover,
+.docs-gm .modal-dialog button:hover,
+.docs-gm .modal-dialog .jfk-button-standard.jfk-button-hover.jfk-button-focused,
+.docs-gm .modal-dialog button:hover:focus,
+.docs-gm .modal-dialog .jfk-button-standard.jfk-button-focused,
+.docs-gm .modal-dialog button:focus {
+    border-color: var(--accent-color-2) !important;
+}
