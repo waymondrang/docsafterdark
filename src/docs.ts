@@ -110,6 +110,10 @@ class DocsAfterDark {
 
         registerStorageListener(this.handleStorageUpdate);
         registerMessageListener(this.handleMessageUpdate);
+
+        window
+            .matchMedia("(prefers-color-scheme: dark)")
+            .addEventListener("change", this.handleSystemThemeChange);
     }
 
     private raiseButton(raise: boolean) {
@@ -176,6 +180,12 @@ class DocsAfterDark {
             subtree: true,
         });
     }
+
+    private handleSystemThemeChange = () => {
+        if (this.extensionData.mode === ExtensionMode.Auto) {
+            this.updateExtension();
+        }
+    };
 
     private handleMessageUpdate: MessageListener = (message) => {
         Logger.debug("Update via message:", message);
@@ -348,6 +358,15 @@ class DocsAfterDark {
         this.updateButton();
     }
 
+    private resolveMode(): ExtensionMode {
+        if (this.extensionData.mode !== ExtensionMode.Auto) {
+            return this.extensionData.mode;
+        }
+        return window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? ExtensionMode.Dark
+            : ExtensionMode.Light;
+    }
+
     private updateMode(): boolean {
         this.resetMode();
 
@@ -361,13 +380,15 @@ class DocsAfterDark {
         addClassToHTML(enabledClass);
         insertStylesheet("docs.bundle.css", "stylesheet");
 
-        if (this.extensionData.mode === ExtensionMode.Dark) {
+        const effectiveMode = this.resolveMode();
+
+        if (effectiveMode === ExtensionMode.Dark) {
             this.updateDarkMode();
-        } else if (this.extensionData.mode === ExtensionMode.Light) {
+        } else if (effectiveMode === ExtensionMode.Light) {
             this.updateLightMode();
         } else {
             throw new Error(
-                "Unknown extension operation: " + this.extensionData.mode
+                "Unknown extension operation: " + effectiveMode
             );
         }
 
@@ -379,7 +400,15 @@ class DocsAfterDark {
     }
 
     private updateDocumentBackground() {
-        if (this.extensionData.doc_bg == DocumentBackground.Custom) {
+        let docBg = this.extensionData.doc_bg;
+        if (this.extensionData.mode === ExtensionMode.Auto) {
+            docBg =
+                this.resolveMode() === ExtensionMode.Dark
+                    ? DocumentBackground.Blend
+                    : DocumentBackground.Default;
+        }
+
+        if (docBg == DocumentBackground.Custom) {
             setStyleProperty(
                 "documentBackground",
                 this.extensionData.custom_bg ?? ""
@@ -387,18 +416,25 @@ class DocsAfterDark {
         } else {
             setStyleProperty(
                 "documentBackground",
-                documentBackgroundStyles[this.extensionData.doc_bg]
+                documentBackgroundStyles[docBg]
             );
         }
     }
 
     private updateDocumentInvert() {
-        if (!this.extensionData.invert_enabled) {
+        let invertEnabled = this.extensionData.invert_enabled;
+        let invertMode = this.extensionData.invert_mode;
+        if (this.extensionData.mode === ExtensionMode.Auto) {
+            invertEnabled = this.resolveMode() === ExtensionMode.Dark;
+            invertMode = defaultExtensionData.invert_mode;
+        }
+
+        if (!invertEnabled) {
             setStyleProperty("documentInvert", documentInvert.off);
             return;
         }
 
-        switch (this.extensionData.invert_mode) {
+        switch (invertMode) {
             case InvertMode.Gray:
                 setStyleProperty("documentInvert", documentInvert.grayscale);
                 break;
