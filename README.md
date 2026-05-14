@@ -1,8 +1,5 @@
 # DocsAfterDark
 
-> [!IMPORTANT]
-> Google Docs's recent updates have been breaking several dark mode elements, including the menus. These issues have been addressed in the latest update, [v2.0.2](https://github.com/waymondrang/docsafterdark/releases/tag/v2.0.2), which is live for Chrome but still under review for Firefox. Firefox users should set the extension to "light" or "off" mode to get notified when DocsAfterDark is updated!
-
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/pihphjfnfjmdbhakhjifipfdgbpenobg?color=%23262626%20)](https://chrome.google.com/webstore/detail/docsafterdark/pihphjfnfjmdbhakhjifipfdgbpenobg) [![Mozilla Add-on](https://img.shields.io/amo/v/docsafterdark?color=%23262626%20)](https://addons.mozilla.org/en-US/firefox/addon/docsafterdark/)
 
 A free and open-source browser extension for customizing the appearance of Google Docs.
@@ -74,7 +71,10 @@ Launches a temporary Firefox instance with the extension installed. The extensio
 npm run check
 ```
 
-This script is also run as a GitHub Action workflow. Pull requests must pass these checks before being merged.
+This is also run in the continuous integration GitHub Actions workflow.
+
+> [!IMPORTANT]
+> Pull requests must pass these checks before being merged!
 
 ### Building
 
@@ -84,9 +84,9 @@ This script is also run as a GitHub Action workflow. Pull requests must pass the
 npm run build
 ```
 
-This creates optimized bundles in `build/` and packages the extension as a `.zip` file in `release/`. The packaging process is handled by `package.ts` and reads the version from `src/manifest.json`.
+This calls `build.sh` which creates optimized bundles of CSS and JavaScript, then packages those files in a `.zip` file within `release/`.
 
-The version in `package.json` is copied to the extension's `manifest.json` when the extension is built.
+The version of the extension is set by the top level `package.json`, which is copied to the extension's `manifest.json` during the build process.
 
 ## Versions and tag names
 

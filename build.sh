@@ -2,6 +2,12 @@
 
 set -e
 
+# note: the build version is set by the version from manifest.json in the
+# $BUILD_DIR directory. this script reads the version after the webpack step,
+# during which the manifest's version is set using package.json's version.
+#
+# see: ./webpack.config.cjs
+
 BUILD_DIR="./build"
 RELEASE_DIR="./release"
 
