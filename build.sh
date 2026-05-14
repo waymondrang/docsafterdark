@@ -110,7 +110,9 @@ if [ ! -d "$RELEASE_DIR" ]; then
     print_info "created release directory: $RELEASE_DIR"
 fi
 
-# halt package if already exists
+# note: the build script will only warn you about an existing package with
+# the same version. it will remove it and overwrite it by default.
+
 TARGET_FILE="${RELEASE_DIR}/DocsAfterDark_${VERSION}.zip"
 if [ -f "$TARGET_FILE" ]; then
     print_warning "packaged version already exists: $TARGET_FILE"
@@ -119,7 +121,7 @@ if [ -f "$TARGET_FILE" ]; then
     rm -f "${TARGET_FILE}"
 fi
 
-# Create zip archive (excluding .DS_Store files)
+# create zip archive (exclude .ds_store files)
 (cd "${BUILD_DIR}" && zip --quiet --recurse-paths "../$TARGET_FILE" . --exclude "**/.DS_Store") || {
     print_error "failed to create zip archive"
     exit 1
