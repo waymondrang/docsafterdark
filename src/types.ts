@@ -87,6 +87,7 @@ type ExtensionData = {
     invert_mode: InvertMode;
 
     show_border: boolean;
+    disabled_documents: Array<string>;
 
     accent_color: AccentColorOptions;
     button_options: ButtonOptions;
@@ -125,7 +126,8 @@ type StorageListener = (
 
 interface MessagePayload {
     type: string;
-    color: AccentColorOptions;
+    color?: AccentColorOptions;
+    enabled?: boolean;
 }
 
 type MessageListener = (
@@ -143,11 +145,13 @@ interface ListenerFunctions<T> {
 interface QueryInfo {
     active?: boolean;
     currentWindow?: boolean;
+    lastFocusedWindow?: boolean;
 }
 
 interface Tab {
     active: boolean;
     id?: number;
+    url?: string;
 }
 
 interface CreateProperties {
