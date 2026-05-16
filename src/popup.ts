@@ -101,7 +101,7 @@ class toggleCategoryComponent {
 
 class ModeComponent extends StateSubscriber {
     private modeButtons = document.querySelectorAll(
-        "#modeDark, #modeLight, #modeOff"
+        "#modeDark, #modeLight, #modeAuto, #modeOff"
     ) as NodeListOf<HTMLButtonElement>;
 
     initialize() {
@@ -138,6 +138,9 @@ class ModeComponent extends StateSubscriber {
                             invert_enabled: false,
                         });
                         break;
+                    case "auto":
+                        this.state.setData({ mode: ExtensionMode.Auto });
+                        break;
                 }
             });
         });
@@ -151,7 +154,9 @@ class ModeComponent extends StateSubscriber {
                 (button.value == "off" && newData.mode == ExtensionMode.Off) ||
                 (button.value == "dark" &&
                     newData.mode == ExtensionMode.Dark) ||
-                (button.value == "light" && newData.mode == ExtensionMode.Light)
+                (button.value == "light" &&
+                    newData.mode == ExtensionMode.Light) ||
+                (button.value == "auto" && newData.mode == ExtensionMode.Auto)
             ) {
                 button.classList.add("selected");
             }
@@ -184,7 +189,10 @@ class DarkModeComponent extends StateSubscriber {
     update(newData: ExtensionData): void {
         this.resetAppearance();
 
-        if (newData.mode != ExtensionMode.Dark) {
+        if (
+            newData.mode != ExtensionMode.Dark &&
+            newData.mode != ExtensionMode.Auto
+        ) {
             this.section.classList.add("hidden");
         }
 
