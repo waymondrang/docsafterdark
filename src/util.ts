@@ -161,21 +161,8 @@ function removeMessageListener(listener: MessageListener) {
 }
 
 async function getExtensionData(): Promise<ExtensionData> {
-    let data = await getStorage<ExtensionData>(
-        "mode",
-        "dark_mode",
-        "light_mode",
-        "doc_bg",
-        "custom_bg",
-        "show_border",
-        "accent_color",
-        "button_options",
-        "invert_enabled",
-        "invert_mode",
-        "version",
-        // Deprecated
-        "invert"
-    );
+    // Get all storage values
+    let data = await getStorage<ExtensionData>();
 
     data = updateExtensionData(data);
 
