@@ -104,8 +104,6 @@ class ModeComponent extends StateSubscriber {
     ) as NodeListOf<HTMLButtonElement>;
 
     initialize() {
-        Logger.debug(this.modeButtons);
-
         this.modeButtons.forEach((button) => {
             button.addEventListener("click", (event) => {
                 // NOTE: Only include state management logic here, as the
@@ -553,6 +551,26 @@ class InvertComponent extends StateSubscriber {
     }
 }
 
+class ExperimentalCanvasComponent extends StateSubscriber {
+    private experimentalCanvasCheckbox = document.querySelector(
+        "#experimentalCanvas"
+    ) as HTMLInputElement;
+
+    initialize(): void {
+        this.experimentalCanvasCheckbox.addEventListener("click", () => {
+            this.state.setData({
+                use_experimental_canvas:
+                    this.experimentalCanvasCheckbox.checked,
+            });
+        });
+    }
+
+    update(newData: ExtensionData): void {
+        this.experimentalCanvasCheckbox.checked =
+            newData.use_experimental_canvas;
+    }
+}
+
 class VersionComponent {
     private versionElement = document.querySelector(
         "#version"
@@ -605,6 +623,8 @@ class Popup extends PopupState {
     private tipComponent: TipComponent = new TipComponent();
     private invertComponent: InvertComponent = new InvertComponent(this);
     private versionComponent: VersionComponent = new VersionComponent();
+    private experimentalCanvasComponent: ExperimentalCanvasComponent =
+        new ExperimentalCanvasComponent(this);
 
     private styleManager: StyleManager = new StyleManager(this);
     private linkManager: LinkManager = new LinkManager();
@@ -632,6 +652,7 @@ class Popup extends PopupState {
         this.styleManager.initialize();
         this.linkManager.initialize();
         this.advancedCategoryComponent.initialize();
+        this.experimentalCanvasComponent.initialize();
 
         this.updateSubscribers();
     }

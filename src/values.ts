@@ -103,6 +103,13 @@ const defaultExtensionData: ExtensionData = {
     version: {
         last_version: "",
     },
+
+    //////////////////
+    // EXPERIMENTAL //
+    //////////////////
+
+    // TODO: Remember to change in production!
+    use_experimental_canvas: true,
 };
 
 export {

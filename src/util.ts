@@ -117,11 +117,27 @@ function setStorage(update: Partial<ExtensionData>) {
 /**
  * Gets storage items with the given key(s)
  */
-function getStorage<T>(...keys: (keyof ExtensionData)[]): Promise<T> {
+function getStorage(
+    ...keys: (keyof ExtensionData)[]
+): Promise<Partial<ExtensionData>> {
     return new Promise((resolve, reject) => {
         browser_ns.storage.local.get(keys).then(
             (result) => {
-                resolve(result as T);
+                resolve(result as Partial<ExtensionData>);
+            },
+            () => reject(browser_ns.runtime.lastError)
+        );
+    });
+}
+
+/**
+ * Gets all storage items
+ */
+function getAllStorage(): Promise<ExtensionData> {
+    return new Promise((resolve, reject) => {
+        browser_ns.storage.local.get().then(
+            (result) => {
+                resolve(result as ExtensionData);
             },
             () => reject(browser_ns.runtime.lastError)
         );
@@ -161,13 +177,8 @@ function removeMessageListener(listener: MessageListener) {
 }
 
 async function getExtensionData(): Promise<ExtensionData> {
-    // Get all storage values
-    let data = await getStorage<ExtensionData>();
-
+    let data = await getAllStorage();
     data = updateExtensionData(data);
-
-    Logger.debug(data);
-
     return data;
 }
 
@@ -301,6 +312,7 @@ export {
     isVersionNewer,
     setStorage,
     getStorage,
+    getAllStorage,
     deleteStorage,
     registerStorageListener,
     hasStorageListener,
