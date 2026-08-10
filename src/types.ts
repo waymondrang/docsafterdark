@@ -93,7 +93,16 @@ type ExtensionData = {
 
     version: VersionInfo;
 
-    // Deprecated fields
+    //////////////////
+    // EXPERIMENTAL //
+    //////////////////
+
+    // Whether or not to use experimental canvas rendering
+    use_experimental_canvas: boolean;
+
+    ////////////////
+    // DEPRECATED //
+    ////////////////
 
     // NOTE: We need to keep the invert field because we want to keep user
     //       preferences when updating to future versions.
@@ -159,7 +168,7 @@ interface BrowserAPI {
     storage: {
         local: {
             set(data: Record<string, unknown>): Promise<void>;
-            get(keys: string | string[]): Promise<Record<string, unknown>>;
+            get(keys?: string | string[]): Promise<Record<string, unknown>>;
             remove(keys: string | string[]): Promise<void>;
         };
         onChanged: ListenerFunctions<StorageListener>;

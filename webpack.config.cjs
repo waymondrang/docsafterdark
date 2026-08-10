@@ -5,6 +5,7 @@ const fs = require("fs");
 
 module.exports = (env, argv) => {
     const packageJSON = JSON.parse(fs.readFileSync("package.json", "utf8"));
+    const isProduction = JSON.stringify(argv.mode === "production");
 
     return {
         mode: "production",
@@ -31,7 +32,11 @@ module.exports = (env, argv) => {
         plugins: [
             new webpack.DefinePlugin({
                 // See: https://webpack.js.org/configuration/mode/
-                __IS_PRODUCTION__: JSON.stringify(argv.mode === "production"),
+                __IS_PRODUCTION__: isProduction,
+
+                // Note: When passing string values, they should be wrapped in
+                //       quotes. i.e. 0.0.0 vs "0.0.0"
+                __VERSION__: JSON.stringify(packageJSON.version),
             }),
             new CopyWebpackPlugin({
                 patterns: [

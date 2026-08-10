@@ -24,10 +24,10 @@ import {
 import {
     addClassToHTML,
     getAssetURL,
-    getBrowserNamespace,
     getElement,
     getElementId,
     getExtensionData,
+    insertEphemeralScript,
     insertStylesheet,
     isElementVisible,
     isOnHomepage,
@@ -39,9 +39,6 @@ import {
     setStyleProperty,
 } from "./util";
 
-const browser_ns = getBrowserNamespace();
-const CURRENT_VERSION = browser_ns.runtime.getManifest().version;
-
 const REPLACEMENTS_PATH = "assets/replacements/";
 
 class DocsAfterDark {
@@ -52,50 +49,10 @@ class DocsAfterDark {
         Logger.info("Hello from DocsAfterDark!");
 
         const data = await getExtensionData();
+        this.extensionData = { ...this.extensionData, ...data };
 
-        // Update extensionData with saved data (or use default values)
-
-        if (data.mode !== undefined) {
-            this.extensionData.mode = data.mode;
-        }
-        if (data.dark_mode !== undefined) {
-            this.extensionData.dark_mode = data.dark_mode;
-        }
-        if (data.light_mode !== undefined) {
-            this.extensionData.light_mode = data.light_mode;
-        }
-
-        if (data.doc_bg !== undefined) {
-            this.extensionData.doc_bg = data.doc_bg;
-        }
-        if (data.custom_bg !== undefined) {
-            this.extensionData.custom_bg = data.custom_bg;
-        }
-
-        if (data.accent_color !== undefined) {
-            this.extensionData.accent_color = data.accent_color;
-        }
-
-        if (data.invert_enabled !== undefined) {
-            this.extensionData.invert_enabled = data.invert_enabled;
-        }
-
-        if (data.invert_mode !== undefined) {
-            this.extensionData.invert_mode = data.invert_mode;
-        }
-
-        if (data.button_options !== undefined) {
-            this.extensionData.button_options = data.button_options;
-        }
-
-        if (data.show_border !== undefined) {
-            this.extensionData.show_border = data.show_border;
-        }
-
-        // Uncomment to always show the update notification
-        if (data.version !== undefined) {
-            this.extensionData.version = data.version;
-        }
+        // DEBUG: Uncomment to always show the update notification
+        // this.extensionData.version = defaultExtensionData.version;
 
         Logger.debug(this.extensionData);
 
@@ -110,6 +67,19 @@ class DocsAfterDark {
 
         registerStorageListener(this.handleStorageUpdate);
         registerMessageListener(this.handleMessageUpdate);
+    }
+
+    private updateCanvas() {
+        if (this.extensionData.mode == ExtensionMode.Dark) {
+            insertEphemeralScript("canvas.bundle.js");
+        } else {
+            this.restoreCanvas();
+        }
+    }
+
+    private restoreCanvas() {
+        Logger.debug("Restoring canvas rendering functions");
+        // TODO: Create and run canvas restoration script
     }
 
     private raiseButton(raise: boolean) {
@@ -191,112 +161,16 @@ class DocsAfterDark {
     private handleStorageUpdate: StorageListener = (changes) => {
         Logger.debug("Update via storage:", changes);
 
-        //////////
-        // MODE //
-        //////////
+        // Hold updated keys and values in an object for easy updating
+        const updates: Partial<ExtensionData> = {};
 
-        // NOTE: Do not early stop if new mode is off because the state of the
-        //       extension should still be synced (other variables must be
-        //       updated).
-
-        if (changes.mode !== undefined && changes.mode.newValue !== undefined) {
-            this.extensionData.mode = changes.mode.newValue;
+        for (const [key, value] of Object.entries(changes)) {
+            if (value.newValue !== undefined) {
+                Object.assign(updates, { [key]: value.newValue });
+            }
         }
 
-        ///////////////////////
-        // DARK MODE VARIANT //
-        ///////////////////////
-
-        if (
-            changes.dark_mode !== undefined &&
-            changes.dark_mode.newValue !== undefined
-        ) {
-            this.extensionData.dark_mode = changes.dark_mode.newValue;
-        }
-
-        ////////////////////////
-        // LIGHT MODE VARIANT //
-        ////////////////////////
-
-        if (
-            changes.light_mode !== undefined &&
-            changes.light_mode.newValue !== undefined
-        ) {
-            this.extensionData.light_mode = changes.light_mode.newValue;
-        }
-
-        /////////////////////////
-        // DOCUMENT BACKGROUND //
-        /////////////////////////
-
-        if (
-            changes.doc_bg !== undefined &&
-            changes.doc_bg.newValue !== undefined
-        ) {
-            this.extensionData.doc_bg = changes.doc_bg.newValue;
-        }
-
-        ////////////////////////////////
-        // CUSTOM DOCUMENT BACKGROUND //
-        ////////////////////////////////
-
-        if (
-            changes.custom_bg !== undefined &&
-            changes.custom_bg.newValue !== undefined
-        ) {
-            this.extensionData.custom_bg = changes.custom_bg.newValue;
-        }
-
-        ////////////
-        // INVERT //
-        ////////////
-
-        if (
-            changes.invert_enabled !== undefined &&
-            changes.invert_enabled.newValue !== undefined
-        ) {
-            this.extensionData.invert_enabled = changes.invert_enabled.newValue;
-        }
-
-        if (
-            changes.invert_mode !== undefined &&
-            changes.invert_mode.newValue !== undefined
-        ) {
-            this.extensionData.invert_mode = changes.invert_mode.newValue;
-        }
-
-        //////////////////
-        // ACCENT COLOR //
-        //////////////////
-
-        if (
-            changes.accent_color !== undefined &&
-            changes.accent_color.newValue !== undefined
-        ) {
-            this.extensionData.accent_color = changes.accent_color.newValue;
-        }
-
-        ////////////
-        // BUTTON //
-        ////////////
-
-        if (
-            changes.button_options !== undefined &&
-            changes.button_options.newValue !== undefined
-        ) {
-            this.extensionData.button_options = changes.button_options.newValue;
-        }
-
-        ////////////
-        // BORDER //
-        ////////////
-
-        if (
-            changes.show_border !== undefined &&
-            changes.show_border.newValue !== undefined
-        ) {
-            this.extensionData.show_border = changes.show_border.newValue;
-        }
+        this.extensionData = { ...this.extensionData, ...updates };
 
         this.updateExtension();
     };
@@ -333,8 +207,9 @@ class DocsAfterDark {
     }
 
     private updateExtension() {
-        // Always update version, regardless of extension mode
-        this.updateVersion();
+        // Always update
+        this.updateVersion(); // Always show update notification
+        this.updateCanvas(); // Always update canvas rendering
 
         // Do not continue update if extension is off
         if (!this.updateMode()) {
@@ -513,13 +388,13 @@ class DocsAfterDark {
         } else {
             textElement.textContent =
                 "DocsAfterDark has been updated to version " +
-                CURRENT_VERSION +
+                __VERSION__ +
                 ". Read release notes on ";
         }
         messageElement.appendChild(textElement);
 
         const linkElement = document.createElement("a");
-        linkElement.href = links.release(CURRENT_VERSION); // Link to specific release via tag
+        linkElement.href = links.release(__VERSION__); // Link to specific release via tag
         linkElement.target = "_blank";
         linkElement.textContent = "GitHub";
 
@@ -574,10 +449,10 @@ class DocsAfterDark {
     }
 
     private updateVersion() {
-        if (this.extensionData.version.last_version != CURRENT_VERSION) {
-            Logger.info("Updated to version: " + CURRENT_VERSION);
+        if (this.extensionData.version.last_version != __VERSION__) {
+            Logger.info("Updated to version: " + __VERSION__);
             this.showUpdateNotification();
-            this.extensionData.version.last_version = CURRENT_VERSION;
+            this.extensionData.version.last_version = __VERSION__;
         }
     }
 
@@ -585,6 +460,7 @@ class DocsAfterDark {
         removeClassFromHTML(enabledClass);
         removeElement("stylesheet");
         removeElement("button");
+        this.restoreCanvas();
     }
 }
 
