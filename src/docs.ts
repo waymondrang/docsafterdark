@@ -24,7 +24,6 @@ import {
 import {
     addClassToHTML,
     getAssetURL,
-    getBrowserNamespace,
     getElement,
     getElementId,
     getExtensionData,
@@ -40,9 +39,6 @@ import {
     setStyleProperty,
 } from "./util";
 
-const browserNamespace = getBrowserNamespace();
-
-const CURRENT_VERSION = browserNamespace.runtime.getManifest().version;
 const REPLACEMENTS_PATH = "assets/replacements/";
 
 class DocsAfterDark {
@@ -171,7 +167,7 @@ class DocsAfterDark {
         for (const [key, value] of Object.entries(changes)) {
             if (value.newValue !== undefined) {
                 Object.assign(updates, { [key]: value.newValue });
-        }
+            }
         }
 
         this.extensionData = { ...this.extensionData, ...updates };
@@ -392,13 +388,13 @@ class DocsAfterDark {
         } else {
             textElement.textContent =
                 "DocsAfterDark has been updated to version " +
-                CURRENT_VERSION +
+                __VERSION__ +
                 ". Read release notes on ";
         }
         messageElement.appendChild(textElement);
 
         const linkElement = document.createElement("a");
-        linkElement.href = links.release(CURRENT_VERSION); // Link to specific release via tag
+        linkElement.href = links.release(__VERSION__); // Link to specific release via tag
         linkElement.target = "_blank";
         linkElement.textContent = "GitHub";
 
@@ -453,10 +449,10 @@ class DocsAfterDark {
     }
 
     private updateVersion() {
-        if (this.extensionData.version.last_version != CURRENT_VERSION) {
-            Logger.info("Updated to version: " + CURRENT_VERSION);
+        if (this.extensionData.version.last_version != __VERSION__) {
+            Logger.info("Updated to version: " + __VERSION__);
             this.showUpdateNotification();
-            this.extensionData.version.last_version = CURRENT_VERSION;
+            this.extensionData.version.last_version = __VERSION__;
         }
     }
 
