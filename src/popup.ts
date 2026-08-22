@@ -11,6 +11,8 @@ import {
     getBrowserNamespace,
     getExtensionData,
     messageTabs,
+    registerColorSchemeListener,
+    resolveExtensionMode,
     setStorage,
     setStyleProperty,
 } from "./util";
@@ -101,7 +103,7 @@ class toggleCategoryComponent {
 
 class ModeComponent extends StateSubscriber {
     private modeButtons = document.querySelectorAll(
-        "#modeDark, #modeLight, #modeOff"
+        "#modeDark, #modeLight, #modeAuto, #modeOff"
     ) as NodeListOf<HTMLButtonElement>;
 
     initialize() {
@@ -138,6 +140,13 @@ class ModeComponent extends StateSubscriber {
                             invert_enabled: false,
                         });
                         break;
+                    case "auto":
+                        // NOTE: Only the mode is written. Invert is derived
+                        //       from the resolved theme, and the document
+                        //       background is left to the user, so there is
+                        //       nothing else to seed here.
+                        this.state.setData({ mode: ExtensionMode.Auto });
+                        break;
                 }
             });
         });
@@ -151,7 +160,9 @@ class ModeComponent extends StateSubscriber {
                 (button.value == "off" && newData.mode == ExtensionMode.Off) ||
                 (button.value == "dark" &&
                     newData.mode == ExtensionMode.Dark) ||
-                (button.value == "light" && newData.mode == ExtensionMode.Light)
+                (button.value == "light" &&
+                    newData.mode == ExtensionMode.Light) ||
+                (button.value == "auto" && newData.mode == ExtensionMode.Auto)
             ) {
                 button.classList.add("selected");
             }
@@ -184,7 +195,9 @@ class DarkModeComponent extends StateSubscriber {
     update(newData: ExtensionData): void {
         this.resetAppearance();
 
-        if (newData.mode != ExtensionMode.Dark) {
+        // Theme variants are dark-only, so in auto mode this section is only
+        // relevant while the browser prefers a dark color scheme.
+        if (resolveExtensionMode(newData.mode) != ExtensionMode.Dark) {
             this.section.classList.add("hidden");
         }
 
@@ -362,7 +375,7 @@ class DocumentBackgroundComponent extends StateSubscriber {
                     value == DocumentBackground.Black ||
                     ((value == DocumentBackground.Blend ||
                         value == DocumentBackground.Shade) &&
-                        data.mode == ExtensionMode.Dark)
+                        resolveExtensionMode(data.mode) == ExtensionMode.Dark)
                 ) {
                     update.invert_enabled = true;
                 } else {
@@ -465,6 +478,13 @@ class TipComponent {
 }
 
 class InvertComponent extends StateSubscriber {
+    private optionsRow = document.querySelector(
+        "#invertOptions"
+    ) as HTMLDivElement;
+    private advancedOptionsRow = document.querySelector(
+        "#advancedInvertOptions"
+    ) as HTMLDivElement;
+
     private grayButton = document.querySelector(
         "#documentInvertGray"
     ) as HTMLButtonElement;
@@ -522,7 +542,24 @@ class InvertComponent extends StateSubscriber {
     update(newData: ExtensionData): void {
         this.resetAppearance();
 
-        if (!newData.invert_enabled) {
+        // In auto mode invert is derived from the resolved theme, so show the
+        // state the document is actually in and disable the options auto mode
+        // controls, rather than leaving them to silently do nothing.
+
+        const isAuto = newData.mode == ExtensionMode.Auto;
+        const resolvedMode = resolveExtensionMode(newData.mode);
+        const invertEnabled = isAuto
+            ? resolvedMode == ExtensionMode.Dark
+            : newData.invert_enabled;
+
+        if (isAuto) {
+            // The light theme must never invert, so no option is actionable.
+            // The dark theme must always invert, so only turning it off is.
+            this.setOptionsDisabled(resolvedMode == ExtensionMode.Light);
+            this.offButton.disabled = true;
+        }
+
+        if (!invertEnabled) {
             this.offButton.classList.add("selected");
             return;
         }
@@ -545,7 +582,24 @@ class InvertComponent extends StateSubscriber {
         }
     }
 
+    private setOptionsDisabled(disabled: boolean): void {
+        this.optionsRow.classList.toggle("disabled", disabled);
+        this.advancedOptionsRow.classList.toggle("disabled", disabled);
+
+        for (const button of [
+            this.grayButton,
+            this.blackButton,
+            this.colorfulButton,
+            this.normalButton,
+            this.offButton,
+        ]) {
+            button.disabled = disabled;
+        }
+    }
+
     resetAppearance(): void {
+        this.setOptionsDisabled(false);
+
         this.grayButton.classList.remove("selected");
         this.blackButton.classList.remove("selected");
         this.colorfulButton.classList.remove("selected");
@@ -633,6 +687,10 @@ class Popup extends PopupState {
         this.styleManager.initialize();
         this.linkManager.initialize();
         this.advancedCategoryComponent.initialize();
+
+        // Auto mode is resolved against the browser's preference, so the popup
+        // has to re-render if that preference changes while it is open.
+        registerColorSchemeListener(() => this.updateSubscribers());
 
         this.updateSubscribers();
     }

@@ -31,10 +31,12 @@ import {
     insertStylesheet,
     isElementVisible,
     isOnHomepage,
+    registerColorSchemeListener,
     registerMessageListener,
     registerStorageListener,
     removeClassFromHTML,
     removeElement,
+    resolveExtensionMode,
     setStorage,
     setStyleProperty,
 } from "./util";
@@ -45,7 +47,11 @@ const CURRENT_VERSION = browser_ns.runtime.getManifest().version;
 const REPLACEMENTS_PATH = "assets/replacements/";
 
 class DocsAfterDark {
-    private extensionData: ExtensionData = defaultExtensionData;
+    // NOTE: Clone the defaults, otherwise the assignments in initialize()
+    //       mutate the shared defaultExtensionData object and it stops being
+    //       readable as a source of default values.
+    private extensionData: ExtensionData =
+        structuredClone(defaultExtensionData);
     private isTempDisabled: boolean = false;
 
     async initialize(): Promise<void> {
@@ -110,6 +116,7 @@ class DocsAfterDark {
 
         registerStorageListener(this.handleStorageUpdate);
         registerMessageListener(this.handleMessageUpdate);
+        registerColorSchemeListener(this.handleColorSchemeChange);
     }
 
     private raiseButton(raise: boolean) {
@@ -184,6 +191,18 @@ class DocsAfterDark {
             this.extensionData.accent_color =
                 message.color as AccentColorOptions;
         }
+
+        this.updateExtension();
+    };
+
+    private handleColorSchemeChange = () => {
+        // Only auto mode is derived from the browser's preference, so nothing
+        // changes for the other modes.
+        if (this.extensionData.mode !== ExtensionMode.Auto) {
+            return;
+        }
+
+        Logger.debug("Update via color scheme preference");
 
         this.updateExtension();
     };
@@ -336,22 +355,24 @@ class DocsAfterDark {
         // Always update version, regardless of extension mode
         this.updateVersion();
 
+        const effectiveMode = resolveExtensionMode(this.extensionData.mode);
+
         // Do not continue update if extension is off
-        if (!this.updateMode()) {
+        if (!this.updateMode(effectiveMode)) {
             return;
         }
 
         this.updateDocumentBackground();
-        this.updateDocumentInvert();
+        this.updateDocumentInvert(effectiveMode);
         this.updateDocumentBorder();
         this.updateAccentColor();
         this.updateButton();
     }
 
-    private updateMode(): boolean {
+    private updateMode(effectiveMode: ExtensionMode): boolean {
         this.resetMode();
 
-        if (this.extensionData.mode === ExtensionMode.Off) {
+        if (effectiveMode === ExtensionMode.Off) {
             this.removeExtension();
             return false;
         }
@@ -361,14 +382,12 @@ class DocsAfterDark {
         addClassToHTML(enabledClass);
         insertStylesheet("docs.bundle.css", "stylesheet");
 
-        if (this.extensionData.mode === ExtensionMode.Dark) {
+        if (effectiveMode === ExtensionMode.Dark) {
             this.updateDarkMode();
-        } else if (this.extensionData.mode === ExtensionMode.Light) {
+        } else if (effectiveMode === ExtensionMode.Light) {
             this.updateLightMode();
         } else {
-            throw new Error(
-                "Unknown extension operation: " + this.extensionData.mode
-            );
+            throw new Error("Unknown extension operation: " + effectiveMode);
         }
 
         return true;
@@ -392,8 +411,23 @@ class DocsAfterDark {
         }
     }
 
-    private updateDocumentInvert() {
-        if (!this.extensionData.invert_enabled) {
+    private updateDocumentInvert(effectiveMode: ExtensionMode) {
+        // NOTE: Document background is not derived in auto mode because the
+        //       theme-relative options (blend, shade) already follow the
+        //       active theme through CSS variables, and the absolute ones
+        //       (default, black, custom) are deliberate user choices.
+        //
+        //       Invert is the exception: it has to follow the resolved theme,
+        //       because inverting the page while the light theme is active
+        //       would leave the document unreadable.
+
+        let invertEnabled = this.extensionData.invert_enabled;
+
+        if (this.extensionData.mode === ExtensionMode.Auto) {
+            invertEnabled = effectiveMode === ExtensionMode.Dark;
+        }
+
+        if (!invertEnabled) {
             setStyleProperty("documentInvert", documentInvert.off);
             return;
         }

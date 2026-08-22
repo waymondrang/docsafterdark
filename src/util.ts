@@ -1,5 +1,6 @@
 import { Logger } from "./logger";
 import {
+    ExtensionMode,
     InvertMode,
     type BrowserAPI,
     type ExtensionData,
@@ -160,6 +161,47 @@ function removeMessageListener(listener: MessageListener) {
     browser_ns.runtime.onMessage.removeListener(listener);
 }
 
+const COLOR_SCHEME_QUERY = "(prefers-color-scheme: dark)";
+
+let colorSchemeMediaQuery: MediaQueryList | undefined;
+
+function getColorSchemeMediaQuery(): MediaQueryList {
+    if (colorSchemeMediaQuery === undefined) {
+        colorSchemeMediaQuery = window.matchMedia(COLOR_SCHEME_QUERY);
+    }
+
+    return colorSchemeMediaQuery;
+}
+
+/**
+ * Whether the browser currently prefers a dark color scheme
+ */
+function prefersDarkColorScheme(): boolean {
+    return getColorSchemeMediaQuery().matches;
+}
+
+/**
+ * Maps ExtensionMode.Auto onto the mode matching the browser's preference.
+ * Every other mode resolves to itself.
+ *
+ * NOTE: Both the content script and the popup must resolve through here, so
+ *       that the popup never presents a state the document is not actually in.
+ */
+function resolveExtensionMode(mode: ExtensionMode): ExtensionMode {
+    if (mode !== ExtensionMode.Auto) {
+        return mode;
+    }
+
+    return prefersDarkColorScheme() ? ExtensionMode.Dark : ExtensionMode.Light;
+}
+
+/**
+ * Calls the listener whenever the browser's light/dark preference changes
+ */
+function registerColorSchemeListener(listener: () => void): void {
+    getColorSchemeMediaQuery().addEventListener("change", listener);
+}
+
 async function getExtensionData(): Promise<ExtensionData> {
     let data = await getStorage<ExtensionData>(
         "mode",
@@ -298,6 +340,9 @@ export {
     registerMessageListener,
     hasMessageListener,
     removeMessageListener,
+    prefersDarkColorScheme,
+    resolveExtensionMode,
+    registerColorSchemeListener,
     messageTabs,
     getExtensionData,
     addClassToParent,
