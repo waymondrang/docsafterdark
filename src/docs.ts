@@ -3,6 +3,7 @@ import {
     defaultExtensionData,
     documentBackgroundStyles,
     documentBorder,
+    documentHighlightBoost,
     documentInvert,
     enabledClass,
     links,
@@ -88,6 +89,10 @@ class DocsAfterDark {
 
         if (data.invert_mode !== undefined) {
             this.extensionData.invert_mode = data.invert_mode;
+        }
+
+        if (data.highlight_enabled !== undefined) {
+            this.extensionData.highlight_enabled = data.highlight_enabled;
         }
 
         if (data.button_options !== undefined) {
@@ -284,6 +289,18 @@ class DocsAfterDark {
             this.extensionData.invert_mode = changes.invert_mode.newValue;
         }
 
+        ////////////////////////
+        // HIGHLIGHT VISIBILITY //
+        ////////////////////////
+
+        if (
+            changes.highlight_enabled !== undefined &&
+            changes.highlight_enabled.newValue !== undefined
+        ) {
+            this.extensionData.highlight_enabled =
+                changes.highlight_enabled.newValue;
+        }
+
         //////////////////
         // ACCENT COLOR //
         //////////////////
@@ -432,22 +449,33 @@ class DocsAfterDark {
             return;
         }
 
+        let invertFilter: string;
+
         switch (this.extensionData.invert_mode) {
             case InvertMode.Gray:
-                setStyleProperty("documentInvert", documentInvert.grayscale);
+                invertFilter = documentInvert.grayscale;
                 break;
             case InvertMode.Black:
-                setStyleProperty("documentInvert", documentInvert.black);
+                invertFilter = documentInvert.black;
                 break;
             case InvertMode.Colorful:
-                setStyleProperty("documentInvert", documentInvert.colorful);
+                invertFilter = documentInvert.colorful;
                 break;
             case InvertMode.Normal:
-                setStyleProperty("documentInvert", documentInvert.normal);
+                invertFilter = documentInvert.normal;
                 break;
             default:
-                break;
+                return;
         }
+
+        if (
+            this.extensionData.highlight_enabled &&
+            effectiveMode === ExtensionMode.Dark
+        ) {
+            invertFilter += ` ${documentHighlightBoost}`;
+        }
+
+        setStyleProperty("documentInvert", invertFilter);
     }
 
     private updateDocumentBorder() {

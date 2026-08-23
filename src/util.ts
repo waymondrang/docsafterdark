@@ -214,6 +214,7 @@ async function getExtensionData(): Promise<ExtensionData> {
         "button_options",
         "invert_enabled",
         "invert_mode",
+        "highlight_enabled",
         "version",
         // Deprecated
         "invert"

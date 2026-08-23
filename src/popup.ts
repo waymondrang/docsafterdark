@@ -434,6 +434,24 @@ class BorderComponent extends StateSubscriber {
     }
 }
 
+class HighlightComponent extends StateSubscriber {
+    private highlightCheckbox = document.querySelector(
+        "#highlightVisibility"
+    ) as HTMLInputElement;
+
+    initialize(): void {
+        this.highlightCheckbox.addEventListener("click", () => {
+            this.state.setData({
+                highlight_enabled: this.highlightCheckbox.checked,
+            });
+        });
+    }
+
+    update(newData: ExtensionData): void {
+        this.highlightCheckbox.checked = newData.highlight_enabled;
+    }
+}
+
 class ButtonComponent extends StateSubscriber {
     private showButtonCheckbox = document.querySelector(
         "#showButton"
@@ -656,6 +674,9 @@ class Popup extends PopupState {
     private documentBackgroundComponent: DocumentBackgroundComponent =
         new DocumentBackgroundComponent(this);
     private borderComponent: BorderComponent = new BorderComponent(this);
+    private highlightComponent: HighlightComponent = new HighlightComponent(
+        this
+    );
     private buttonComponent: ButtonComponent = new ButtonComponent(this);
     private tipComponent: TipComponent = new TipComponent();
     private invertComponent: InvertComponent = new InvertComponent(this);
@@ -680,6 +701,7 @@ class Popup extends PopupState {
         this.spectrumComponent.initialize();
         this.documentBackgroundComponent.initialize();
         this.borderComponent.initialize();
+        this.highlightComponent.initialize();
         this.buttonComponent.initialize();
         this.tipComponent.initialize();
         this.invertComponent.initialize();

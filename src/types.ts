@@ -88,6 +88,7 @@ type ExtensionData = {
 
     invert_enabled: boolean;
     invert_mode: InvertMode;
+    highlight_enabled: boolean;
 
     show_border: boolean;
 
