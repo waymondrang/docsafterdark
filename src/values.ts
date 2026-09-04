@@ -69,6 +69,12 @@ const documentInvert = {
     off: "none",
 };
 
+// Google Docs composites light highlight colors with the white page before
+// the canvas is inverted. This makes highlights such as yellow too dark to
+// distinguish from a dark document background, so brighten them after the
+// existing inversion while preserving the original hue.
+const documentHighlightBoost = "brightness(1.8) saturate(1.35)";
+
 const documentBorder = {
     border: "1px solid var(--primary-border-color)",
     off: "none",
@@ -93,6 +99,7 @@ const defaultExtensionData: ExtensionData = {
 
     invert_enabled: true,
     invert_mode: InvertMode.Colorful,
+    highlight_enabled: true,
 
     button_options: {
         show: true,
@@ -112,6 +119,7 @@ export {
     documentBackgroundStyles,
     documentBackgroundDescriptions,
     documentInvert,
+    documentHighlightBoost,
     documentBorder,
     buttonPosition,
     themeClasses,

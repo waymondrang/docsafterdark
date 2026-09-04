@@ -13,6 +13,9 @@ enum ExtensionMode {
     Off = 0,
     Light = 1,
     Dark = 2,
+    // Follows the browser's light/dark preference. Never applied directly;
+    // resolveExtensionMode() maps it onto Light or Dark.
+    Auto = 3,
 }
 
 enum DarkModeOperation {
@@ -85,6 +88,7 @@ type ExtensionData = {
 
     invert_enabled: boolean;
     invert_mode: InvertMode;
+    highlight_enabled: boolean;
 
     show_border: boolean;
 
